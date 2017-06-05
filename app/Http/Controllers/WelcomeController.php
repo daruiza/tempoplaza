@@ -51,9 +51,9 @@ class WelcomeController extends Controller {
 			}
 		}
 
-		Session::put('app', env('APP_NAME','ComprarJuntos'));
-		Session::put('copy', env('APP_RIGTH','ComprarJuntos'));
-		Session::put('mail', env('MAIL_USERNAME','info.comprarjuntos@gmail.com'));
+		Session::put('app', env('APP_NAME','Macalù'));
+		Session::put('copy', env('APP_RIGTH','Temposolutions'));
+		Session::put('mail', env('MAIL_USERNAME','soportemacalu@gmail.com'));
 		Session::put('support', env('APP_SUPPORT','daruiza@gmail.com'));
 		//Session::put('style', env('APP_STYLE','default'));		
 		/**
@@ -114,6 +114,15 @@ class WelcomeController extends Controller {
 		->skip(0)->take(1)
 		->get();
 
+		//ultima_tienda		
+		$moduledata['ultima_tienda'] = \DB::table('clu_store')
+		->select('clu_store.*','seg_user.name as user_name','seg_user_profile.avatar as avatar','seg_user_profile.names as tnames','seg_user_profile.surnames as tsurnames')
+		->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
+		->leftjoin('seg_user_profile', 'clu_store.user_id', '=', 'seg_user_profile.user_id')
+		->where('clu_store.status','Activa')
+		->where('clu_store.id',\DB::table('clu_store')->max('clu_store.id'))		
+		->get();		
+
 		//HAY REQUEST
 		if(!empty($request->input())){
 			//si es el finder es el buscador inicial			
@@ -135,7 +144,7 @@ class WelcomeController extends Controller {
 					->where('clu_store.metadata','like','%'.$categoria[0]->category_id.'%')
 					->where('clu_store.status','Activa')
 					->orderByRaw("RAND()")
-					->skip(0)->take(4)
+					->skip(0)->take(6)
 					->get();		
 
 					//productos		
@@ -147,7 +156,7 @@ class WelcomeController extends Controller {
 					->where('clu_products.category','like','%'.$categoria[0]->id.'%')
 					->where('clu_store.status','Activa')
 					->orderByRaw("RAND()")
-					->skip(0)->take(12)
+					->skip(0)->take(18)
 					->get();
 
 				}else{
@@ -159,7 +168,7 @@ class WelcomeController extends Controller {
 					->where('clu_store.metadata','like','%'.$categoria[0]->id.'%')
 					->where('clu_store.status','Activa')
 					->orderByRaw("RAND()")
-					->skip(0)->take(4)
+					->skip(0)->take(6)
 					->get();
 					
 					//necesitamos las subcategorias
@@ -186,7 +195,7 @@ class WelcomeController extends Controller {
 							}
 						})
 						->orderByRaw("RAND()")
-						->skip(0)->take(12)
+						->skip(0)->take(18)
 						->get();
 					}					
 				}
@@ -217,7 +226,7 @@ class WelcomeController extends Controller {
 					}
 				})
 				->orderByRaw("RAND()")
-				->skip(0)->take(4)
+				->skip(0)->take(6)
 				->get();
 
 				$moduledata['productos'] = \DB::table('clu_products')
@@ -235,7 +244,7 @@ class WelcomeController extends Controller {
 					}
 				})
 				->orderByRaw("RAND()")
-				->skip(0)->take(12)
+				->skip(0)->take(18)
 				->get();				
 			}
 
@@ -402,10 +411,10 @@ class WelcomeController extends Controller {
 			->leftjoin('seg_user_profile', 'clu_store.user_id', '=', 'seg_user_profile.user_id')
 			->where('clu_store.status','Activa')
 			->orderByRaw("RAND()")
-			->skip(0)->take(4)
+			->skip(0)->take(6)
 			->get();		
 
-			//productos		
+			// algunos productos		
 			$moduledata['productos'] = \DB::table('clu_products')
 			->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name')
 			->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
@@ -413,7 +422,7 @@ class WelcomeController extends Controller {
 			->where('clu_products.active',1)
 			->where('clu_store.status','Activa')
 			->orderByRaw("RAND()")
-			->skip(0)->take(12)
+			->skip(0)->take(18)
 			->get();
 
 		}
@@ -701,7 +710,8 @@ class WelcomeController extends Controller {
 			$moduledata['ordenes']=
 			Orden::
 			select('clu_order.*')			
-			->where('clu_order.store_id',Session::get('store.id'))		
+			->where('clu_order.store_id',Session::get('store.id'))
+			->where('clu_order.resenia_active',1)		
 			->where(function ($query) {
 				$query->where('clu_order.name_client', 'like', '%'.Session::get('search').'%')
 				->orWhere('clu_order.resenia', 'like', '%'.Session::get('search').'%')	
@@ -714,6 +724,7 @@ class WelcomeController extends Controller {
 		}else{			
 			$moduledata['ordenes']=\DB::table('clu_order')
 			->where('clu_order.store_id',Session::get('store.id'))
+			->where('clu_order.resenia_active',1)
 			->skip($request->input('start'))->take($request->input('length'))
 			->orderBy('id', 'desc')
 			->get();			
@@ -830,7 +841,7 @@ class WelcomeController extends Controller {
 		);		
 				
 		Mail::send('email.support',$data,function($message) use ($data) {
-			$message->from(Session::get('mail'),Session::get('copy'));
+			$message->from(Session::get('mail'),Session::get('app'));
 			$message->to($data['email'],'Soporte')->subject('Solicitud de Usuario.');
 		});
 
@@ -912,7 +923,7 @@ class WelcomeController extends Controller {
 						
 			try{
 				Mail::send('email.order_message_tender',$data,function($message) use ($orden,$tienda) {
-					$message->from(Session::get('mail'),Session::get('copy').' - '.$orden[0]->id);
+					$message->from(Session::get('mail'),Session::get('app').' - '.$orden[0]->id);
 					$message->to($tienda[0]->email,$tienda[0]->uname)->subject('Orden de Pedido.');
 				});
 			}catch (\Exception  $e) {	
@@ -1036,6 +1047,12 @@ class WelcomeController extends Controller {
 			$orden->email_client = $cliente[0]->email;
 			$orden->number_client = $cliente[0]->movil_number.', ' .$cliente[0]->fix_number;
 			$orden->client_id = $cliente[0]->user_id;
+			//verificamos si ya terminado sus datos de perfil
+			if(empty($cliente[0]->names) || empty($cliente[0]->adress) || empty($cliente[0]->email) ){
+				//el cleinte no ha terminado su registro
+				return Redirect::back()->with('error',['Lo sentimos pero el pedido no pudo realizarce, aùn tienes datos por diligenciar en tu perfil de usuario.']);
+
+			}
 		}
 		$orden->active= true;
 		$orden->stage_id = 1;
@@ -1131,7 +1148,7 @@ class WelcomeController extends Controller {
 			//envio de correo al tendero
 			try{
 				Mail::send('email.order',$data,function($message) use ($tienda,$orden) {
-					$message->from(Session::get('mail'),Session::get('copy').' - '.$orden->id);
+					$message->from(Session::get('mail'),Session::get('app').' - '.$orden->id);
 					$message->to($tienda[0]->email,$tienda[0]->name)->subject('Orden de Pedido.');
 				});
 			}catch (\Exception  $e) {	
@@ -1141,7 +1158,7 @@ class WelcomeController extends Controller {
 			//envio de correo a cliente, si falla notificar al tendero en mensage
 			try{
 				Mail::send('email.order_client',$data,function($message) use ($orden) {
-					$message->from(Session::get('mail'),Session::get('copy').' - '.$orden->id);
+					$message->from(Session::get('mail'),Session::get('app').' - '.$orden->id);
 					$message->to($orden->email_client,$orden->name_client)->subject('Orden de Pedido.');
 				});
 			}catch (\Exception  $e) {	

@@ -103,7 +103,7 @@
 					<!--Rechazado o aceptado-->
 					@if($estado == "RECHAZADA")
 						<div>Te pedimos que 
-						<a  href = "{{url('/modal/modalresenatostore/'.$orden_id)}}">aportes con tu reseña al servicio prestado</a>, ya que actualmente esta orden aporta una reseña neutral en esta tienda y tu aporte nos ayuda a cuantificar la repuraciòn de las tiendas en ComprarJuntos.</div>						
+						<a  href = "{{url('/modal/modalresenatostore/'.$orden_id)}}">aportes con tu reseña al servicio prestado</a>, ya que actualmente esta orden aporta una reseña neutral en esta tienda y tu aporte nos ayuda a cuantificar la repuraciòn de las tiendas en {{Session::get('app')}}.</div>						
 						<p>
 						<a  href = "{{url('/modal/modalresenatostore/'.$orden_id)}}">Puedes contribuir con tu reseña a la tienda. Aquì!!</a>
 						</p>
@@ -115,7 +115,7 @@
 							@if($id_client != $id_tender)						
 								<div>Te pedimos que 
 								<a href = "{{url('/modal/modalresenatostore/'.$orden_id)}}">aportes con tu reseña al servicio prestado</a>, ya que actualmente la orden aporta una reseña neutral para esta tienda y tu 
-								aporte nos ayuda a cuantificar la repuraciòn de las tiendas de ComprarJuntos.</div>
+								aporte nos ayuda a cuantificar la repuraciòn de las tiendas de {{Session::get('app')}}.</div>
 								<p>
 								<a  href = "{{url('/modal/modalresenatostore/'.$orden_id)}}">Puedes contribuir con tu calificaciòn al servicio. Aquì!!</a>
 								</p>
@@ -128,7 +128,7 @@
 				</div>
 
 				<div class="panel-footer" style="text-align: center;padding: 15px;font-size: 15px;border-top: 1px solid #e5e5e5;background: #dddddd;color: cadetblue;">
-					<a href = "{{url('/'.$tienda)}}"> ComprarJuntos - {{$tienda}} </a>
+					<a href = "{{url('/'.$tienda)}}"> {{Session::get('app')}} - {{$tienda}} </a>
 					@if(!$id_client)						
 						<div style="margin-top: 10px;">
 							<b>Te invitamos para que hagas parte de esta maravillosa comunidad.</b>

@@ -8,8 +8,8 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		
 		<title>{!! Session::get('app') !!}</title>
-		<meta name="description" content="Plaza de mercado para la Economia del Bien Común" />
-		<meta name="keywords" content="bien común, economia solidaria, grupos solidarios, comprar, vender, tienda, cart, plaza mercado, grupo consumo" />
+		<meta name="description" content="Plaza de Mercado Para la Economia del Bien Común" />
+		<meta name="keywords" content="bien común, economia solidaria, comprar, vender, tienda, cart, plaza mercado, marketplace" />
 
 		<link rel="shortcut icon" href="{{ url('images/icons/icon.png') }}">		
 		<link  rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css" />
@@ -42,7 +42,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" style="font-family: 'Calligraffitti';font-size:24px ;" href="{{ url('/') }}"><b>{{ Session::get('app') }}</b></a>					 
+					<a class="navbar-brand" style="font-family: 'Calligraffitti';font-size:34px ;" href="{{ url('/') }}"><b>{{ Session::get('app') }}</b></a>					 
 				</div>
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -260,4 +260,11 @@
 		@yield('script')
 		
 	</body>
+	<footer>
+		<div class="form-group">
+			<div class="col-md-3 col-md-offset-5">
+				<p>© 2017 {{ Session::get('copy') }}, Inc.</p>
+			</div>		
+		</div>	
+	</footer>
  </html>

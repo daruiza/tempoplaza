@@ -811,7 +811,7 @@ class StoreController extends Controller {
 					
 					try{
 						Mail::send('email.order_change',$data,function($message) use ($orden) {
-							$message->from(Session::get('mail'),Session::get('copy').' - '.$orden[0]->id);
+							$message->from(Session::get('mail'),Session::get('app').' - '.$orden[0]->id);
 							$message->to($orden[0]->email_client,$orden[0]->name_client)->subject('Orden de Pedido.');
 						});
 					}catch (\Exception  $e) {	

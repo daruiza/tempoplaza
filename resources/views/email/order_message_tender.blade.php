@@ -106,7 +106,7 @@
 
 				<div class="panel-footer" style="text-align: center;padding: 15px;font-size: 15px;border-top: 1px solid #e5e5e5;background: #dddddd;color: cadetblue;">
 					<div>
-						<a  href = "{{url('/modal/modalorden/'.$orden_id)}}">Consultar La orden en ComprarJuntos</a>
+						<a  href = "{{url('/modal/modalorden/'.$orden_id)}}">Consultar La orden en {{Session::get('app')}}</a>
 					</div>					
 				</div>
 			</div>			

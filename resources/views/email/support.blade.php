@@ -1,6 +1,6 @@
 <html lang="es">
 	<body>
-		<h1>ComprarJuntos te Informa.</h1>
+		<h1>{{Session::get('app')}} te Informa.</h1>
 		<div>El tendero : {{ $names }} {{ $surnames }}</div>
 		<div>Usuario : {{ $user }}</div>
 		<div>Email : {{ $uemail }}</div>

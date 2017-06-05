@@ -17,21 +17,57 @@
 		}
 		.introduccion{
 			margin-top: 2%;padding: 1%;
-			background:  #B0E1EA ; /* For browsers that do not support gradients */    
-		    background: -webkit-linear-gradient(left, #B0E1EA  , white ); /* For Safari 5.1 to 6.0 */
-		    background: -o-linear-gradient(right,   #B0E1EA  , white ); /* For Opera 11.1 to 12.0 */
-		    background: -moz-linear-gradient(right,   #B0E1EA  , white ); /* For Firefox 3.6 to 15 */
-		    background: linear-gradient(to right,   #B0E1EA  , white ); /* Standard syntax (must be last) */
-		}
-		/*449AA2 - #D8E9EC*/
-		.comprarjuntos{
+			/*
+			background:  #B0E1EA ; 
+		    background: -webkit-linear-gradient(left, #B0E1EA  , white );
+		    background: -o-linear-gradient(right,   #B0E1EA  , white ); 
+		    background: -moz-linear-gradient(right,   #B0E1EA  , white ); 
+		    background: linear-gradient(to right,   #B0E1EA  , white ); 
+		    */
+		}		
+
+		.pie_wellcome{						
+			background:  #009999 ;
+			background: -webkit-linear-gradient(left, #009999  , white );
+		    background: -o-linear-gradient(right,   #009999  , white ); 
+		    background: -moz-linear-gradient(right,   #009999  , white ); 
+		    background: linear-gradient(to right,   #009999  , white );		    
+		}		
+
+		.macalu{
 			margin-top: 2%;padding: 1%;
 			background:  #fff; /* For browsers that do not support gradients */    
 		    background: -webkit-linear-gradient(left, #449AA2 , #B0E1EA  ); /* For Safari 5.1 to 6.0 */
 		    background: -o-linear-gradient(right,   #449AA2 , #B0E1EA  ); /* For Opera 11.1 to 12.0 */
 		    background: -moz-linear-gradient(right,   #449AA2 , #B0E1EA  ); /* For Firefox 3.6 to 15 */
 		    background: linear-gradient(to right,   #449AA2 , #B0E1EA  ); /* Standard syntax (must be last) */
+	       
+
 		}
+
+		.macalu_nueva{
+			margin-top: 3%;
+			background-image: url("{{url('users/'.$ultima_tienda[0]->user_name.'/banners/'.$ultima_tienda[0]->banner)}}");
+			/*background-size: 100% 175px;*/
+			background-repeat: no-repeat;
+	    	background-position: center;
+	    	height: 200px;
+	    	margin-bottom: 3%;
+	    	border: 1px solid {{$ultima_tienda[0]->color_one}};
+		    padding: 1%;
+		    border-radius: 5px;
+		    color:{{$ultima_tienda[0]->color_one}};
+		   	cursor: pointer;
+		}
+
+		.img_nueva{
+			border:2px solid {{$ultima_tienda[0]->color_one}};
+		}
+
+		.bienvenida_nueva{
+			color:{{$ultima_tienda[0]->color_two}};
+		}
+
 		.option_store{
 			text-align: center;
 			cursor:pointer;			
@@ -72,7 +108,7 @@
 		.btn{
 			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 			font-size: 14px;
-			/*border-color: #ff3300;*/
+			border-color: #009999;
 		}
 		.btn-search{
 			background-color: #009999;
@@ -211,21 +247,26 @@
 	</div>	
 
 	<!--Div Introducciòn-->
-	<div class="col-md-12 col-md-offset-0 introduccion visible-lg">
-		<div class="row col-md-12" >
-			<div class="col-md-2  col-md-offset-0">
-				{{ Html::image('images/icons/LogoFomentamos.png','Imagen no disponible',array( 'style'=>'width: auto; height: 200px;border-radius: 0%; float: left;' ))}}	
-			</div>
-			<div class="col-md-7 col-md-offset-0" style="text-align: justify;">
-				La economía del bien común no es ni el mejor de los modelos económicos ni el final de una historia, sólo el paso siguiente hacia un futuro más sostenible, justo y democrático. Se trata de un proceso participativo, de desarrollo abierto que busca sinergia en procesos similares como: economía solidaria, economía social, movimiento de bienes comunes, economía del postcrecimiento o democracia económica. Juntando sus esfuerzos, una gran cantidad de personas y actores son capaces de crear algo fundalmente nuevo. La implementación de la visión requiere motivación intrínseca y autorresponsabilidad, incentivos económicos, un orden político-legal coherente, así como concientización. Todas las personas, empresas y comunidades están invitadas a participar en la reconstrucción de la economía hacia el bien común.
-			</div>
-			@if(count($tendero))
-				<div class="col-md-3"  style="text-align: center;">
-					{{ Html::image('users/'.$tendero[0]->user_name.'/profile/'.$tendero[0]->avatar,'Imagen no disponible',array( 'style'=>'width: auto; height: 150px;border:2px solid #449aa2;border-radius: 50%;' ))}}
-					<div>Yo: {{$tendero[0]->names}} </div>
-					<div> Tambièn hago parte de ComprarJuntos</div>
+	<div class="col-md-12 introduccion visible-lg">
+		<div class="row col-md-10 col-md-offset-1"  >
+			<div class="col-md-4  col-md-offset-0" data-toggle="modal" data-target="#registry_modal" style="display: flex;cursor: pointer;">
+				{{ Html::image('images/icons/tienda.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;' ))}}
+				<div style="font-size: 16px;margin-left: 5px;text-align: center;">
+					Si tienes un producto, bien o servicio que ofrecer, <b>¡Animate a crear tu tienda virtual! </b> aquí en {{ Session::get('app') }}. 
 				</div>
-			@endif	
+			</div>
+			<div class="col-md-4 col-md-offset-0" style="display: flex">
+				{{ Html::image('images/icons/cart.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;' ))}}
+				<div style="font-size: 16px;margin-left: 5px;text-align: center;">
+					En {{ Session::get('app') }}  prima el <b>Bien Común</b>, todas las tiendas son importantes en el mercado, todas tienen algo que ofrecer.
+				</div>
+			</div>
+			<div class="col-md-4 col-md-offset-0" style="display: flex">
+				{{ Html::image('images/icons/seguridad.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;' ))}}
+				<div style="font-size: 16px;margin-left: 5px;text-align: center;">
+					Compra con seguridad, la información del tendero estara siempre disponible en cada una de sus teindas.
+				</div>
+			</div>			
 		</div>
 	</div>	
 
@@ -235,7 +276,7 @@
 			<!-- Div de tiendas-->
 			<div class="col-md-12 col-md-offset-0 " style="margin-top: 1%;">
 				<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
-					<b>Encuentra Tiendas y CrearRedes de Consumo</b>
+					<b>Muchas Tiendas En Un Solo Lugar</b>
 				</div>
 				<div class="col-md-12 col-md-offset-0" style="margin-top: 1%;" >
 				@foreach($tiendas as $tienda)
@@ -278,7 +319,8 @@
 			</div>
 
 			<!--Div Presentaciòn de una tienda-->
-			<div class="col-md-10 col-md-offset-1 comprarjuntos" style="margin-top: 3%;background-image: url('images/banner/banner_word.jpg');">
+
+			<div class="col-md-10 col-md-offset-1 macalu" style="margin-top: 3%;background-image: url('images/banner/banner_word.jpg');">
 				<div class="row col-md-7 col-md-offset-1" style="font-size: 30px;">
 					<div class="col-md-12 col-md-offset-0">
 						Encuentra lo que buscas
@@ -352,153 +394,167 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- Para resoluciones de computador-->
-		<div  class=" row col-md-9 col-md-offset-0 visible-lg" >
-			<!-- Div de tiendas-->
-			<div class="col-md-12 col-md-offset-0 " style="margin-top: 1%;">
-				<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
-					<b>Encuentra Tiendas y Crea Redes de Consumo</b>
+	<!-- Para resoluciones de computador-->
+	<div  class="visible-lg" style="margin-top: 1%;">
+		<!-- Div de tiendas-->
+		<div class="tiendas">
+			<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
+				<b>Muchas Tiendas En Un Solo Lugar</b>
+			</div>
+			<div class="col-md-12 col-md-offset-0" style="margin-top: 1%;" >
+			@foreach($tiendas as $tienda)
+				<div class="col-md-2 col-mx-offset-0">
+					<div class="panel panel-default" style="border-color:{{$tienda->color_two}};">					
+						<div class="panel-body">
+					    	<div class="row">
+					    		<div class="col-md-12 popoverStore" data-content="<div>{{$tienda->description}}</div><div><b>Tendero:</b> {{$tienda->tnames}} {{$tienda->tsurnames}}</div>" rel="popover" data-placement="bottom" data-original-title="{{$tienda->name}}" data-trigger="hover" data-html="true">
+					    			<a href="{{url('/'.$tienda->name)}}">
+					    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	    				
+					    			</a>					    				    									    			
+					    		</div>
+					    		<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;"> 
+			    					{{ Html::image('users/'.$tienda->user_name.'/profile/'.$tienda->avatar,'Imagen no disponible',array('class'=>'img_tendero', 'style'=>'width: 30%;border-radius: 50%;position: absolute; margin-left: 50%;z-index: 99;' ))}}
+			    				</a>	
+					    		<div class="col-md-12"  style="background-color:{{$tienda->color_one}}; color: {{$tienda->color_two}}; border-color:
+					    	{{$tienda->color_two}};padding: 0px;">					    			
+					    			<div class="col-md-12" style="padding: 0px;">				    				
+				    					<div style="text-align: center;">
+				    						<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;text-decoration:none;	">	
+					    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$tienda->name}}
+				    						</a>
+						    			</div>			    				
+					    			</div>
+					    			<div class="col-md-12" >
+					    				<div style="font-size: 16px;text-align: center;">
+						    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$tienda->department}} - {{$tienda->city}}
+						    			</div>						    			
+						    			<div style="font-size: 16px;text-align: center;">
+						    				{{$tienda->adress}}
+						    			</div>		
+					    			</div>  			
+					    		</div>
+					    	</div>
+					    </div>				    
+					</div>
+				</div>	
+			@endforeach
+			</div>
+		</div>
+
+		<!--Div Presentaciòn de una tienda-->
+		<div class="col-md-10 col-md-offset-1 macalu_nueva" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
+			@if(count($ultima_tienda))				
+				<div class="col-md-3 col-md-offset-0 bienvenida_nueva"  style="text-align: center;margin-top: 0%;float: left;font-family: 'Calligraffitti';font-size: 28px;">
+					Damos la BIENVENIDA a nuestra nueva tienda {{ucwords($ultima_tienda[0]->name)}}
 				</div>
-				<div class="col-md-12 col-md-offset-0" style="margin-top: 1%;" >
-				@foreach($tiendas as $tienda)
-					<div class="col-md-3 col-mx-offset-1">
-						<div class="panel panel-default" style="border-color:{{$tienda->color_two}};">					
+				<div class=""  style="text-align: center;margin-top: 0%;float: right;">
+					{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/profile/'.$ultima_tienda[0]->avatar,'Imagen no disponible',array('class'=>'img_nueva', 'style'=>'width: auto; height: 120px;;border-radius: 50%;'))}}
+					<div>Yo: {{$ultima_tienda[0]->tnames}} </div>
+					<div> Tambièn hago parte de {!! Session::get('app') !!}</div>
+				</div>				
+			@endif
+		</div>
+
+		<!--Div de productos-->
+		<div class="">
+			<div class="col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;margin-bottom: 1%;">
+				<b>Nuestro Mercado Contiene un Universo de Productos</b>
+			</div>
+			<div class="" style="margin-top: 1%;">
+				@php ($p=0)
+				@php ($j=1)
+				@foreach($productos as $producto)						
+					@if($p%6==0)
+						<div class="col-md-12 col-md-offset-0">
+					@endif
+					<div class="col-md-2 col-mx-offset-1">
+						<div class="panel panel-default">					
 							<div class="panel-body">
 						    	<div class="row">
-						    		<div class="col-md-12 popoverStore" data-content="<div>{{$tienda->description}}</div><div><b>Tendero:</b> {{$tienda->tnames}} {{$tienda->tsurnames}}</div>" rel="popover" data-placement="bottom" data-original-title="{{$tienda->name}}" data-trigger="hover" data-html="true">
-						    			<a href="{{url('/'.$tienda->name)}}">
-						    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	    				
-						    			</a>					    				    									    			
+						    		<div class="col-md-12 popoverStore" data-content="<div><b>Precio:</b> ${{$producto->price}}</div>@if($producto->colors)<div> Colores: {{$producto->colors}}</div>@endif @if($producto->sizes)<div> Tamaños: {{$producto->sizes}}</div>@endif @if($producto->flavors)<div> Sabores: {{$producto->flavors}}</div>@endif @if($producto->materials)<div> Materiales: {{$producto->materials}}</div>@endif" rel="popover" data-placement="bottom" data-original-title="{{$producto->name}}" data-trigger="hover" data-html="true">
+						    			<a href="{{url('/'.$producto->store_name)}}">
+						    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}    				
+						    			</a>				    			
 						    		</div>
-						    		<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;"> 
-				    					{{ Html::image('users/'.$tienda->user_name.'/profile/'.$tienda->avatar,'Imagen no disponible',array('class'=>'img_tendero', 'style'=>'width: 35%;border-radius: 50%;position: absolute; margin-left: 40%;z-index: 99;' ))}}
-				    				</a>	
-						    		<div class="col-md-12"  style="background-color:{{$tienda->color_one}}; color: {{$tienda->color_two}}; border-color:
-						    	{{$tienda->color_two}};padding: 0px;">					    			
-						    			<div class="col-md-12" style="padding: 0px;">				    				
+						    		{{--
+						    		<div class="col-md-12"  style="background-color:{{$producto->color_one}}; color: {{$producto->color_two}}; border-color:{{$producto->color_two}};padding: 0px;">
+						    		--}}
+						    		<div class="col-md-12"  style="background-color:#fff; color: #777777; border-color:#777777;padding: 0px;">
+						    			<div  class="col-md-12" style="padding: 0px;">
 					    					<div style="text-align: center;">
-					    						<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;text-decoration:none;	">	
-						    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$tienda->name}}
+					    						<a href="{{url('/'.$producto->store_name)}}" style="/*color:{{$producto->color_two}}*/color:#777777;font-size: 18px;text-decoration:none;	">	
+						    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$producto->name}}
 					    						</a>
-							    			</div>			    				
-						    			</div>
-						    			<div class="col-md-12" >
-						    				<div style="font-size: 16px;text-align: center;">
-							    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$tienda->department}} - {{$tienda->city}}
+							    			</div>
+							    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
+							    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$producto->store_city}} - {{$producto->store_adress}}
 							    			</div>						    			
-							    			<div style="font-size: 16px;text-align: center;">
-							    				{{$tienda->adress}}
-							    			</div>		
-						    			</div>  			
+							    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
+							    				De la Tienda {{$producto->store_name}}
+							    			</div>						    			
+					    				</div>
+					    				{{--
+					    				<div class="col-md-3 hidden-xs">
+					    					<a href="{{url('/'.$producto->name)}}" style="color:{{$producto->color_two}};font-size: 18px;">
+						    					{{ Html::image('users/'.$producto->user_name.'/stores/'.$producto->store_image,'Imagen no disponible',array( 'style'=>'width: 130%;border-radius: 0%;' ))}}
+						    				</a>
+						    			</div>
+						    			--}}		    			
 						    		</div>
 						    	</div>
 						    </div>				    
 						</div>
-					</div>	
-				@endforeach
-				</div>
-			</div>
-
-			<!--Div Presentaciòn de una tienda-->
-			<div class="col-md-10 col-md-offset-1 comprarjuntos" style="margin-top: 3%;background-image: url('images/banner/banner_word.jpg');">
-				<div class="row col-md-7 col-md-offset-1" style="font-size: 30px;">
-					<div class="col-md-12 col-md-offset-0">
-						Encuentra lo que buscas
 					</div>
-					<div class="col-md-12 col-md-offset-0">
-						{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left visible-lg','onsubmit'=>'javascript:return seg_user.validateFinder()', 'style'=>'width: 100%;')) !!}
-						   <div class="input-group" style="width: 100%;">
-								{!! Form::text('finder','', array('class' => 'form-control','placeholder'=>'¿Que Estas Buscando?','style'=>'text-align: center;border: 1px solid #449aa2;','maxlength' => 48)) !!}
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="submit">Buscar!</button>
-								</span>
-							</div>
-					    {!! Form::close() !!}
-				    </div>		    
-				</div>
-
-				<div class="row col-md-4 col-md-offset-0" style="font-size: 22px;text-align: center;">
-					<div>Tiendas</div>
-					<div>Productos</div>
-					<!--<div>Grupos de Consumo</div>-->
-					<div>Tenderos</div>
-				</div>
-			</div>
-
-			<!--Div de productos-->
-			<div class="col-md-12 col-md-offset-0" style="margin-top: 3%;">
-				<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
-					<b>Encuentra Productos y Consume Responsablemente</b>
-				</div>
-				<div class="col-md-12 col-md-offset-0" style="margin-top: 1%;" >
-					@php ($p=0)
-					@php ($j=1)
-					@foreach($productos as $producto)						
-						@if($p%4==0)
-							<div class="col-md-12 col-md-offset-0">
-						@endif
-						<div class="col-md-3 col-mx-offset-1">
-							<div class="panel panel-default">					
-								<div class="panel-body">
-							    	<div class="row">
-							    		<div class="col-md-12 popoverStore" data-content="<div><b>Precio:</b> ${{$producto->price}}</div>@if($producto->colors)<div> Colores: {{$producto->colors}}</div>@endif @if($producto->sizes)<div> Tamaños: {{$producto->sizes}}</div>@endif @if($producto->flavors)<div> Sabores: {{$producto->flavors}}</div>@endif @if($producto->materials)<div> Materiales: {{$producto->materials}}</div>@endif" rel="popover" data-placement="bottom" data-original-title="{{$producto->name}}" data-trigger="hover" data-html="true">
-							    			<a href="{{url('/'.$producto->store_name)}}">
-							    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}    				
-							    			</a>				    			
-							    		</div>
-							    		{{--
-							    		<div class="col-md-12"  style="background-color:{{$producto->color_one}}; color: {{$producto->color_two}}; border-color:{{$producto->color_two}};padding: 0px;">
-							    		--}}
-							    		<div class="col-md-12"  style="background-color:#fff; color: #777777; border-color:#777777;padding: 0px;">
-							    			<div  class="col-md-12" style="padding: 0px;">
-						    					<div style="text-align: center;">
-						    						<a href="{{url('/'.$producto->name)}}" style="color:{{$producto->color_two}};font-size: 18px;text-decoration:none;	">	
-							    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$producto->name}}
-						    						</a>
-								    			</div>
-								    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
-								    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$producto->store_city}} - {{$producto->store_adress}}
-								    			</div>						    			
-								    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
-								    				De la Tienda {{$producto->store_name}}
-								    			</div>						    			
-						    				</div>
-						    				{{--
-						    				<div class="col-md-3 hidden-xs">
-						    					<a href="{{url('/'.$producto->name)}}" style="color:{{$producto->color_two}};font-size: 18px;">
-							    					{{ Html::image('users/'.$producto->user_name.'/stores/'.$producto->store_image,'Imagen no disponible',array( 'style'=>'width: 130%;border-radius: 0%;' ))}}
-							    				</a>
-							    			</div>
-							    			--}}		    			
-							    		</div>
-							    	</div>
-							    </div>				    
-							</div>
+					@if($j%6==0)
+						</div>							
+					@elseif($p == count($productos)-1)
 						</div>
-						@if($j%4==0)
-							</div>							
-						@elseif($p == count($productos)-1)
-							</div>
-						@endif
-						@php ($p++)
-						@php ($j++)
-					@endforeach
-				</div>
+					@endif
+					@php ($p++)
+					@php ($j++)
+				@endforeach			
 			</div>
+	</div>
+
+	<div class="col-md-12" style="margin-top: 1%;margin-bottom: 1%; ">
+		<hr style="display: block;height: 1px;border: 0;border-top: 1px solid #ccc;margin: 1em 0;padding: 0;" size="1">
+	</div>
+	<div class="row col-md-12 col-md-offset-0 visible-lg pie_wellcome" style="border: 1px solid #888888;box-shadow: 4px 4px 8px #888888;border-radius: 5px;margin-bottom: 3%;padding: 2%;">
+
+		<div class="col-md-3" style="text-align: justify">
+			<div class="  title m-b-md center-block" style="font-size: 22px;">
+				<b>¿Que es {!! Session::get('app') !!}?</b>
+			</div>			
+				{!! Session::get('app') !!} es una analogía virtual a un centro comercial donde los tenderos ya sea que posean una tienda física o no, comparten un espacio similar a una plaza de mercados donde poder ofertar y comprar productos y servicios.			
 		</div>
 
-		<div class="row col-md-3 col-md-offset-0 visible-lg" >
-			<div class="col-md-12 col-md-offset-0 " style="border: 1px solid #449AA2;">
-				<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
-					<b>¿Que es ComprarJuntos?</b>
-				</div>
-				<div class="row col-md-12 col-md-offset-0" style="text-align: justify;">
-					ComprarJuntos es un proyecto para fomentar el consumo responsable. Es una herramienta para favorecer el cambio y promover la economia solidaria. La idea es que la gente pueda unirse a Grupos de Consumo existentes o puedan crear nuevos Grupos de Consumo con compañeros, vecinos o amigos. Se da la posibilidad a productoras y productores de promocionar sus productos y comunicar tanto con grupos de consumo como con otros productores para intercambiar información. Facilitamos el sistema de pedidos para que todo el proceso sea más sencillo y rápido tanto para los grupos de consumo como para los productores. Es soberanía alimentaria: volvamos a ser dueños de nuestra comida, compremos a través de circuitos locales, compremos productos de comercio justo, ¡Compremos Ecológico, Compremos Juntos!
-				</div>
-			</div>		
+		<div class="col-md-3" style="text-align: justify">
+			<div class="  title m-b-md center-block" style="font-size: 22px;">
+				<b>¿Porque Elegir {!! Session::get('app') !!}?</b>
+			</div>			
+				{!! Session::get('app') !!} implementa la Filosofía del Bien Común, de manera que ninguna de las tiendas padezca de aislamiento; además, el mercadeo realizado a una tienda beneficia a todas las demás tiendas de la comunidad. ¡Genial!
 		</div>
-	</div>	
+
+		<div class="col-md-4" style="text-align: justify">
+			<div class="  title m-b-md center-block" style="font-size: 22px;">
+				<b>¿Como Funciona La Pasarela de Pagos?</b>
+			</div>			
+				{!! Session::get('app') !!} es una analogía virtual a un centro comercial donde los tenderos ya sea que posean una tienda física o no, comparten un espacio similar a una plaza de mercados donde poder ofertar y comprar productos y servicios.			
+		</div>	
+
+		<div class="col-md-2" style="text-align: justify">
+			<div class="  title m-b-md center-block" style="font-size: 22px;">
+				<b>Siguenos En</b>
+			</div>			
+				{!! Session::get('app') !!}		
+		</div>	
+
+			
+
+	</div>
+	
 
 @endsection
 
@@ -552,7 +608,7 @@
 	      <div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Ingreso a ComprarJuntos</h4>
+					<h4 class="modal-title">Ingreso a {!! Session::get('app') !!}</h4>
 				</div>
 				<div class = "alerts-module"></div>				
 				<div class="modal-body">

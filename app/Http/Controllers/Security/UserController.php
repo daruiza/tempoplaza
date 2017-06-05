@@ -97,8 +97,7 @@ class UserController extends Controller {
 	
 	//Esta función es para guardar el usuario de la vista perfil, el usuario personal
 	public function postEditarPerfil(Request $request,$id=null)
-	{
-			
+	{			
 		//rutina para refinar los inputs		
 		$array_input = array();
 		$array_input['_token'] = $request->input('_token');
@@ -123,7 +122,7 @@ class UserController extends Controller {
 			'min' => 'La :attribute deberia tener almenos :min. caracteres',
 			'max' => 'La :attribute no debe tener maximo :max. caracteres',
 			'numeric' => 'El :attribute  debe ser un número',
-			'before' => "El :attribute  debe menor a: $fecha",
+			'before' => "El :attribute  debe ser menor a: $fecha",
 			'date' => 'El :attribute  no es una fecha valida',
 			'mimes' => 'La :attribute debe ser de tipo jpeg, png o bmp',
 		];
@@ -196,6 +195,7 @@ class UserController extends Controller {
 			$userprofile ->fix_number =  $request->input()['telefono_fijo'];			
 			$userprofile ->template =  $request->input()['fuente_tipografica'];
 			$userprofile ->avatar =  Session::get('comjunplus.usuario.avatar');
+			
 			if(!empty($fileName))$userprofile ->avatar =  $fileName;
 			
 			try {

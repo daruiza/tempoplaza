@@ -8,6 +8,7 @@
 html, body {	
 	 /*font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;;font-size: 17px;*/
 	 font-family: 'Dosis';font-size: 19px;
+	 background-color: #faf9f5;
 }
 .modal-backdrop {
   z-index: -1;
