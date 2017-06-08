@@ -81,7 +81,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME','info.comprarjuntos@gmail.com'),
+    'username' => env('MAIL_USERNAME','soportemacalu@gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -94,7 +94,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD','infoComprarJuntos#0724'),
+    'password' => env('MAIL_PASSWORD','soporteMacalu#0724'),
 
     /*
     |--------------------------------------------------------------------------
