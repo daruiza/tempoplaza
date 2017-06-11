@@ -329,6 +329,13 @@ class WelcomeController extends Controller {
 					$moduledata['categorias'][] = $value->name;
 				}
 
+				$citys = \DB::table('seg_city')->orderBy('city','asc')				
+				->get();
+				foreach ($citys as $city){
+					$ciudades[$city->city] = $city->city;
+				}
+				$moduledata['ciudades']=$ciudades;
+				
 				//autocomplete para el buscador
 				$products = \DB::table('clu_products')
 				->select('clu_products.name as pname','clu_category.name as cname')
@@ -495,6 +502,13 @@ class WelcomeController extends Controller {
 				$moduledata['categorias'][] = $value->name;
 			}
 
+			$citys = \DB::table('seg_city')->orderBy('city','asc')				
+			->get();
+			foreach ($citys as $city){
+				$ciudades[$city->city] = $city->city;
+			}
+			$moduledata['ciudades']=$ciudades;
+			
 			//autocomplete para el buscador
 			$products = \DB::table('clu_products')
 			->select('clu_products.name as pname','clu_category.name as cname')
@@ -1029,7 +1043,7 @@ class WelcomeController extends Controller {
 		if(!empty($request->input('name_invitado')) && !empty($request->input('dir_invitado')) ){
 			//es invitado, captamos los datos de contacto
 			$orden->name_client = $request->input('name_invitado');
-			$orden->adress_client = $request->input('dir_invitado');
+			$orden->adress_client = $request->input('dir_invitado').' - '.$request->input('municipio_invitado');
 			$orden->email_client = strtolower($request->input('email_invitado'));
 			$orden->number_client = $request->input('tel_invitado');
 			$orden->client_id = 0;

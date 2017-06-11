@@ -12,6 +12,9 @@ function seg_user() {
     this.colores_pie_orders = [];
     this.datos_pie_resenias = [];
     this.colores_pie_resenias = [];
+    //modal de captura de datos
+    this.btn_enviar_modal = 0 ;
+
     
     //refrescamos el brand del carrito de compras, ante el refresh de seg_user
 }
@@ -75,17 +78,24 @@ seg_user.prototype.validateEditPerfil = function(){
 seg_user.prototype.validateCart = function(){
     //verificacmos que se halle logueado, que sea un usuario de la aplicaciòn
     if($('#value_login').val() == "0"){
+
         //verificamos los inputs
-        if( $('#name_invitado').val() && $('#dir_invitado').val() && $('#email_invitado').val()){
+        if( $('#name_invitado').val() && $('#dir_invitado').val() && $('#municipio_invitado').val() && $('#email_invitado').val()){
             return true;
         }
 
-        if( $('#name_invitado').val() && $('#dir_invitado').val() && $('#tel_invitado').val()){
+        if( $('#name_invitado').val() && $('#dir_invitado').val() && $('#municipio_invitado').val() && $('#tel_invitado').val()){
             return true;
         }
+
+        if(this.btn_enviar_modal){
+            $('#invitado_cart_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Aún hay campos por diligenciar!</strong></div>');
+        }
+        this.btn_enviar_modal++;
         
         //desplegamos el modal de captura de información basica
         //$('#invitado_cart_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Aún no haces parte de ComprarJuntos!</strong> Diligencia el siguiente formulario para continuar con el pedido.</div>');
+
         $('#invitado_cart_modal').modal();
 
         //vinculamos los datos
@@ -95,6 +105,13 @@ seg_user.prototype.validateCart = function(){
         $("#name_invitado_modal").keyup(function(e) {
            $("#name_invitado").val(this.value); 
         });
+        $("#municipio_invitado_modal").change(function(e) {
+            $("#municipio_invitado").val($("#municipio_invitado_modal").val());
+        });
+        $("#municipio_invitado_modal").keyup(function(e) {
+           $("#municipio_invitado").val($("#municipio_invitado_modal").val()); 
+        });
+
         $("#dir_invitado_modal").change(function(e) {
             $("#dir_invitado").val(this.value);
         });
@@ -589,6 +606,11 @@ seg_user.prototype.openModalCart = function(result) {
             nombre.setAttribute("name", "name_invitado");
             nombre.setAttribute("id", "name_invitado");
 
+            municipio = document.createElement("input");
+            municipio.setAttribute("type", "hidden");
+            municipio.setAttribute("name", "municipio_invitado");
+            municipio.setAttribute("id", "municipio_invitado");
+
             dir = document.createElement("input");
             dir.setAttribute("type", "hidden");
             dir.setAttribute("name", "dir_invitado");
@@ -605,6 +627,7 @@ seg_user.prototype.openModalCart = function(result) {
             tel.setAttribute("id", "tel_invitado");
 
             inputs.appendChild(nombre);
+            inputs.appendChild(municipio);
             inputs.appendChild(dir);
             inputs.appendChild(email);
             inputs.appendChild(tel);

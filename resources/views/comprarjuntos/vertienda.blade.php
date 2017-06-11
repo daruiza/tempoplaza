@@ -564,7 +564,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<!--Para captar los datos de los invitados que desean comprar-->
 	<div class="modal fade" id="invitado_cart_modal" role="dialog">
 		<div class="modal-dialog modal-sm">
@@ -582,8 +582,13 @@
 						</div>
 
 						<div class="col-md-12">
+							{!! Form::label('municipio', 'Municipio', array('class' => 'col-md-12 control-label')) !!}
+							{!! Form::select('municipio_invitado_modal',$ciudades,null, array('id'=>'municipio_invitado_modal','class' => 'form-control','placeholder'=>'Municipio de recidencia')) !!}							
+						</div>
+
+						<div class="col-md-12">
 							{!! Form::label('direccion', 'Dirección', array('class' => 'col-md-12 control-label')) !!}
-							{!! Form::text('dir_invitado_modal',null, array('id'=>'dir_invitado_modal', 'class' => 'form-control','placeholder'=>'Dirección Y Ciudad de recidencia')) !!}
+							{!! Form::text('dir_invitado_modal',null, array('id'=>'dir_invitado_modal', 'class' => 'form-control','placeholder'=>'Dirección de recidencia')) !!}
 						</div>
 
 						<div class="col-md-12">
