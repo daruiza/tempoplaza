@@ -32,7 +32,7 @@
 		
 	</head>
 	
-	<body>		
+	<body>	
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">			
 				<div class="navbar-header">
@@ -262,7 +262,7 @@
 	</body>
 	<footer>
 		<div class="form-group">
-			<div class="col-md-3 col-md-offset-5">
+			<div class="col-md-12 col-md-offset-0" style="text-align: center;">
 				<p>© 2017 {{ Session::get('copy') }}, Inc.</p>
 			</div>		
 		</div>	

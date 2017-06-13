@@ -40,11 +40,10 @@
 		    background: -webkit-linear-gradient(left, #449AA2 , #B0E1EA  ); /* For Safari 5.1 to 6.0 */
 		    background: -o-linear-gradient(right,   #449AA2 , #B0E1EA  ); /* For Opera 11.1 to 12.0 */
 		    background: -moz-linear-gradient(right,   #449AA2 , #B0E1EA  ); /* For Firefox 3.6 to 15 */
-		    background: linear-gradient(to right,   #449AA2 , #B0E1EA  ); /* Standard syntax (must be last) */
-	       
+		    background: linear-gradient(to right,   #449AA2 , #B0E1EA  ); /* Standard syntax (must be last) */       
 
 		}
-
+		@if(count($ultima_tienda))
 		.macalu_nueva{
 			margin-top: 3%;
 			background-image: url("{{url('users/'.$ultima_tienda[0]->user_name.'/banners/'.$ultima_tienda[0]->banner)}}");
@@ -67,6 +66,7 @@
 		.bienvenida_nueva{
 			color:{{$ultima_tienda[0]->color_two}};
 		}
+		@endif
 
 		.option_store{
 			text-align: center;
@@ -286,7 +286,7 @@
 						    	<div class="row">
 						    		<div class="col-md-12" style="text-align: center;">
 						    			<a href="{{url('/'.$tienda->name)}}">
-						    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	    				
+						    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	  				
 						    			</a>					    				    									    			
 						    		</div>
 						    		<a href="{{url('/'.$tienda->name)}}" class="visible-lg" style="color:{{$tienda->color_two}};font-size: 16px;"> 
@@ -320,6 +320,22 @@
 
 			<!--Div Presentaciòn de una tienda-->
 
+			@if(count($ultima_tienda))
+				<div class="col-md-12 col-md-offset-0 macalu_nueva_movil" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
+							
+					<div class="col-md-3 col-md-offset-0 bienvenida_nueva"  style="text-align: center;margin-top: 0%;font-family: 'Calligraffitti';font-size: 28px;">
+						Damos la BIENVENIDA a nuestra nueva tienda {{ucwords($ultima_tienda[0]->name)}}
+					</div>
+					<div class=""  style="text-align: center;margin-top: 0%;">
+						{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/profile/'.$ultima_tienda[0]->avatar,'Imagen no disponible',array('class'=>'img_nueva', 'style'=>'width: auto; height: 120px;;border-radius: 50%;'))}}
+						<div>Yo: {{$ultima_tienda[0]->tnames}} </div>
+						<div> Tambièn hago parte de {!! Session::get('app') !!}</div>
+					</div>				
+		
+				</div>
+			@endif
+
+			<!--
 			<div class="col-md-10 col-md-offset-1 macalu" style="margin-top: 3%;background-image: url('images/banner/banner_word.jpg');">
 				<div class="row col-md-7 col-md-offset-1" style="font-size: 30px;">
 					<div class="col-md-12 col-md-offset-0">
@@ -344,6 +360,7 @@
 					<div>Tenderos</div>
 				</div>
 			</div>
+			-->
 
 			<!--Div de productos-->
 			<div class="col-md-12 col-md-offset-0" style="margin-top: 3%;">
@@ -445,8 +462,9 @@
 		</div>
 
 		<!--Div Presentaciòn de una tienda-->
-		<div class="col-md-10 col-md-offset-1 macalu_nueva" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
-			@if(count($ultima_tienda))				
+		@if(count($ultima_tienda))
+			<div class="col-md-10 col-md-offset-1 macalu_nueva" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
+							
 				<div class="col-md-3 col-md-offset-0 bienvenida_nueva"  style="text-align: center;margin-top: 0%;float: left;font-family: 'Calligraffitti';font-size: 28px;">
 					Damos la BIENVENIDA a nuestra nueva tienda {{ucwords($ultima_tienda[0]->name)}}
 				</div>
@@ -455,8 +473,9 @@
 					<div>Yo: {{$ultima_tienda[0]->tnames}} </div>
 					<div> Tambièn hago parte de {!! Session::get('app') !!}</div>
 				</div>				
-			@endif
-		</div>
+	
+			</div>
+		@endif
 
 		<!--Div de productos-->
 		<div class="">

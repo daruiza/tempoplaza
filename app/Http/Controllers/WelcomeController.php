@@ -86,16 +86,16 @@ class WelcomeController extends Controller {
 				$ciudades[$city->city] = $city->city;
 			}
 			$moduledata['ciudades']=$ciudades;
-		}		
+		}	
 
-		$moduledata['category'] = \DB::table('clu_category')
+		$category = \DB::table('clu_category')
 		->select('clu_category.name','fc.name as fname')
 		->leftjoin('clu_category as fc', 'clu_category.category_id', '=', 'fc.id')
 		->orderByRaw("RAND()")
 		->get();
 		//construimos el array
 		$cat =  array();
-		foreach ($moduledata['category'] as $key => $value) {
+		foreach ($category as $key => $value) {
 			if(!$value->fname){
 				if(!array_key_exists($value->name,$cat))$cat[$value->name] = array(); 
 			}else{
@@ -406,7 +406,6 @@ class WelcomeController extends Controller {
 				//asignamos el id para listar las ordenes, en listarajaxorders
 				Session::put('store.id', $moduledata['tienda'][0]->id);			
 				return view('comprarjuntos/vertienda')->with($moduledata);
-
 			}
 
 		}else{
@@ -435,6 +434,8 @@ class WelcomeController extends Controller {
 		}
 		
 		//return view('welcome',['modulo'=>$moduledata]);
+		//dd($moduledata);
+		//dd(Session::all());
 		return view('welcome')->with($moduledata);		
 	}
 
