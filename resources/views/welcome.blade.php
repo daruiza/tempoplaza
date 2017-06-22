@@ -264,7 +264,7 @@
 			<div class="col-md-4 col-md-offset-0" style="display: flex">
 				{{ Html::image('images/icons/seguridad.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;' ))}}
 				<div style="font-size: 16px;margin-left: 5px;text-align: center;">
-					Compra con seguridad, la información del tendero estara siempre disponible en cada una de sus teindas.
+					Compra con seguridad, la información del tendero estara siempre disponible en cada una de sus tindas.
 				</div>
 			</div>			
 		</div>
@@ -548,7 +548,7 @@
 				<b>¿Que es {!! Session::get('app') !!}?</b>
 			</div>
 				{{ Html::image('images/icons/etiqueta1.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}		
-				{!! Session::get('app') !!} es una analogía virtual a un centro comercial donde los tenderos ya sea que posean una tienda física o no, comparten un espacio similar a una plaza de mercados donde poder ofertar y comprar productos y servicios.			
+				{!! Session::get('app') !!} es una analogía virtual a un centro comercial donde los tenderos ya sea que posean una tienda física o no, comparten un espacio similar a una plaza de mercados donde poder ofertar o comprar productos y servicios.			
 		</div>
 
 		<div class="col-md-4 col-md-offset-0" style="text-align: justify">
@@ -574,7 +574,7 @@
 			<b>¿Como Funciona La Pasarela de Pagos?</b>
 		</div>
 			{{ Html::image('images/icons/etiqueta3.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}			
-			Luego de realizarce un pedido en una Tienda, el tendero recibirá una notificación via correo electrónico con la información necesaria para realizar el primer contacto con el cliente y así concretar detalles del servicio (verificación de dirección, metodo de pago, etc). A continuación el cliente recibirá una notificación via correo electrónico ante la aceptación o el rechazo de la oden; en caso de ser aceptada, esté recibirá una última notificación tambien en su correo luego de tener el producto en su poder para proceder con la calificación del servicio ofrecido por la tienda. ¡ Y Eso es Todo!.
+			Luego de realizarce un pedido en una Tienda, el tendero recibirá una notificación via correo electrónico con la información necesaria para realizar el primer contacto con el cliente y así concretar detalles del servicio (verificación de dirección, metodo de pago, etc). A continuación el cliente recibirá una notificación via correo electrónico ante la aceptación o el rechazo de la oden; en caso de ser aceptada, esté recibirá una última notificación tambien en su correo electrónico luego de tener el producto en su poder para proceder con la calificación del servicio ofrecido por la tienda. ¡ Y Eso es Todo!.
 	</div>
 	<!--
 	<div class="col-md-2 col-md-offset-0" style="text-align: justify">

@@ -135,7 +135,7 @@
 	.btn{
 		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 		font-size: 14px;
-		border-color: {!!$tienda[0]->color_two!!} !important;
+		/*border-color: {!!$tienda[0]->color_two!!} !important;*/
 	}
 
 	.ui-autocomplete{
@@ -232,7 +232,7 @@
 		</div>
 	</div>
 	
-	<div class="row tienda_banner col-md-10 col-md-offset-1" style="height: 200px;font-size: 40px; color: {{$tienda[0]->color_two}} !important; padding: 1%;margin-bottom: 1%; ">
+	<div class="row tienda_banner col-md-10 col-md-offset-1 visible-lg" style="height: 200px;font-size: 40px; color: {{$tienda[0]->color_two}} !important; padding: 1%;margin-bottom: 1%; ">
 		@if($tienda[0]->banner == 'default.png')
 			{{$tienda[0]->name}}
 		@endif
@@ -341,7 +341,7 @@
 		</div>		
 	</div>	
 
-	<div class="col-md-10 col-md-offset-1" style="margin-bottom: 2%;">
+	<div class="col-md-10 col-md-offset-1 " style="margin-bottom: 2%;">
 		<div class="title m-b-md center-block">
 			<div class="btn-group btn-menu" role="group">
 				<!--<button type="button" class="btn btn-default">Articulos</button>-->
@@ -349,7 +349,7 @@
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ubication_modal">Ubicaciòn</button>
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#resumen_modal">Resumen</button>				
 				<!--<button type="button" class="btn btn-default">Grupos de Consumo</button>-->
-				<button type="button" class="btn btn-default" ><a href="#calificaciones" id="link1" class="bnt-catacteristicas">Calificaciones</a></button>
+				<button type="button" class="btn btn-default visible-lg" ><a href="#calificaciones" id="link1" class="bnt-catacteristicas">Calificaciones</a></button>
 			</div>
 		</div>
 	</div>
