@@ -326,6 +326,41 @@
 					<div class="col-md-3 col-md-offset-0 bienvenida_nueva"  style="text-align: center;margin-top: 0%;font-family: 'Calligraffitti';font-size: 28px;">
 						Damos la BIENVENIDA a nuestra nueva tienda {{ucwords($ultima_tienda[0]->name)}}
 					</div>
+					<div class="col-md-12 col-md-offset-0" style="margin-top: 1%;" >
+						<div class="col-md-3 col-mx-offset-1">
+							<div class="panel panel-default" style="border-color:{{$ultima_tienda[0]->color_two}};">					
+								<div class="panel-body">
+							    	<div class="row">
+							    		<div class="col-md-12" style="text-align: center;">
+							    			<a href="{{url('/'.$ultima_tienda[0]->name)}}">
+							    				{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/stores/'.$ultima_tienda[0]->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}		
+							    			</a>					    				    									    			
+							    		</div>
+							    		
+							    		<div class="col-md-12"  style="background-color:{{$ultima_tienda[0]->color_one}}; color: {{$ultima_tienda[0]->color_two}}; border-color:
+							    	{{$ultima_tienda[0]->color_two}};padding: 0px;">					    			
+							    			<div class="col-md-12" style="padding: 0px;" >
+						    					<div style="text-align: center;">
+						    						<a href="{{url('/'.$ultima_tienda[0]->name)}}" style="color:{{$ultima_tienda[0]->color_two}};font-size: 16px;text-decoration:none;	">	
+							    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$ultima_tienda[0]->name}}
+						    						</a>
+								    			</div>			    				
+							    			</div>
+							    			<div class="col-md-12" >
+							    				<div style="font-size: 16px;text-align: center;">
+								    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$ultima_tienda[0]->department}} - {{$ultima_tienda[0]->city}}
+								    			</div>						    			
+								    			<div style="font-size: 16px;text-align: center;">
+								    				{{$ultima_tienda[0]->adress}}
+								    			</div>		
+							    			</div>  			
+							    		</div>
+							    	</div>
+							    </div>				    
+							</div>
+						</div>
+					</div>
+
 					<div class=""  style="text-align: center;margin-top: 0%;">
 						{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/profile/'.$ultima_tienda[0]->avatar,'Imagen no disponible',array('class'=>'img_nueva', 'style'=>'width: auto; height: 120px;;border-radius: 50%;'))}}
 						<div>Yo: {{$ultima_tienda[0]->tnames}} </div>
@@ -388,6 +423,9 @@
 							    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$producto->name}}
 						    						</a>
 								    			</div>
+								    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
+								    				$ {{$producto->price}}
+								    			</div>	
 								    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
 								    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$producto->store_city}} - {{$producto->store_adress}}
 								    			</div>						    			

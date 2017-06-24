@@ -242,7 +242,8 @@
 			<div class="col-md-5">
 			{{ Html::image('users/'.$tienda[0]->user_name.'/stores/'.$tienda[0]->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 200px;border-radius: 0%;' ))}}	
 			</div>
-			<div class="col-md-7 col-sd-offset-0" style="text-align: center;">				
+			<div class="col-md-7 col-sd-offset-0" style="text-align: center;">
+				<div class ="hidden-lg" style="margin-bottom: 1%;margin-top: 1%;"><b>{{strtoupper($tienda[0]->name)}}</b></div>
 				<div>{{$tienda[0]->description}}</div>
 				<div><span class="glyphicon glyphicon-map-marker" aria-hidden="true">{{$tienda[0]->department}}, {{$tienda[0]->city}}</span></div>
 				<div>{{$tienda[0]->adress}}</div>
@@ -368,7 +369,54 @@
 	<div id="color_two" style="display:none;">{{$tienda[0]->color_two}}</div>
 
 	<!--Listado de productos-->
-	<div class="col-md-10 col-md-offset-1 listado_productos">
+	<!-- Para resoluciones de celulares-->
+	<div class="col-md-10 col-md-offset-1 listado_productos hidden-lg">
+		@php ($p=0)
+		@php ($j=1)
+		@foreach($productos as $producto)
+			@if($p%4==0)
+				<div class="col-md-12 col-md-offset-0">
+			@endif
+			<div class="col-md-3 col-mx-offset-1" style="text-align: center;">
+				<div class="panel panel-default">					
+					<div class="panel-body">
+				    	<div class="row">
+				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
+			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}				    							    			
+				    		</div>
+
+				    		<div class="col-xs-12 panel-footer"  style="background-color:{{$tienda[0]->color_one}}; color: {{$tienda[0]->color_two}}; border-color:{{$tienda[0]->color_two}};padding: 2px;">				    			
+				    			<div class="col-xs-3 col-mx-offset-0" style="font-size: 14px;">
+					    			{{$producto->name}}				    			
+				    			</div>
+				    			<div class="col-xs-3 col-mx-offset-0" style="font-size: 14px;">
+					    			${{$producto->price}}				    			
+				    			</div>	
+				    			<div class="col-xs-3 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
+				    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
+				    				<div style="font-size: 10px;">Descripciòn</div>
+				    			</div>
+				    			<div class="col-xs-3 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
+				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
+				    				<div style="font-size: 10px;">Al Carrito</div>
+				    			</div>	
+				    		</div>
+				    	</div>
+				    </div>				    
+				</div>
+			</div>
+			@if($j%4==0)
+				</div>							
+			@elseif($p == count($productos)-1)
+				</div>
+			@endif
+			@php ($p++)
+			@php ($j++)
+		@endforeach
+	</div>
+
+	<!-- Para resoluciones de computador-->
+	<div class="col-md-10 col-md-offset-1 listado_productos visible-lg">
 		@php ($p=0)
 		@php ($j=1)
 		@foreach($productos as $producto)

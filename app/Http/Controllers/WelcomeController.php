@@ -249,6 +249,7 @@ class WelcomeController extends Controller {
 			}
 
 			if(array_key_exists('finder_store',$request->input())){
+
 				//buscador de la tienda, intentan buscar productos o categorias
 				$criterio = explode(' ',strtolower($request->input('finder_store')));
 				$conectors = Conector::all()->toArray();			
@@ -269,7 +270,7 @@ class WelcomeController extends Controller {
 				->select('seg_user_profile.*','seg_user.name as user_name')
 				->leftjoin('seg_user', 'seg_user_profile.user_id', '=', 'seg_user.id')					
 				->where('seg_user.id',$moduledata['tienda'][0]->user_id)		
-				->get();			
+				->get();
 
 				$moduledata['productos'] = \DB::table('clu_products')
 				->select('clu_products.*',\DB::raw('SUM(clu_order_detail.volume) as ventas'))			
@@ -350,6 +351,7 @@ class WelcomeController extends Controller {
 				}
 
 				//resumen estadistico
+				//preguntamos si hay ordenes
 				$moduledata['orders'] = \DB::table('clu_order')
 				->select('clu_stage.stage', \DB::raw('count(*) as total'))
 				->join('clu_stage', 'clu_order.stage_id', '=', 'clu_stage.id')
@@ -362,6 +364,7 @@ class WelcomeController extends Controller {
 					if($value->stage == "RECHAZADO") $value->color = "#ff5c33";
 					if($value->stage == "FINALIZADO") $value->color = "#33cc33";
 				}
+
 				$moduledata['calificaciones'] = \DB::table('clu_order')
 				->select('clu_order.resenia', \DB::raw('count(*) as total'))			
 				->where('clu_order.store_id',$moduledata['tienda'][0]->id)
@@ -373,10 +376,10 @@ class WelcomeController extends Controller {
 					if($value->resenia == 3){$value->resenia_text = "Regular";$value->color = "#ffcc00";}
 					if($value->resenia == 4){$value->resenia_text = "Bueno";$value->color = "#66ccff";}
 					if($value->resenia == 5){$value->resenia_text = "Muy Bueno";$value->color = "#00cc66";}
-				}	
+				}
 
 				//paginador
-				$moduledata['paginador']['total'] =Producto::where('clu_order.store_id',$moduledata['tienda'][0]->id)->count();
+				$moduledata['paginador']['total'] =Producto::where('clu_products.store_id',$moduledata['tienda'][0]->id)->count();
 				$moduledata['paginador']['ppp'] =16;//productospor pagina
 				$moduledata['paginador']['pagina'] =1;
 				$moduledata['paginador']['paginas'] = ceil($moduledata['paginador']['total'] / $moduledata['paginador']['ppp']);
