@@ -446,6 +446,13 @@ class WelcomeController extends Controller {
 	public function getFind($data = null){
 		//BUSQUEDA DE TIENDA PRODUCTO O CATEGORIA
 		
+		if( empty(Session::get('copy'))){
+			Session::put('app', env('APP_NAME','Macalù'));
+			Session::put('copy', env('APP_RIGTH','Temposolutions'));
+			Session::put('mail', env('MAIL_USERNAME','soportemacalu@gmail.com'));
+			Session::put('support', env('APP_SUPPORT','daruiza@gmail.com'));	
+		}	
+		
 		//PRIMERO miramos si coincide con el nombre de una tienda
 		$moduledata['tienda'] = \DB::table('clu_store')
 		->select('clu_store.*','seg_user.name as user_name')
