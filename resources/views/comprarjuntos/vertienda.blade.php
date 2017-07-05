@@ -159,6 +159,26 @@
 	.panel-heading{
 		background-color: {!!$tienda[0]->color_one!!} !important;
 	}
+	.buscador_t{
+		border-color: {!!$tienda[0]->color_two!!} !important;		
+	}
+	.cart_b{
+		color: {!!$tienda[0]->color_one!!} !important;		
+	}
+	.boton_cart2{
+	    text-align: center;
+	    background-color: {!!$tienda[0]->color_two!!} !important;	
+	}
+	.bange_cart_b{
+		color: {!!$tienda[0]->color_one!!} !important;		
+	}
+	.cart_text_b{
+		color: {!!$tienda[0]->color_one!!} !important;		
+	}
+	.badge{
+		background-color: {!!$tienda[0]->color_one!!} !important;
+		color: {!!$tienda[0]->color_two!!} !important;			
+	}
 
 	</style>
 
@@ -341,6 +361,19 @@
 			<!--<div><span class="glyphicon glyphicon-envelope" aria-hidden="true"> Contacto</span></div>-->
 		</div>		
 	</div>	
+
+	<!--Buscador de tiendas solo para moviles-->
+	<div class="col-md-10 col-md-offset-1 hidden-lg">
+		{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
+		   <div class="input-group">
+				{!! Form::text('finder_store','', array('class' => 'form-control buscador_t','placeholder'=>'Buscador de Productos','style'=>'text-align: center;','maxlength' => 48)) !!}
+				{!! Form::hidden('store', $tienda[0]->id) !!}
+				<span class="input-group-btn">
+					<button class="btn btn-default buscador_t" type="submit">Buscar!</button>
+				</span>
+			</div>
+	    {!! Form::close() !!}
+    </div>	
 
 	<div class="col-md-10 col-md-offset-1 " style="margin-bottom: 2%;">
 		<div class="title m-b-md center-block">
@@ -856,11 +889,21 @@
     {!! Form::open(array('id'=>'form_from_products','url' => 'welcome/listarajaxproducts')) !!}		
     {!! Form::close() !!}
 
+	<nav class="navbar  navbar-fixed-bottom navbar-light bg-faded hidden-lg">		
+		<a href="#" id="cart_modal_b">
+			<div class="col-xs-4 col-xs-offset-4 boton_cart2" style="border-radius: 10%">			
+				<span class="glyphicon glyphicon-shopping-cart cart_b" aria-hidden="true" style = "font-size: 30px;"></span>
+				<span class ="cart_text_b" style = "font-size: 16px;" >Carro</span>	
+				<span id="bange_cart_b" class="badge"></span>
+			</div>
+		</a>
+
+	</nav>
 @endsection
 
 @section('script')
 	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>
-
+	<script type="text/javascript">	$('#cart_modal_b').on('click', function (e) { seg_user.openModalCart();});</script>
 	<!--Autocomplete para buscador-->
 	@foreach($products_name as $producto)
 		<script type="text/javascript" charset="utf-8">  seg_user.datos_productos.push("{!!$producto!!}"); </script>
@@ -1242,6 +1285,11 @@
 							$('#bange_cart').html(1);	
 						}else{
 							$('#bange_cart').html(parseInt($('#bange_cart').html())+1);
+						}
+						if($('#bange_cart_b').html() == ""){
+							$('#bange_cart_b').html(1);	
+						}else{
+							$('#bange_cart_b').html(parseInt($('#bange_cart_b').html())+1);
 						}
 					}
 					//cerrar el modal

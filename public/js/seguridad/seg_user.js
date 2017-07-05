@@ -654,6 +654,7 @@ seg_user.prototype.openModalCart = function(result) {
 
             //reducir el brage del carrito
             $('#bange_cart').html(parseInt($('#bange_cart').html())-1);
+            $('#bange_cart_b').html(parseInt($('#bange_cart_b').html())-1);
 
             //recalculamos los totales
             cantidad_total = 0;

@@ -122,7 +122,21 @@ class WelcomeController extends Controller {
 		->where('seg_user_profile.avatar','!=','default.png')
 		->where('clu_store.status','Activa')
 		->where('clu_store.id',\DB::table('clu_store')->max('clu_store.id'))		
-		->get();		
+		->get();
+
+		//si no hay nueva tienda, buscamos una otra que pueda ubicarce
+		if(!count($moduledata['ultima_tienda'])){
+			$moduledata['ultima_tienda'] = \DB::table('clu_store')
+			->select('clu_store.*','seg_user.name as user_name','seg_user_profile.avatar as avatar','seg_user_profile.names as tnames','seg_user_profile.surnames as tsurnames')
+			->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
+			->leftjoin('seg_user_profile', 'clu_store.user_id', '=', 'seg_user_profile.user_id')
+			->where('seg_user_profile.avatar','!=','default.png')
+			->where('clu_store.status','Activa')
+			->orderByRaw("RAND()")
+			->skip(0)->take(1)
+			->get();
+		}
+			
 
 		//HAY REQUEST
 		if(!empty($request->input())){
