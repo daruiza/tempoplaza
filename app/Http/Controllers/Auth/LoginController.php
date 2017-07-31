@@ -110,7 +110,7 @@ class LoginController extends Controller
 			 					Session::flash('orden_id', Session::get('orden_id'));
 							}
 							//el redirect puede redirigir a route, to, back, url
-							return Redirect::to('/')->withErrors(['Datos invalidos, comunicate con el administrador','Recuerda que tu correo electrónico tambien funciona como usuario para ingresar a ComprarJuntos.'])->withInput();
+							return Redirect::to('/')->withErrors(['Datos invalidos, comunicate con el administrador','Recuerda que tu correo electrónico tambien funciona como usuario para ingresar a '.Session::get('app').'.'])->withInput();
 						}
 					}
 					
@@ -131,6 +131,7 @@ class LoginController extends Controller
 					
 					$array = Array();
 					$array['usuario']['id'] = $user->id = $result['user_id'];
+					$array['usuario']['id_perfil'] = $user->id = $result['id'];
 					$array['usuario']['name']=$result['name'];
 					$array['usuario']['email']=$result['email'];					
 					$array['usuario']['ip'] = $user->ip = $request->server()['REMOTE_ADDR'];
@@ -260,8 +261,7 @@ class LoginController extends Controller
 					}					
 					$message[] = 'Bienvenid@: '.Session::get('comjunplus.usuario.names').' '.Session::get('comjunplus.usuario.surnames');
 					if(!empty($request->input('user_id'))){
-						$message[] = 'Ya puedes crear tu propia tienda y vender tus productos en nuestra gran comunidad';
-						$message[] = 'Antes de empezar, date una vuelta por el PERFIL DE USUARIO para que completes la Inscripción, configures tu cuenta y se habiliten todas las opciones';
+						$message[] = 'Ya puedes crear tu propia tienda y vender tus productos en nuestra gran comunidad';			
 						$message[] = 'Perfil1';
 						
 					}else{						
@@ -403,7 +403,7 @@ class LoginController extends Controller
     	
     	
     }
-    
+
     public function getLogout(Request $request,$id=null)
     {    	
     	// Cerramos la sesión
@@ -416,7 +416,7 @@ class LoginController extends Controller
 			return Redirect::back()->with('error', [$message]);
 		}
 		Session::put('style', 'default');
-		return Redirect::to('/')->with('message', ['Acabas de Salir de forma segura de ComprarJuntos.','Te epramos en una proxima visita.']);
+		return Redirect::to('/')->with('message', ['Acabas de Salir de forma segura de '.Session::get('app').'.','Te epramos en una proxima visita.']);
     }
     
     

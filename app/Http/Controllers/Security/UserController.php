@@ -98,6 +98,7 @@ class UserController extends Controller {
 	//Esta función es para guardar el usuario de la vista perfil, el usuario personal
 	public function postEditarPerfil(Request $request,$id=null)
 	{			
+
 		//rutina para refinar los inputs		
 		$array_input = array();
 		$array_input['_token'] = $request->input('_token');
@@ -173,17 +174,15 @@ class UserController extends Controller {
 					}
 
 				}	
-			}	
-
+			}
+			
 			$user = new User();
-			$userprofile = new UserProfile();
-							
-			$userprofile = UserProfile::find(Session::get('comjunplus.usuario.id'));
+			$userprofile = new UserProfile();					
+			$userprofile = UserProfile::find(Session::get('comjunplus.usuario.id_perfil'));
 			$user = User::find(Session::get('comjunplus.usuario.id'));
 			
 			$user->ip = $request->server()['REMOTE_ADDR'];			
 			$user->email = $request->input()['correo_electronico'];			
-
 			$userprofile ->identificacion =  $request->input()['identificacion'];					
 			$userprofile ->names =  $request->input()['nombres'];			
 			$userprofile ->surnames =  $request->input()['apellidos'];			

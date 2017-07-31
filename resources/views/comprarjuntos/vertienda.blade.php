@@ -891,7 +891,7 @@
 
 	<nav class="navbar  navbar-fixed-bottom navbar-light bg-faded hidden-lg">		
 		<a href="#" id="cart_modal_b">
-			<div class="col-xs-4 col-xs-offset-4 boton_cart2" style="border-radius: 10%">			
+			<div class="col-xs-4 col-xs-offset-4 boton_cart2" style="border-radius: 5%">			
 				<span class="glyphicon glyphicon-shopping-cart cart_b" aria-hidden="true" style = "font-size: 30px;"></span>
 				<span class ="cart_text_b" style = "font-size: 16px;" >Carro</span>	
 				<span id="bange_cart_b" class="badge"></span>

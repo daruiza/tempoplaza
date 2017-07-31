@@ -103,8 +103,7 @@ class RegisterController extends Controller
 			if ($validator->fails()) {
 				//el redirect puede redirigir a route, to, back, url
 				return Redirect::to('/')->withErrors($validator)->withInput();
-			}else{
-				
+			}else{				
 				//verificamos que el nombre de usuario no exista
 				$user = User::where('name', '=', $request->input('usuario'))->first();
 				if(empty($user)){
@@ -207,8 +206,7 @@ class RegisterController extends Controller
 									return Redirect::back()->with('error', $message);	
 								}
 								chmod('users/'.$user->name.'/products/default.png', 0777);
-							} 
-								
+							}								
 							
 							//envio de mensage al administrador							
 							$data['user'] = $user->name;
@@ -220,16 +218,16 @@ class RegisterController extends Controller
 							});						
 							
 							return redirect()->action('Auth\LoginController@getLogin', ['user_id' => $user->id, 'usuario'=>$user->name, 'contraseña'=>  $request->input()['contraseña_uno']]);
-							
+
 						}else{
 							return Redirect::to('/')->withErrors(['Datos invalidos, La contraseña no coincide']);
 						}
 					}else{
-						return Redirect::to('/')->withErrors(['Datos invalidos, el email '.$request->input('email').' Ya existe en ComprarJuntos']);
+						return Redirect::to('/')->withErrors(['Datos invalidos, el email '.$request->input('email').' Ya existe en '.Session::get('app').'.']);
 					}
 				}else{
 					//el usuario ya existe					 
-					return Redirect::to('/')->withErrors(['Datos invalidos, el nombre de usuario '.$request->input('usuario').' Ya existe en ComprarJuntos']);
+					return Redirect::to('/')->withErrors(['Datos invalidos, el nombre de usuario '.$request->input('usuario').' Ya existe en '.Session::get('app').'.']);
 				}
 				
 				

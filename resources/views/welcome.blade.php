@@ -46,17 +46,20 @@
 		@if(count($ultima_tienda))
 		.macalu_nueva{
 			margin-top: 3%;
-			background-image: url("{{url('users/'.$ultima_tienda[0]->user_name.'/banners/'.$ultima_tienda[0]->banner)}}");
-			/*background-size: 100% 175px;*/
-			background-repeat: no-repeat;
-	    	background-position: center;
-	    	height: 200px;
+			
+			/*background-size: 100% 175px;*/			
 	    	margin-bottom: 3%;
 	    	border: 1px solid {{$ultima_tienda[0]->color_one}};
 		    padding: 1%;
 		    border-radius: 5px;
 		    color:{{$ultima_tienda[0]->color_two}};
 		   	cursor: pointer;
+		}
+		.macalu_background{
+			background-image: url("{{url('users/'.$ultima_tienda[0]->user_name.'/banners/'.$ultima_tienda[0]->banner)}}");
+			background-repeat: no-repeat;
+	    	background-position: center;
+	    	height: 200px;
 		}
 
 		.img_nueva{
@@ -155,7 +158,9 @@
 				<ul>
 					@foreach (Session::get('message') as $message)
 						@if ($message  == 'Perfil1')
-							<li>  El perfil de usuario se halla ubicado en la esquina superior derecha al desplegar las opciones del botón que tiene tu nombre de usuario: {{Session::get('comjunplus.usuario.name')}}.  <a  href="{{ url('/perfil/'.Session::get('comjunplus.usuario.id')) }}">Ó dando CLICK AQUI</a>  </li>													
+							<li>
+								Antes de empezar, date una vuelta por el <a  href="{{ url('/perfil/'.Session::get('comjunplus.usuario.id')) }}">PERFIL DE USUARIO</a> para que completes la Inscripción, configures tu cuenta y se habiliten todas las opciones
+							</li>													
 						@elseif ($message  == 'Perfil2' || $message  == 'Perfil3')						
 						@else
 							<li>{{ $message }}</li>
@@ -273,53 +278,57 @@
 	<div class="col-md-12 col-md-offset-0 " style="margin-top: 1%;">
 		<!--Para resoluciones en celular-->
 		<div  class=" row col-md-12 col-md-offset-0 hidden-lg" >
-			<!-- Div de tiendas-->
-			<div class="col-md-12 col-md-offset-0 " style="margin-top: 1%;">
+			
+			<!--Div de productos-->
+			<div class="col-md-12 col-md-offset-0" style="margin-top: 3%;">
 				<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
-					<b>Muchas Tiendas En Un Solo Lugar</b>
+					<b>Nuestro Mercado Contiene un Universo de Productos</b>
 				</div>
 				<div class="col-md-12 col-md-offset-0" style="margin-top: 1%;" >
-				@foreach($tiendas as $tienda)
-					<div class="col-md-3 col-mx-offset-1">
-						<div class="panel panel-default" style="border-color:{{$tienda->color_two}};">					
-							<div class="panel-body">
-						    	<div class="row">
-						    		<div class="col-md-12" style="text-align: center;">
-						    			<a href="{{url('/'.$tienda->name)}}">
-						    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	  				
-						    			</a>					    				    									    			
-						    		</div>
-						    		<a href="{{url('/'.$tienda->name)}}" class="visible-lg" style="color:{{$tienda->color_two}};font-size: 16px;"> 
-				    					{{ Html::image('users/'.$tienda->user_name.'/profile/'.$tienda->avatar,'Imagen no disponible',array('class'=>'img_tendero', 'style'=>'width: 35%;border-radius: 50%;position: absolute; margin-left: 40%;z-index: 99;' ))}}
-				    				</a>	
-						    		<div class="col-md-12"  style="background-color:{{$tienda->color_one}}; color: {{$tienda->color_two}}; border-color:
-						    	{{$tienda->color_two}};padding: 0px;">					    			
-						    			<div class="col-md-12" style="padding: 0px;" >
-					    					<div style="text-align: center;">
-					    						<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;text-decoration:none;	">	
-						    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$tienda->name}}
-					    						</a>
-							    			</div>			    				
-						    			</div>
-						    			<div class="col-md-12" >
-						    				<div style="font-size: 16px;text-align: center;">
-							    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$tienda->department}} - {{$tienda->city}}
-							    			</div>						    			
-							    			<div style="font-size: 16px;text-align: center;">
-							    				{{$tienda->adress}}
-							    			</div>		
-						    			</div>  			
-						    		</div>
-						    	</div>
-						    </div>				    
-						</div>
-					</div>	
-				@endforeach
+					@foreach($productos as $producto)
+						<div class="col-md-3 col-mx-offset-1">
+							<div class="panel panel-default">					
+								<div class="panel-body">
+							    	<div class="row">
+							    		<div class="col-md-12">
+							    			<a href="{{url('/'.$producto->store_name)}}">
+							    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}    				
+							    			</a>				    			
+							    		</div>							    		
+							    		<div class="col-md-12"  style="background-color:#fff; color: #777777; border-color:#777777;padding: 0px;">
+							    			<div  class="col-md-12" style="padding: 0px;">
+						    					<div style="text-align: center;">
+						    						<a href="{{url('/'.$producto->name)}}" style="color:#777777;font-size: 18px;text-decoration:none;	">	
+							    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$producto->name}}
+						    						</a>
+								    			</div>
+								    			<div style="font-size: 14px;text-align: center;;">
+								    				$ {{$producto->price}}
+								    			</div>	
+								    			<div style="font-size: 14px;text-align: center;;">
+								    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$producto->store_city}} - {{$producto->store_adress}}
+								    			</div>						    			
+								    			<div style="font-size: 14px;text-align: center;">
+								    				De la Tienda {{$producto->store_name}}
+								    			</div>						    			
+						    				</div>
+						    				{{--
+						    				<div class="col-md-3 hidden-xs">
+						    					<a href="{{url('/'.$producto->name)}}" style="color:{{$producto->color_two}};font-size: 18px;">
+							    					{{ Html::image('users/'.$producto->user_name.'/stores/'.$producto->store_image,'Imagen no disponible',array( 'style'=>'width: 130%;border-radius: 0%;' ))}}
+							    				</a>
+							    			</div>
+							    			--}}		    			
+							    		</div>
+							    	</div>
+							    </div>				    
+							</div>
+						</div>	
+					@endforeach
 				</div>
 			</div>
 
 			<!--Div Presentaciòn de una tienda-->
-
 			@if(count($ultima_tienda))
 				<div class="col-md-12 col-md-offset-0 macalu_nueva_movil" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
 							
@@ -368,152 +377,65 @@
 					</div>				
 		
 				</div>
-			@endif
+			@endif		
 
-			<!--
-			<div class="col-md-10 col-md-offset-1 macalu" style="margin-top: 3%;background-image: url('images/banner/banner_word.jpg');">
-				<div class="row col-md-7 col-md-offset-1" style="font-size: 30px;">
-					<div class="col-md-12 col-md-offset-0">
-						Encuentra lo que buscas
-					</div>
-					<div class="col-md-12 col-md-offset-0">
-						{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left','onsubmit'=>'javascript:return seg_user.validateFinder()', 'style'=>'width: 100%;')) !!}
-						   <div class="input-group" style="width: 100%;">
-								{!! Form::text('finder','', array('class' => 'form-control','placeholder'=>'¿Que Estas Buscando?','style'=>'text-align: center;border: 1px solid #449aa2;','maxlength' => 48)) !!}
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="submit">Buscar!</button>
-								</span>
-							</div>
-					    {!! Form::close() !!}
-				    </div>		    
-				</div>
-
-				<div class="row col-md-4 col-md-offset-0" style="font-size: 22px;text-align: center;">
-					<div>Tiendas</div>
-					<div>Productos</div>
-					<div>Grupos de Consumo</div>
-					<div>Tenderos</div>
-				</div>
-			</div>
-			-->
-
-			<!--Div de productos-->
-			<div class="col-md-12 col-md-offset-0" style="margin-top: 3%;">
+			<!-- Div de tiendas-->
+			<div class="col-md-12 col-md-offset-0 " style="margin-top: 1%;">
 				<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
-					<b>Encuentra Productos y Consume Responsablemente</b>
+					<b>Muchas Tiendas En Un Solo Lugar</b>
 				</div>
 				<div class="col-md-12 col-md-offset-0" style="margin-top: 1%;" >
-					@foreach($productos as $producto)
-						<div class="col-md-3 col-mx-offset-1">
-							<div class="panel panel-default">					
-								<div class="panel-body">
-							    	<div class="row">
-							    		<div class="col-md-12">
-							    			<a href="{{url('/'.$producto->store_name)}}">
-							    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}    				
-							    			</a>				    			
-							    		</div>
-							    		{{--
-							    		<div class="col-md-12"  style="background-color:{{$producto->color_one}}; color: {{$producto->color_two}}; border-color:{{$producto->color_two}};padding: 0px;">
-							    		--}}
-							    		<div class="col-md-12"  style="background-color:#fff; color: #777777; border-color:#777777;padding: 0px;">
-							    			<div  class="col-md-12" style="padding: 0px;">
-						    					<div style="text-align: center;">
-						    						<a href="{{url('/'.$producto->name)}}" style="color:{{$producto->color_two}};font-size: 18px;text-decoration:none;	">	
-							    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$producto->name}}
-						    						</a>
-								    			</div>
-								    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
-								    				$ {{$producto->price}}
-								    			</div>	
-								    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
-								    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$producto->store_city}} - {{$producto->store_adress}}
-								    			</div>						    			
-								    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
-								    				De la Tienda {{$producto->store_name}}
-								    			</div>						    			
-						    				</div>
-						    				{{--
-						    				<div class="col-md-3 hidden-xs">
-						    					<a href="{{url('/'.$producto->name)}}" style="color:{{$producto->color_two}};font-size: 18px;">
-							    					{{ Html::image('users/'.$producto->user_name.'/stores/'.$producto->store_image,'Imagen no disponible',array( 'style'=>'width: 130%;border-radius: 0%;' ))}}
-							    				</a>
-							    			</div>
-							    			--}}		    			
-							    		</div>
-							    	</div>
-							    </div>				    
-							</div>
-						</div>	
-					@endforeach
+				@php ($c=0)
+				@foreach($tiendas as $tienda)
+					@if($c == 4)
+						 @break
+					@endif
+					<div class="col-md-3 col-mx-offset-1">
+						<div class="panel panel-default" style="border-color:{{$tienda->color_two}};">					
+							<div class="panel-body">
+						    	<div class="row">
+						    		<div class="col-md-12" style="text-align: center;">
+						    			<a href="{{url('/'.$tienda->name)}}">
+						    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}					
+						    			</a>					    				    									    			
+						    		</div>
+						    		<!--
+						    		<a href="{{url('/'.$tienda->name)}}" class="visible-lg" style="color:{{$tienda->color_two}};font-size: 16px;"> 
+				    					{{ Html::image('users/'.$tienda->user_name.'/profile/'.$tienda->avatar,'Imagen no disponible',array('class'=>'img_tendero', 'style'=>'width: 35%;border-radius: 50%;position: absolute; margin-left: 40%;z-index: 99;' ))}}
+				    				</a>
+				    				-->	
+						    		<div class="col-md-12"  style="background-color:{{$tienda->color_one}}; color: {{$tienda->color_two}}; border-color:
+						    	{{$tienda->color_two}};padding: 0px;">					    			
+						    			<div class="col-md-12" style="padding: 0px;" >
+					    					<div style="text-align: center;">
+					    						<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;text-decoration:none;	">	
+						    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$tienda->name}}
+					    						</a>
+							    			</div>			    				
+						    			</div>
+						    			<div class="col-md-12" >
+						    				<div style="font-size: 16px;text-align: center;">
+							    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$tienda->department}} - {{$tienda->city}}
+							    			</div>						    			
+							    			<div style="font-size: 16px;text-align: center;">
+							    				{{$tienda->adress}}
+							    			</div>		
+						    			</div>  			
+						    		</div>
+						    	</div>
+						    </div>				    
+						</div>
+					</div>
+					@php ($c++)
+				@endforeach
 				</div>
-			</div>
+			</div>			
+
 		</div>
 	</div>
 
 	<!-- Para resoluciones de computador-->
 	<div  class="visible-lg" style="margin-top: 1%;">
-		<!-- Div de tiendas-->
-		<div class="tiendas">
-			<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
-				<b>Muchas Tiendas En Un Solo Lugar</b>
-			</div>
-			<div class="col-md-12 col-md-offset-0" style="margin-top: 1%;" >
-			@foreach($tiendas as $tienda)
-				<div class="col-md-2 col-mx-offset-0">
-					<div class="panel panel-default" style="border-color:{{$tienda->color_two}};">					
-						<div class="panel-body">
-					    	<div class="row">
-					    		<div class="col-md-12 popoverStore" data-content="<div>{{$tienda->description}}</div><div><b>Tendero:</b> {{$tienda->tnames}} {{$tienda->tsurnames}}</div>" rel="popover" data-placement="bottom" data-original-title="{{$tienda->name}}" data-trigger="hover" data-html="true">
-					    			<a href="{{url('/'.$tienda->name)}}">
-					    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	    				
-					    			</a>					    				    									    			
-					    		</div>
-					    		<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;"> 
-			    					{{ Html::image('users/'.$tienda->user_name.'/profile/'.$tienda->avatar,'Imagen no disponible',array('class'=>'img_tendero', 'style'=>'width: 30%;border-radius: 50%;position: absolute; margin-left: 50%;z-index: 99;' ))}}
-			    				</a>	
-					    		<div class="col-md-12"  style="background-color:{{$tienda->color_one}}; color: {{$tienda->color_two}}; border-color:
-					    	{{$tienda->color_two}};padding: 0px;background: {{$tienda->color_one}};background: -webkit-linear-gradient(-30deg, {{$tienda->color_one}}, , transparent, transparent);background: -o-linear-gradient(-30deg, {{$tienda->color_one}}, , transparent, transparent);background: -moz-linear-gradient(-30deg, {{$tienda->color_one}}, , transparent, transparent);background: linear-gradient(-30deg, {{$tienda->color_one}}, transparent, transparent);
-">					    			
-					    			<div class="col-md-12" style="padding: 0px;">				    				
-				    					<div style="text-align: center;">
-				    						<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;text-decoration:none;	">	
-					    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$tienda->name}}
-				    						</a>
-						    			</div>			    				
-					    			</div>
-					    			<div class="col-md-12" >
-					    				<div style="font-size: 16px;text-align: center;">
-						    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$tienda->department}} - {{$tienda->city}}
-						    			</div>						    			
-						    			<div style="font-size: 16px;text-align: center;">
-						    				{{$tienda->adress}}
-						    			</div>		
-					    			</div>  			
-					    		</div>
-					    	</div>
-					    </div>				    
-					</div>
-				</div>	
-			@endforeach
-			</div>
-		</div>
-
-		<!--Div Presentaciòn de una tienda-->
-		@if(count($ultima_tienda))
-			<div class="col-md-10 col-md-offset-1 macalu_nueva" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
-							
-				<div class="col-md-3 col-md-offset-0 bienvenida_nueva"  style="text-align: center;margin-top: 0%;float: left;font-family: 'Calligraffitti';font-size: 28px;">
-					Damos la BIENVENIDA a nuestra nueva tienda {{ucwords($ultima_tienda[0]->name)}}
-				</div>
-				<div class=""  style="text-align: center;margin-top: 0%;float: right;">
-					{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/profile/'.$ultima_tienda[0]->avatar,'Imagen no disponible',array('class'=>'img_nueva', 'style'=>'width: auto; height: 120px;;border-radius: 50%;'))}}
-					<div>Yo: {{$ultima_tienda[0]->tnames}} </div>
-					<div> Tambièn hago parte de {!! Session::get('app') !!}</div>
-				</div>				
-	
-			</div>
-		@endif
 
 		<!--Div de productos-->
 		<div class="">
@@ -546,10 +468,10 @@
 						    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$producto->name}}
 					    						</a>
 							    			</div>
-							    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
+							    			<div style="font-size: 14px;text-align: center;">
 							    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$producto->store_city}} - {{$producto->store_adress}}
 							    			</div>						    			
-							    			<div style="font-size: 14px;text-align: center;border-color:{{$tienda->color_two}};">
+							    			<div style="font-size: 14px;text-align: center;;">
 							    				De la Tienda {{$producto->store_name}}
 							    			</div>						    			
 					    				</div>
@@ -574,6 +496,75 @@
 					@php ($j++)
 				@endforeach			
 			</div>
+		</div>		
+
+		<!--Div Presentaciòn de una tienda-->
+		@if(count($ultima_tienda))
+			<div class="col-md-10 col-md-offset-1 macalu_nueva" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
+							
+				<div class="col-md-2 col-md-offset-0 bienvenida_nueva"  style="text-align: center;margin-top: 0%;float: left;font-family: 'Calligraffitti';font-size: 28px;z-index: 1;">
+					Damos la Bienvenida a nuestra nueva tienda {{ucwords($ultima_tienda[0]->name)}}
+				</div>
+				<div class="col-md-8 col-md-offset-0 macalu_background">
+				</div>
+				<div class="col-md-2 col-md-offset-0"  style="text-align: center;margin-top: 0%;float: right;">
+					{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/profile/'.$ultima_tienda[0]->avatar,'Imagen no disponible',array('class'=>'img_nueva', 'style'=>'width: auto; height: 120px;;border-radius: 50%;'))}}
+					<div>Yo: {{$ultima_tienda[0]->tnames}} </div>
+					<div> Tambièn hago parte de {!! Session::get('app') !!}</div>
+				</div>				
+	
+			</div>
+		@endif
+
+		<!-- Div de tiendas-->
+		<div class="tiendas">
+			<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
+				<b>Muchas Tiendas En Un Solo Lugar</b>
+			</div>
+			<div class="col-md-12 col-md-offset-0" style="margin-top: 1%;" >			
+			@foreach($tiendas as $tienda)
+				<div class="col-md-2 col-mx-offset-0">
+					<div class="panel panel-default" style="border-color:{{$tienda->color_two}};">					
+						<div class="panel-body" style="background-color:{{$tienda->color_one}}; color: {{$tienda->color_two}}; border-color:
+					    	{{$tienda->color_two}};padding: 0px;background: {{$tienda->color_one}};background: -webkit-linear-gradient(-30deg, {{$tienda->color_one}}, , transparent, transparent);background: -o-linear-gradient(-30deg, {{$tienda->color_one}}, , transparent, transparent);background: -moz-linear-gradient(-30deg, {{$tienda->color_one}}, , transparent, transparent);background: linear-gradient(-30deg, {{$tienda->color_one}}, transparent, transparent);">
+					    	<div class="row">
+					    		<div class="col-md-12 popoverStore" data-content="<div>{{$tienda->description}}</div><div><b>Tendero:</b> {{$tienda->tnames}} {{$tienda->tsurnames}}</div>" rel="popover" data-placement="bottom" data-original-title="{{$tienda->name}}" data-trigger="hover" data-html="true">
+					    			<a href="{{url('/'.$tienda->name)}}">
+					    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	    				
+					    			</a>
+
+					    		</div>
+					    		<!--
+					    		<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;"> 
+			    					{{ Html::image('users/'.$tienda->user_name.'/profile/'.$tienda->avatar,'Imagen no disponible',array('class'=>'img_tendero', 'style'=>'width: 30%;border-radius: 50%;position: absolute; margin-left: 50%;z-index: 99;' ))}}
+			    				</a>
+			    				-->	
+					    		<div class="col-md-12"  >					    			
+					    			<div class="col-md-12" style="padding: 0px;">				    				
+				    					<div style="text-align: center;">
+				    						<a href="{{url('/'.$tienda->name)}}" style="color:{{$tienda->color_two}};font-size: 16px;text-decoration:none;	">	
+					    						<span class="glyphicon glyphicon-home option_store_icon" aria-hidden="true"></span> {{$tienda->name}}
+				    						</a>
+						    			</div>			    				
+					    			</div>
+					    			<div class="col-md-12" >
+					    				<div style="font-size: 16px;text-align: center;">
+						    				<span class="glyphicon glyphicon-map-marker option_store_icon" aria-hidden="true"></span> {{$tienda->department}} - {{$tienda->city}}
+						    			</div>						    			
+						    			<div style="font-size: 16px;text-align: center;">
+						    				{{$tienda->adress}}
+						    			</div>		
+					    			</div>  			
+					    		</div>
+					    	</div>
+					    </div>				    
+					</div>
+				</div>	
+			@endforeach
+			</div>
+		</div>
+
+
 	</div>
 
 	<div class="col-md-12" style="margin-top: 1%;margin-bottom: 1%; ">
@@ -607,7 +598,7 @@
 
 	</div>
 
-	<div class="col-md-8 col-md-offset-2" style="text-align: justify;    margin-top: 2%;;margin-bottom: 3%">
+	<div class="col-md-8 col-md-offset-2 visible-lg" style="text-align: justify;    margin-top: 2%;;margin-bottom: 3%">
 		<div class="  title m-b-md center-block" style="font-size: 22px;">
 			<b>¿Como Funciona La Pasarela de Pagos?</b>
 		</div>

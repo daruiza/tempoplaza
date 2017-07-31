@@ -28,7 +28,18 @@
 		<link  rel="stylesheet" href="{{ url('css/bootstrap-submenu.min.css') }}" type="text/css" />
 		<link  rel="stylesheet" href="{{ url('css/bootstrap-datepicker.min.css') }}" type="text/css" />	
 		<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
-		<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />	
+		<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />
+
+		<!--Google analitycs-->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-102562779-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
 		
 	</head>
 	
