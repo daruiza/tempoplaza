@@ -315,7 +315,7 @@
 									<div class="col-md-4">
 										<div class="form-group" >
 											<div class="col-md-12" style="text-align: center; margin-bottom: 9px;">
-												{!! Form::label('img_store', 'Imagen de Tienda', array('class' => 'col-md-12 control-label')) !!}
+												{!! Form::label('img_store', 'Logo o Imagen de Tienda', array('class' => 'col-md-12 control-label')) !!}
 												@if( old('img_store'))
 													{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/stores/'.old('img_store'),'Imagen no disponible',array( 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
 												@else
@@ -570,7 +570,7 @@
 									<div class="row col-md-12 ">
 										<div class="col-md-12">
 											<div class="form-group ">
-												{!! Form::label('unidades_medida', 'Unidades de Medida', array('class' => 'col-md-12 control-label')) !!}
+												{!! Form::label('unidades_medida', 'Unidad de Medida', array('class' => 'col-md-12 control-label')) !!}
 												<div class="input-group input-grp categorias col-md-12">		
 													{!! Form::select('unidades_select',array('Unidad'=>'Unidad','Paquete'=>'Paquete','Paca'=>'Paca','Bolsa'=>'Bolsa','Bulto'=>'Bulto','Litro'=>'Litro','Kilo'=>'Kilo','Metro'=>'Metro'),old('unidades_select'), array('id'=>'unidades_select','class' => 'form-control chosen-select' ,'data-placeholder'=>'Selecciona las categorias','tabindex'=>'4', 'style'=>'width:350px;')) !!}
 													{!! Form::hidden('unidades_medida',old('unidades_medida'),array('id'=>'unidades_medida')) !!}													
