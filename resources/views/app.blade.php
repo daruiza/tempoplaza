@@ -43,7 +43,7 @@
 		
 	</head>
 	
-	<body>	
+	<body >	
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">			
 				<div class="navbar-header">
@@ -267,6 +267,7 @@
 		
 		<script type="text/javascript">	$('[data-submenu]').submenupicker();</script>
 		<script type="text/javascript">	$('#cart_modal_a').on('click', function (e) { seg_user.openModalCart();});</script>
+				
 		@yield('modal')
 		@yield('script')
 		

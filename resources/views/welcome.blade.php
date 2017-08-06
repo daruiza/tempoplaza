@@ -158,8 +158,8 @@
 				<ul>
 					@foreach (Session::get('message') as $message)
 						@if ($message  == 'Perfil1')
-							<li>
-								Antes de empezar, date una vuelta por el <a  href="{{ url('/perfil/'.Session::get('comjunplus.usuario.id')) }}">PERFIL DE USUARIO</a> para que completes la Inscripción, configures tu cuenta y se habiliten todas las opciones
+							<li>								
+								Pero antes de empezar, date una vuelta por el <a  href="#"><span class ="perfil_usuario_bienvenida"> PERFIL DE USUARIO</span></a> para que completes la Inscripción, configures tu cuenta y se habiliten todas las opciones
 							</li>													
 						@elseif ($message  == 'Perfil2' || $message  == 'Perfil3')						
 						@else
@@ -253,20 +253,26 @@
 
 	<!--Div Introducciòn-->
 	<div class="col-md-12 introduccion visible-lg">
-		<div class="row col-md-10 col-md-offset-1"  >
+		
+		<div class="row col-md-10 col-md-offset-1">
+
+			<div class="col-md-8 col-md-offset-0 carrusel_index" style="height: 275px;border: 1px black solid;">
+				div slider
+			</div>
+
 			<div class="col-md-4  col-md-offset-0" data-toggle="modal" data-target="#registry_modal" style="display: flex;cursor: pointer;">
 				{{ Html::image('images/icons/tienda.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;' ))}}
 				<div style="font-size: 16px;margin-left: 5px;text-align: center;">
 					Si tienes un producto, bien o servicio que ofrecer, <b>¡Animate a crear tu tienda virtual! </b> aquí en {{ Session::get('app') }}. 
 				</div>
 			</div>
-			<div class="col-md-4 col-md-offset-0" style="display: flex">
+			<div class="col-md-4 col-md-offset-0" style="display: flex;margin-top: 2%;">
 				{{ Html::image('images/icons/cart.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;' ))}}
 				<div style="font-size: 16px;margin-left: 5px;text-align: center;">
 					En {{ Session::get('app') }}  prima el <b>Bien Común</b>, todas las tiendas son importantes en el mercado, todas tienen algo que ofrecer.
 				</div>
 			</div>
-			<div class="col-md-4 col-md-offset-0" style="display: flex">
+			<div class="col-md-4 col-md-offset-0" style="display: flex;margin-top: 2%;">
 				{{ Html::image('images/icons/seguridad.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;' ))}}
 				<div style="font-size: 16px;margin-left: 5px;text-align: center;">
 					Compra con seguridad, la información del tendero estara siempre disponible en cada una de sus tindas.
@@ -442,12 +448,12 @@
 			<div class="col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;margin-bottom: 1%;">
 				<b>Nuestro Mercado Contiene un Universo de Productos</b>
 			</div>
-			<div class="" style="margin-top: 1%;">
+			<div class="" style="margin-top: 1%;">				
 				@php ($p=0)
 				@php ($j=1)
 				@foreach($productos as $producto)						
-					@if($p%6==0)
-						<div class="col-md-12 col-md-offset-0">
+					@if($p%6==0)						
+						<div class="col-md-12 col-md-offset-0">						
 					@endif
 					<div class="col-md-2 col-mx-offset-1">
 						<div class="panel panel-default">					
@@ -487,10 +493,10 @@
 						    </div>				    
 						</div>
 					</div>
-					@if($j%6==0)
-						</div>							
+					@if($j%6==0)						
+						</div>						
 					@elseif($p == count($productos)-1)
-						</div>
+						</div>						
 					@endif
 					@php ($p++)
 					@php ($j++)
@@ -527,7 +533,7 @@
 					<div class="panel panel-default" style="border-color:{{$tienda->color_two}};">					
 						<div class="panel-body" style="background-color:{{$tienda->color_one}}; color: {{$tienda->color_two}}; border-color:
 					    	{{$tienda->color_two}};padding: 0px;background: {{$tienda->color_one}};background: -webkit-linear-gradient(-30deg, {{$tienda->color_one}}, , transparent, transparent);background: -o-linear-gradient(-30deg, {{$tienda->color_one}}, , transparent, transparent);background: -moz-linear-gradient(-30deg, {{$tienda->color_one}}, , transparent, transparent);background: linear-gradient(-30deg, {{$tienda->color_one}}, transparent, transparent);">
-					    	<div class="row">
+					    	<div class="row" style="margin: 4px;">
 					    		<div class="col-md-12 popoverStore" data-content="<div>{{$tienda->description}}</div><div><b>Tendero:</b> {{$tienda->tnames}} {{$tienda->tsurnames}}</div>" rel="popover" data-placement="bottom" data-original-title="{{$tienda->name}}" data-trigger="hover" data-html="true">
 					    			<a href="{{url('/'.$tienda->name)}}">
 					    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	    				
@@ -1005,6 +1011,8 @@
 
 	{!! Form::open(array('id'=>'form_consult_city','url' => 'user/consultarcity')) !!}		
     {!! Form::close() !!}
+    {!! Form::open(array('id'=>'form_consult_item','url' => 'welcome/consultaritem')) !!}		
+    {!! Form::close() !!}
     {!! Form::open(array('id'=>'form_home','url' => '/')) !!}		
     {!! Form::close() !!}
 
@@ -1066,7 +1074,12 @@
 		@endif	
 	@endif	
 
-	<script type="text/javascript">  
+	<script type="text/javascript">
+		
+		$('.perfil_usuario_bienvenida').on('click', function(e) {
+			$("#cpep_modal").modal(); 
+		});
+
 		$('#fecha_nacimiento').datepicker({
 			format: "yyyy-mm-dd",
 			autoclose: true,			
@@ -1114,7 +1127,8 @@
 			//redirecciòn de categorias
 		    $('.popover-title').on('click', function(e) {		        
 		        window.location=$('#form_home').attr('action')+"/"+this.textContent;
-		    });
+		    });	    
+
 	    });
 
 	   	$('.popoverStore').popover();
@@ -1152,6 +1166,22 @@
 		  		$('#service_text').css('color','#00cc66');
 		  	}
 		  	$('#rsn_resenia').val($(this)[0].id.split("_")[1]);			  	
-		  })		  
+		 });
+
+		//llamado a funcion controlador de carrusel_index
+		@if (Session::has('frequency'))
+			seg_user.refresh_interval_id  = setInterval(function() {
+				seg_user.controllerCarruselIndex();
+			},{{ Session::get('frequency') }});
+		@else
+			var seg_user.refresh_interval_id  = setInterval(function() {
+				seg_user.controllerCarruselIndex();
+			},6500);
+		@endif
+		/*
+		window.onblur = function() {
+			clearInterval(seg_user.refresh_interval_id);
+		};
+		*/
 	</script>
 @endsection

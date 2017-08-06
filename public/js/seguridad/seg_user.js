@@ -14,6 +14,8 @@ function seg_user() {
     this.colores_pie_resenias = [];
     //modal de captura de datos
     this.btn_enviar_modal = 0 ;
+    //id de refresh carrusel index
+    this.refresh_interval_id = 0 ;
 
     
     //refrescamos el brand del carrito de compras, ante el refresh de seg_user
@@ -925,7 +927,7 @@ seg_user.prototype.consultaRespuestaListarProductos = function(result) {
         html: true,
         trigger: 'manual',          
         container: 'body'
-     }).on('click', function(e) {
+        }).on('click', function(e) {
         $('[data-toggle="popover"]').each(function () {
             //the 'is' for buttons that trigger popups
             //the 'has' for icons within a button that triggers a popup             
@@ -958,10 +960,21 @@ seg_user.prototype.consultaRespuestaListarProductos = function(result) {
     });
 
     //asignamos el valor al input buscador
-    $('[name=finder_store]').val(result.request.finder_store);
+    $('[name=finder_store]').val(result.request.finder_store);    
+};
 
-    
-}
+seg_user.prototype.controllerCarruselIndex = function() {
+    //realizamos la consulta del producto (objeto, tienda, tendero, veces vendido, comentarios)
+    var datos = new Array();    
+    seg_ajaxobject.peticionajax($('#form_consult_item').attr('action'),datos,"seg_user.consultaRespuestaItem");    
+};
+
+seg_user.prototype.consultaRespuestaItem = function(result) {
+
+    var d = new Date();
+    $('.carrusel_index').text(d.getSeconds());
+
+};
 
 
 var seg_user = new seg_user();

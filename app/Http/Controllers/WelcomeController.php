@@ -55,6 +55,7 @@ class WelcomeController extends Controller {
 		Session::put('copy', env('APP_RIGTH','Temposolutions'));
 		Session::put('mail', env('MAIL_USERNAME','soportemacalu@gmail.com'));
 		Session::put('support', env('APP_SUPPORT','daruiza@gmail.com'));
+		Session::put('frequency', env('APP_FREQUENCY',6500));
 		//Session::put('style', env('APP_STYLE','default'));		
 		/**
 		 * REALIZAMOS CONSULTAS PARA INDEX
@@ -458,6 +459,11 @@ class WelcomeController extends Controller {
 		//dd($moduledata);
 		//dd(Session::all());
 		return view('welcome')->with($moduledata);		
+	}
+
+	//funcion llamado de iten carrusel
+	public function postConsultaritem(){
+		return response()->json(['respuesta'=>true,'data'=>null]);
 	}
 
 	//Este es el metodo que controla el buscador principal
