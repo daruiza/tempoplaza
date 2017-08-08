@@ -1168,7 +1168,15 @@
 		  	$('#rsn_resenia').val($(this)[0].id.split("_")[1]);			  	
 		 });
 
-		//llamado a funcion controlador de carrusel_index
+		//Codigo para carrusel
+		@if (Session::has('frequency'))
+			seg_user.controllerCarruselIndex({{ Session::get('frequency') }});
+		@else
+			seg_user.controllerCarruselIndex(5000);
+		@endif
+		  
+
+		/*
 		@if (Session::has('frequency'))
 			seg_user.refresh_interval_id  = setInterval(function() {
 				seg_user.controllerCarruselIndex();
@@ -1178,6 +1186,7 @@
 				seg_user.controllerCarruselIndex();
 			},6500);
 		@endif
+		*/
 		/*
 		window.onblur = function() {
 			clearInterval(seg_user.refresh_interval_id);

@@ -16,6 +16,7 @@ function seg_user() {
     this.btn_enviar_modal = 0 ;
     //id de refresh carrusel index
     this.refresh_interval_id = 0 ;
+    this.refresh_interval= 700 ;
 
     
     //refrescamos el brand del carrito de compras, ante el refresh de seg_user
@@ -963,10 +964,18 @@ seg_user.prototype.consultaRespuestaListarProductos = function(result) {
     $('[name=finder_store]').val(result.request.finder_store);    
 };
 
-seg_user.prototype.controllerCarruselIndex = function() {
+seg_user.prototype.controllerCarruselIndex = function(frecuency) {
     //realizamos la consulta del producto (objeto, tienda, tendero, veces vendido, comentarios)
     var datos = new Array();    
-    seg_ajaxobject.peticionajax($('#form_consult_item').attr('action'),datos,"seg_user.consultaRespuestaItem");    
+    seg_ajaxobject.peticionajax($('#form_consult_item').attr('action'),datos,"seg_user.consultaRespuestaItem");
+
+    //llamamos la funcion nuevamente
+    if(frecuency < 9000){
+        setTimeout(function(){ 
+            seg_user.controllerCarruselIndex((frecuency+500))
+        }, (frecuency) );
+        
+    }
 };
 
 seg_user.prototype.consultaRespuestaItem = function(result) {
