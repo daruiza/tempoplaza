@@ -246,11 +246,9 @@
 		</nav>		
 		<div class="container-fluid">
 			@yield('content')
-		</div>
-		
+		</div>		
 
-		<!-- Scripts -->
-		
+		<!-- Scripts -->		
 		<script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url('js/jquery-ui.js') }}"></script>
 		<script type="text/javascript" src="{{ url('js/bootstrap.min.js') }}"></script>

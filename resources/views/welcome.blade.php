@@ -254,10 +254,30 @@
 	<!--Div Introducciòn-->
 	<div class="col-md-12 introduccion visible-lg">
 		
-		<div class="row col-md-10 col-md-offset-1">
+		<div class="row col-md-10 col-md-offset-1" style="overflow-x: hidden;">
 
-			<div class="col-md-8 col-md-offset-0 carrusel_index" style="height: 275px;border: 1px black solid;">
-				div slider
+			<div class="col-md-8 col-md-offset-0" >
+				<div class = "contenedor_carrusel_index" style="height: 285px;background-color: white;overflow-x: hidden;">
+					<div class="carrusel_index_back" style="height: 99%;width: 96%;background-color:wheat;display: block;position: absolute;">
+
+						<div class="col-md-12 col-md-offset-0">
+							
+							<div class="col-md-6 col-md-offset-0" style="height: 285px;text-align: center;padding: 1%;">
+								<div class="col-md-12 col-md-offset-0">Pionono De Aserrin</div>
+								<div class="col-md-12 col-md-offset-0" style="margin-bottom: 2%;">Ofrecido por la Tienda Almacen Bulerias</div>
+								<div class="col-md-6 col-md-offset-0" >Descipcion completa sobre l producto y sus caracteristicas mas importantes</div>
+							</div>
+
+							<div class="col-md-6 col-md-offset-0" style="height: 285px">
+								<a href="http://localhost/software/tempoplaza/public/peperland">
+				    				<img src="http://localhost/software/tempoplaza/public/users/DavidRuiz/products/default.png" style="width: 100%;height: 100%;border-radius: 0%;" alt="Imagen no disponible">    				
+				    			</a>							
+							</div>
+						</div>
+						
+
+					</div>
+				</div>
 			</div>
 
 			<div class="col-md-4  col-md-offset-0" data-toggle="modal" data-target="#registry_modal" style="display: flex;cursor: pointer;">

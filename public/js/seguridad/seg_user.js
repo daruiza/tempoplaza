@@ -17,6 +17,7 @@ function seg_user() {
     //id de refresh carrusel index
     this.refresh_interval_id = 0 ;
     this.refresh_interval= 700 ;
+    this.refresh_background= -1 ;
 
     
     //refrescamos el brand del carrito de compras, ante el refresh de seg_user
@@ -970,18 +971,60 @@ seg_user.prototype.controllerCarruselIndex = function(frecuency) {
     seg_ajaxobject.peticionajax($('#form_consult_item').attr('action'),datos,"seg_user.consultaRespuestaItem");
 
     //llamamos la funcion nuevamente
-    if(frecuency < 9000){
+    if(frecuency < 9500){        
         setTimeout(function(){ 
             seg_user.controllerCarruselIndex((frecuency+500))
-        }, (frecuency) );
-        
+        }, (frecuency) );        
     }
 };
 
 seg_user.prototype.consultaRespuestaItem = function(result) {
 
-    var d = new Date();
-    $('.carrusel_index').text(d.getSeconds());
+    //creacion de div carrusel_index_font hijo de contenedor_carrusel_index
+    var cont_carr_index = document.getElementsByClassName("contenedor_carrusel_index")[0];
+    var div = document.createElement("div");
+    div.setAttribute("class", "carrusel_index_back");
+    div.setAttribute("style", "height: 99%;width: 96%;display: none;position: absolute;");
+    seg_user.refresh_background = seg_user.refresh_background*-1;
+    div.style.backgroundColor = '#ffffff';    
+    if(seg_user.refresh_background === 1){
+        div.style.backgroundColor = '#ffeee6';    
+    }    
+    var div2 = document.createElement("div");
+    div2.setAttribute("class", "col-md-12 col-md-offset-0");
+
+    /*descripcion*/
+    var div2_1 = document.createElement("div");
+    div2_1.setAttribute("class", "col-md-6 col-md-offset-0");
+    div2_1.setAttribute("style", "height: 285px;text-align: center;padding: 1%;");
+    var div2_1_1 = document.createElement("div");
+    div2_1_1.setAttribute("class", "col-md-12 col-md-offset-0");
+    div2_1_1.innerHTML = result.data.producto[0].name;
+    var div2_1_2 = document.createElement("div");
+    div2_1_2.setAttribute("class", "col-md-12 col-md-offset-0");
+    div2_1_2.innerHTML = 'Ofrecido por la Tienda '+result.data.producto[0].store_name.charAt(0).toUpperCase() + result.data.producto[0].store_name.slice(1);
+    var div2_1_3 = document.createElement("div");
+    div2_1_3.setAttribute("class", "col-md-6 col-md-offset-0");
+    div2_1_3.innerHTML = result.data.producto[0].description;
+
+    div2_1.appendChild(div2_1_1);
+    div2_1.appendChild(div2_1_2);
+    div2_1.appendChild(div2_1_3);
+    div2.appendChild(div2_1);
+
+    /*Imagen de producto*/
+    var div2_2 = document.createElement("div");
+    div2_2.setAttribute("class", "col-md-6 col-md-offset-0");
+    div2_2.setAttribute("style", "height: 285px;");   
+    div2.appendChild(div2_2);
+
+
+    div.appendChild(div2);
+    cont_carr_index.appendChild(div);
+
+    //show    
+    //$( ".carrusel_index_back" ).show( 'drop',{ direction: "right" },500);
+    $( ".carrusel_index_back" ).show( 'clip',500);    
 
 };
 

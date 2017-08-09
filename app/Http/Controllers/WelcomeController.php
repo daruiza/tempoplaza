@@ -139,7 +139,7 @@ class WelcomeController extends Controller {
 		}
 			
 
-		//HAY REQUEST
+		//HAY REQUEST INDICA BUSQUEDA
 		if(!empty($request->input())){
 			//si es el finder es el buscador inicial			
 			if(array_key_exists('categoria',$request->input())){
@@ -173,7 +173,7 @@ class WelcomeController extends Controller {
 					->where('clu_products.category','like','%'.$categoria[0]->id.'%')
 					->where('clu_store.status','Activa')
 					->orderByRaw("RAND()")
-					->skip(0)->take(18)
+					->skip(0)->take(16)
 					->get();
 
 				}else{
@@ -213,7 +213,7 @@ class WelcomeController extends Controller {
 							}
 						})
 						->orderByRaw("RAND()")
-						->skip(0)->take(18)
+						->skip(0)->take(16)
 						->get();
 					}					
 				}
@@ -262,7 +262,7 @@ class WelcomeController extends Controller {
 					}
 				})
 				->orderByRaw("RAND()")
-				->skip(0)->take(18)
+				->skip(0)->take(16)
 				->get();				
 			}
 
@@ -361,7 +361,7 @@ class WelcomeController extends Controller {
 				->leftjoin('clu_category', 'clu_products.category', '=', 'clu_category.id')	
 				->where('clu_products.store_id',$moduledata['tienda'][0]->id)
 				->orderByRaw("RAND()")
-				->skip(0)->take(128)					
+				->skip(0)->take(24)					
 				->get();
 				$moduledata['products_name'] = array();
 				foreach ($products as $key => $value) {
@@ -463,7 +463,19 @@ class WelcomeController extends Controller {
 
 	//funcion llamado de iten carrusel
 	public function postConsultaritem(){
-		return response()->json(['respuesta'=>true,'data'=>null]);
+		//consultamos un item alazar
+		$data_array = array();
+		$data_array['producto'] = \DB::table('clu_products')
+		->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name')
+		->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
+		->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
+		->where('clu_products.active',1)		
+		->where('clu_store.status','Activa')
+		->orderByRaw("RAND()")
+		->skip(0)->take(1)
+		->get();
+		
+		return response()->json(['respuesta'=>true,'data'=>$data_array]);
 	}
 
 	//Este es el metodo que controla el buscador principal
@@ -1063,8 +1075,8 @@ class WelcomeController extends Controller {
 	public function postAddproduct(Request $request){
 		//consultamos las caracteristicas del producto		
 		$producto = \DB::table('clu_products')							
-			->where('clu_products.id',$request->input('id'))		
-			->get();			
+		->where('clu_products.id',$request->input('id'))		
+		->get();			
 		return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>$producto]);	
 	}
 
@@ -1255,8 +1267,7 @@ class WelcomeController extends Controller {
 		
 	}
 
-	public function getTerminosycondiciones(Request $request){
-		
+	public function getTerminosycondiciones(Request $request){		
 		return view('user/terminos');		
 	}
 	
