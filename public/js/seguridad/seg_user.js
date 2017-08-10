@@ -1026,7 +1026,7 @@ seg_user.prototype.consultaRespuestaItem = function(result) {
 
     var div2_1_logo = document.createElement("div");
     div2_1_logo.setAttribute("class", "");
-    div2_1_logo.setAttribute("style", "display:none");
+    div2_1_logo.setAttribute("style", "margin-right: 10%;display:none");
     var div2_1_a = document.createElement("a");
     div2_1_a.setAttribute("href", $('#form_home').attr('action')+"/users/"+result.data.producto[0].store_name);
     var div2_1_img = document.createElement("img");
