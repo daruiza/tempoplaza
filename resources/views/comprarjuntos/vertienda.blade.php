@@ -419,20 +419,20 @@
 				    		</div>
 
 				    		<div class="col-xs-12 panel-footer"  style="background-color:{{$tienda[0]->color_one}}; color: {{$tienda[0]->color_two}}; border-color:{{$tienda[0]->color_two}};padding: 2px;">				    			
-				    			<div class="col-xs-12 col-mx-offset-0" style="font-size: 14px;">
+				    			<div class="col-xs-12 col-mx-offset-0" style="font-size: 18px;">
 					    			{{$producto->name}}				    			
 				    			</div>
 				    			<div class="col-xs-4 col-mx-offset-0">
 				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
-				    				<div  style="font-size: 12px;">${{$producto->price}}</div>					    			
+				    				<div  style="font-size: 16px;">${{$producto->price}}</div>					    			
 				    			</div>	
 				    			<div class="col-xs-4 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
 				    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 10px;">Descripciòn</div>
+				    				<div style="font-size: 14px;">Descripciòn</div>
 				    			</div>
 				    			<div class="col-xs-4 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
 				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 10px;">Al Carrito</div>
+				    				<div style="font-size: 14px;">Al Carrito</div>
 				    			</div>	
 				    		</div>
 				    	</div>
@@ -466,20 +466,20 @@
 				    		</div>
 
 				    		<div class="col-md-12 panel-footer"  style="background-color:{{$tienda[0]->color_one}}; color: {{$tienda[0]->color_two}}; border-color:{{$tienda[0]->color_two}};padding: 2px;">				    			
-				    			<div class="col-md-12 col-mx-offset-0" style="font-size: 14px;">
+				    			<div class="col-md-12 col-mx-offset-0" style="font-size: 18px;">
 					    			{{$producto->name}}				    			
 				    			</div>
 				    			<div class="col-md-4 col-mx-offset-0">
 				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
-				    				<div  style="font-size: 12px;">${{$producto->price}}</div>					    			
+				    				<div  style="font-size: 16px;">${{$producto->price}}</div>					    			
 				    			</div>	
 				    			<div class="col-md-4 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
 				    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 12px;">Descripciòn</div>
+				    				<div style="font-size: 14px;">Descripciòn</div>
 				    			</div>
 				    			<div class="col-md-4 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
 				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 12px;">Al Carrito</div>
+				    				<div style="font-size: 14px;">Al Carrito</div>
 				    			</div>	
 				    		</div>
 				    	</div>

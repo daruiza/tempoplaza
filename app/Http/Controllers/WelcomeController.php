@@ -173,7 +173,7 @@ class WelcomeController extends Controller {
 					->where('clu_products.category','like','%'.$categoria[0]->id.'%')
 					->where('clu_store.status','Activa')
 					->orderByRaw("RAND()")
-					->skip(0)->take(16)
+					->skip(0)->take(18)
 					->get();
 
 				}else{
@@ -262,7 +262,7 @@ class WelcomeController extends Controller {
 					}
 				})
 				->orderByRaw("RAND()")
-				->skip(0)->take(16)
+				->skip(0)->take(18)
 				->get();				
 			}
 
@@ -303,7 +303,7 @@ class WelcomeController extends Controller {
 					}
 				})
 				->groupBy('clu_products.id')
-				->skip(0)->take(16)		
+				->skip(0)->take(18)		
 				->get();
 
 				$ventas = \DB::table('clu_products')
@@ -319,7 +319,7 @@ class WelcomeController extends Controller {
 					}
 				})
 				->groupBy('clu_products.id')
-				->skip(0)->take(16)		
+				->skip(0)->take(18)		
 				->get();
 
 				foreach ($moduledata['productos'] as $pkey => $producto) {
@@ -328,7 +328,7 @@ class WelcomeController extends Controller {
 						if($producto->id == $venta->id){
 							//el producto tiene ventas reales
 							$producto->ventas = $venta->ventas;
-							 break; 
+							break; 
 						}
 					}				
 				}
@@ -466,14 +466,17 @@ class WelcomeController extends Controller {
 		//consultamos un item alazar
 		$data_array = array();
 		$data_array['producto'] = \DB::table('clu_products')
-		->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name')
+		->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name','seg_user_profile.avatar as user_avatar')
 		->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
 		->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
+		->leftjoin('seg_user_profile', 'clu_store.user_id', '=', 'seg_user_profile.user_id')
 		->where('clu_products.active',1)		
 		->where('clu_store.status','Activa')
 		->orderByRaw("RAND()")
 		->skip(0)->take(1)
 		->get();
+
+
 		
 		return response()->json(['respuesta'=>true,'data'=>$data_array]);
 	}
