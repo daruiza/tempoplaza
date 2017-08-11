@@ -24,7 +24,16 @@
 		    background: -moz-linear-gradient(right,   #B0E1EA  , white ); 
 		    background: linear-gradient(to right,   #B0E1EA  , white ); 
 		    */
-		}		
+		}
+		/*
+		.carrusel_index_back{			
+			background:  #B0E1EA ; 
+		    background: -webkit-linear-gradient(left top, #faf9f5, #faf9f5, #B0E1EA );
+		    background: -o-linear-gradient(left top,  #faf9f5, #faf9f5, #B0E1EA ); 
+		    background: -moz-linear-gradient(left top,   #faf9f5, #faf9f5, #B0E1EA ); 
+		    background: linear-gradient(to left top,   #faf9f5, #faf9f5, #B0E1EA ); 		    
+		}
+		*/				
 
 		.pie_wellcome{						
 			background:  #009999 ;
