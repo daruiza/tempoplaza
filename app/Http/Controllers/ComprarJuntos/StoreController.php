@@ -721,7 +721,7 @@ class StoreController extends Controller {
 	//funciòn para ante el cambio de estado de la orden
 	public function postCambioestadoorder(Request $request){
 		//verificamos la orden y la tienda
-		//Tiendas
+		//Tiendas		
 		try {
 			$orden=\DB::table('clu_order')			
 			->leftjoin('clu_store', 'clu_order.store_id', '=', 'clu_store.id')
@@ -844,7 +844,7 @@ class StoreController extends Controller {
 						$mensaje->object_id = $data['orden_id'];
 						$mensaje->user_sender_id = $tienda[0]->user_id;//tendero			
 						$mensaje->user_receiver_id = 0;//enviada al cliente
-						$mensaje->message = 'Nevo cambio de estado en Orden de pedido, codigo: '.$data['orden_id'].' '.$data['mensaje_orden'].', Estado actual: '.$estado;
+						$mensaje->message = 'Nuevo cambio de estado en Orden de pedido, codigo: '.$data['orden_id'].' '.$data['mensaje_orden'].', Estado actual: '.$estado;
 						//enviada al cliente
 						if($orden[0]->client_id){
 							$mensaje->user_receiver_id = $orden[0]->client_id;

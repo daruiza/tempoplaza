@@ -52,6 +52,7 @@ class LoginController extends Controller
     
     public function getLogin(Request $request)
     {    
+
     	if ($this->auth->guest()){
     		$messages = [
 				'required' => 'El campo :attribute es requerido.',
@@ -280,6 +281,12 @@ class LoginController extends Controller
 					if(Session::has('orden_id')){						
 						//redirigir a mistiendas y mostrar el modal con la orden solicitada
 						Session::flash('orden_id', Session::get('orden_id'));			 	
+						return Redirect::to('/mistiendas/listar')->with('message', $message);
+					}
+					//mismo if anterior pero con input
+					if($request->input('orden_id')){						
+						//redirigir a mistiendas y mostrar el modal con la orden solicitada
+						Session::flash('orden_id', $request->input('orden_id'));			 	
 						return Redirect::to('/mistiendas/listar')->with('message', $message);
 					}
 

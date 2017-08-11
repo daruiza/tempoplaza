@@ -231,7 +231,7 @@ clu_tienda.prototype.consultaRespuestaOrder = function(result) {
 			//bloquear el div de los botones
 		    $('.stage_cambio')[0].parentElement.remove();
 		    //agregamos el mensaje
-		    clu_tienda.datos_order.menssage_order = $( "textarea[name='message_order']").val();
+		    clu_tienda.datos_order.menssage_order = $( "textarea[name='message_order']").val().split("\n").join("");
 		    seg_ajaxobject.peticionajax($('#form_stage_order').attr('action'),clu_tienda.datos_order,"clu_tienda.cambiarRespuestaOrden");
 		    //loading
 			var opts = {
@@ -548,7 +548,7 @@ clu_tienda.prototype.cambiarRespuestaOrden = function(result) {
 	}else{
 		//ubo un error en el envio del mensage
 		$('#odenes_modal .alerts-module').html('<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!La Orden ha sido actualizada correctamente!</strong></br> Sin embargo el correo no llego al cliente </br> '+result.data+' </br>Intenta contactar el cliente si en caso dejo su nùmero de contacto para que sepa sobre el nuevo estado ('+result.request.stage+') de la orden de pedido: '+result.request.id_order+' </div>');
-	}
+	}	
 };
 
 var clu_tienda = new clu_tienda();

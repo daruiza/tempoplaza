@@ -723,7 +723,7 @@ class WelcomeController extends Controller {
 				return Redirect::to('/mistiendas/listar');
 				
 			}			
-		}
+		}		
 
 		if($data == 'modalmessagetotender' ){
 			//el cliente desea dejar un mensaje para el tendero deacuerdo ala orden aceptada o rechazada.

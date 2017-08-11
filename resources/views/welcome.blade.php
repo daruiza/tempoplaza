@@ -267,8 +267,8 @@
 
 			<div class="col-md-8 col-md-offset-0" >
 				<div class = "contenedor_carrusel_index" style="height: 285px;overflow-x: hidden;">
-					<div class="carrusel_index_back" style="height: 100%;width: 96%;display: block;position: absolute;">
-					</div>
+					<button type="button" class="btn btn-info" style="display: block;position: absolute;z-index: 1;margin-top: 28%;border-radius: 50%;height: 35px;"> << </button>
+					<button type="button" class="btn btn-info" style="display: block;position: absolute;z-index: 1;margin-top: 28%;border-radius: 50%;margin-left: 90%;height: 35px;"> >> </button>
 				</div>
 			</div>
 
@@ -712,6 +712,8 @@
 										</div>
 									</div>
 
+									{!! Form::hidden('orden_id',Session::get('orden_id'),array('id'=>'orden_id')) !!}
+
 									<div class="col-md-12" data-toggle="modal" data-target="#rpsw_modal" style="margin-top: 10px; font-size: 16px;">
 										<a href="#">Recuperar Contraseña</a>
 									</div>
@@ -1056,7 +1058,7 @@
 			<script> $("#registry_modal").modal(); </script>
 		@endif
 
-		@if(Session::get('modal') == 'modallogin')
+		@if(Session::get('modal') == 'modallogin')			
 			<script> 
 				$("#login_modal").modal(); 
 				$('#login_modal .alerts-module').html('<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button>Luego de ingresar, se mostrara en pantalla el pedido solicitado.</div>');

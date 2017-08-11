@@ -5,7 +5,7 @@ function seg_ajaxobject() {
 seg_ajaxobject.prototype.peticionajax = function(url, datos, object, async) {	
 	if (async === undefined){async = true;}
 	var stringDatos = '{APP: "true"';
-    for (var d in datos) {
+    for (var d in datos) {        
         stringDatos += ',' + d + ': "' + datos[d] + '"';
     }
     stringDatos += '}';	

@@ -682,8 +682,8 @@
 			 		<div class="row ">
 			 			<div class="col-md-12 col-md-offset-0 row_init">
 							Agrega un Mensaje para el Cliente ante el cambio de estado de esta Orden.
-							{!! Form::textarea('message_order',null, array('class' => 'form-control','rows' => 3,'placeholder'=>'Este mensaje llegara al correo electronico del cliente asosciado a esta orden de pedido.')) !!}
-						</div>
+							{!! Form::textarea('message_order',null, array('class' => 'form-control message_order','rows' => 5,'placeholder'=>'Este mensaje llegara al correo electronico del cliente asosciado a esta orden de pedido.')) !!}
+						</div>						 
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -1234,7 +1234,7 @@
 		            seg_ajaxobject.peticionajax($('#form_consult_order').attr('action'),datos,"clu_tienda.consultaRespuestaOrder");
 		            clu_tienda.tr.addClass('shown');
 		        }
-			});
+			});			
 		</script>			
 	@endif
 	

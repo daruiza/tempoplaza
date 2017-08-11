@@ -103,7 +103,7 @@
 					<!--Rechazado o aceptado-->
 					@if($estado == "RECHAZADA")
 						<div>Te pedimos que 
-						<a  href = "{{url('/modal/modalresenatostore/'.$orden_id)}}">aportes con tu reseña al servicio prestado</a>, ya que actualmente esta orden aporta una reseña neutral en esta tienda y tu aporte nos ayuda a cuantificar la repuraciòn de las tiendas en {{Session::get('app')}}.</div>						
+						<a  href = "{{url('/modal/modalresenatostore/'.$orden_id)}}"> califiques el servicio prestado</a>, tu aporte nos ayuda a cuantificar la repuraciòn de las tiendas en {{Session::get('app')}}.</div>						
 						<p>
 						<a  href = "{{url('/modal/modalresenatostore/'.$orden_id)}}">Puedes contribuir con tu reseña a la tienda. Aquì!!</a>
 						</p>
@@ -114,7 +114,7 @@
 							<!--Si el cliente es el tendero no se le permitira calificar el servicio-->
 							@if($id_client != $id_tender)						
 								<div>Te pedimos que 
-								<a href = "{{url('/modal/modalresenatostore/'.$orden_id)}}">aportes con tu reseña al servicio prestado</a>, ya que actualmente la orden aporta una reseña neutral para esta tienda y tu 
+								<a href = "{{url('/modal/modalresenatostore/'.$orden_id)}}"> califiques al servicio prestado</a>, tu 
 								aporte nos ayuda a cuantificar la repuraciòn de las tiendas de {{Session::get('app')}}.</div>
 								<p>
 								<a  href = "{{url('/modal/modalresenatostore/'.$orden_id)}}">Puedes contribuir con tu calificaciòn al servicio. Aquì!!</a>
