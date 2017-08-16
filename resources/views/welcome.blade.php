@@ -266,9 +266,9 @@
 		<div class="row col-md-10 col-md-offset-1" style="overflow-x: hidden;">
 
 			<div class="col-md-8 col-md-offset-0" >
-				<div class = "contenedor_carrusel_index" style="height: 285px;overflow-x: hidden;">
-					<button type="button" class="btn btn-info" style="display: block;position: absolute;z-index: 1;margin-top: 28%;border-radius: 50%;height: 35px;"> << </button>
-					<button type="button" class="btn btn-info" style="display: block;position: absolute;z-index: 1;margin-top: 28%;border-radius: 50%;margin-left: 90%;height: 35px;"> >> </button>
+				{{ Html::image('images/icons/left-arrow.png','Imagen no disponible',array( 'class'=>'bnt_left','style'=>'width: auto;display:block;position: absolute;z-index: 2;height: 45px;margin-top: 30%;cursor: pointer;' ))}}
+				{{ Html::image('images/icons/right-arrow.png','Imagen no disponible',array('class'=>'bnt_right', 'style'=>'width: auto;display:block;position: absolute;z-index: 2;height: 45px;margin-top: 30%;margin-left: 90%;cursor: pointer;' ))}}
+				<div class = "contenedor_carrusel_index" style="height: 285px;overflow-x: hidden;">	
 				</div>
 			</div>
 
@@ -287,7 +287,7 @@
 			<div class="col-md-4 col-md-offset-0" style="display: flex;margin-top: 2%;">
 				{{ Html::image('images/icons/seguridad.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;' ))}}
 				<div style="font-size: 16px;margin-left: 5px;text-align: center;">
-					Compra con seguridad, la información del tendero estara siempre disponible en cada una de sus tindas.
+					Compra con seguridad, la información del tendero estara siempre disponible en cada una de sus tiendas.
 				</div>
 			</div>			
 		</div>
@@ -1189,21 +1189,59 @@
 			seg_user.controllerCarruselIndex(6500);
 		@endif	  
 
-		/*
-		@if (Session::has('frequency'))
-			seg_user.refresh_interval_id  = setInterval(function() {
-				seg_user.controllerCarruselIndex();
-			},{{ Session::get('frequency') }});
-		@else
-			var seg_user.refresh_interval_id  = setInterval(function() {
-				seg_user.controllerCarruselIndex();
-			},6500);
-		@endif
-		*/
-		/*
-		window.onblur = function() {
+		//siguiente y anterior del carrusel
+		$('.bnt_left').on('click', function(e) {
+			//primero paramos el carrusel
+			clearInterval(seg_user.refresh_interval_id);			
+			//si es diferente del primero
+			if(seg_user.refresh_index != 1){
+				//ponemos todos los items en z-index = 0
+				for(var i =0 ; i < $('.contenedor_carrusel_index').children().length; i++){
+					$('.contenedor_carrusel_index').children()[i].style.zIndex = 0
+				}
+				//ponemos z-index en 1
+				seg_user.refresh_index = seg_user.refresh_index-1;
+				$('.contenedor_carrusel_index').children()[seg_user.refresh_index-1].style.zIndex = 1
+
+			}else{
+				//ponemos todos los items en z-index = 0
+				for(var i =0 ; i < $('.contenedor_carrusel_index').children().length; i++){
+					$('.contenedor_carrusel_index').children()[i].style.zIndex = 0
+				}
+				//nos pasamos al ultimo item
+				seg_user.refresh_index = $('.contenedor_carrusel_index').children().length;
+				$('.contenedor_carrusel_index').children()[seg_user.refresh_index-1].style.zIndex = 1
+			}
+			
+
+		});
+
+		$('.bnt_right').on('click', function(e) {
+			//primero paramos el carrusel
 			clearInterval(seg_user.refresh_interval_id);
-		};
-		*/
+			//si es diferente del ultimo
+			if(seg_user.refresh_index != $('.contenedor_carrusel_index').children().length){
+				//ponemos todos los items en z-index = 0
+				for(var i =0 ; i < $('.contenedor_carrusel_index').children().length; i++){
+					$('.contenedor_carrusel_index').children()[i].style.zIndex = 0
+				}
+				//ponemos z-index en 1
+				seg_user.refresh_index = seg_user.refresh_index+1;
+				$('.contenedor_carrusel_index').children()[seg_user.refresh_index-1].style.zIndex = 1
+
+			}else{
+				for(var i =0 ; i < $('.contenedor_carrusel_index').children().length; i++){
+					$('.contenedor_carrusel_index').children()[i].style.zIndex = 0
+				}
+				//traemos uno nuevo e iniciamos el carrusel automatico
+				@if (Session::has('frequency'))
+					seg_user.controllerCarruselIndex({{ Session::get('frequency') }});
+				@else
+					seg_user.controllerCarruselIndex(6500);
+				@endif	  
+			}
+
+		});
+
 	</script>
 @endsection

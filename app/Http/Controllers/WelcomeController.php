@@ -515,8 +515,10 @@ class WelcomeController extends Controller {
 			->where('clu_products.store_id',$moduledata['tienda'][0]->id)
 			//->where('clu_order.stage_id',4)
 			->groupBy('clu_products.id')
+			->orderBy('clu_products.order')
 			->skip(0)->take(16)		
 			->get();
+
 			$ventas = \DB::table('clu_products')
 			->select('clu_products.*',\DB::raw('SUM(clu_order_detail.volume) as ventas'))			
 			->leftjoin('clu_order_detail', 'clu_products.id', '=', 'clu_order_detail.product_id')
@@ -524,6 +526,7 @@ class WelcomeController extends Controller {
 			->where('clu_products.store_id',$moduledata['tienda'][0]->id)
 			->where('clu_order.stage_id',4)
 			->groupBy('clu_products.id')
+			->orderBy('clu_products.order')
 			->skip(0)->take(16)		
 			->get();
 			foreach ($moduledata['productos'] as $pkey => $producto) {
