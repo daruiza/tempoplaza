@@ -173,7 +173,7 @@ class WelcomeController extends Controller {
 					->where('clu_products.category','like','%'.$categoria[0]->id.'%')
 					->where('clu_store.status','Activa')
 					->orderByRaw("RAND()")
-					->skip(0)->take(18)
+					->skip(0)->take(12)
 					->get();
 
 				}else{
@@ -213,7 +213,7 @@ class WelcomeController extends Controller {
 							}
 						})
 						->orderByRaw("RAND()")
-						->skip(0)->take(16)
+						->skip(0)->take(12)
 						->get();
 					}					
 				}
@@ -262,7 +262,7 @@ class WelcomeController extends Controller {
 					}
 				})
 				->orderByRaw("RAND()")
-				->skip(0)->take(18)
+				->skip(0)->take(12)
 				->get();				
 			}
 
@@ -303,7 +303,7 @@ class WelcomeController extends Controller {
 					}
 				})
 				->groupBy('clu_products.id')
-				->skip(0)->take(18)		
+				->skip(0)->take(12)		
 				->get();
 
 				$ventas = \DB::table('clu_products')
@@ -319,7 +319,7 @@ class WelcomeController extends Controller {
 					}
 				})
 				->groupBy('clu_products.id')
-				->skip(0)->take(18)		
+				->skip(0)->take(12)		
 				->get();
 
 				foreach ($moduledata['productos'] as $pkey => $producto) {
@@ -450,7 +450,7 @@ class WelcomeController extends Controller {
 			->where('clu_products.active',1)
 			->where('clu_store.status','Activa')
 			->orderByRaw("RAND()")
-			->skip(0)->take(18)
+			->skip(0)->take(12)
 			->get();
 
 		}

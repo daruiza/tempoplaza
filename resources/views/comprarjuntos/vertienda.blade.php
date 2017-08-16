@@ -43,9 +43,10 @@
 		padding-right: 15px !important;
 		padding-left: 15px !important;			
 	}
-	.fa{
-		/*color:#ffcc00;*/
-	}
+	.fa-star, .fa-star-half-o{
+		color:#ffcc00;
+	}	
+	
 	table.dataTable.no-footer {
 	    border-bottom: 1px solid #111 !important;
 	    border: 1px solid transparent;

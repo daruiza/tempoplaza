@@ -266,8 +266,8 @@
 		<div class="row col-md-10 col-md-offset-1" style="overflow-x: hidden;">
 
 			<div class="col-md-8 col-md-offset-0" >
-				{{ Html::image('images/icons/left-arrow.png','Imagen no disponible',array( 'class'=>'bnt_left','style'=>'width: auto;display:block;position: absolute;z-index: 2;height: 45px;margin-top: 30%;cursor: pointer;' ))}}
-				{{ Html::image('images/icons/right-arrow.png','Imagen no disponible',array('class'=>'bnt_right', 'style'=>'width: auto;display:block;position: absolute;z-index: 2;height: 45px;margin-top: 30%;margin-left: 90%;cursor: pointer;' ))}}
+				{{ Html::image('images/icons/left-arrow.png','Imagen no disponible',array( 'class'=>'bnt_left','style'=>'width: auto;display:block;position: absolute;z-index: 2;height: 45px;margin-top: 28%;cursor: pointer;' ))}}
+				{{ Html::image('images/icons/right-arrow.png','Imagen no disponible',array('class'=>'bnt_right', 'style'=>'width: auto;display:block;position: absolute;z-index: 2;height: 45px;margin-top: 28%;margin-left: 90%;cursor: pointer;' ))}}
 				<div class = "contenedor_carrusel_index" style="height: 285px;overflow-x: hidden;">	
 				</div>
 			</div>
@@ -464,16 +464,16 @@
 				@php ($p=0)
 				@php ($j=1)
 				@foreach($productos as $producto)						
-					@if($p%6==0)						
-						<div class="col-md-12 col-md-offset-0">						
+					@if($p%4==0)						
+						<div class="col-md-10 col-md-offset-1">						
 					@endif
-					<div class="col-md-2 col-mx-offset-1">
+					<div class="col-md-3 col-mx-offset-1">
 						<div class="panel panel-default">					
 							<div class="panel-body">
 						    	<div class="row">
 						    		<div class="col-md-12 popoverStore" data-content="<div><b>Precio:</b> ${{$producto->price}}</div>@if($producto->colors)<div> Colores: {{$producto->colors}}</div>@endif @if($producto->sizes)<div> Tamaños: {{$producto->sizes}}</div>@endif @if($producto->flavors)<div> Sabores: {{$producto->flavors}}</div>@endif @if($producto->materials)<div> Materiales: {{$producto->materials}}</div>@endif" rel="popover" data-placement="bottom" data-original-title="{{$producto->name}}" data-trigger="hover" data-html="true">
 						    			<a href="{{url('/'.$producto->store_name)}}">
-						    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}    				
+						    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 250px;border-radius: 0%;' ))}}    				
 						    			</a>				    			
 						    		</div>
 						    		{{--
@@ -505,7 +505,7 @@
 						    </div>				    
 						</div>
 					</div>
-					@if($j%6==0)						
+					@if($j%4==0)						
 						</div>						
 					@elseif($p == count($productos)-1)
 						</div>						
