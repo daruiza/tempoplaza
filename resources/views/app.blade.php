@@ -74,7 +74,7 @@
 					<div class="visible-lg div-finder-conteiner">
 						<div class="div-finder">
 							{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left visible-lg','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
-							   <div class="input-group " style="width: 35%;position: absolute;margin-left: 15%;">						   		
+							   <div class="input-group " style="width: 35%;position: absolute;margin-left: 20%;">						   		
 									{!! Form::text('finder','', array('class' => 'form-control','placeholder'=>'Busca Productos o Tiendas','style'=>'text-align: center;border: 1px solid #009999;}','maxlength' => 48)) !!}
 									<span class="input-group-btn">
 										<button class="btn btn-default btn-search" type="submit">Buscar!</button>

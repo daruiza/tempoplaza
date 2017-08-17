@@ -297,6 +297,16 @@
 		<!--Para resoluciones en celular-->
 		<div  class=" row col-md-12 col-md-offset-0 hidden-lg" >
 			
+			<!--Buscador de moviles-->
+			<div class="col-md-12 col-md-offset-0">
+				<div class="col-md-3 col-mx-offset-1">
+				{!! Form::open(array('url' => '/','method'=>'get','class'=>'','onsubmit'=>'javascript:return seg_user.validateFinder()', 'style'=>'width: 100%;')) !!}
+				   <div class="input-group" style="width: 100%;">
+						<input class="form-control" type="search" placeholder="Encuentra lo que Buscas" style="text-align: center;border: 1px solid #449aa2;border-radius: 5px;" maxlength="48" name="finder" value="">						
+					</div>
+			    {!! Form::close() !!}
+			    </div>
+		    </div>	
 			<!--Div de productos-->
 			<div class="col-md-12 col-md-offset-0" style="margin-top: 3%;">
 				<div class=" col-md-12  col-md-offset-0 title m-b-md center-block" style="font-size: 22px;">
@@ -473,7 +483,7 @@
 						    	<div class="row">
 						    		<div class="col-md-12 popoverStore" data-content="<div><b>Precio:</b> ${{$producto->price}}</div>@if($producto->colors)<div> Colores: {{$producto->colors}}</div>@endif @if($producto->sizes)<div> Tamaños: {{$producto->sizes}}</div>@endif @if($producto->flavors)<div> Sabores: {{$producto->flavors}}</div>@endif @if($producto->materials)<div> Materiales: {{$producto->materials}}</div>@endif" rel="popover" data-placement="bottom" data-original-title="{{$producto->name}}" data-trigger="hover" data-html="true">
 						    			<a href="{{url('/'.$producto->store_name)}}">
-						    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 250px;border-radius: 0%;' ))}}    				
+						    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 225px;border-radius: 0%;' ))}}    				
 						    			</a>				    			
 						    		</div>
 						    		{{--
