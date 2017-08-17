@@ -264,7 +264,7 @@ color: #333;">Terminos y Condiciones </a></div>
 							
 							{!! Form::label('identificacion', 'Identificación', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::text('identificacion',value(Session::get('comjunplus.usuario.identificacion')), array('class' => 'form-control','placeholder'=>'C.C, C.E ó T.I')) !!}
+								{!! Form::number('identificacion',value(Session::get('comjunplus.usuario.identificacion')), array('class' => 'form-control','placeholder'=>'C.C, C.E ó T.I')) !!}
 							</div>
 							
 							{!! Form::label('fecha_nacimiento', 'Fecha de Nacimiento', array('class' => 'col-md-12 control-label')) !!}
@@ -274,7 +274,7 @@ color: #333;">Terminos y Condiciones </a></div>
 							
 							{!! Form::label('correo_electronico', 'Correo Electronico', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::text('correo_electronico',value(Session::get('comjunplus.usuario.email')), array('class' => 'form-control','placeholder'=>'Ingresa tu email')) !!}
+								{!! Form::email('correo_electronico',value(Session::get('comjunplus.usuario.email')), array('class' => 'form-control','placeholder'=>'Ingresa tu email')) !!}
 							</div>
 																							
 						</div>						
@@ -300,12 +300,12 @@ color: #333;">Terminos y Condiciones </a></div>
 							
 							{!! Form::label('telefono_movil', 'Teléfono Fijo', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::text('telefono_fijo',value(Session::get('comjunplus.usuario.fix_number')), array('class' => 'form-control','placeholder'=>'Ingresa tu Fijo')) !!}
+								{!! Form::number('telefono_fijo',value(Session::get('comjunplus.usuario.fix_number')), array('class' => 'form-control','placeholder'=>'Ingresa tu Fijo')) !!}
 							</div>
 							
 							{!! Form::label('telefono_movil', 'Teléfono Móvil', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::text('telefono_movil',value(Session::get('comjunplus.usuario.movil_number')), array('class' => 'form-control','placeholder'=>'Ingresa tu Celular')) !!}
+								{!! Form::number('telefono_movil',value(Session::get('comjunplus.usuario.movil_number')), array('class' => 'form-control','placeholder'=>'Ingresa tu Celular')) !!}
 							</div>
 							
 							{!! Form::label('fuente', 'Fuente Tipográfica', array('class' => 'col-md-12 control-label')) !!}

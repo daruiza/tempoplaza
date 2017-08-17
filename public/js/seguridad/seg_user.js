@@ -16,9 +16,10 @@ function seg_user() {
     this.btn_enviar_modal = 0 ;
     //id de refresh carrusel index
     this.refresh_interval_id = 0 ;
-    this.refresh_interval= 700 ;
-    this.refresh_background= -1 ;
-    this.refresh_index= 0 ;
+    this.refresh_interval = 700 ;
+    this.refresh_background = -1 ;
+    this.refresh_index = 0 ;  
+    this.isMobile;
 
     //refrescamos el brand del carrito de compras, ante el refresh de seg_user
 }
@@ -33,6 +34,8 @@ seg_user.prototype.validateLogin = function() {
 		return false;
 	}
 	return true;
+
+
 };
 
 seg_user.prototype.validateRegistry = function() {
@@ -44,7 +47,31 @@ seg_user.prototype.validateRegistry = function() {
 			$('#registry_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Registro Fallido!</strong></br> La Contraseña no coincide.</div>');
 			return false;
 		}
-	}	
+	}
+    //loading
+    var opts = {
+          lines: 13 // The number of lines to draw
+        , length: 41 // The length of each line
+        , width: 10 // The line thickness
+        , radius: 56 // The radius of the inner circle
+        , scale: 1 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    }       
+    seg_user.spinner = new Spinner(opts).spin(document.getElementsByTagName("body")[0]);	
 	return true;
 };
 
@@ -62,6 +89,7 @@ seg_user.prototype.validatePassword = function() {
 };
 
 seg_user.prototype.validateEditPerfil = function(){
+
 	if($("#cpfep :input")[2].value =="" || $("#cpfep :input")[3].value =="" || $("#cpfep :input")[6].value =="" || $("#cpfep :input")[7].value =="" || $("#cpfep :input")[8].value =="" || $("#cpfep :input")[9].value =="" || $("#cpfep :input")[10].value ==""){
 		$('#cpep_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close close_alert_edit_perfil" data-dismiss="alert">&times;</button><strong>!Envio Fallido!</strong></br> Faltan campos por diligenciar.</div>');
 		//pintamos los input faltantes
@@ -76,6 +104,30 @@ seg_user.prototype.validateEditPerfil = function(){
         $(".close_alert_edit_perfil").on('click', function () { $("#cpfep :input").removeClass("input_danger"); });
         return false;
 	}
+     //loading
+    var opts = {
+          lines: 13 // The number of lines to draw
+        , length: 41 // The length of each line
+        , width: 10 // The line thickness
+        , radius: 56 // The radius of the inner circle
+        , scale: 1 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    }       
+    seg_user.spinner = new Spinner(opts).spin(document.getElementsByTagName("body")[0]);    
 	return true;
 };
 
@@ -85,10 +137,62 @@ seg_user.prototype.validateCart = function(){
 
         //verificamos los inputs
         if( $('#name_invitado').val() && $('#dir_invitado').val() && $('#municipio_invitado').val() && $('#email_invitado').val()){
+             //loading
+            $($('.btn_invitado_submit')[0].parentElement).hide();
+            seg_user.cart_products = new Array();
+            var opts = {
+                  lines: 13 // The number of lines to draw
+                , length: 41 // The length of each line
+                , width: 10 // The line thickness
+                , radius: 56 // The radius of the inner circle
+                , scale: 1 // Scales overall size of the spinner
+                , corners: 1 // Corner roundness (0..1)
+                , color: '#000' // #rgb or #rrggbb or array of colors
+                , opacity: 0.25 // Opacity of the lines
+                , rotate: 0 // The rotation offset
+                , direction: 1 // 1: clockwise, -1: counterclockwise
+                , speed: 1 // Rounds per second
+                , trail: 60 // Afterglow percentage
+                , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+                , zIndex: 2e9 // The z-index (defaults to 2000000000)
+                , className: 'spinner' // The CSS class to assign to the spinner
+                , top: '50%' // Top position relative to parent
+                , left: '50%' // Left position relative to parent
+                , shadow: false // Whether to render a shadow
+                , hwaccel: false // Whether to use hardware acceleration
+                , position: 'absolute' // Element positioning
+            }       
+            seg_user.spinner = new Spinner(opts).spin(document.getElementsByTagName("body")[0]);  
             return true;
         }
 
         if( $('#name_invitado').val() && $('#dir_invitado').val() && $('#municipio_invitado').val() && $('#tel_invitado').val()){
+            //loading
+            $($('.btn_invitado_submit')[0].parentElement).hide();
+            seg_user.cart_products = new Array();
+            var opts = {
+                  lines: 13 // The number of lines to draw
+                , length: 41 // The length of each line
+                , width: 10 // The line thickness
+                , radius: 56 // The radius of the inner circle
+                , scale: 1 // Scales overall size of the spinner
+                , corners: 1 // Corner roundness (0..1)
+                , color: '#000' // #rgb or #rrggbb or array of colors
+                , opacity: 0.25 // Opacity of the lines
+                , rotate: 0 // The rotation offset
+                , direction: 1 // 1: clockwise, -1: counterclockwise
+                , speed: 1 // Rounds per second
+                , trail: 60 // Afterglow percentage
+                , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+                , zIndex: 2e9 // The z-index (defaults to 2000000000)
+                , className: 'spinner' // The CSS class to assign to the spinner
+                , top: '50%' // Top position relative to parent
+                , left: '50%' // Left position relative to parent
+                , shadow: false // Whether to render a shadow
+                , hwaccel: false // Whether to use hardware acceleration
+                , position: 'absolute' // Element positioning
+            }       
+            seg_user.spinner = new Spinner(opts).spin(document.getElementsByTagName("body")[0]);  
             return true;
         }
 
@@ -136,7 +240,33 @@ seg_user.prototype.validateCart = function(){
         });
 
         return false;
-    }    
+    } 
+    //loading
+    $($('.btn_invitado_submit')[0].parentElement).hide();
+    seg_user.cart_products = new Array();
+    var opts = {
+          lines: 13 // The number of lines to draw
+        , length: 41 // The length of each line
+        , width: 10 // The line thickness
+        , radius: 56 // The radius of the inner circle
+        , scale: 1 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    }       
+    seg_user.spinner = new Spinner(opts).spin(document.getElementsByTagName("body")[0]);  
     return true;
     
 };

@@ -138,7 +138,7 @@
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
 	<div class="row visible-md" style="margin-top: 7%;"></div>
 	<div class="row visible-sm" style="margin-top: 10%;"></div>
-	<div class="row visible-xs" style="margin-top: 16%;"></div>
+	<div class="row visible-xs" style="margin-top: 17%;"></div>
 	
 	<div class="row">
 	<div class="alerts col-md-12 col-md-offset-0">
@@ -859,7 +859,7 @@
 							
 							{!! Form::label('identificacion', 'Identificación', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::text('identificacion',value(Session::get('comjunplus.usuario.identificacion')), array('class' => 'form-control','placeholder'=>'C.C, C.E ó T.I')) !!}
+								{!! Form::number('identificacion',value(Session::get('comjunplus.usuario.identificacion')), array('class' => 'form-control','placeholder'=>'C.C, C.E ó T.I')) !!}
 							</div>
 							
 							{!! Form::label('fecha_nacimiento', 'Fecha de Nacimiento', array('class' => 'col-md-12 control-label')) !!}
@@ -895,12 +895,12 @@
 							
 							{!! Form::label('telefono_movil', 'Teléfono Fijo', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::text('telefono_fijo',value(Session::get('comjunplus.usuario.fix_number')), array('class' => 'form-control','placeholder'=>'Ingresa tu Fijo')) !!}
+								{!! Form::number('telefono_fijo',value(Session::get('comjunplus.usuario.fix_number')), array('class' => 'form-control','placeholder'=>'Ingresa tu Fijo')) !!}
 							</div>
 							
 							{!! Form::label('telefono_movil', 'Teléfono Móvil', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::text('telefono_movil',value(Session::get('comjunplus.usuario.movil_number')), array('class' => 'form-control','placeholder'=>'Ingresa tu Celular')) !!}
+								{!! Form::number('telefono_movil',value(Session::get('comjunplus.usuario.movil_number')), array('class' => 'form-control','placeholder'=>'Ingresa tu Celular')) !!}
 							</div>
 							
 							{!! Form::label('fuente', 'Fuente Tipográfica', array('class' => 'col-md-12 control-label')) !!}
@@ -1043,6 +1043,8 @@
 @endsection
 
 @section('script')
+	<script type="text/javascript" src="{{ url('js/spin.min.js') }}"></script>
+	
 	<!-- Cambio de Contraseña -->
 	@if(Session::has('user'))		
 		<script> $("#cpsw_modal").modal(); </script>
@@ -1098,7 +1100,30 @@
 		@endif	
 	@endif	
 
+
 	<script type="text/javascript">
+
+		//codigo para detectar si el dispositivo es movil.
+	    seg_user.isMobile = {
+	        Android: function() {
+	            return navigator.userAgent.match(/Android/i);
+	        },
+	        BlackBerry: function() {
+	            return navigator.userAgent.match(/BlackBerry/i);
+	        },
+	        iOS: function() {
+	            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+	        },
+	        Opera: function() {
+	            return navigator.userAgent.match(/Opera Mini/i);
+	        },
+	        Windows: function() {
+	            return navigator.userAgent.match(/IEMobile/i);
+	        },
+	        any: function() {
+	            return (seg_user.isMobile.Android() || seg_user.isMobile.BlackBerry() || seg_user.isMobile.iOS() || seg_user.isMobile.Opera() || seg_user.isMobile.Windows());
+	        }
+	    };
 		
 		$('.perfil_usuario_bienvenida').on('click', function(e) {
 			$("#cpep_modal").modal(); 
@@ -1193,11 +1218,14 @@
 		 });
 
 		//Codigo para carrusel
-		@if (Session::has('frequency'))
-			seg_user.controllerCarruselIndex({{ Session::get('frequency') }});
-		@else
-			seg_user.controllerCarruselIndex(6500);
-		@endif	  
+		if(seg_user.isMobile.any() === null){
+			//si es escritorio, solo para pc
+			@if (Session::has('frequency'))
+				seg_user.controllerCarruselIndex({{ Session::get('frequency') }});
+			@else
+				seg_user.controllerCarruselIndex(6500);
+			@endif
+		}
 
 		//siguiente y anterior del carrusel
 		$('.bnt_left').on('click', function(e) {

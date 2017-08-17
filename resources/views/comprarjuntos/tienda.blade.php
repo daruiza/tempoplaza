@@ -354,7 +354,7 @@
 
 											<label for="movil" class="col-md-12 control-label"><span class="fa fa-whatsapp"></span>  Movil WhatsUP</label>											
 											<div class="col-md-12">
-												{!! Form::text('movil',old('movil'), array('id' => 'movil' , 'class' => 'form-control solo_numeros','placeholder'=>'Ìngresa un nùmero de Celular')) !!}
+												{!! Form::number('movil',old('movil'), array('id' => 'movil' , 'class' => 'form-control solo_numeros','placeholder'=>'Ìngresa un nùmero de Celular')) !!}
 											</div>
 
 											<label for="ubicacion" class="col-md-12 control-label"><span class="fa fa-google"></span>  Ubicaciòn</label>											
@@ -368,7 +368,7 @@
 											{!! Form::label('prioridad', 'Prioridad' , array('class' => 'col-md-12 control-label')) !!} 
 											<div class="col-md-12">
 												<div class="input-group ">									
-													{!! Form::text('prioridad',old('prioridad'), array('class' => 'form-control solo_numeros','placeholder'=>'Prioridad de la Tienda para Macalú')) !!}
+													{!! Form::number('prioridad',old('prioridad'), array('class' => 'form-control solo_numeros','placeholder'=>'Prioridad de la Tienda para Macalú')) !!}
 													<span class="input-group-addon" data-toggle="tooltip" title="La prioridad es un nùmero que indica el orden en el cual se listaran las tiendas dentro de Macalú.">?</span>
 												</div>
 											</div>
@@ -523,7 +523,7 @@
 												</div>
 												{!! Form::label('precio', 'Precio', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
-													{!! Form::text('precio',old('precio'), array('class' => 'form-control solo_numeros','placeholder'=>'Ingresa precio sin puntos ni comas')) !!}
+													{!! Form::number('precio',old('precio'), array('class' => 'form-control solo_numeros','placeholder'=>'Ingresa precio sin puntos ni comas')) !!}
 												</div>
 												{!! Form::label('categoria', 'Categoria', array('class' => 'col-md-12 control-label')) !!}
 												<div class="input-group categorias input-grp col-md-12">		
@@ -536,7 +536,7 @@
 												{!! Form::label('prioridad_producto', 'Prioridad' , array('class' => 'col-md-12 control-label')) !!} 
 												<div class="col-md-12">
 													<div class="input-group">									
-														{!! Form::text('prioridad_producto',old('prioridad_producto'), array('class' => 'form-control solo_numeros','placeholder'=>'Prioridad del Producto')) !!}
+														{!! Form::number('prioridad_producto',old('prioridad_producto'), array('class' => 'form-control solo_numeros','placeholder'=>'Prioridad del Producto')) !!}
 														<span class="input-group-addon" data-toggle="tooltip" title="La prioridad es un nùmero que indica el orden en el cual se listaran los productos en la Tienda">?</span>
 													</div>
 												</div>										

@@ -571,7 +571,7 @@
 								<div id="unity_cart_modal" class="col-md-12"></div>
 							</div>
 							<div class="col-md-12" style="margin-bottom: 5%;">
-								{!! Form::text('volume_cart_modal',1, array('id'=>'volume_cart_modal', 'class' => 'form-control solo_numeros','placeholder'=>'Cantidad a comprar')) !!}
+								{!! Form::number('volume_cart_modal',1, array('id'=>'volume_cart_modal', 'class' => 'form-control solo_numeros','placeholder'=>'Cantidad a comprar')) !!}
 							</div>
 							<div id="div_cart_colors" class="col-md-12" style="margin-bottom: 3%;">
 								<label for="color_cart_modal_for" class="col-md-3 control-label">Color</label>
@@ -685,14 +685,14 @@
 
 						<div class="col-md-12">
 							{!! Form::label('numero', 'Número Teléfonico', array('class' => 'col-md-12 control-label')) !!}
-							{!! Form::text('tel_invitado_modal',null, array('id'=>'tel_invitado_modal', 'class' => 'form-control solo_numeros','placeholder'=>'Ingres un fijo o un móvil')) !!}
+							{!! Form::number('tel_invitado_modal',null, array('id'=>'tel_invitado_modal', 'class' => 'form-control solo_numeros','placeholder'=>'Ingres un fijo o un móvil')) !!}
 						</div>
 					</div>
 				</div>
 
 				<div class="modal-footer">
 					<div class="col-md-12">
-						<button type="submit"  form = "cart_form" id="submit_cart_modal" class="btn btn-default" >Enviar Pedido</button>
+						<button type="submit"  form = "cart_form" id="submit_cart_modal" class="btn btn-default btn_invitado_submit" >Enviar Pedido</button>
 				    	<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar Carro</button>
 					</div>
 				</div>
@@ -761,7 +761,7 @@
 	      <div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Ingreso a ComprarJuntos</h4>
+					<h4 class="modal-title">Ingreso a {!! Session::get('app') !!}</h4>
 				</div>
 				<div class = "alerts-module"></div>				
 				<div class="modal-body">
@@ -905,6 +905,7 @@
 @section('script')
 	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>
 	<script type="text/javascript">	$('#cart_modal_b').on('click', function (e) { seg_user.openModalCart();});</script>
+	<script type="text/javascript" src="{{ url('js/spin.min.js') }}"></script>
 	<!--Autocomplete para buscador-->
 	@foreach($products_name as $producto)
 		<script type="text/javascript" charset="utf-8">  seg_user.datos_productos.push("{!!$producto!!}"); </script>
