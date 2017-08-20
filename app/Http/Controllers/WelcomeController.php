@@ -661,7 +661,7 @@ class WelcomeController extends Controller {
 			if(count($tiendas)){
 				return redirect()->action('WelcomeController@index', ['categoria' => $data]);	
 			}else{
-				return Redirect::to('/')->with('message_ok', ['Actualmente no tenemos en ComprarJuntos alguna tienda que ofrezca '.$data.'.']);				
+				return Redirect::to('/')->with('message_ok', ['Actualmente no tenemos en '. Session::get("app").' alguna tienda que ofrezca '.$data.'.']);				
 			}			
 		}
 
@@ -1230,7 +1230,7 @@ class WelcomeController extends Controller {
 				});
 			}catch (\Exception  $e) {	
 				$mensage[]='El correo suministrado no es valido';
-				$mensage[]='Si no eres usuario de ComprarJuntos lo mejor es realizar nuevamente el pedido. Si ya eres usuario, tu correo electronico esta mal diligenciado y deberias correjirlo';				
+				$mensage[]='Si no eres usuario de '.Session::get('app').' lo mejor es realizar nuevamente el pedido. Si ya eres usuario, tu correo electronico esta mal diligenciado y deberias correjirlo';				
 			}
 
 			//envio a buzon interno mailbox de pedido, a tendero
