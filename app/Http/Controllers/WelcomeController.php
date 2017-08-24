@@ -46,7 +46,7 @@ class WelcomeController extends Controller {
 		
 		if(!empty($request->input())){
 			//si es el finder es el buscador inicial			
-			if(array_key_exists('finder',$request->input())){
+			if(array_key_exists('finder',$request->input())){				
 				return redirect('/'.$request->input('finder'));
 			}
 		}
@@ -219,8 +219,9 @@ class WelcomeController extends Controller {
 				}
 			}
 
+			//el criterio es una busqueda aleatoria
 			if(array_key_exists('criterio',$request->input())){
-				$criterio = explode(' ',strtolower($request->input('criterio')));
+				$criterio = explode(' ',strtolower($request->input('criterio')));				
 				$conectors = Conector::all()->toArray();			
 				foreach ($conectors as $key => $value) {
 					$conectores[] = $value['conector'];
@@ -229,6 +230,16 @@ class WelcomeController extends Controller {
 					if(strlen($value) < 3 )unset($criterio[$key]);
 					if(in_array($value, $conectores))unset($criterio[$key]);
 				}
+				//creamos nuevos criterios
+				foreach ($criterio as $key => $value) {
+					if(strlen($value) >= 4 ){
+						$criterio[] = substr($value, 0, -2); 
+					}elseif(strlen($value) >= 3){
+						//quitamos solo la ultima
+						$criterio[] = substr($value, 0, -1);
+					}					
+				}	
+					
 				$moduledata['tiendas'] = \DB::table('clu_store')
 				->distinct()->select('clu_store.*','seg_user.name as user_name','seg_user_profile.avatar as avatar','seg_user_profile.names as tnames','seg_user_profile.surnames as tsurnames')
 				->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
@@ -266,10 +277,12 @@ class WelcomeController extends Controller {
 				->get();				
 			}
 
+			//buscador de la tienda
 			if(array_key_exists('finder_store',$request->input())){
 
 				//buscador de la tienda, intentan buscar productos o categorias
-				$criterio = explode(' ',strtolower($request->input('finder_store')));
+				$criterio = explode(' ',strtolower($request->input('finder_store')));		
+
 				$conectors = Conector::all()->toArray();			
 				foreach ($conectors as $key => $value) {
 					$conectores[] = $value['conector'];
@@ -277,7 +290,17 @@ class WelcomeController extends Controller {
 				foreach ($criterio as $key => $value) {			
 					if(strlen($value) < 3 )unset($criterio[$key]);
 					if(in_array($value, $conectores))unset($criterio[$key]);
-				}				
+				}
+
+				//creamos nuevos criterios
+				foreach ($criterio as $key => $value) {
+					if(strlen($value) >= 4 ){
+						$criterio[] = substr($value, 0, -2); 
+					}elseif(strlen($value) >= 3){
+						//quitamos solo la ultima
+						$criterio[] = substr($value, 0, -1);
+					}					
+				}		
 
 				$moduledata['tienda'] = \DB::table('clu_store')
 				->select('clu_store.*','seg_user.name as user_name')
@@ -675,11 +698,21 @@ class WelcomeController extends Controller {
 		foreach ($criterio as $key => $value) {			
 			if(strlen($value) < 3 )unset($criterio[$key]);
 			if(in_array($value, $conectores))unset($criterio[$key]);
+		}
+
+		//creamos nuevos criterios
+		foreach ($criterio as $key => $value) {
+			if(strlen($value) >= 4 ){
+				$criterio[] = substr($value, 0, -2); 
+			}elseif(strlen($value) >= 3){
+				//quitamos solo la ultima
+				$criterio[] = substr($value, 0, -1);
+			}					
 		}		
 		
 		if(count($criterio)){
 			//hay criterios de busqueda			
-
+			//esto es solo por si encontramos un solo elemento en ela base de datos
 			$productos = \DB::table('clu_products')
 			->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name')
 			->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
@@ -697,7 +730,7 @@ class WelcomeController extends Controller {
 			->orderByRaw("RAND()")
 			->skip(0)->take(1)
 			->get();
-			
+			//no s vamos para el index para luego si buscar todo el criterio
 			if(count($productos)){
 				return redirect()->action('WelcomeController@index', ['criterio' => strtolower($data)]);	
 			}
@@ -803,7 +836,7 @@ class WelcomeController extends Controller {
 
 	}
 
-	//para el paginador de productos
+	//para el paginador de productos de tienda
 	public function postListarajaxproducts(Request $request){
 
 		//Tienda id
@@ -823,6 +856,15 @@ class WelcomeController extends Controller {
 				if(strlen($value) < 3 )unset($criterio[$key]);
 				if(in_array($value, $conectores))unset($criterio[$key]);
 			}
+			//creamos nuevos criterios
+			foreach ($criterio as $key => $value) {
+				if(strlen($value) >= 4 ){
+					$criterio[] = substr($value, 0, -2); 
+				}elseif(strlen($value) >= 3){
+					//quitamos solo la ultima
+					$criterio[] = substr($value, 0, -1);
+				}					
+			}		
 		}
 		
 		if(count($criterio)){
