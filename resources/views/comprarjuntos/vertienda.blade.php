@@ -269,10 +269,10 @@
 				<div><span class="glyphicon glyphicon-map-marker" aria-hidden="true">{{$tienda[0]->department}}, {{$tienda[0]->city}}</span></div>
 				<div>{{$tienda[0]->adress}}</div>
 				@if($tienda[0]->web)
-					<div><i class="fa fa-cloud" aria-hidden="true"></i> <a href="https://{{$tienda[0]->web}}" target="_blank">{{$tienda[0]->web}}</a></div>
+					<div><i class="fa fa-cloud" aria-hidden="true"></i> <a href="{{$tienda[0]->web}}" target="_blank">{{$tienda[0]->web}}</a></div>
 				@endif
 				@if($tienda[0]->fanpage)
-					<div><i class="fa fa-facebook" aria-hidden="true"></i> <a href="https://{{$tienda[0]->fanpage}}" target="_blank">{{$tienda[0]->fanpage}}</a></div>
+					<div><i class="fa fa-facebook" aria-hidden="true"></i> <a href="{{$tienda[0]->fanpage}}" target="_blank">{{$tienda[0]->fanpage}}</a></div>
 				@endif
 
 				@if($tienda[0]->movil)
