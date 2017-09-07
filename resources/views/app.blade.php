@@ -8,8 +8,8 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		
 		<title>{!! Session::get('app') !!}</title>
-		<meta name="description" content="Plaza de Mercado Para la Economia del Bien Común" />
-		<meta name="keywords" content="bien común, economia solidaria, comprar, vender, tienda, cart, plaza mercado, marketplace" />
+		<meta name="description" content="Plaza de Mercado Virtual, donde crear una tienda virtual, ofrecer vender y comprar productos en Colombia" />
+		<meta name="keywords" content="plaza virtual de mercado, Colombia, economía solidaria, crear una tienda virtual,vender online, comprar online, plaza Macalú para la economía el bien común" />
 
 		<link rel="shortcut icon" href="{{ url('images/icons/icon.png') }}">		
 		<link  rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css" />
