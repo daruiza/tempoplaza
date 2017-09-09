@@ -34,7 +34,7 @@ class WelcomeController extends Controller {
 	 */
 	public function __construct()
 	{
-		
+		Session::put('app', env('APP_NAME','Macalù'));
 	}
 
 	/**
@@ -653,7 +653,8 @@ class WelcomeController extends Controller {
 				$moduledata['tienda'][0]->ordenes = count($ordenes);	
 			}		
 			//asignamos el id para listar las ordenes, en listarajaxorders
-			Session::put('store.id', $moduledata['tienda'][0]->id);			
+			Session::put('store.id', $moduledata['tienda'][0]->id);
+			Session::put('app', $moduledata['tienda'][0]->name);		
 			return view('comprarjuntos/vertienda')->with($moduledata);
 		}
 

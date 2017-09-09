@@ -53,7 +53,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" style="font-family: 'Calligraffitti';font-size:34px ;" href="{{ url('/') }}"><b>{{ Session::get('app') }}</b></a>					 
+					<a class="navbar-brand nav-titulo" style="font-family: 'Calligraffitti';font-size:34px ;" href="{{ url('/') }}"><b>{{ Session::get('app') }}</b></a>					 
 				</div>
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
