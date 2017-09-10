@@ -4,12 +4,7 @@
 	<style>
 	.panel-body {		    
 	    padding-bottom: 0px;
-	}
-	/*
-	.nav-titulo{
-		display: none;
-	}
-	*/
+	}	
 	.navbar-default {
 	    background-color: {{$tienda[0]->color_one}} !important;
 	    border-color: #e7e7e7;
@@ -931,9 +926,7 @@
 		$('.div-finder').hide();
 		//agregamos el carrito
 		$('#cart_modal_b').on('click', function (e) { seg_user.openModalCart();});
-		//cambiamos el nav titulo
-		//$('.nav-titulo').html('<b>{!!ucwords($tienda[0]->name)!!}</b>');
-		//$('.nav-titulo').css('display','block');
+		
 		//agregamos el nuevo buscador via javascript
 		var div_finder_conteiner = document.getElementsByClassName("div-finder-conteiner");
 		
