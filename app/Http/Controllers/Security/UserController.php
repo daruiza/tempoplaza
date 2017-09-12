@@ -234,6 +234,22 @@ class UserController extends Controller {
 			Session::put('comjunplus.usuario.avatar', $userprofile ->avatar);		
 			Session::put('comjunplus.usuario.template', $request->input()['fuente_tipografica']);			
 			//return Redirect::to('perfil')->with('message', ['¡Los Datos de tu perfil se han actualizado correctamente!']);
+			
+			//miramos si el usuario tiene tiendas.
+			try {$tiendas=\DB::table('clu_store')
+				->where('clu_store.user_id',Session::get('comjunplus.usuario.id'))
+				->orderBy('order', 'asc')
+				->get();
+			}catch (ModelNotFoundException $e) {				
+				return Redirect::back()->with('message', ['¡Los Datos de tu perfil se han actualizado correctamente!']);
+			}
+			//si no tiene tiendas, verificador.
+			if(!count($tiendas)){
+				Session::flash('Tiendauno', 'Tiendauno');
+				return Redirect::back()->with('message', ['¡Los Datos de tu perfil se han actualizado correctamente!','Tiendauno']);
+			}					
+
+			//el perfil se ha editado normalmente
 			return Redirect::back()->with('message', ['¡Los Datos de tu perfil se han actualizado correctamente!']);
 		}
 	}

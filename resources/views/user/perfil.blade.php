@@ -82,7 +82,14 @@
 				<strong>¡Operación exitosa!</strong>  El proceso se ha ejecutado adecuadamente.<br>
 				<ul>
 					@foreach (Session::get('message') as $message)
-						<li>{{ $message }}</li>
+						@if ($message  == 'Tiendauno')						
+							<li>								
+								Ya puedes crear tu primer tienda en Macalú. ¡Animate a crear tu tieanda! dando <a  href="{{url('/mistiendas/listar/nueva')}}"><span class ="tienda_uno">CLICK AQUI</span></a>. Ó dando click sobre la opción Mis Tiendas.
+							</li>
+						@elseif
+							<li>{{ $message }}</li>
+						@endif
+						
 					@endforeach								
 													
 				</ul>

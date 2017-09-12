@@ -39,10 +39,12 @@ class StoreController extends Controller {
 
 	public function getIndex(){	
 		//no funcionara debido a la ruta de busqueda por url
+		//redirigimos a listar
+		//return redirect()->action('ComprarJuntos\StoreController@getListar');
 	}
 	
-	public function getListar(){
-		
+	public function getListar($option=null){
+				
 		$moduledata['detalles']=\DB::table('clu_order_detail')
 		->select('clu_order_detail.*')
 		->leftjoin('clu_order', 'clu_order_detail.order_id', '=', 'clu_order.id')
@@ -58,6 +60,12 @@ class StoreController extends Controller {
 			$message[] = 'Perfil3';
 			return Redirect::to('/')->with('message', $message);
 		}
+
+		//orden de nueva tienda
+		if($option == 'nueva'){
+			//nueva tienda			
+			$message[] = 'nuevaTienda';
+		}	
 
 		//calculo de datos para desplegar las tiendas del usuario
 		$moduledata = array();	
@@ -99,7 +107,7 @@ class StoreController extends Controller {
 			return Redirect::to('mistiendas/inicio')->with('modulo',$moduledata)->with('error', $message);
 		}
 		//si no tiene tiendas, verificador.
-		if(!count($moduledata['tiendas']))$message = ['Tiendas0'];
+		if(!count($moduledata['tiendas']))$message[] = 'Tiendas0';
 
 		//categorias
 		$categories = Categoria::select('id','name')->where('category_id',0)->get()->toArray();
@@ -135,7 +143,7 @@ class StoreController extends Controller {
 			$message = array_merge ($message,Session::get('message'));
 		}		
 
-		if(!empty($message)){
+		if(!empty($message)){			
 			return Redirect::to('mistiendas/inicio')->with('modulo',$moduledata)->with('message', $message);
 		}else{
 			return Redirect::to('mistiendas/inicio')->with('modulo',$moduledata);

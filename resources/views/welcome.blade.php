@@ -170,6 +170,10 @@
 							<li>								
 								Pero antes de empezar, date una vuelta por el <a  href="#"><span class ="perfil_usuario_bienvenida"> PERFIL DE USUARIO</span></a> para que completes la Inscripción, configures tu cuenta y se habiliten todas las opciones
 							</li>													
+						@elseif ($message  == 'Tiendauno')						
+							<li>								
+								Ya puedes crear tu primer tienda en Macalú. ¡Animate a crear tu tieanda! dando <a  href="{{url('/mistiendas/listar/nueva')}}"><span class ="tienda_uno">CLICK AQUI</span></a>. Ó dando click sobre la opción Mis Tiendas.
+							</li>							
 						@elseif ($message  == 'Perfil2' || $message  == 'Perfil3')						
 						@else
 							<li>{{ $message }}</li>
@@ -260,7 +264,7 @@
 		</div>
 	</div>	
 
-	<!--Div Introducciòn-->
+	<!--Div Introducción-->
 	<div class="col-md-12 introduccion visible-lg">
 		
 		<div class="row col-md-10 col-md-offset-1" style="overflow-x: hidden;">
@@ -356,7 +360,7 @@
 				</div>
 			</div>
 
-			<!--Div Presentaciòn de una tienda-->
+			<!--Div Presentación de una tienda-->
 			@if(count($ultima_tienda))
 				<div class="col-md-12 col-md-offset-0 macalu_nueva_movil" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
 							
@@ -526,7 +530,7 @@
 			</div>
 		</div>		
 
-		<!--Div Presentaciòn de una tienda-->
+		<!--Div Presentación de una tienda-->
 		@if(count($ultima_tienda))
 			<div class="col-md-10 col-md-offset-1 macalu_nueva" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
 							
@@ -953,7 +957,7 @@
 							<div class="col-md-12" id="msg_annotations">
 								<div class="col-md-12" style="border-bottom: 1px solid black;">
 									<div class="col-md-3"> Usuarios</div>
-									<div class="col-md-6"> Descripciòn</div>
+									<div class="col-md-6"> Descripción</div>
 									<div class="col-md-3"> Fecha</div>
 								</div>
 								@foreach(Session::get("orden_data")["annotations"] as $annotation)
@@ -1060,7 +1064,7 @@
 		@if(in_array('Perfil3',Session::get('message')))
 			<script> 
 				$("#cpep_modal").modal();
-				$('#cpep_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!El perfil de usuario esta incompleto!</strong> Para crear tu primer tienda primero debes diligenciar la informaciòn de tu perfil de usuario.</div>');
+				$('#cpep_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!El perfil de usuario esta incompleto!</strong> Para crear tu primer tienda primero debes diligenciar la información de tu perfil de usuario.</div>');
 			</script>
 		@endif		
 	@endif
@@ -1168,12 +1172,12 @@
 		        }
 		    });
 
-		    //redirecciòn de subcategorias
+		    //redirección de subcategorias
 			$('.popover-content ul li').on('click', function(e) {		        
 		        window.location=$('#form_home').attr('action')+"/"+this.textContent;
 		    });
 
-			//redirecciòn de categorias
+			//redirección de categorias
 		    $('.popover-title').on('click', function(e) {		        
 		        window.location=$('#form_home').attr('action')+"/"+this.textContent;
 		    });	    

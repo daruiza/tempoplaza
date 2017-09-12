@@ -112,8 +112,8 @@
 					<ul>
 						@foreach (Session::get('message') as $message)
 							@if ($message  == 'Tiendas0')
-								<li style="display: inline-flex;"> {{Session::get('comjunplus.usuario.names')}}, no tienes ninguna tienda que administar. No esperes màs y crea una dando click en la opciòn.&nbsp;<a href="#"><div class="" id="btn_nueva_tienda_a" data-toggle="modal" data-target="#nuevatienda_modal"><b> Crear una tienda</b></div></a> </li>
-							@elseif ($message  == 'ProductosOK' || $message  == 'ProductosEDITOK' )						
+								<li style="display: inline-flex;"> {{Session::get('comjunplus.usuario.names')}}, no tienes ninguna tienda que administar. No esperes màs y crea una dando click en la opción.&nbsp;<a href="#"><div class="" id="btn_nueva_tienda_a" data-toggle="modal" data-target="#nuevatienda_modal"><b> Crear una tienda</b></div></a> </li>
+							@elseif ($message  == 'ProductosOK' || $message  == 'ProductosEDITOK' || $message  == 'nuevaTienda')						
 							@else
 								<li>{{ $message }}</li>
 							@endif
@@ -225,10 +225,10 @@
 			{!! Form::open(array('url' => Session::get('controlador').'nuevatienda', 'id'=>'form_nueva_tienda','files'=>true,'onsubmit'=>'javascript:return clu_tienda.validateNuevaTienda()')) !!}
 			<div class="modal-body">
 				<ul class="nav nav-tabs">
-					<li role="presentation" class="active"><a href="#tab1" data-toggle="tab">Informaciòn Basica</a></li>
-					<li role="presentation"><a href="#tab2" data-toggle="tab">Infomaciòn Complementaria</a></li>
+					<li role="presentation" class="active"><a href="#tab1" data-toggle="tab">Información Basica</a></li>
+					<li role="presentation"><a href="#tab2" data-toggle="tab">Infomación Complementaria</a></li>
 					@if(Session::has('_old_input.edit'))
-						<li role="presentation"><a href="#tab3" data-toggle="tab">Infomaciòn de Interes</a></li>
+						<li role="presentation"><a href="#tab3" data-toggle="tab">Infomación de Interes</a></li>
 					@endif			
 				</ul>
 				<div class="tab-content">					
@@ -239,15 +239,15 @@
 									<div class="col-md-8">
 										<div class="col-md-6">
 											<div class="form-group ">
-												{!! Form::label('nombre', 'Nombre', array('class' => 'col-md-12 control-label')) !!}
+												{!! Form::label('nombre', 'Nombre de Tienda', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
-													{!! Form::text('nombre',old('nombre'), array('class' => 'form-control','placeholder'=>'Ingresa el Nombre o La Razòn Social')) !!}
+													{!! Form::text('nombre',old('nombre'), array('class' => 'form-control','placeholder'=>'Nombre o La Razón Social')) !!}
 												</div>
 
 												{{--
 													{!! Form::label('nit', 'NIT', array('class' => 'col-md-12 control-label')) !!}
 													<div class="col-md-12">
-														{!! Form::text('nit',old('nit'), array('class' => 'form-control','placeholder'=>'Nùmero de identificaciòn Tributaria')) !!}
+														{!! Form::text('nit',old('nit'), array('class' => 'form-control','placeholder'=>'Nùmero de identificación Tributaria')) !!}
 													</div>
 												--}}
 
@@ -270,7 +270,7 @@
 										<div class="col-md-6">
 											<div class="form-group ">
 												
-												{!! Form::label('color_uno', 'Color Primario', array('class' => 'col-md-12 control-label')) !!}
+												{!! Form::label('color_uno', 'Color de Fondo', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
 													<div id="cp1" class="input-group colorpicker-component">
 														@if(old('color_uno'))
@@ -283,7 +283,7 @@
 													</div>
 												</div>
 
-												{!! Form::label('color_dos', 'Color Secundario', array('class' => 'col-md-12 control-label')) !!}
+												{!! Form::label('color_dos', 'Color de Letra', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
 													<div id="cp2" class="input-group colorpicker-component">
 														@if(old('color_dos'))
@@ -295,16 +295,16 @@
 													</div>
 												</div>
 
-												{!! Form::label('descripcion', 'Descripciòn', array('class' => 'col-md-12 control-label')) !!}
+												{!! Form::label('descripcion', 'Descripción', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
-													{!! Form::textarea('descripcion',old('descripcion'), array('class' => 'form-control','rows' => 3,'placeholder'=>'Descripciòn de tu Tienda','maxlength' => 256)) !!}
+													{!! Form::textarea('descripcion',old('descripcion'), array('class' => 'form-control','rows' => 3,'placeholder'=>'Descripción de tu Tienda','maxlength' => 256)) !!}
 												</div>
 
 											</div>
 										</div>
 										<div class="col-md-12">
 											<div class="form-group ">
-												{!! Form::label('categorias', 'Categorias', array('class' => 'col-md-12 control-label')) !!}
+												{!! Form::label('categorias', 'Categorias de Venta', array('class' => 'col-md-12 control-label')) !!}
 												<div class="input-group input-grp categorias col-md-12">		
 													{!! Form::select('categorias_select',Session::get('modulo.categorias'),old('categorias_select'), array('id'=>'categorias_select','class' => 'form-control chosen-select','multiple' ,'data-placeholder'=>'Selecciona las categorias','tabindex'=>'4', 'style'=>'width:350px;')) !!}
 													{!! Form::hidden('categorias',old('categorias'),array('id'=>'categorias')) !!}
@@ -357,10 +357,10 @@
 												{!! Form::number('movil',old('movil'), array('id' => 'movil' , 'class' => 'form-control solo_numeros','placeholder'=>'Ìngresa un nùmero de Celular')) !!}
 											</div>
 
-											<label for="ubicacion" class="col-md-12 control-label"><span class="fa fa-google"></span>  Ubicaciòn</label>											
+											<label for="ubicacion" class="col-md-12 control-label"><span class="fa fa-google"></span>  Ubicación</label>											
 											<div class="col-md-12">
 												<div class="input-group">	
-													{!! Form::text('ubicacion',old('ubicacion'), array('class' => 'form-control','placeholder'=>'Ubicaciòn en Google Maps')) !!}
+													{!! Form::text('ubicacion',old('ubicacion'), array('class' => 'form-control','placeholder'=>'Ubicación en Google Maps')) !!}
 													<span class="input-group-addon" style="cursor: pointer;"  data-toggle="modal" data-target="#guiaubicacion_modal">?</span>
 												</div>
 											</div>
@@ -378,7 +378,7 @@
 										<div class="form-group " style="text-align: center;";>
 											{!! Form::label('img_banner', 'Imagen Tipo Banner' , array('class' => 'col-md-12 control-label')) !!}
 											<div class="col-md-12">
-												Un Banner es una imagen ubicada en la parte superior de la tienda, su objetivo es dar la bienvenida a los visitantes, la cùal puede tratarse de un mensaje de amor y paz, una promociòn o una metafora visual de la mision y la visiòn de la tienda.
+												Un Banner es una imagen ubicada en la parte superior de la tienda, su objetivo es dar la bienvenida a los visitantes, la cùal puede tratarse de un mensaje de amor y paz, una promoción o una metafora visual de la mision y la visión de la tienda.
 											</div>
 
 											<div class="col-md-12" style="text-align: center; margin-bottom: 9px; margin-top: 9px;">
@@ -440,7 +440,7 @@
 	      <div class="modal-content">
 	      	<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Guia para el Campo Ubicaciòn de una Tienda</h4>
+				<h4 class="modal-title">Guia para el Campo Ubicación de una Tienda</h4>
 			</div>
 			<div class = "alerts-module"></div>
 			<div class="modal-body">
@@ -507,8 +507,8 @@
 				{!! Form::open(array('url' => Session::get('controlador').'nuevoproducto', 'id'=>'form_nuevo_producto','files'=>true,'onsubmit'=>'javascript:return clu_tienda.validateNuevoProducto()')) !!}
 				<div class="modal-body">
 					<ul class="nav nav-tabs">
-						<li role="presentation" class="active"><a href="#tab_prod1" data-toggle="tab">Informaciòn Basica</a></li>
-						<li role="presentation"><a href="#tab_prod2" data-toggle="tab">Infomaciòn Complementaria</a></li>			
+						<li role="presentation" class="active"><a href="#tab_prod1" data-toggle="tab">Información Basica</a></li>
+						<li role="presentation"><a href="#tab_prod2" data-toggle="tab">Infomación Complementaria</a></li>			
 					</ul>
 					<div class="tab-content">					
 						<div class="tab-pane fade in active" id="tab_prod1">
@@ -529,9 +529,9 @@
 												<div class="input-group categorias input-grp col-md-12">		
 													{!! Form::select('categoria_select',array(),old('categoria_select'), array('id'=>'categoria_select', 'class' => 'form-control chosen-select', 'style'=>'width:350px;')) !!}						
 												</div>
-												{!! Form::label('descripcion_producto', 'Descripciòn', array('class' => 'col-md-12 control-label')) !!}
+												{!! Form::label('descripcion_producto', 'Descripción', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
-													{!! Form::textarea('descripcion_producto',old('descripcion_producto'), array('class' => 'form-control','rows' => 2,'placeholder'=>'Descripciòn de tu Producto')) !!}
+													{!! Form::textarea('descripcion_producto',old('descripcion_producto'), array('class' => 'form-control','rows' => 2,'placeholder'=>'Descripción de tu Producto')) !!}
 												</div>
 												{!! Form::label('prioridad_producto', 'Prioridad' , array('class' => 'col-md-12 control-label')) !!} 
 												<div class="col-md-12">
@@ -756,7 +756,7 @@
 		    seg_ajaxobject.peticionajax($('#form_consult_products').attr('action'),datos,"clu_tienda.consultaRespuestaProducts",false);
 
 		    //llamado sincrono, para cambiar el id de tienda
-		    //la otra opciòn es retardar el listado de las los productos
+		    //la otra opción es retardar el listado de las los productos
 
 		    javascript:clu_tienda.table_products = $('#table_prods').DataTable( {		
 			    "responsive": true,
@@ -834,7 +834,7 @@
 			seg_ajaxobject.peticionajax($('#form_consult_orders').attr('action'),datos,"clu_tienda.consultaRespuestaOrders",false);
 
 			//llamado sincrono, para cambiar el id de tienda
-		    //la otra opciòn es retardar el listado de las los pedidos
+		    //la otra opción es retardar el listado de las los pedidos
 
 		    javascript:clu_tienda.table_orders = $('#table_orders').DataTable({
 		    	"responsive": true,
@@ -1027,7 +1027,7 @@
 		@if(in_array('Productos0',Session::get('error')))
 			<script> 				
 				$("#nuevoproducto_modal").modal(); 
-				$('#nuevoproducto_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Problemas al crear el producto!</strong> No puedes crear màs de {{Session::get("comjunplus.usuario.products")}} productos por Tienda, Para màs informaciòn envìa tu sugerencia al administrador en tu perfil de usuario.</div>');
+				$('#nuevoproducto_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Problemas al crear el producto!</strong> No puedes crear màs de {{Session::get("comjunplus.usuario.products")}} productos por Tienda, Para màs información envìa tu sugerencia al administrador en tu perfil de usuario.</div>');
 			</script>
 		@endif		
 	@endif
@@ -1120,7 +1120,15 @@
 			    });		
 				
 			</script>
-		@endif		
+		@endif
+		@if(in_array('nuevaTienda',Session::get('message')))
+			<script> 
+				$("#nuevatienda_modal").modal();
+				/*
+				$('#nuevatienda_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Formulario para creación de una Tienda!</strong> Consulte la guia de creación para una mayor comprensión.</div>');
+				*/
+			</script>
+		@endif	
 	@endif
 
 	@if(Session::has('orden_id'))
@@ -1133,7 +1141,7 @@
 			seg_ajaxobject.peticionajax($('#form_consult_orders').attr('action'),datos,"clu_tienda.consultaRespuestaOrders",false);
 
 			//llamado sincrono, para cambiar el id de tienda
-		    //la otra opciòn es retardar el listado de las los pedidos
+		    //la otra opción es retardar el listado de las los pedidos
 
 		    javascript:clu_tienda.table_orders = $('#table_orders').DataTable({
 		    	"responsive": true,

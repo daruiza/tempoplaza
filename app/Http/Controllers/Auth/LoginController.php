@@ -261,6 +261,7 @@ class LoginController extends Controller
 						$message[] = 'Tu contraseña fue Cambiada exitosamente';
 					}					
 					$message[] = 'Bienvenid@: '.Session::get('comjunplus.usuario.names').' '.Session::get('comjunplus.usuario.surnames');
+
 					if(!empty($request->input('user_id'))){
 						$message[] = 'Ya puedes crear tu propia tienda y vender tus productos en nuestra gran comunidad';			
 						$message[] = 'Perfil1';
@@ -268,9 +269,23 @@ class LoginController extends Controller
 					}else{						
 						if(empty($array['usuario']['names']) || empty($array['usuario']['adress']) || empty($array['usuario']['state']) || empty($array['usuario']['city']) || empty($array['usuario']['birthdate']) || empty($array['usuario']['email'])){				
 							$message[] = 'Perfil2';
+						}else{
+
+							try {$tiendas=\DB::table('clu_store')
+								->where('clu_store.user_id',Session::get('comjunplus.usuario.id'))
+								->orderBy('order', 'asc')
+								->get();
+							}catch (ModelNotFoundException $e) {				
+								//nada
+							}
+							//si no tiene tiendas, verificador.
+							if(!count($tiendas)){
+								$message[] =  'Tiendauno';
+							}					
+
 						}
 						
-					}
+					}				
 					
 					//$message[] = 'Tienes varios mensajes por revisar';
 					

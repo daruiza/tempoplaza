@@ -282,7 +282,7 @@
 			</div>	
 		</div>
 		<div class="row col-md-3" style="text-align: center;">
-			<div><b>REPUTACIÒN</b></div>			
+			<div><b>REPUTACIóN</b></div>			
 			@if($tienda[0]->reputacion == 0)
 				<i class="fa fa-star-o fa-2x" aria-hidden="true"></i>
 				<i class="fa fa-star-o fa-2x" aria-hidden="true"></i>
@@ -381,7 +381,7 @@
 			<div class="btn-group btn-menu" role="group">
 				<!--<button type="button" class="btn btn-default">Articulos</button>-->
 				<button type="button" class="btn btn-default" data-toggle="popover" title="Categorias" data-placement="bottom" data-content="{{ Html::ul($categorias)}}" data-html="true">Categorias</button>				
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ubication_modal">Ubicaciòn</button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ubication_modal">Ubicación</button>
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#resumen_modal">Resumen</button>				
 				<!--<button type="button" class="btn btn-default">Grupos de Consumo</button>-->
 				<button type="button" class="btn btn-default visible-lg" ><a href="#calificaciones" id="link1" class="bnt-catacteristicas">Calificaciones</a></button>
@@ -429,7 +429,7 @@
 				    			</div>	
 				    			<div class="col-xs-4 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
 				    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 14px;">Descripciòn</div>
+				    				<div style="font-size: 14px;">Descripción</div>
 				    			</div>
 				    			<div class="col-xs-4 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
 				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
@@ -476,7 +476,7 @@
 				    			</div>	
 				    			<div class="col-md-4 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
 				    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 14px;">Descripciòn</div>
+				    				<div style="font-size: 14px;">Descripción</div>
 				    			</div>
 				    			<div class="col-md-4 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
 				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
@@ -700,7 +700,7 @@
 		</div>
 	</div>
 
-	<!--Modal para la ubicaciòn-->
+	<!--Modal para la ubicación-->
 	<div class="modal fade" id="ubication_modal" role="dialog">
 		<div class="modal-dialog" style="text-align: center;">
 			<div class="modal-content">
@@ -1394,13 +1394,13 @@
 		        }
 		    });
 
-		    //redirecciòn de subcategorias
+		    //redirección de subcategorias
 		    /*
 			$('.popover-content ul li').on('click', function(e) {		        
 		        window.location=$('#form_home').attr('action')+"/"+this.textContent;
 		    });
 
-			//redirecciòn de categorias
+			//redirección de categorias
 		    $('.popover-title').on('click', function(e) {		        
 		        window.location=$('#form_home').attr('action')+"/"+this.textContent;
 		    });
@@ -1408,7 +1408,7 @@
 	    });
 
 
-		//al cerrar el modal de captacion de informaciòn se cierre el modal de carrito
+		//al cerrar el modal de captacion de información se cierre el modal de carrito
 		$('#invitado_cart_modal').on('hidden.bs.modal', function () {			
 			$('#cart_modal').modal('hide');			
 		});
