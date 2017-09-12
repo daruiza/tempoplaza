@@ -85,8 +85,8 @@
 						@if ($message  == 'Tiendauno')						
 							<li>								
 								Ya puedes crear tu primer tienda en Macalú. ¡Animate a crear tu tieanda! dando <a  href="{{url('/mistiendas/listar/nueva')}}"><span class ="tienda_uno">CLICK AQUI</span></a>. Ó dando click sobre la opción Mis Tiendas.
-							</li>
-						@elseif
+							</li>	
+						@else
 							<li>{{ $message }}</li>
 						@endif
 						

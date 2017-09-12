@@ -83,8 +83,7 @@ class UserController extends Controller {
 				$ciudades[$city->city] = $city->city;
 			}
 			$moduledata['ciudades']=$ciudades;
-		}
-
+		}		
 		return view('user/perfil')->with($moduledata);
 	}
 		
