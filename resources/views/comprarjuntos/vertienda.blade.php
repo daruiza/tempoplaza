@@ -183,6 +183,9 @@
 
 	</style>
 
+	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
+	<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />
+
 	<link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}">
 
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
@@ -903,8 +906,13 @@
 @endsection
 
 @section('script')
+	
+	<script type="text/javascript" src="{{ url('js/locales/bootstrap-datepicker.es.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/datatables_row.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/datatables-responsive.min.js') }}"></script>	
 	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>	
 	<script type="text/javascript" src="{{ url('js/spin.min.js') }}"></script>
+
 	<!--Autocomplete para buscador-->
 	@foreach($products_name as $producto)
 		<script type="text/javascript" charset="utf-8">  seg_user.datos_productos.push("{!!$producto!!}"); </script>

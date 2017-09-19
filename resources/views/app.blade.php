@@ -26,10 +26,7 @@
 		<link  rel="stylesheet" href="{{ url('css/'.$style.'/app.css') }}" type="text/css" />		
 		<link  rel="stylesheet" href="{{ url('css/jquery-ui.css') }}" type="text/css" />
 		<link  rel="stylesheet" href="{{ url('css/bootstrap-submenu.min.css') }}" type="text/css" />
-		<link  rel="stylesheet" href="{{ url('css/bootstrap-datepicker.min.css') }}" type="text/css" />	
-		<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
-		<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />
-
+		
 		<!--Google analitycs-->
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -252,14 +249,8 @@
 		<script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url('js/jquery-ui.js') }}"></script>
 		<script type="text/javascript" src="{{ url('js/bootstrap.min.js') }}"></script>
-		<script type="text/javascript" src="{{ url('js/bootstrap.submenu.min.js') }}"></script>
-		<script type="text/javascript" src="{{ url('js/bootstrap-datepicker.min.js') }}"></script>
-		<script type="text/javascript" src="{{ url('js/locales/bootstrap-datepicker.es.min.js') }}"></script>
-		<script type="text/javascript" src="{{ url('js/datatables_row.min.js') }}"></script>
-		<script type="text/javascript" src="{{ url('js/datatables-responsive.min.js') }}"></script>
-		<script type="text/javascript" src="{{ url('js/highcharts.js') }}"></script>	
-		<script type="text/javascript" src="{{ url('js/exporting.js') }}"></script>		
-
+		<script type="text/javascript" src="{{ url('js/bootstrap.submenu.min.js') }}"></script>		
+		
 		<script type="text/javascript" src="{{ url('js/seguridad/seg_user.js') }}"></script>
 		<script type="text/javascript" src="{{ url('js/seguridad/seg_ajaxobject.js') }}"></script>
 		

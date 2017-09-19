@@ -76,6 +76,9 @@
 		
 		
 	</style>
+	
+	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
+	<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />
 	<link  rel="stylesheet" href="{{ url('css/bootstrap-colorpicker.min.css') }}" type="text/css" />
 	<link  rel="stylesheet" href="{{ url('css/chosen.css') }}" type="text/css" />
 	<link  rel="stylesheet" href="{{ url('css/bootstrap-social.css') }}" type="text/css" />
@@ -716,6 +719,12 @@
 @endsection
 
 @section('script')
+	
+	<script type="text/javascript" src="{{ url('js/datatables_row.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/datatables-responsive.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/highcharts.js') }}"></script>	
+	<script type="text/javascript" src="{{ url('js/exporting.js') }}"></script>		
+
 	<script type="text/javascript" src="{{ url('js/bootstrap-colorpicker.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url('js/bootstrap-filestyle.min.js') }}"></script>

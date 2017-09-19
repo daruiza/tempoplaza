@@ -53,6 +53,12 @@
 		
 		
 	</style>
+
+	<link  rel="stylesheet" href="{{ url('css/bootstrap-datepicker.min.css') }}" type="text/css" />	
+	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
+	<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />
+
+
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
 	<div class="row visible-md" style="margin-top: 7%;"></div>
 	<div class="row visible-sm" style="margin-top: 10%;"></div>
@@ -418,6 +424,11 @@ color: #333;">Terminos y Condiciones </a></div>
 @endsection
 
 @section('script')
+	<script type="text/javascript" src="{{ url('js/bootstrap-datepicker.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/locales/bootstrap-datepicker.es.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/datatables_row.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/datatables-responsive.min.js') }}"></script>
+	
 	<script type="text/javascript"> 
 		//tabla de mensajes recibidos
 		javascript:seg_user.table_receiver = $('#table_msj_recibidos').DataTable( {
