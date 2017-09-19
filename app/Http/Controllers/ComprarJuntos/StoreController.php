@@ -153,6 +153,7 @@ class StoreController extends Controller {
 	}
 
 	public function getInicio(){
+		if(!Session::has('modulo'))return redirect()->action('ComprarJuntos\StoreController@getListar');
 		return view('comprarjuntos/tienda');
 	}
 
@@ -801,7 +802,7 @@ class StoreController extends Controller {
 					$data['direccion_tienda'] = $tienda[0]->city.' - '.$tienda[0]->adress;
 					$data['ciudad_tienda'] = $tienda[0]->city;
 					$data['telefono_tienda'] = $tienda[0]->movil_number.' - '.$tienda[0]->fix_number;
-					$data['imagen'] = 'users/'.$tienda[0]->uname.'/stores/'.$tienda[0]->image;
+					$data['imagen'] = 'users/'.str_replace(" ","",$tienda[0]->uname).'/stores/'.$tienda[0]->image;
 
 					$data['estado'] = $estado;
 

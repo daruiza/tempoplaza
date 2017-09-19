@@ -852,7 +852,7 @@
 
 									{!! Form::label('usuario', 'Usuario', array('class' => 'col-md-12 control-label')) !!}						
 									<div class="col-md-12">
-										{!! Form::text('usuario', old('usuario'), array('class' => 'form-control','placeholder'=>'Ingresa tu nombre usuario', 'autofocus'=>'autofocus'))!!}
+										{!! Form::text('usuario', old('usuario'), array('class' => 'form-control input_usuario','placeholder'=>'Ingresa tu nombre usuario', 'autofocus'=>'autofocus'))!!}
 									</div>
 									
 									{!! Form::label('email', 'Correo Electronico', array('class' => 'col-md-12 control-label')) !!}
@@ -1495,6 +1495,27 @@
 		seg_user.colores_pie_orders = [];
 		seg_user.datos_pie_resenias = [];
     	seg_user.colores_pie_resenias = [];
+
+    	//validador de input usuario para registro
+    	$('.input_usuario').keypress(function(e){
+	    	key = e.keyCode || e.which;
+		    tecla = String.fromCharCode(key).toString();
+		    letras = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+		    especiales = []; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+		    tecla_especial = false
+		    for(var i in especiales) {
+		        if(key == especiales[i]) {
+		            tecla_especial = true;
+		            break;
+		        }
+		    }
+
+		    if(key == 32) return false;
+
+		    if(letras.indexOf(tecla) == -1 && !tecla_especial){			
+		    	return false;
+		    }
+	    });
 
 	</script>
 

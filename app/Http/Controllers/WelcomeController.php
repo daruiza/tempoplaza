@@ -232,7 +232,7 @@ class WelcomeController extends Controller {
 				}
 				//creamos nuevos criterios
 				foreach ($criterio as $key => $value) {
-					if(strlen($value) >= 4 ){
+					if(strlen($value) >= 5 ){
 						$criterio[] = substr($value, 0, -2); 
 					}elseif(strlen($value) >= 3){
 						//quitamos solo la ultima
@@ -294,7 +294,7 @@ class WelcomeController extends Controller {
 
 				//creamos nuevos criterios
 				foreach ($criterio as $key => $value) {
-					if(strlen($value) >= 4 ){
+					if(strlen($value) >= 5 ){
 						$criterio[] = substr($value, 0, -2); 
 					}elseif(strlen($value) >= 3){
 						//quitamos solo la ultima
@@ -703,7 +703,7 @@ class WelcomeController extends Controller {
 
 		//creamos nuevos criterios
 		foreach ($criterio as $key => $value) {
-			if(strlen($value) >= 4 ){
+			if(strlen($value) >= 5 ){
 				$criterio[] = substr($value, 0, -2); 
 			}elseif(strlen($value) >= 3){
 				//quitamos solo la ultima
@@ -859,7 +859,7 @@ class WelcomeController extends Controller {
 			}
 			//creamos nuevos criterios
 			foreach ($criterio as $key => $value) {
-				if(strlen($value) >= 4 ){
+				if(strlen($value) >= 5 ){
 					$criterio[] = substr($value, 0, -2); 
 				}elseif(strlen($value) >= 3){
 					//quitamos solo la ultima
@@ -1014,7 +1014,7 @@ class WelcomeController extends Controller {
 			$data['direccion_tienda'] = $tienda[0]->city.' - '.$tienda[0]->adress;
 			$data['ciudad_tienda'] = $tienda[0]->city;
 			$data['telefono_tienda'] = $tienda[0]->movil_number.' - '.$tienda[0]->fix_number;
-			$data['imagen'] = 'users/'.$tienda[0]->uname.'/stores/'.$tienda[0]->image;		
+			$data['imagen'] = 'users/'.str_replace(" ","",$tienda[0]->uname).'/stores/'.$tienda[0]->image;		
 
 			$data['nombres_tendero'] =  $tienda[0]->nombres_tendero;
 			$data['apellidos_tendero'] = $tienda[0]->apellidos_tendero;					
@@ -1240,7 +1240,7 @@ class WelcomeController extends Controller {
 			$data['direccion_tienda'] = $tienda[0]->city.' - '.$tienda[0]->adress;
 			$data['ciudad_tienda'] = $tienda[0]->city;
 			$data['telefono_tienda'] = $tienda[0]->movil_number.' - '.$tienda[0]->fix_number;
-			$data['imagen'] = 'users/'.$tienda[0]->uname.'/stores/'.$tienda[0]->image;		
+			$data['imagen'] = 'users/'.str_replace(" ","",$tienda[0]->uname).'/stores/'.$tienda[0]->image;		
 
 			$data['nombres_tendero'] =  $tienda[0]->nombres_tendero;
 			$data['apellidos_tendero'] = $tienda[0]->apellidos_tendero;

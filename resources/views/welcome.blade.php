@@ -796,7 +796,7 @@
 
 									{!! Form::label('usuario', 'Usuario', array('class' => 'col-md-12 control-label')) !!}						
 									<div class="col-md-12">
-										{!! Form::text('usuario', old('usuario'), array('class' => 'form-control','placeholder'=>'Ingresa tu nombre usuario', 'autofocus'=>'autofocus'))!!}
+										{!! Form::text('usuario', old('usuario'), array('class' => 'form-control input_usuario','placeholder'=>'Ingresa tu nombre usuario', 'autofocus'=>'autofocus'))!!}
 									</div>
 									
 									{!! Form::label('email', 'Correo Electronico', array('class' => 'col-md-12 control-label')) !!}
@@ -918,7 +918,7 @@
 					<div class=" col-md-4 ">	
 						<div class="form-group ">
 							{!! Form::label('img_user', 'Imagen de Usuario', array('class' => 'col-md-12 control-label')) !!}
-							{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array( 'style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;' ))}}
+							{{ Html::image('users/'.str_replace(' ','',Session::get('comjunplus.usuario.name')).'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array( 'style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;' ))}}
 							
 						</div>
 						<div>
@@ -1128,6 +1128,26 @@
 	            return (seg_user.isMobile.Android() || seg_user.isMobile.BlackBerry() || seg_user.isMobile.iOS() || seg_user.isMobile.Opera() || seg_user.isMobile.Windows());
 	        }
 	    };
+
+	    $('.input_usuario').keypress(function(e){
+	    	key = e.keyCode || e.which;
+		    tecla = String.fromCharCode(key).toString();
+		    letras = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+		    especiales = []; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+		    tecla_especial = false
+		    for(var i in especiales) {
+		        if(key == especiales[i]) {
+		            tecla_especial = true;
+		            break;
+		        }
+		    }
+
+		    if(key == 32) return false;
+
+		    if(letras.indexOf(tecla) == -1 && !tecla_especial){			
+		    	return false;
+		    }
+	    });
 		
 		$('.perfil_usuario_bienvenida').on('click', function(e) {
 			$("#cpep_modal").modal(); 

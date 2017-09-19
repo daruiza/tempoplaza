@@ -82,7 +82,7 @@ class RegisterController extends Controller
     }
     
     public function getRegistry(Request $request)
-    {
+    {    	
     	if ($this->auth->guest()){
     		$messages = [
 				'required' => 'El campo :attribute es requerido.',
@@ -143,69 +143,69 @@ class RegisterController extends Controller
 								$userprofile->delete();
 								$message[] = '¡Lo sentimos!, se presentarón problemas al crear el usuario';
 								return Redirect::back()->with('error', $message);
-							}
-							
-							//creación de directorio de usuario
-							if (!is_dir($user->name)){
-								if(!mkdir('users/'.$user->name.'/profile',0777,true)){
+							}							
+
+							//creación de directorio de usuario							
+							if (!is_dir(str_replace(' ','',$user->name))){
+								if(!mkdir('users/'.str_replace(' ','',$user->name).'/profile',0777,true)){
 									$message[] = '¡Lo sentimos!, se presentarón problemas al crear el usuario';
 									$message[] = '¡Fallo la creación de tu directorio.';
 									return Redirect::back()->with('error', $message);									
 								}								
-								chmod('users/'.$user->name, 0777);
+								chmod('users/'.str_replace(' ','',$user->name), 0777);
 								
 								//ubicamos la imagen del perfil de usuario
-								if (!copy('images/user/default.png', 'users/'.$user->name.'/profile/default.png')) {
+								if (!copy('images/user/default.png', 'users/'.str_replace(' ','',$user->name).'/profile/default.png')) {
 									$message[] = '¡Lo sentimos!, se presentarón problemas al crear el usuario';
 									$message[] = '¡Fallo la copia de archivos.';
 									return Redirect::back()->with('error', $message);	
 								}
-								chmod('users/'.$user->name.'/profile/default.png', 0777);
+								chmod('users/'.str_replace(' ','',$user->name).'/profile/default.png', 0777);
 
-								if(!mkdir('users/'.$user->name.'/stores',0777,true)){
+								if(!mkdir('users/'.str_replace(' ','',$user->name).'/stores',0777,true)){
 									$message[] = '¡Lo sentimos!, se presentarón problemas al crear el usuario';
 									$message[] = '¡Fallo la creación de tu directorio.';
 									return Redirect::back()->with('error', $message);									
 								}								
-								chmod('users/'.$user->name, 0777);
+								chmod('users/'.str_replace(' ','',$user->name), 0777);
 
 								//ubicamos la imagen de la tienda de usuario, necesaria para que se cree el directorio
-								if (!copy('images/store/default.png', 'users/'.$user->name.'/stores/default.png')) {
+								if (!copy('images/store/default.png', 'users/'.str_replace(' ','',$user->name).'/stores/default.png')) {
 									$message[] = '¡Lo sentimos!, se presentarón problemas al crear el usuario';
 									$message[] = '¡Fallo la copia de archivos.';
 									return Redirect::back()->with('error', $message);	
 								}
-								chmod('users/'.$user->name.'/stores/default.png', 0777);
+								chmod('users/'.str_replace(' ','',$user->name).'/stores/default.png', 0777);
 
-								if(!mkdir('users/'.$user->name.'/banners',0777,true)){
+								if(!mkdir('users/'.str_replace(' ','',$user->name).'/banners',0777,true)){
 									$message[] = '¡Lo sentimos!, se presentarón problemas al crear el usuario';
 									$message[] = '¡Fallo la creación de tu directorio.';
 									return Redirect::back()->with('error', $message);									
 								}								
-								chmod('users/'.$user->name, 0777);
+								chmod('users/'.str_replace(' ','',$user->name), 0777);
 
 								//ubicamos la imagen del banner de tienda
-								if (!copy('images/banner/default.png', 'users/'.$user->name.'/banners/default.png')) {
+								if (!copy('images/banner/default.png', 'users/'.str_replace(' ','',$user->name).'/banners/default.png')) {
 									$message[] = '¡Lo sentimos!, se presentarón problemas al crear el usuario';
 									$message[] = '¡Fallo la copia de archivos.';
 									return Redirect::back()->with('error', $message);	
 								}
-								chmod('users/'.$user->name.'/banners/default.png', 0777);
+								chmod('users/'.str_replace(' ','',$user->name).'/banners/default.png', 0777);
 
-								if(!mkdir('users/'.$user->name.'/products',0777,true)){
+								if(!mkdir('users/'.str_replace(' ','',$user->name).'/products',0777,true)){
 									$message[] = '¡Lo sentimos!, se presentarón problemas al crear el usuario';
 									$message[] = '¡Fallo la creación de tu directorio.';
 									return Redirect::back()->with('error', $message);									
 								}								
-								chmod('users/'.$user->name, 0777);
+								chmod('users/'.str_replace(' ','',$user->name), 0777);
 
 								//ubicamos la imagen del producto por defecto
-								if (!copy('images/product/default.png', 'users/'.$user->name.'/products/default.png')) {
+								if (!copy('images/product/default.png', 'users/'.str_replace(' ','',$user->name).'/products/default.png')) {
 									$message[] = '¡Lo sentimos!, se presentarón problemas al crear el usuario';
 									$message[] = '¡Fallo la copia de archivos.';
 									return Redirect::back()->with('error', $message);	
 								}
-								chmod('users/'.$user->name.'/products/default.png', 0777);
+								chmod('users/'.str_replace(' ','',$user->name).'/products/default.png', 0777);
 							}								
 							
 							//envio de mensage al administrador							

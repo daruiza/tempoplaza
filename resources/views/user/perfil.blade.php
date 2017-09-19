@@ -147,7 +147,7 @@ color: #333;">Terminos y Condiciones </a></div>
 			<div class="col-md-9 col-md-offset-0">		
 				<div class="panel panel-default">				
 					<div class="panel-heading">Datos de Mi Perfil de Usuario {{--{{Session::get('comjunplus.usuario.name')}}--}}			 
-						{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array( 'style'=>'width: 10%; border:2px solid #ddd;border-radius: 50%; float: right;' ))}}					
+						{{ Html::image('users/'.str_replace(' ','',Session::get('comjunplus.usuario.name')).'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array( 'style'=>'width: 10%; border:2px solid #ddd;border-radius: 50%; float: right;' ))}}					
 					</div>					
 					<div class="panel-body">
 						<div class="row">
@@ -326,7 +326,7 @@ color: #333;">Terminos y Condiciones </a></div>
 					<div class=" col-md-4 ">	
 						<div class="form-group ">
 							{!! Form::label('img_user', 'Imagen de Usuario', array('class' => 'col-md-12 control-label')) !!}
-							{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array( 'style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;' ))}}
+							{{ Html::image('users/'.str_replace(' ','',Session::get('comjunplus.usuario.name')).'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array( 'style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;' ))}}
 							
 						</div>
 						<div>
