@@ -20,7 +20,8 @@ seg_ajaxobject.prototype.peticionajax = function(url, datos, object, async) {
             eval(object + "(result);");			
         },
         "error": function(result) {
-            alert("El recurso que intentas accesar esta fuera de rango, probablemente has perdido tu sesión. Desea informar ");
+
+            //alert("El recurso que intentas accesar esta fuera de rango, probablemente has perdido tu sesión. Desea informar ");
             //se debe informar sobre el error inesperado con otra peticion
         }	 
 	});
