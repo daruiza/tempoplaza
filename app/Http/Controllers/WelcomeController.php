@@ -166,7 +166,7 @@ class WelcomeController extends Controller {
 
 					//productos		
 					$moduledata['productos'] = \DB::table('clu_products')
-					->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name')
+					->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.description as descriptionstore','clu_store.color_two as color_two','seg_user.name as user_name')
 					->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
 					->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
 					->where('clu_products.active',1)
@@ -202,7 +202,7 @@ class WelcomeController extends Controller {
 					if(count($subcat)){						
 						//productos		
 						$moduledata['productos'] = \DB::table('clu_products')
-						->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name')
+						->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.description as descriptionstore','clu_store.color_two as color_two','seg_user.name as user_name')
 						->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
 						->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
 						->where('clu_products.active',1)						
@@ -259,7 +259,7 @@ class WelcomeController extends Controller {
 				->get();
 
 				$moduledata['productos'] = \DB::table('clu_products')
-				->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name')
+				->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.description as descriptionstore','clu_store.color_two as color_two','seg_user.name as user_name')
 				->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
 				->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')			
 				->where('clu_products.active',1)
@@ -467,7 +467,7 @@ class WelcomeController extends Controller {
 
 			// algunos productos		
 			$moduledata['productos'] = \DB::table('clu_products')
-			->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name')
+			->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.description as descriptionstore','clu_store.color_two as color_two','seg_user.name as user_name')
 			->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
 			->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
 			->where('clu_products.active',1)
@@ -489,7 +489,7 @@ class WelcomeController extends Controller {
 		//consultamos un item alazar
 		$data_array = array();
 		$data_array['producto'] = \DB::table('clu_products')
-		->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name','seg_user_profile.avatar as user_avatar')
+		->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.description as descriptionstore','clu_store.color_two as color_two','seg_user.name as user_name','seg_user_profile.avatar as user_avatar')
 		->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
 		->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
 		->leftjoin('seg_user_profile', 'clu_store.user_id', '=', 'seg_user_profile.user_id')
@@ -715,7 +715,7 @@ class WelcomeController extends Controller {
 			//hay criterios de busqueda			
 			//esto es solo por si encontramos un solo elemento en ela base de datos
 			$productos = \DB::table('clu_products')
-			->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.color_two as color_two','seg_user.name as user_name')
+			->select('clu_products.*','clu_store.id as store_id','clu_store.name as store_name','clu_store.city as store_city','clu_store.adress as store_adress','clu_store.image as store_image','clu_store.color_one as color_one','clu_store.description as descriptionstore','clu_store.color_two as color_two','seg_user.name as user_name')
 			->leftjoin('clu_store', 'clu_products.store_id', '=', 'clu_store.id')
 			->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')			
 			->where('clu_products.active',1)

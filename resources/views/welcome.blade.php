@@ -324,7 +324,7 @@
 							    	<div class="row">
 							    		<div class="col-md-12">
 							    			<a href="{{url('/'.$producto->store_name)}}">
-							    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}    				
+							    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,$producto->descriptionstore,array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}    				
 							    			</a>				    			
 							    		</div>							    		
 							    		<div class="col-md-12"  style="background-color:#fff; color: #777777; border-color:#777777;padding: 0px;">
@@ -347,7 +347,7 @@
 						    				{{--
 						    				<div class="col-md-3 hidden-xs">
 						    					<a href="{{url('/'.$producto->name)}}" style="color:{{$producto->color_two}};font-size: 18px;">
-							    					{{ Html::image('users/'.$producto->user_name.'/stores/'.$producto->store_image,'Imagen no disponible',array( 'style'=>'width: 130%;border-radius: 0%;' ))}}
+							    					{{ Html::image('users/'.$producto->user_name.'/stores/'.$producto->store_image,$producto->descriptionstore,array( 'style'=>'width: 130%;border-radius: 0%;' ))}}
 							    				</a>
 							    			</div>
 							    			--}}		    			
@@ -374,7 +374,7 @@
 							    	<div class="row">
 							    		<div class="col-md-12" style="text-align: center;">
 							    			<a href="{{url('/'.$ultima_tienda[0]->name)}}">
-							    				{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/stores/'.$ultima_tienda[0]->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}		
+							    				{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/stores/'.$ultima_tienda[0]->image,$ultima_tienda[0]->description,array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}		
 							    			</a>					    				    									    			
 							    		</div>
 							    		
@@ -403,7 +403,7 @@
 					</div>
 
 					<div class=""  style="text-align: center;margin-top: 0%;">
-						{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/profile/'.$ultima_tienda[0]->avatar,'Imagen no disponible',array('class'=>'img_nueva', 'style'=>'width: auto; height: 120px;;border-radius: 50%;'))}}
+						{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/profile/'.$ultima_tienda[0]->avatar,$ultima_tienda[0]->description,array('class'=>'img_nueva', 'style'=>'width: auto; height: 120px;;border-radius: 50%;'))}}
 						<div>Yo: {{$ultima_tienda[0]->tnames}} </div>
 						<div> Tambièn hago parte de {!! Session::get('app') !!}</div>
 					</div>				
@@ -428,7 +428,7 @@
 						    	<div class="row">
 						    		<div class="col-md-12" style="text-align: center;">
 						    			<a href="{{url('/'.$tienda->name)}}">
-						    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}					
+						    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,$tienda->description,array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}					
 						    			</a>					    				    									    			
 						    		</div>
 						    		<!--
@@ -487,7 +487,7 @@
 						    	<div class="row">
 						    		<div class="col-md-12 popoverStore" data-content="<div><b>Precio:</b> ${{$producto->price}}</div>@if($producto->colors)<div> Colores: {{$producto->colors}}</div>@endif @if($producto->sizes)<div> Tamaños: {{$producto->sizes}}</div>@endif @if($producto->flavors)<div> Sabores: {{$producto->flavors}}</div>@endif @if($producto->materials)<div> Materiales: {{$producto->materials}}</div>@endif" rel="popover" data-placement="bottom" data-original-title="{{$producto->name}}" data-trigger="hover" data-html="true">
 						    			<a href="{{url('/'.$producto->store_name)}}">
-						    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 225px;border-radius: 0%;' ))}}    				
+						    				{{ Html::image('users/'.$producto->user_name.'/products/'.$producto->image1,$producto->descriptionstore,array( 'style'=>'width: 100%;height: 225px;border-radius: 0%;' ))}}    				
 						    			</a>				    			
 						    		</div>
 						    		{{--
@@ -510,7 +510,7 @@
 					    				{{--
 					    				<div class="col-md-3 hidden-xs">
 					    					<a href="{{url('/'.$producto->name)}}" style="color:{{$producto->color_two}};font-size: 18px;">
-						    					{{ Html::image('users/'.$producto->user_name.'/stores/'.$producto->store_image,'Imagen no disponible',array( 'style'=>'width: 130%;border-radius: 0%;' ))}}
+						    					{{ Html::image('users/'.$producto->user_name.'/stores/'.$producto->store_image,$producto->descriptionstore,array( 'style'=>'width: 130%;border-radius: 0%;' ))}}
 						    				</a>
 						    			</div>
 						    			--}}		    			
@@ -540,7 +540,7 @@
 				<div class="col-md-8 col-md-offset-0 macalu_background">
 				</div>
 				<div class="col-md-2 col-md-offset-0"  style="text-align: center;margin-top: 0%;float: right;">
-					{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/profile/'.$ultima_tienda[0]->avatar,'Imagen no disponible',array('class'=>'img_nueva', 'style'=>'width: auto; height: 120px;;border-radius: 50%;'))}}
+					{{ Html::image('users/'.$ultima_tienda[0]->user_name.'/profile/'.$ultima_tienda[0]->avatar,$ultima_tienda[0]->description,array('class'=>'img_nueva', 'style'=>'width: auto; height: 120px;;border-radius: 50%;'))}}
 					<div>Yo: {{$ultima_tienda[0]->tnames}} </div>
 					<div> Tambièn hago parte de {!! Session::get('app') !!}</div>
 				</div>				
@@ -562,7 +562,7 @@
 					    	<div class="row" style="margin: 4px;">
 					    		<div class="col-md-12 popoverStore" data-content="<div>{{$tienda->description}}</div><div><b>Tendero:</b> {{$tienda->tnames}} {{$tienda->tsurnames}}</div>" rel="popover" data-placement="bottom" data-original-title="{{$tienda->name}}" data-trigger="hover" data-html="true">
 					    			<a href="{{url('/'.$tienda->name)}}">
-					    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	    				
+					    				{{ Html::image('users/'.$tienda->user_name.'/stores/'.$tienda->image,$tienda->description,array( 'style'=>'width: 100%;height: 150px;border-radius: 0%;' ))}}	    				
 					    			</a>
 
 					    		</div>
