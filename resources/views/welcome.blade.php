@@ -1,4 +1,5 @@
 @extends('app')
+
 @section('content')
 	<style>
 		.panel-body {		    
@@ -668,7 +669,7 @@
 				<div class="modal-body">
 					<div class="row ">
 						<div class="col-md-12 col-md-offset-0 row_init">
-							{!! Form::open(array('id'=>'cpsw','url' => '/cambiarcontraseña','method'=>'get','onsubmit'=>'javascript:return seg_user.validatePassword()')) !!}
+							{!! Form::open(array('id'=>'cpsw','url' => '/cambiarcontrasena','method'=>'get','onsubmit'=>'javascript:return seg_user.validatePassword()')) !!}
 				        		<div class="form-group">
 									{!! Form::hidden('usuario', Session::get('user.name')) !!}
 									{!! Form::label('contraseña_uno', 'Contraseña', array('class' => 'col-md-12 control-label')) !!}
@@ -758,7 +759,7 @@
 				<div class="modal-body">
 					<div class="row ">
 						<div class="col-md-12 col-md-offset-0 row_init">
-							{!! Form::open(array('id'=>'rpsw','url' => '/recuperarcontraseña','method'=>'get')) !!}
+							{!! Form::open(array('id'=>'rpsw','url' => '/recuperarcontrasena','method'=>'get')) !!}
 				        		<div class="form-group">
 									{!! Form::label('email', 'Correo Electronico', array('class' => 'col-md-12 control-label')) !!}
 									<div class="col-md-12">
@@ -817,7 +818,10 @@
 					        {!! Form::close() !!}					        
 						</div>									
 					</div>
-					<a href="{{ url('/welcome/terminosycondiciones')}}"  target="_blank" style="font-size: 16px;margin:auto;">Terminos y Condiciones</a>		
+					<div class="row" style="text-align: center;">
+						{{ Form::checkbox('tyc') }}
+						<a href="{{ url('/welcome/terminosycondiciones')}}"  target="_blank" style="font-size: 16px;margin:auto;">Terminos y Condiciones</a>		
+					</div>
 		        </div>
 		        <div class="modal-footer">		          
 		          <button type="submit" form = "registry" class="btn btn-default " >Enviar</button>

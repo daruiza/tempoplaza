@@ -879,6 +879,10 @@
 					        {!! Form::close() !!}
 						</div>						
 					</div>
+					<div class="row" style="text-align: center;">
+						{{ Form::checkbox('tyc') }}
+						<a href="{{ url('/welcome/terminosycondiciones')}}"  target="_blank" style="font-size: 16px;margin:auto;">Terminos y Condiciones</a>		
+					</div>
 		        </div>
 		        <div class="modal-footer">
 		          <button type="submit" form = "registry" class="btn btn-default " >Enviar</button>

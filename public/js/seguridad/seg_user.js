@@ -47,6 +47,10 @@ seg_user.prototype.validateRegistry = function() {
 			$('#registry_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Registro Fallido!</strong></br> La Contraseña no coincide.</div>');
 			return false;
 		}
+        if($("input[name='tyc']:checked").length == 0){
+            $('#registry_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Registro Fallido!</strong></br> Debes aceptar los terminos y condiciones.</div>');
+            return false;   
+        }
 	}
     //loading
     var opts = {

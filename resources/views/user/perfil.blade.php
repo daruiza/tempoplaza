@@ -367,7 +367,7 @@ color: #333;">Terminos y Condiciones </a></div>
 				<div class="modal-body">
 					<div class="row ">
 						<div class="col-md-12 col-md-offset-0 row_init">
-							{!! Form::open(array('id'=>'cpsw','url' => '/cambiarcontraseña','method'=>'get','onsubmit'=>'javascript:return seg_user.validatePassword()')) !!}
+							{!! Form::open(array('id'=>'cpsw','url' => '/cambiarcontrasena','method'=>'get','onsubmit'=>'javascript:return seg_user.validatePassword()')) !!}
 				        		<div class="form-group">
 									{!! Form::hidden('usuario', Session::get('comjunplus.usuario.name')) !!}
 									{!! Form::label('contraseña_uno', 'Contraseña', array('class' => 'col-md-12 control-label')) !!}

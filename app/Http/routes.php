@@ -24,15 +24,15 @@ Route::get('registro',[
 	'uses' => 'Auth\RegisterController@getRegistry',
 	'as' => 'registry'
 ]);
-Route::get('recuperarcontraseña',[
+Route::get('recuperarcontrasena',[
 	'uses' => 'Auth\LoginController@getRecoverPassword',
 	'as' => 'recoverpasword'
 ]);
-Route::get('recuperarcontraseñaemail/{user}/{psw}',[
+Route::get('recuperarcontrasenaemail/{user}/{psw}',[
 	'uses' => 'Auth\LoginController@getRecoverPasswordEmail',
 	'as' => 'recoverpaswordemail'
 ]);
-Route::get('cambiarcontraseña/',[
+Route::get('cambiarcontrasena/',[
 	'uses' => 'Auth\LoginController@getChangePassword',
 	'as' => 'changepasword'
 ]);
