@@ -355,7 +355,7 @@
 												{!! Form::text('facebook_web',old('facebook_web'), array('class' => 'form-control','placeholder'=>'URL de la FanPage de Facebook')) !!}
 											</div>
 
-											<label for="movil" class="col-md-12 control-label"><span class="fa fa-whatsapp"></span>  Movil WhatsUP</label>											
+											<label for="movil" class="col-md-12 control-label"><span class="fa fa-whatsapp"></span>  Movil WhatsAPP</label>											
 											<div class="col-md-12">
 												{!! Form::number('movil',old('movil'), array('id' => 'movil' , 'class' => 'form-control solo_numeros','placeholder'=>'Ìngresa un nùmero de Celular')) !!}
 											</div>
