@@ -12,7 +12,7 @@
 		<meta name="keywords" content="plaza virtual de mercado, Colombia, economía solidaria, crear una tienda virtual,vender online, comprar online, plaza Macalú para la economía el bien común" />
 
 		<link rel="shortcut icon" href="{{ url('images/icons/icon.png') }}">		
-		<link  rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css" />
+		<link  rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css" />		
 
 		<!--
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -25,7 +25,7 @@
 			
 		<link  rel="stylesheet" href="{{ url('css/'.$style.'/app.css') }}" type="text/css" />		
 		<link  rel="stylesheet" href="{{ url('css/jquery-ui.css') }}" type="text/css" />
-		<link  rel="stylesheet" href="{{ url('css/bootstrap-submenu.min.css') }}" type="text/css" />
+		<link  rel="stylesheet" href="{{ url('css/bootstrap-submenu.min.css') }}" type="text/css" />		
 		
 		<!--Google analitycs-->
 		<script>
@@ -54,11 +54,11 @@
 				</div>
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				@if (Auth::guest())
-					<!-- Usuario sin Loguear -->
+				<!-- Usuario sin Loguear -->
+				@if (Auth::guest())					
 					<ul class="nav navbar-nav">
-					<li class="dropdown">
 					<!--
+					<li class="dropdown">					
 						<a href="#" data-submenu="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" tabindex="0">Como Iniciar<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">							
 							<li><a href="{{ url('/auth/logout') }}">Ser Un Tendero</a></li>							
@@ -67,6 +67,19 @@
 						</ul>
 					</li>				
 					-->
+					<!-- Social para web -->
+					<li class="visible-lg">
+						<a href="https://facebook.com/macaluplaza" data-toggle="modal" target="_blank" style="padding: 10px 0px 5px 7px;">
+							{{ Html::image('images/icons/facebook_icon.png','www.facebook.com/macaluplaza',array( 'style'=>'width: auto; height: 39px;border-radius: 0%;' ))}}
+						</a>
+					</li>	
+					<li class="visible-lg">
+						<a href="https://www.youtube.com/channel/UC6VfuiG58SCtsDfbh8oifJA" data-toggle="modal" target="_blank" style="padding: 13px 0px 5px 7px;">
+							{{ Html::image('images/icons/youtube_icon.png','www.facebook.com/macaluplaza',array( 'style'=>'width: auto; height: 33px;border-radius: 0%;' ))}}
+						</a>
+					</li>					
+					
+
 					</ul>
 					<div class="visible-lg div-finder-conteiner">
 						<div class="div-finder">
