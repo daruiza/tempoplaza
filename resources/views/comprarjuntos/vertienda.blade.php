@@ -17,7 +17,7 @@
 	}
 	.tienda_banner{
 		background-image: url("{{url('users/'.$tienda[0]->user_name.'/banners/'.$tienda[0]->banner)}}");
-		/*background-size: 100% 175px;*/
+		background-size: auto 100%;
 		background-repeat: no-repeat;
     	background-position: center;
 	}
@@ -937,7 +937,7 @@
 
 	<script type="text/javascript">
 		//ocultamos el buscador general
-		$('.div-finder').hide();
+		//$('.div-finder').hide();
 		//agregamos el carrito
 		$('#cart_modal_b').on('click', function (e) { seg_user.openModalCart();});
 		
@@ -952,13 +952,14 @@
 		form0.setAttribute("action", ""+"{{url('/')}}");
 		form0.setAttribute("accept-charset", "UTF-8");
 		form0.setAttribute("onsubmit", "javascript:return seg_user.validateFinder()");
+		form0.setAttribute("style", "width: 100%;position: absolute;text-align: center;");
 		var div_group0 = document.createElement("div");
 		div_group0.setAttribute("class", "input-group");
-		div_group0.setAttribute("style", "width: 35%;position: absolute;margin-left: 15%;");
+		div_group0.setAttribute("style", "width: 40%;");
 		var input0 = document.createElement("input");
 		input0.setAttribute("class", "form-control");
 		input0.setAttribute("placeholder", "Busca productos de la Tienda "+"{!!ucwords($tienda[0]->name)!!}");
-		input0.setAttribute("style", "text-align: center;");
+		input0.setAttribute("style", "text-align: center;width: 115%;");
 		input0.setAttribute("maxlength", 48);
 		input0.setAttribute("name", "finder_store");
 		inputhidden0 = document.createElement("input");
@@ -985,11 +986,12 @@
 		form1.setAttribute("method", "GET");
 		form1.setAttribute("action", ""+"{{url('/')}}");
 		form1.setAttribute("accept-charset", "UTF-8");
-		form1.setAttribute("style", "width: 100%");
+		//form1.setAttribute("style", "width: 100%");
 		form1.setAttribute("onsubmit", "javascript:return seg_user.validateFinder()");
+		form1.setAttribute("style", "width: 100%;position: absolute;text-align: center;");
 		var div_group1 = document.createElement("div");
 		div_group1.setAttribute("class", "input-group");
-		div_group1.setAttribute("style", "width: 100%;");
+		//div_group1.setAttribute("style", "width: 100%;");
 		var input1 = document.createElement("input");
 		input1.setAttribute("class", "form-control");
 		input1.setAttribute("placeholder", "Buscador de "+"{!!ucwords($tienda[0]->name)!!}");
@@ -1022,9 +1024,10 @@
 		form2.setAttribute("accept-charset", "UTF-8");
 		form2.setAttribute("style", "width: 100%");
 		form2.setAttribute("onsubmit", "javascript:return seg_user.validateFinder()");
+		form2.setAttribute("style", "width: 100%;position: absolute;text-align: center;");
 		var div_group2 = document.createElement("div");
 		div_group2.setAttribute("class", "input-group");
-		div_group2.setAttribute("style", "width: 100%;");
+		//div_group2.setAttribute("style", "width: 100%;");
 		var input2 = document.createElement("input");
 		input2.setAttribute("class", "form-control");
 		input2.setAttribute("placeholder", "Buscador de "+"{!!ucwords($tienda[0]->name)!!}");
@@ -1530,6 +1533,9 @@
 		    	return false;
 		    }
 	    });
+
+	    //cambio de url de tienda
+	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");
 
 	</script>
 

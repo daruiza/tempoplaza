@@ -332,7 +332,7 @@ color: #333;">Terminos y Condiciones </a></div>
 					<div class=" col-md-4 ">	
 						<div class="form-group ">
 							{!! Form::label('img_user', 'Imagen de Usuario', array('class' => 'col-md-12 control-label')) !!}
-							{{ Html::image('users/'.str_replace(' ','',Session::get('comjunplus.usuario.name')).'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array( 'style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;' ))}}
+							{{ Html::image('users/'.str_replace(' ','',Session::get('comjunplus.usuario.name')).'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array('id'=>'img_user_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;' ))}}
 							
 						</div>
 						<div>
@@ -476,12 +476,12 @@ color: #333;">Terminos y Condiciones </a></div>
             }
 		});
 
-
 		$('#fecha_nacimiento').datepicker({
 			format: "yyyy-mm-dd",
 			autoclose: true,			
 			language: "es"
 		});
+
 		$( "#departamento" ).change(function() {
 			var datos = new Array();
 			datos['id'] =$( "#departamento option:selected" ).val();			   
@@ -503,16 +503,31 @@ color: #333;">Terminos y Condiciones </a></div>
 		 	$(this).popover('show');
 		 });
 
-		 $(document).on('click', function(e) {
+		$(document).on('click', function(e) {
 	        $('[data-toggle="popover"]').each(function () {
 		        //the 'is' for buttons that trigger popups
 		        //the 'has' for icons within a button that triggers a popup
 		        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
 		            $(this).popover('hide');
 		        }
-		    });
-		   
+		    });		   
 	    });
+
+		$('#img_user').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_user_img').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });
+
 	</script>
 @endsection
 

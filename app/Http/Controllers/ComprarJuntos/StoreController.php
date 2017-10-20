@@ -414,7 +414,7 @@ class StoreController extends Controller {
 		Session::flash('_old_input.status', $tienda[0]->status);
 		Session::flash('_old_input.store_id', $id_store);
 		Session::flash('_old_input.edit', true);
-				
+		//dd($moduledata);
 		if(!empty($message)){
 			return Redirect::to('mistiendas/inicio')->with('modulo',$moduledata)->with('message', $message);
 		}else{

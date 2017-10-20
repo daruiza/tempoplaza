@@ -1052,7 +1052,7 @@
 
 @section('script')
 	<script type="text/javascript" src="{{ url('js/spin.min.js') }}"></script>
-	
+
 	<!-- Cambio de Contraseña -->
 	@if(Session::has('user'))		
 		<script> $("#cpsw_modal").modal(); </script>
@@ -1132,6 +1132,12 @@
 	            return (seg_user.isMobile.Android() || seg_user.isMobile.BlackBerry() || seg_user.isMobile.iOS() || seg_user.isMobile.Opera() || seg_user.isMobile.Windows());
 	        }
 	    };
+
+	    //mostarar buscador
+	    $('.div-finder').show();
+
+	    //para mostrar las redes sociales
+		$('.iconup').show();
 
 	    $('.input_usuario').keypress(function(e){
 	    	key = e.keyCode || e.which;

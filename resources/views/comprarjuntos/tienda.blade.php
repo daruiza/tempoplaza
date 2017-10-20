@@ -73,8 +73,6 @@
 			font-size: 14px;
 			border-color: #449aa2;
 		}
-		
-		
 	</style>
 	
 	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
@@ -305,12 +303,34 @@
 
 											</div>
 										</div>
+
 										<div class="col-md-12">
 											<div class="form-group ">
 												{!! Form::label('categorias', 'Categorias de Venta', array('class' => 'col-md-12 control-label')) !!}
-												<div class="input-group input-grp categorias col-md-12">		
-													{!! Form::select('categorias_select',Session::get('modulo.categorias'),old('categorias_select'), array('id'=>'categorias_select','class' => 'form-control chosen-select','multiple' ,'data-placeholder'=>'Selecciona las categorias','tabindex'=>'4', 'style'=>'width:350px;')) !!}
-													{!! Form::hidden('categorias',old('categorias'),array('id'=>'categorias')) !!}
+												<div class="input-group input-grp categorias col-md-12">
+
+													@if(Session::has('_old_input.categorias_select'))
+														
+														<select multiple="multiple" name="categorias_select" id="categorias_select" class="form-control chosen-select">
+														@foreach(Session::get('modulo.categorias') as $aKey => $aCat)
+															@php ($s=0)	
+															@foreach(old('categorias_select') as $aItemKey => $aItem)
+
+																@if($aKey == $aItem)
+																	@php ($s=1)	
+																@endif
+															@endforeach   
+															 <option value="{{$aKey}}" @if($s==1) selected="selected" @endif>{{$aCat}}</option>
+														@endforeach
+														</select>
+													@else
+
+														{!! Form::select('categorias_select',Session::get('modulo.categorias'),null, array('id'=>'categorias_select','class' => 'form-control chosen-select','multiple' => 'multiple' ,'data-placeholder'=>'Selecciona las categorias','tabindex'=>'4', 'style'=>'width:350px;')) !!}
+
+													@endif
+													
+													{!! Form::hidden('categorias',old('categorias'),array('id'=>'categorias')) !!}			
+
 												</div>											
 											</div>
 										</div>
@@ -320,9 +340,9 @@
 											<div class="col-md-12" style="text-align: center; margin-bottom: 9px;">
 												{!! Form::label('img_store', 'Logo o Imagen de Tienda', array('class' => 'col-md-12 control-label')) !!}
 												@if( old('img_store'))
-													{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/stores/'.old('img_store'),'Imagen no disponible',array( 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
+													{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/stores/'.old('img_store'),'Imagen no disponible',array('id'=>'img_store_img', 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
 												@else
-													{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/stores/default.png','Imagen no disponible',array( 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
+													{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/stores/default.png','Imagen no disponible',array('id'=>'img_store_img', 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
 												@endif												
 											</div>
 											<div  class="col-md-12 filestyle">
@@ -386,9 +406,9 @@
 
 											<div class="col-md-12" style="text-align: center; margin-bottom: 9px; margin-top: 9px;">
 												@if( old('img_banner'))
-													{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/banners/'.old('img_banner'),'Imagen no disponible',array( 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
+													{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/banners/'.old('img_banner'),'Imagen no disponible',array('id'=>'img_banner_img', 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
 												@else
-													{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/banners/default.png','Imagen no disponible',array( 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
+													{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/banners/default.png','Imagen no disponible',array('id'=>'img_banner_img','style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
 												@endif
 											</div>
 											<div class="col-md-12 filestyle" style="text-align: center;">
@@ -1024,6 +1044,36 @@
 			 $('#table_orders tbody').off('click');
 		});
 
+		$('#image_store').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_store_img').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });		
+
+	    $('#image_banner').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_banner_img').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });		
+
 		//limpiamos el spinner
 		//clu_tienda.spinner.el.remove();
 
@@ -1251,7 +1301,8 @@
 		            seg_ajaxobject.peticionajax($('#form_consult_order').attr('action'),datos,"clu_tienda.consultaRespuestaOrder");
 		            clu_tienda.tr.addClass('shown');
 		        }
-			});			
+			});
+		
 		</script>			
 	@endif
 	

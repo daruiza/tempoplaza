@@ -68,12 +68,12 @@
 					</li>				
 					-->
 					<!-- Social para web -->
-					<li class="visible-lg">
+					<li class="visible-lg iconup" style="display: none!important;">
 						<a href="https://facebook.com/macaluplaza" data-toggle="modal" target="_blank" style="padding: 10px 0px 5px 7px;">
 							{{ Html::image('images/icons/facebook_icon.png','www.facebook.com/macaluplaza',array( 'style'=>'width: auto; height: 39px;border-radius: 0%;' ))}}
 						</a>
 					</li>	
-					<li class="visible-lg">
+					<li class="visible-lg iconup" style="display: none!important;">
 						<a href="https://www.youtube.com/channel/UC6VfuiG58SCtsDfbh8oifJA" data-toggle="modal" target="_blank" style="padding: 13px 0px 5px 7px;">
 							{{ Html::image('images/icons/youtube_icon.png','www.facebook.com/macaluplaza',array( 'style'=>'width: auto; height: 33px;border-radius: 0%;' ))}}
 						</a>
@@ -82,7 +82,7 @@
 
 					</ul>
 					<div class="visible-lg div-finder-conteiner">
-						<div class="div-finder">
+						<div class="div-finder" style="display: none">
 							{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left visible-lg','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
 							   <div class="input-group " style="width: 35%;position: absolute;margin-left: 20%;">						   		
 									{!! Form::text('finder','', array('class' => 'form-control','placeholder'=>'Busca Productos o Tiendas','style'=>'text-align: center;border: 1px solid #009999;}','maxlength' => 48)) !!}
@@ -95,7 +95,7 @@
 				    </div>
 
 				    <div class="visible-md div-finder-conteiner" style="margin-left: 30%;position: absolute;width: 35%;">
-					    <div class="div-finder">					    
+					    <div class="div-finder" style="display: none">					    
 						   <div class="input-group" style="width: 100%;">					   		
 						   		{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left visible-md','onsubmit'=>'javascript:return seg_user.validateFinder()','style'=>'width: 100%;')) !!}
 									{!! Form::text('finder','', array('class' => 'form-control','placeholder'=>'Busca Productos o Tiendas','style'=>'text-align: center;width: 70%;border: 1px solid #009999;','maxlength' => 48)) !!}
@@ -108,7 +108,7 @@
 				    </div>
 
 				    <div class="visible-sm div-finder-conteiner" style="width: 35%;position: absolute;margin-left: 30%;">
-			    		<div class="div-finder">				    					    
+			    		<div class="div-finder" style="display: none">				    					    
 					   		<div class="input-group div-finder-conteiner" style="width: 100%;">
 					   			{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left visible-sm','onsubmit'=>'javascript:return seg_user.validateFinder()','style'=>'width: 100%;')) !!}	
 									{!! Form::text('finder','', array('class' => 'form-control','placeholder'=>'Busca Productos o Tiendas','style'=>'text-align: center;width: 60%;border: 1px solid #009999;','maxlength' => 48)) !!}
@@ -175,7 +175,7 @@
 					@endforeach				
 					</ul>
 					<div class="visible-lg div-finder-conteiner">
-						<div class="div-finder">
+						<div class="div-finder" style="display: none">
 							{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left visible-lg','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
 							   <div class="input-group " style="width: 35%;position: absolute;margin-left: 15%;">						   		
 									{!! Form::text('finder','', array('class' => 'form-control','placeholder'=>'Busca Productos o Tiendas','style'=>'text-align: center;border: 1px solid #009999;','maxlength' => 48)) !!}
@@ -188,7 +188,7 @@
 				    </div>
 
 				    <div class="visible-md div-finder-conteiner" style="margin-left: 30%;position: absolute;width: 35%;">
-					    <div class="div-finder">					    
+					    <div class="div-finder" style="display: none">					    
 						   <div class="input-group" style="width: 100%;">					   		
 						   		{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left visible-md','onsubmit'=>'javascript:return seg_user.validateFinder()','style'=>'width: 100%;')) !!}
 									{!! Form::text('finder','', array('class' => 'form-control','placeholder'=>'Busca Productos o Tiendas','style'=>'text-align: center;width: 70%;border: 1px solid #009999;','maxlength' => 48)) !!}
@@ -201,7 +201,7 @@
 				    </div>
 
 				    <div class="visible-sm div-finder-conteiner" style="width: 35%;position: absolute;margin-left: 30%;">
-			    		<div class="div-finder">				    					    
+			    		<div class="div-finder" style="display: none">				    					    
 					   		<div class="input-group div-finder-conteiner" style="width: 100%;">
 					   			{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left visible-sm','onsubmit'=>'javascript:return seg_user.validateFinder()','style'=>'width: 100%;')) !!}	
 									{!! Form::text('finder','', array('class' => 'form-control','placeholder'=>'Busca Productos o Tiendas','style'=>'text-align: center;width: 60%;border: 1px solid #009999;','maxlength' => 48)) !!}
@@ -268,7 +268,7 @@
 		<script type="text/javascript" src="{{ url('js/seguridad/seg_ajaxobject.js') }}"></script>
 		
 		<script type="text/javascript">	$('[data-submenu]').submenupicker();</script>
-		<script type="text/javascript">	$('#cart_modal_a').on('click', function (e) { seg_user.openModalCart();});</script>
+		<script type="text/javascript">	$('#cart_modal_a').on('click', function (e) { seg_user.openModalCart();});</script>		
 				
 		@yield('modal')
 		@yield('script')

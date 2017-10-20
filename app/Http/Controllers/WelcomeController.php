@@ -231,6 +231,7 @@ class WelcomeController extends Controller {
 					if(in_array($value, $conectores))unset($criterio[$key]);
 				}
 				//creamos nuevos criterios
+				/*
 				foreach ($criterio as $key => $value) {
 					if(strlen($value) >= 5 ){
 						$criterio[] = substr($value, 0, -2); 
@@ -238,7 +239,15 @@ class WelcomeController extends Controller {
 						//quitamos solo la ultima
 						$criterio[] = substr($value, 0, -1);
 					}					
-				}	
+				}*/
+				foreach ($criterio as $key => $value) {
+					if(substr($value,-2) == 'es'){
+						$criterio[$key]= substr($value,0,-2);
+					}
+					if(substr($value,-1) == 's'){
+						$criterio[$key]= substr($value,0,-1);
+					}
+				}				
 					
 				$moduledata['tiendas'] = \DB::table('clu_store')
 				->distinct()->select('clu_store.*','seg_user.name as user_name','seg_user_profile.avatar as avatar','seg_user_profile.names as tnames','seg_user_profile.surnames as tsurnames')
@@ -293,6 +302,7 @@ class WelcomeController extends Controller {
 				}
 
 				//creamos nuevos criterios
+				/*
 				foreach ($criterio as $key => $value) {
 					if(strlen($value) >= 5 ){
 						$criterio[] = substr($value, 0, -2); 
@@ -300,7 +310,16 @@ class WelcomeController extends Controller {
 						//quitamos solo la ultima
 						$criterio[] = substr($value, 0, -1);
 					}					
-				}		
+				}*/
+				foreach ($criterio as $key => $value) {
+					if(substr($value,-2) == 'es'){
+						$criterio[$key]= substr($value,0,-2);
+					}
+					if(substr($value,-1) == 's'){
+						$criterio[$key]= substr($value,0,-1);
+					}
+				}
+
 
 				$moduledata['tienda'] = \DB::table('clu_store')
 				->select('clu_store.*','seg_user.name as user_name')
@@ -448,7 +467,8 @@ class WelcomeController extends Controller {
 					$moduledata['tienda'][0]->ordenes = count($ordenes);	
 				}		
 				//asignamos el id para listar las ordenes, en listarajaxorders
-				Session::put('store.id', $moduledata['tienda'][0]->id);			
+				Session::put('store.id', $moduledata['tienda'][0]->id);
+				Session::put('app', $moduledata['tienda'][0]->name);//para cambiar ombre de tienda		
 				return view('comprarjuntos/vertienda')->with($moduledata);
 			}
 
@@ -654,7 +674,7 @@ class WelcomeController extends Controller {
 			}		
 			//asignamos el id para listar las ordenes, en listarajaxorders
 			Session::put('store.id', $moduledata['tienda'][0]->id);
-			Session::put('app', $moduledata['tienda'][0]->name);		
+			Session::put('app', $moduledata['tienda'][0]->name);//para cambiar el nombre de la teinda	
 			return view('comprarjuntos/vertienda')->with($moduledata);
 		}
 
@@ -702,6 +722,7 @@ class WelcomeController extends Controller {
 		}
 
 		//creamos nuevos criterios
+		/*
 		foreach ($criterio as $key => $value) {
 			if(strlen($value) >= 5 ){
 				$criterio[] = substr($value, 0, -2); 
@@ -709,8 +730,17 @@ class WelcomeController extends Controller {
 				//quitamos solo la ultima
 				$criterio[] = substr($value, 0, -1);
 			}					
+		}*/
+		//quitamos los plurales
+		foreach ($criterio as $key => $value) {
+			if(substr($value,-2) == 'es'){
+				$criterio[$key]= substr($value,0,-2);
+			}
+			if(substr($value,-1) == 's'){
+				$criterio[$key]= substr($value,0,-1);
+			}
 		}		
-		
+				
 		if(count($criterio)){
 			//hay criterios de busqueda			
 			//esto es solo por si encontramos un solo elemento en ela base de datos
@@ -858,6 +888,7 @@ class WelcomeController extends Controller {
 				if(in_array($value, $conectores))unset($criterio[$key]);
 			}
 			//creamos nuevos criterios
+			/*
 			foreach ($criterio as $key => $value) {
 				if(strlen($value) >= 5 ){
 					$criterio[] = substr($value, 0, -2); 
@@ -865,6 +896,14 @@ class WelcomeController extends Controller {
 					//quitamos solo la ultima
 					$criterio[] = substr($value, 0, -1);
 				}					
+			}*/
+			foreach ($criterio as $key => $value) {
+				if(substr($value,-2) == 'es'){
+					$criterio[$key]= substr($value,0,-2);
+				}
+				if(substr($value,-1) == 's'){
+					$criterio[$key]= substr($value,0,-1);
+				}
 			}		
 		}
 		
