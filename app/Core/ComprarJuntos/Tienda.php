@@ -11,6 +11,6 @@ class Tienda extends Model
      */
 	protected $table = 'clu_store';
 	
-	protected $fillable = ['id','name','nit','department','city','adress','description','ubication','image','banner','color_one','color_two','status','order','metadata','web','fanpage','movil','stores','products','user_id'];
+	protected $fillable = ['id','name','nit','department','city','adress','description','ubication','image','banner','color_one','color_two','status','order','template','metadata','web','fanpage','movil','stores','products','user_id'];
 			
 }

@@ -257,6 +257,8 @@
 		</div>
 	</div>
 	
+	<!--Solo para template app_store-->
+	@if($tienda[0]->template == "app_store")
 	<div class="row tienda_banner col-md-10 col-md-offset-1 visible-lg" style="height: 200px;font-size: 40px; color: {{$tienda[0]->color_two}} !important; padding: 1%;margin-bottom: 1%; ">
 		@if($tienda[0]->banner == 'default.png')
 			{{$tienda[0]->name}}
@@ -365,7 +367,8 @@
 			<div>{{$tendero[0]->names}} {{$tendero[0]->surnames}} </div>
 			<!--<div><span class="glyphicon glyphicon-envelope" aria-hidden="true"> Contacto</span></div>-->
 		</div>		
-	</div>	
+	</div>
+	@endif
 
 	<!--Buscador de tiendas solo para moviles-->
 	<div class="col-md-10 col-md-offset-1 hidden-lg">

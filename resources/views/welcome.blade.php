@@ -648,8 +648,6 @@
 			<div> Facebook</div>	
 	</div>
 	-->
-
-
 	
 
 @endsection
@@ -1135,6 +1133,9 @@
 
 	    //mostarar buscador
 	    $('.div-finder').show();
+
+	    //para mostar opciones menu
+	    $('.opcion_menu_sup').show();
 
 	    //para mostrar las redes sociales
 		$('.iconup').show();

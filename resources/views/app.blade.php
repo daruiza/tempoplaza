@@ -121,8 +121,8 @@
 				    </div>
 
 					<ul class="nav navbar-nav navbar-right">				
-						<li><a href="#" data-toggle="modal" data-target="#registry_modal" >Registrate</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#login_modal" >Ingresa</a></li>
+						<li class ="opcion_menu_sup" style="display: none !important;"><a href="#" data-toggle="modal" data-target="#registry_modal" >Registrate</a></li>
+						<li class ="opcion_menu_sup" style="display: none !important;"><a href="#" data-toggle="modal" data-target="#login_modal" >Ingresa</a></li>
 						<li>
 							<a href="#" id="cart_modal_a">		
 								<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" style = "font-size: 20px;"></span>

@@ -235,7 +235,7 @@
 				<div class="tab-content">					
 					<div class="tab-pane fade in active" id="tab1">
 						<div class="row">
-							<div class="col-md-12 col-md-offset-0 row_init">								
+							<div class="col-md-12 col-md-offset-0 row_init">							
 								<div class="row col-md-12 ">
 									<div class="col-md-8">
 										<div class="col-md-6">
@@ -438,6 +438,13 @@
 											@endif											
 											</div>
 										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group ">
+											{!! Form::label('template', 'Plantilla', array('class' => 'col-md-12 control-label')) !!}
+											<div class="col-md-12">
+												{!! Form::select('template',array('app_store'=>'Macalú','web_store'=>'Página Web'),old('tempalte'), array('id'=>'template','class' => 'form-control chosen-select','data-placeholder'=>'Selecciona la plantilla')) !!}	
+											</div>
 									</div>
 								</div>
 							</div>

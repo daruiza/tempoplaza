@@ -190,8 +190,9 @@ class StoreController extends Controller {
 		$array_input['facebook_web'] = $request->input('facebook_web');
 		$array_input['movil'] = $request->input('movil');
 		$array_input['ubicacion'] = $request->input('ubicacion');
-		$array_input['prioridad'] = 0;
+		$array_input['prioridad'] = 0;		
 		if(is_numeric($request->input('prioridad')))$array_input['prioridad'] = $request->input('prioridad');
+		$array_input['template'] = $request->input('template');
 
 		foreach($request->input() as $key=>$value){
 			if($key != "_token" && 
@@ -206,7 +207,8 @@ class StoreController extends Controller {
 				$key != "facebook_web" &&
 				$key != "movil" &&
 				$key != "ubicacion" &&
-				$key != "prioridad")
+				$key != "prioridad" &&
+				$key != "template")
 			{				
 				$array_input[$key] = ucwords(mb_strtolower($value));
 			}
@@ -306,7 +308,8 @@ class StoreController extends Controller {
 			$store->color_one =  $request->input()['color_uno'];
 			$store->color_two =  $request->input()['color_dos'];			
 			$store->order = 1;
-			if(!empty($request->input()['prioridad']))$store->order =  $request->input()['prioridad'];			
+			if(!empty($request->input()['prioridad']))$store->order =  $request->input()['prioridad'];
+			$store->template =  $request->input()['template'];			
 			$store->metadata =  $request->input()['categorias'];			
 			$store->web =  $request->input()['sitio_web'];
 			$store->fanpage =  $request->input()['facebook_web'];
@@ -410,6 +413,7 @@ class StoreController extends Controller {
 		Session::flash('_old_input.movil', $tienda[0]->movil);
 		Session::flash('_old_input.ubicacion', $tienda[0]->ubication);
 		Session::flash('_old_input.prioridad', $tienda[0]->order);
+		Session::flash('_old_input.template', $tienda[0]->template);
 		Session::flash('_old_input.img_banner', $tienda[0]->banner);
 		Session::flash('_old_input.status', $tienda[0]->status);
 		Session::flash('_old_input.store_id', $id_store);

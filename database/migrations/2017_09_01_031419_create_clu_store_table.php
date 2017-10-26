@@ -29,6 +29,7 @@ class CreateCluStoreTable extends Migration
             $table->string('color_two')->nullable();
             $table->string('status')->nullable();
             $table->integer('order')->nullable();
+            $table->string('template')->nullable()->default('app_store');
             $table->string('metadata')->nullable();
             $table->string('web')->nullable();
             $table->string('fanpage')->nullable();
