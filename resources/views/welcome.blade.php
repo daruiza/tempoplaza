@@ -603,41 +603,50 @@
 	<div class="col-md-12" style="margin-top: 1%;margin-bottom: 1%; ">
 		<hr style="display: block;height: 1px;border: 0;border-top: 1px solid #ccc;margin: 1em 0;padding: 0;" size="1">
 	</div>
-	<div class="row col-md-10 col-md-offset-1 visible-lg pie_wellcome" style="border: 1px solid #888888;box-shadow: 4px 4px 8px #888888;border-radius: 5px;margin-bottom: 0%;padding: 2%;">
+	<div class="row col-md-8 col-md-offset-0 visible-lg" style="margin-bottom: 0%;">
 
-		<div class="col-md-4 col-md-offset-0" style="text-align: justify">
-			<div class="  title m-b-md center-block" style="font-size: 22px;">
-				<b>¿Que es {!! Session::get('app') !!}?</b>
+		<div class="row col-md-12 col-md-offset-0 visible-lg pie_wellcome" style="border: 1px solid #888888;box-shadow: 4px 4px 8px #888888;border-radius: 5px">
+
+			<div class="col-md-4 col-md-offset-0" style="text-align: justify">
+				<div class="  title m-b-md center-block" style="font-size: 22px;">
+					<b>¿Que es {!! Session::get('app') !!}?</b>
+				</div>
+					{{ Html::image('images/icons/etiqueta1.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}		
+					{!! Session::get('app') !!} es una analogía virtual a un centro comercial donde los tenderos ya sea que posean una tienda física o no, comparten un espacio similar a una plaza de mercados donde poder ofertar o comprar productos y servicios.			
 			</div>
-				{{ Html::image('images/icons/etiqueta1.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}		
-				{!! Session::get('app') !!} es una analogía virtual a un centro comercial donde los tenderos ya sea que posean una tienda física o no, comparten un espacio similar a una plaza de mercados donde poder ofertar o comprar productos y servicios.			
+
+			<div class="col-md-4 col-md-offset-0" style="text-align: justify">
+				<div class="  title m-b-md center-block" style="font-size: 22px;">
+					<b>¿Porque Elegir {!! Session::get('app') !!}?</b>
+				</div>
+					{{ Html::image('images/icons/etiqueta2.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}				
+					{!! Session::get('app') !!} implementa la Filosofía del Bien Común, de manera que ninguna de las tiendas padezca de aislamiento; además, el mercadeo realizado a una tienda beneficia a todas las demás tiendas de la comunidad. <b>¡Genial!</b>
+			</div>
+
+			<div class="col-md-4 col-md-offset-0" style="text-align: justify">
+				<div class="  title m-b-md center-block" style="font-size: 22px;">
+					<b>¿Como Funciona {!! Session::get('app') !!}?</b>
+				</div>
+				{{ Html::image('images/icons/etiqueta4.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}
+				{!! Session::get('app') !!} reune en un mismo lugar varidad de Tiendas con el fin de ofrecer una amplia gama de bienes y servicios. <b>¡De seguro encontaras lo que buscas!</b>; en caso contrario es una buena oportunidad para crear una tienda más que ofrezca eso que tanto te gusta. 
+			</div>
 		</div>
 
-		<div class="col-md-4 col-md-offset-0" style="text-align: justify">
+		<div class="col-md-12 col-md-offset-0 visible-lg" style="text-align: justify; margin-top: 1%;margin-bottom: 1%;">
 			<div class="  title m-b-md center-block" style="font-size: 22px;">
-				<b>¿Porque Elegir {!! Session::get('app') !!}?</b>
+				<b>¿Como Funciona La Pasarela de Pagos?</b>
 			</div>
-				{{ Html::image('images/icons/etiqueta2.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}				
-				{!! Session::get('app') !!} implementa la Filosofía del Bien Común, de manera que ninguna de las tiendas padezca de aislamiento; además, el mercadeo realizado a una tienda beneficia a todas las demás tiendas de la comunidad. <b>¡Genial!</b>
-		</div>
-
-		<div class="col-md-4 col-md-offset-0" style="text-align: justify">
-			<div class="  title m-b-md center-block" style="font-size: 22px;">
-				<b>¿Como Funciona {!! Session::get('app') !!}?</b>
-			</div>
-			{{ Html::image('images/icons/etiqueta4.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}
-			{!! Session::get('app') !!} reune en un mismo lugar varidad de Tiendas con el fin de ofrecer una amplia gama de bienes y servicios. <b>¡De seguro encontaras lo que buscas!</b>; en caso contrario es una buena oportunidad para crear una tienda más que ofrezca eso que tanto te gusta. 
+				{{ Html::image('images/icons/etiqueta3.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}			
+				Luego de realizarce un pedido en una Tienda, el tendero recibirá una notificación via correo electrónico con la información necesaria para realizar el primer contacto con el cliente y así concretar detalles del servicio (verificación de dirección, metodo de pago, etc). A continuación el cliente recibirá una notificación via correo electrónico ante la aceptación o el rechazo de la oden; en caso de ser aceptada, esté recibirá una última notificación tambien en su correo electrónico luego de tener el producto en su poder para proceder con la calificación del servicio ofrecido por la tienda. ¡ Y Eso es Todo!.
 		</div>			
 
 	</div>
 
-	<div class="col-md-8 col-md-offset-2 visible-lg" style="text-align: justify;    margin-top: 2%;;margin-bottom: 3%">
-		<div class="  title m-b-md center-block" style="font-size: 22px;">
-			<b>¿Como Funciona La Pasarela de Pagos?</b>
-		</div>
-			{{ Html::image('images/icons/etiqueta3.png','Imagen no disponible',array( 'style'=>'width: auto; height: 75px;border-radius: 0%;float: left;margin-right: 4%;' ))}}			
-			Luego de realizarce un pedido en una Tienda, el tendero recibirá una notificación via correo electrónico con la información necesaria para realizar el primer contacto con el cliente y así concretar detalles del servicio (verificación de dirección, metodo de pago, etc). A continuación el cliente recibirá una notificación via correo electrónico ante la aceptación o el rechazo de la oden; en caso de ser aceptada, esté recibirá una última notificación tambien en su correo electrónico luego de tener el producto en su poder para proceder con la calificación del servicio ofrecido por la tienda. ¡ Y Eso es Todo!.
+	<div class="col-md-4 col-md-offset-0 visible-lg" style="text-align: center;">
+		<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmacaluplaza%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 	</div>
+
+
 	<!--
 	<div class="col-md-2 col-md-offset-0" style="text-align: justify">
 		<div class="  title m-b-md center-block" style="font-size: 22px;">
