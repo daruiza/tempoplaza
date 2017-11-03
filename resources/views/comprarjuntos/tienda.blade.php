@@ -73,6 +73,12 @@
 			font-size: 14px;
 			border-color: #449aa2;
 		}
+
+		@media (max-width: 370px) {
+		  #categoria_select, #unidades_select, #colores_select, #tallas_select, #sabores_select {
+		        width: 245px !important;
+		    }  
+		  }
 	</style>
 	
 	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
@@ -183,21 +189,21 @@
 				    <div class="panel-footer " style="background-color:{{$tienda->color_one}}; color: {{$tienda->color_two}}; border-color:
 				    	{{$tienda->color_two}};">
 				    	<div class="row">
-				    		<div class="col-md-3 col-mx-offset-0 option_store" style="color:{{$tienda->color_two}};">
+				    		<div class="col-md-3 col-sm-4 col-xs-6 col-mx-offset-0 option_store" style="color:{{$tienda->color_two}};">
 				    			<a href="{{url('/mistiendas/actualizar/'.$tienda->id.'/'.Session::get('comjunplus.usuario.id'))}}" style="color:{{$tienda->color_two}};">
 				    				<span class="glyphicon glyphicon-cog option_store_icon" aria-hidden="true"></span>
 				    				<div style="font-size: 10px;">Editar Tienda</div>
 				    			</a>
 				    		</div>
-				    		<div class="col-md-3 col-mx-offset-0 option_store option_products" style="color:{{$tienda->color_two}};" id ="prod_{{$tienda->name}}_{{$tienda->id}}">
+				    		<div class="col-md-3 col-sm-4 col-xs-6 col-mx-offset-0 option_store option_products" style="color:{{$tienda->color_two}};" id ="prod_{{$tienda->name}}_{{$tienda->id}}">
 				    			<span class="glyphicon glyphicon-th option_store_icon" aria-hidden="true"></span>
 				    			<div style="font-size: 10px; margin-left: -10px;">Productos</div>
 				    		</div>
-				    		<div class="col-md-3 col-mx-offset-0 option_store option_order" style="color:{{$tienda->color_two}};" id ="order_{{$tienda->name}}_{{$tienda->id}}">				    			
+				    		<div class="col-md-3 col-sm-4 col-xs-6 col-mx-offset-0 option_store option_order" style="color:{{$tienda->color_two}};" id ="order_{{$tienda->name}}_{{$tienda->id}}">				    			
 				    			<span class="glyphicon glyphicon-book option_store_icon"  aria-hidden="true"></span>
 				    			<div style="font-size: 10px;">Pedidos</div>
 				    		</div>
-				    		<div class="col-md-3 col-mx-offset-0 option_store option_ver" style="color:{{$tienda->color_two}};">
+				    		<div class="col-md-3 col-sm-4 col-xs-6 col-mx-offset-0 option_store option_ver" style="color:{{$tienda->color_two}};">
 				    			<a href="{{url('/'.$tienda->name)}}" style="text-decoration:none; color:{{$tienda->color_two}};">
 				    				<span class="glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
 				    				<div style="font-size: 10px;">Reseñas</div>
