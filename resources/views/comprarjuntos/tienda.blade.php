@@ -75,7 +75,7 @@
 		}
 
 		@media (max-width: 370px) {
-		  #categoria_select, #unidades_select, #colores_select, #tallas_select, #sabores_select {
+		  #categoria_select, #unidades_select, #colores_select, #tallas_select, #sabores_select,#materiales_select {
 		        width: 245px !important;
 		    }  
 		  }
