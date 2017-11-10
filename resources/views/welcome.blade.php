@@ -685,7 +685,7 @@
 									</div>
 									
 									{!! Form::label('contraseña_dos', 'Contraseña Nuevamente', array('class' => 'col-md-12 control-label')) !!}
-									<div class="col-md-12" data-toggle="modal" data-target="#rpsw_modal">
+									<div class="col-md-12" >
 										{!! Form::password('contraseña_dos', array('class' => 'form-control','placeholder'=>'Ingresa nuevamente tu contraseña')) !!}
 									</div>
 								</div>
