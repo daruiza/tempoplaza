@@ -371,7 +371,7 @@
 	@endif
 
 	<!--Buscador de tiendas solo para moviles-->
-	<div class="col-md-10 col-md-offset-1 hidden-lg">
+	<div class="col-sm-10 col-md-offset-1 hidden-lg hidden-md hidden-sm">
 		{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
 		   <div class="input-group">
 				{!! Form::text('finder_store','', array('class' => 'form-control buscador_t','placeholder'=>'Buscador de Productos','style'=>'text-align: center;','maxlength' => 48)) !!}
@@ -411,14 +411,14 @@
 
 	<!--Listado de productos-->
 	<!-- Para resoluciones de celulares-->
-	<div class="col-md-10 col-md-offset-1 listado_productos hidden-lg">
+	<div class="col-md-10 col-md-offset-1 listado_productos hidden-lg ">
 		@php ($p=0)
 		@php ($j=1)
 		@foreach($productos as $producto)
-			@if($p%4==0)
+			@if($p%3==0)
 				<div class="col-md-12 col-md-offset-0">
 			@endif
-			<div class="col-md-3 col-mx-offset-1" style="text-align: center;">
+			<div class="col-sm-4 col-md-4 col-mx-offset-1" style="text-align: center;">
 				<div class="panel panel-default">					
 					<div class="panel-body">
 				    	<div class="row">
@@ -447,7 +447,7 @@
 				    </div>				    
 				</div>
 			</div>
-			@if($j%4==0)
+			@if($j%3==0)
 				</div>							
 			@elseif($p == count($productos)-1)
 				</div>
@@ -465,7 +465,7 @@
 			@if($p%4==0)
 				<div class="col-md-12 col-md-offset-0">
 			@endif
-			<div class="col-md-3 col-mx-offset-1" style="text-align: center;">
+			<div class="col-md-3 col-lg-3 col-mx-offset-1" style="text-align: center;">
 				<div class="panel panel-default">					
 					<div class="panel-body">
 				    	<div class="row">
@@ -901,7 +901,7 @@
     {!! Form::open(array('id'=>'form_from_products','url' => 'welcome/listarajaxproducts')) !!}		
     {!! Form::close() !!}
 
-	<nav class="navbar  navbar-fixed-bottom navbar-light bg-faded hidden-lg">		
+	<nav class="navbar  navbar-fixed-bottom navbar-light bg-faded hidden-lg hidden-md hidden-sm">		
 		<a href="#" id="cart_modal_b">
 			<div class="col-xs-4 col-xs-offset-4 boton_cart2" style="border-radius: 5%">			
 				<span class="glyphicon glyphicon-shopping-cart cart_b" aria-hidden="true" style = "font-size: 30px;"></span>
