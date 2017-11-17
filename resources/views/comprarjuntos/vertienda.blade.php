@@ -185,7 +185,7 @@
 
 	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
 	<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />
-
+	<link  rel="stylesheet" href="{{ url('css/chosen.css') }}" type="text/css" />
 
 	<link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}">
 
@@ -533,23 +533,28 @@
 
 	<!--Listado de reseñas-->
 	<a name="calificaciones"></a>
-	<div id="calificaciones" class="col-md-10 col-md-offset-1" style="margin-top: 2%;">
-		<div class="panel panel-default">
-			<div class="panel-heading" style="text-align: center;"><b>CALIFICACIONES DEL SERVICIO</b></div>
-			<div class="panel-body">
-				<table id="table_orders" class="display responsive no-wrap " cellspacing="0" width="96%" style="margin: auto;">
-					<thead >
-			            <tr>
-			            	<td></td>			            			            	
-		        			<td>CLIENTE</td>
-		        			<td>CALIFICACIÓN</td>
-		        			<td>RESEÑA</td>
-		        			<td>FECHA</td>		        			
-			            </tr>
-			        </thead>              
-				</table>
-			</div>
-		</div>		
+	<div class="col-md-10 col-md-offset-1" style="margin-top: 2%;"></div>
+		<div id="calificaciones" class="col-md-8 ">
+			<div class="panel panel-default">
+				<div class="panel-heading" style="text-align: center;"><b>CALIFICACIONES DEL SERVICIO</b></div>
+				<div class="panel-body">
+					<table id="table_orders" class="display responsive no-wrap " cellspacing="0" width="96%" style="margin: auto;">
+						<thead >
+				            <tr>
+				            	<td></td>			            			            	
+			        			<td>CLIENTE</td>
+			        			<td>CALIFICACIÓN</td>
+			        			<td>RESEÑA</td>
+			        			<td>FECHA</td>		        			
+				            </tr>
+				        </thead>              
+					</table>
+				</div>
+			</div>		
+		</div>
+		<div class="col-md-4">
+			<div class="fb-page" data-href="https://www.facebook.com/macaluplaza" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><blockquote cite="https://www.facebook.com/macaluplaza" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/macaluplaza">Macalú</a></blockquote></div>
+		</div>
 	</div>	
 @endsection
 
@@ -583,7 +588,7 @@
 							<div id="div_cart_colors" class="col-md-12" style="margin-bottom: 3%;">
 								<label for="color_cart_modal_for" class="col-md-3 control-label">Color</label>
 								<div class="col-md-9">
-									{!! Form::select('colores_cart_select',array('0'=>'Elije un color'),array(), array('id'=>'colores_cart_select','class' => 'form-control chosen-select col-md-12' ,'data-placeholder'=>'Elije un color','tabindex'=>'4')) !!}
+									{!! Form::select('colores_cart_select',array('0'=>'Elije un color'),array(), array('id'=>'colores_cart_select','class' => 'form-control col-md-12' ,'data-placeholder'=>'Elije un color','tabindex'=>'4')) !!}
 								</div>
 							</div>
 							<div id="div_cart_sizes" class="col-md-12" style="margin-bottom: 3%;">
@@ -677,7 +682,7 @@
 
 						<div class="col-md-12">
 							{!! Form::label('municipio', 'Municipio', array('class' => 'col-md-12 control-label')) !!}
-							{!! Form::select('municipio_invitado_modal',$ciudades,null, array('id'=>'municipio_invitado_modal','class' => 'form-control','placeholder'=>'Municipio de recidencia')) !!}							
+							{!! Form::select('municipio_invitado_modal',$ciudades,null, array('id'=>'municipio_invitado_modal','class' => 'form-control chosen-select','placeholder'=>'Municipio de recidencia')) !!}				
 						</div>
 
 						<div class="col-md-12">
@@ -921,6 +926,7 @@
 	<script type="text/javascript" src="{{ url('js/exporting.js') }}"></script>		
 	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>	
 	<script type="text/javascript" src="{{ url('js/spin.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>
 
 	<!--Autocomplete para buscador-->
 	@foreach($products_name as $producto)
@@ -943,6 +949,8 @@
 		//$('.div-finder').hide();
 		//agregamos el carrito
 		$('#cart_modal_b').on('click', function (e) { seg_user.openModalCart();});
+		$('.chosen-select').chosen();
+		$('.chosen-container').width('100%');
 		
 		//agregamos el nuevo buscador via javascript
 		var div_finder_conteiner = document.getElementsByClassName("div-finder-conteiner");

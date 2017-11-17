@@ -539,7 +539,7 @@ seg_user.prototype.consultaRespuestaCity = function(result) {
 
     var list = document.getElementById("municipio");
     fistChild=list.firstChild;
-    
+    //limpiamos los hojos
     while (list.hasChildNodes()) {   
         list.removeChild(list.firstChild);
     }
@@ -555,6 +555,9 @@ seg_user.prototype.consultaRespuestaCity = function(result) {
             }
         }
     }
+    //reiniciamos en chossen
+    //$("#municipio").trigger("liszt:updated");
+    $("#municipio").trigger("chosen:updated");
 };
 
 seg_user.prototype.openModalCart = function(result) {

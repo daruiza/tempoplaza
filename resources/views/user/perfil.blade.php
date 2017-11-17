@@ -50,6 +50,10 @@
 			font-size: 14px;
 			border-color: #449aa2;
 		}
+		.chosen-container .chosen-container-multi{
+			border: 1px solid #ccc !important;
+			border-radius: 4px !important;
+		}
 		
 		
 	</style>
@@ -57,7 +61,7 @@
 	<link  rel="stylesheet" href="{{ url('css/bootstrap-datepicker.min.css') }}" type="text/css" />	
 	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
 	<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />
-
+	<link  rel="stylesheet" href="{{ url('css/chosen.css') }}" type="text/css" />
 
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
 	<div class="row visible-md" style="margin-top: 7%;"></div>
@@ -144,8 +148,8 @@
 						<div class="col-md-12 col-md-offset-0 data_cell_b" data-toggle="popover" title="Cuenta {!! ucwords(Session::get('comjunplus.usuario.account'))!!}" data-placement="bottom" data-content="<div>Rol: {!!Session::get('comjunplus.usuario.rol')!!}</div><div>Nº de Tiendas: {!!Session::get('comjunplus.usuario.stores')!!}</div><div style='margin-bottom: 10%;'>Nº de Productos por Tienda: {!!Session::get('comjunplus.usuario.products')!!}</div><div style='font-size: 12px;'>Nota: Puedes modificar tu cuenta para que soporte más productos o más tiendas. <div style='color: blue;cursor: pointer;' data-toggle='modal' data-target='#mesadmin_modal'>Comunicate con soporte Aqui!.</div></div>" data-html="true">Resumen de Cuenta</div>
 						<!--<div class="col-md-12 col-md-offset-0 data_cell_b"> Preguntas Frecuentes</div>-->
 						<div class="col-md-12 col-md-offset-0 data_cell_b" data-toggle='modal' data-target='#mesadmin_modal'> Envianos tus Sugerencia</div>
-						<div class="col-md-12 col-md-offset-0 data_cell_b_c" > <a href="{{ url('/welcome/terminosycondiciones')}}" style="text-decoration: none;
-color: #333;">Terminos y Condiciones </a></div>
+						<div class="col-md-12 col-md-offset-0 data_cell_b_c" > 
+						<a href="{{ url('/welcome/terminosycondiciones')}}" style="text-decoration: none;color: #333;">Terminos y Condiciones </a></div>
 					</div>
 				</div>
 			</div>
@@ -298,12 +302,12 @@ color: #333;">Terminos y Condiciones </a></div>
 													
 							{!! Form::label('departamento', 'Departamento', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::select('departamento',$departamentos,value(Session::get('comjunplus.usuario.state')), array('class' => 'form-control','placeholder'=>'Departamento de residencia')) !!}
+								{!! Form::select('departamento',$departamentos,value(Session::get('comjunplus.usuario.state')), array('class' => 'form-control chosen-select','placeholder'=>'Departamento de residencia')) !!}
 							</div>
 							
 							{!! Form::label('municipio', 'Municipio', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::select('municipio',$ciudades,value(Session::get('comjunplus.usuario.city')), array('class' => 'form-control','placeholder'=>'Municipio de recidencia')) !!}
+								{!! Form::select('municipio',$ciudades,value(Session::get('comjunplus.usuario.city')), array('class' => 'form-control chosen-select','placeholder'=>'Municipio de recidencia')) !!}
 							</div>
 							
 							{!! Form::label('direccion', 'Dirección', array('class' => 'col-md-12 control-label')) !!}
@@ -428,8 +432,12 @@ color: #333;">Terminos y Condiciones </a></div>
 	<script type="text/javascript" src="{{ url('js/locales/bootstrap-datepicker.es.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url('js/datatables_row.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url('js/datatables-responsive.min.js') }}"></script>
-	
+	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>
+
 	<script type="text/javascript"> 
+		//select
+		$('.chosen-select').chosen();
+		$('.chosen-container').width('100%');
 		//tabla de mensajes recibidos
 		javascript:seg_user.table_receiver = $('#table_msj_recibidos').DataTable( {
 		    "responsive": true,
@@ -485,7 +493,7 @@ color: #333;">Terminos y Condiciones </a></div>
 		$( "#departamento" ).change(function() {
 			var datos = new Array();
 			datos['id'] =$( "#departamento option:selected" ).val();			   
-			seg_ajaxobject.peticionajax($('#form_consult_city').attr('action'),datos,"seg_user.consultaRespuestaCity");
+			seg_ajaxobject.peticionajax($('#form_consult_city').attr('action'),datos,"seg_user.consultaRespuestaCity");			
 		});
 
 		$('[data-toggle="popover"]').popover({
