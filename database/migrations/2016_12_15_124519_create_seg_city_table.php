@@ -15,7 +15,7 @@ class CreateSegCityTable extends Migration
     	Schema::create('seg_city', function(Blueprint $table)
     	{
     		$table->increments('id');
-    		$table->integer('code')->unique();
+    		$table->integer('code');
     		$table->string('city');    		
     		$table->integer('department_id')->unsigned();
     		$table->foreign('department_id')->references('id')->on('seg_department')->onDelete('cascade');
