@@ -140,7 +140,7 @@
 					<!-- Para importar los js de los modulos -->
 					@foreach (Session::get('comjunplus.usuario.permisos') as $llave_permiso => $permiso)
 						
-						<li>
+						<li style="z-index: 101;">
 							<a href="{{ url(json_decode($permiso['preferencias'])->js.'/listar/')}}">
 								<span class="{{json_decode($permiso['preferencias'])->icono}}" aria-hidden="true" style = "font-size: 15px;"></span>
 								<span>{{$permiso['aplicacion']}}</span>

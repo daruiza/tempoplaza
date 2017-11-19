@@ -533,6 +533,7 @@
 
 	<!--Listado de reseñas-->
 	<a name="calificaciones"></a>
+	@if($tienda[0]->fanpage != "")
 	<div class="col-md-10 col-md-offset-1" style="margin-top: 2%;"></div>
 		<div id="calificaciones" class="col-md-8 ">
 			<div class="panel panel-default">
@@ -552,10 +553,33 @@
 				</div>
 			</div>		
 		</div>
+		
 		<div class="col-md-4">
-			<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmacaluplaza%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+			<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F{!!explode("/", $tienda[0]->fanpage)[count(explode("/", $tienda[0]->fanpage))-1]!!}%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 		</div>
-	</div>	
+	</div>
+	@else
+	<div class="col-md-10 col-md-offset-1" style="margin-top: 2%;"></div>
+		<div id="calificaciones" class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading" style="text-align: center;"><b>CALIFICACIONES DEL SERVICIO</b></div>
+				<div class="panel-body">
+					<table id="table_orders" class="display responsive no-wrap " cellspacing="0" width="96%" style="margin: auto;">
+						<thead >
+				            <tr>
+				            	<td></td>			            			            	
+			        			<td>CLIENTE</td>
+			        			<td>CALIFICACIÓN</td>
+			        			<td>RESEÑA</td>
+			        			<td>FECHA</td>		        			
+				            </tr>
+				        </thead>              
+					</table>
+				</div>
+			</div>		
+		</div>		
+	</div>
+	@endif
 @endsection
 
 @section('modal')

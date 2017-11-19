@@ -20,11 +20,11 @@ clu_tienda.prototype.opt_select = function(controlador,metodo) {
 
 clu_tienda.prototype.validateNuevaTienda = function() {
 	
-	if($("#form_nueva_tienda :input")[1].value =="" || $("#form_nueva_tienda :input")[2].value =="" || $("#form_nueva_tienda :input")[3].value =="" || $("#form_nueva_tienda :input")[4].value ==""  || $("#form_nueva_tienda :input")[8].value ==""){
+	if($("#form_nueva_tienda :input")[1].value =="" || $("#form_nueva_tienda :input")[2].value =="" || $("#form_nueva_tienda :input")[6].value =="" || $("#municipio").val() ==""){
 		$('#nuevatienda_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close close_alert_edit_perfil" data-dismiss="alert">&times;</button><strong>!Envio Fallido!</strong></br> Faltan campos por diligenciar.</div>');
 		//pintar los inputs problematicos
 		for(var i=0; i < $("#form_nueva_tienda :input").length ; i++){
-	        if( i==1 || i==2 || i==3 || i==4 || i==8) {
+	        if( i==1 || i==2 || i==3 || i==4 || i==6) {
 	            if($("#form_nueva_tienda :input")[i].value ==""){
 	                $($("#form_nueva_tienda :input")[i]).addClass('input_danger');
 	            }

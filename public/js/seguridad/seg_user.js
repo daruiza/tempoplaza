@@ -94,7 +94,7 @@ seg_user.prototype.validatePassword = function() {
 
 seg_user.prototype.validateEditPerfil = function(){
 
-	if($("#cpfep :input")[2].value =="" || $("#cpfep :input")[3].value =="" || $("#cpfep :input")[6].value =="" || $("#cpfep :input")[7].value =="" || $("#cpfep :input")[8].value =="" || $("#cpfep :input")[9].value =="" || $("#cpfep :input")[10].value ==""){
+	if($("#cpfep :input")[2].value =="" || $("#cpfep :input")[3].value =="" || $("#cpfep :input")[6].value =="" || $("#cpfep :input")[7].value =="" || $("#cpfep :input")[8].value =="" || $("#municipio").val() =="" || $("#cpfep :input")[10].value ==""){
 		$('#cpep_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close close_alert_edit_perfil" data-dismiss="alert">&times;</button><strong>!Envio Fallido!</strong></br> Faltan campos por diligenciar.</div>');
 		//pintamos los input faltantes
         for(var i=0; i < $("#cpfep :input").length ; i++){

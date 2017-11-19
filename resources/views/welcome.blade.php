@@ -128,6 +128,10 @@
 			border: 1px solid #009999;
 			color: white;
 		}
+		.chosen-container .chosen-container-multi{
+			border: 1px solid #ccc !important;
+			border-radius: 4px !important;
+		}
 
 	</style>
 
@@ -135,6 +139,8 @@
 	<!--
 	<link  rel="stylesheet" href="{{ url('fonts/font-awesome/css/font-awesome.min.css') }}">
 	-->
+	<link  rel="stylesheet" href="{{ url('css/bootstrap-datepicker.min.css') }}" type="text/css" />	
+	<link  rel="stylesheet" href="{{ url('css/chosen.css') }}" type="text/css" />
 
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
 	<div class="row visible-md" style="margin-top: 7%;"></div>
@@ -895,12 +901,12 @@
 													
 							{!! Form::label('departamento', 'Departamento', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::select('departamento',$departamentos,value(Session::get('comjunplus.usuario.state')), array('class' => 'form-control','placeholder'=>'Departamento de residencia')) !!}
+								{!! Form::select('departamento',$departamentos,value(Session::get('comjunplus.usuario.state')), array('class' => 'form-control chosen-select','placeholder'=>'Departamento de residencia')) !!}
 							</div>
 							
 							{!! Form::label('municipio', 'Municipio', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::select('municipio',$ciudades,value(Session::get('comjunplus.usuario.city')), array('class' => 'form-control','placeholder'=>'Municipio de recidencia')) !!}
+								{!! Form::select('municipio',$ciudades,value(Session::get('comjunplus.usuario.city')), array('class' => 'form-control chosen-select','placeholder'=>'Municipio de recidencia')) !!}
 							</div>
 							
 							{!! Form::label('direccion', 'Dirección', array('class' => 'col-md-12 control-label')) !!}
@@ -929,7 +935,7 @@
 					<div class=" col-md-4 ">	
 						<div class="form-group ">
 							{!! Form::label('img_user', 'Imagen de Usuario', array('class' => 'col-md-12 control-label')) !!}
-							{{ Html::image('users/'.str_replace(' ','',Session::get('comjunplus.usuario.name')).'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array( 'style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;' ))}}
+							{{ Html::image('users/'.str_replace(' ','',Session::get('comjunplus.usuario.name')).'/profile/'.Session::get('comjunplus.usuario.avatar'),'Imagen no disponible',array('id'=>'img_user_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;' ))}}
 							
 						</div>
 						<div>
@@ -1059,6 +1065,9 @@
 
 @section('script')
 	<script type="text/javascript" src="{{ url('js/spin.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/bootstrap-datepicker.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/locales/bootstrap-datepicker.es.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>
 
 	<!-- Cambio de Contraseña -->
 	@if(Session::has('user'))		
@@ -1139,6 +1148,9 @@
 	            return (seg_user.isMobile.Android() || seg_user.isMobile.BlackBerry() || seg_user.isMobile.iOS() || seg_user.isMobile.Opera() || seg_user.isMobile.Windows());
 	        }
 	    };
+
+	    $('.chosen-select').chosen();
+		$('.chosen-container').width('100%');
 
 	    //mostarar buscador
 	    $('.div-finder').show();
@@ -1324,6 +1336,21 @@
 			}
 
 		});
+
+		$('#img_user').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_user_img').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });
 
 	</script>
 @endsection

@@ -72,8 +72,9 @@
 			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 			font-size: 14px;
 			border-color: #449aa2;
-		}
+		}		
 
+		/*selectores para sispositivos moviles*/
 		@media (max-width: 370px) {
 		  #categoria_select, #unidades_select, #colores_select, #tallas_select, #sabores_select,#materiales_select {
 		        width: 245px !important;
@@ -260,12 +261,12 @@
 
 												{!! Form::label('departamento', 'Departamento', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
-													{!! Form::select('departamento',Session::get('modulo.departamentos'),old('departamento'), array('class' => 'form-control','placeholder'=>'Departamento de Tienda')) !!}
+													{!! Form::select('departamento',Session::get('modulo.departamentos'),old('departamento'), array('class' => 'form-control chosen-select','placeholder'=>'Departamento de Tienda')) !!}
 												</div>
 												
 												{!! Form::label('municipio', 'Municipio', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
-													{!! Form::select('municipio',Session::get('modulo.ciudades'),old('municipio'), array('class' => 'form-control','placeholder'=>'Municipio de Tienda')) !!}
+													{!! Form::select('municipio',Session::get('modulo.ciudades'),old('municipio'), array('class' => 'form-control chosen-select','placeholder'=>'Municipio de Tienda')) !!}
 												</div>
 												
 												{!! Form::label('direccion', 'Dirección', array('class' => 'col-md-12 control-label')) !!}
