@@ -706,7 +706,7 @@
 
 						<div class="col-md-12">
 							{!! Form::label('municipio', 'Municipio', array('class' => 'col-md-12 control-label')) !!}
-							{!! Form::select('municipio_invitado_modal',$ciudades,null, array('id'=>'municipio_invitado_modal','class' => 'form-control chosen-select','placeholder'=>'Municipio de recidencia')) !!}				
+							{!! Form::select('municipio_invitado_modal',$ciudades,null, array('id'=>'municipio_invitado_modal','class' => 'form-control chosen-select municipio_invitado_modal','placeholder'=>'Municipio de recidencia')) !!}				
 						</div>
 
 						<div class="col-md-12">
@@ -975,7 +975,7 @@
 		$('#cart_modal_b').on('click', function (e) { seg_user.openModalCart();});
 		$('.chosen-select').chosen();
 		$('.chosen-container').width('100%');
-		
+				
 		//agregamos el nuevo buscador via javascript
 		var div_finder_conteiner = document.getElementsByClassName("div-finder-conteiner");
 		
@@ -1518,6 +1518,7 @@
 		$('[name=finder_store]').autocomplete({
 		      source:seg_user.datos_productos
 	    });
+
 
 	    seg_user.iniciarPie('#container_pie_ordenes','Distribución de pedidos por estado',seg_user.datos_pie_orders,seg_user.colores_pie_orders);
 	    seg_user.iniciarPie('#container_pie_calificaciones','Resumen de Calificaciones del servicio',seg_user.datos_pie_resenias,seg_user.colores_pie_resenias);
