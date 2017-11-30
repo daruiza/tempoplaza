@@ -52,6 +52,17 @@
 	    border: 1px solid transparent;
 	}
 
+	.popover-content ul{
+		margin-left: -25px;
+	}
+
+	.popover-content ul li{
+		cursor:pointer;
+	}
+	.popover-content ul li:hover{
+		background-color: #dddddd;
+	}
+
 	.glyphicon-star{
 		color: #ffcc00;
 	}
@@ -68,7 +79,7 @@
 	}
 
 	.btn-paginator{		
-		color: #666;
+		color: {!!$tienda[0]->color_two!!};
 		box-sizing: border-box;
 		display: inline-block;
 		min-width: 1.5em;
@@ -91,13 +102,13 @@
 	    -moz-user-select: -moz-none;
 	}
 	.btn-paginator:hover{		
-		color:#fff;
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000), color-stop(100%, #dcdcdc));
-	    background: -webkit-linear-gradient(top, #000 0%, #000 100%);
-	    background: -moz-linear-gradient(top, #000 0%, #000 100%);
-	    background: -ms-linear-gradient(top, #000 0%, #000 100%);
-	    background: -o-linear-gradient(top, #000 0%, #000 100%);
-	    background: linear-gradient(to bottom, #000 0%, #000 100%);	    
+		color: {!!$tienda[0]->color_one!!} !important;;
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000), color-stop(100%, {!!$tienda[0]->color_two!!}));
+	    background: -webkit-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+	    background: -moz-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+	    background: -ms-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+	    background: -o-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+	    background: linear-gradient(to bottom, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);	    
 	    border-radius: 2px;
 	    
 	}
@@ -109,22 +120,26 @@
 	    margin-left: 2px;
 	    text-align: center;
 	    text-decoration: none !important;
-	    cursor: pointer;
-	    color: #333 !important;
+	    cursor: pointer;	    
 	    border: 1px solid transparent;
 	    border-radius: 2px;
-	    border: 1px solid #979797;
-
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #dcdcdc));
-	    background: -webkit-linear-gradient(top, #fff 0%, #dcdcdc 100%);
-	    background: -moz-linear-gradient(top, #fff 0%, #dcdcdc 100%);
-	    background: -ms-linear-gradient(top, #fff 0%, #dcdcdc 100%);
-	    background: -o-linear-gradient(top, #fff 0%, #dcdcdc 100%);
-	    background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%);
-
 	    user-select: none;
 	    -webkit-user-select: none;
 	    -moz-user-select: -moz-none;   
+	}
+
+	.btn-paginatorslc{
+		color: {!!$tienda[0]->color_two!!} !important;
+		border: 1px solid {!!$tienda[0]->color_two!!} !important;
+	}
+	.btn-paginatorslc{
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, {!!$tienda[0]->color_one!!} ));
+	    background: -webkit-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+	    background: -moz-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+	    background: -ms-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+	    background: -o-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+	    background: linear-gradient(to bottom, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+
 	}
 	.bnt-catacteristicas{
 		text-decoration: none;
@@ -180,6 +195,10 @@
 		background-color: {!!$tienda[0]->color_one!!} !important;
 		color: {!!$tienda[0]->color_two!!} !important;			
 	}
+	.ifrmae-facebook{
+		border: 1px solid {!!$tienda[0]->color_two!!} !important;	
+	}
+	
 
 	</style>
 
@@ -372,7 +391,7 @@
 
 	<!--Buscador de tiendas solo para moviles-->
 	<div class="col-sm-10 col-md-offset-1 hidden-lg hidden-md hidden-sm">
-		{!! Form::open(array('url' => '/','method'=>'get','class'=>'navbar-form navbar-left','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
+		{!! Form::open(array('id'=>'form_finder_store','url' => '/','method'=>'get','class'=>'navbar-form navbar-left','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
 		   <div class="input-group">
 				{!! Form::text('finder_store','', array('class' => 'form-control buscador_t','placeholder'=>'Buscador de Productos','style'=>'text-align: center;','maxlength' => 48)) !!}
 				{!! Form::hidden('store', $tienda[0]->id) !!}
@@ -426,7 +445,7 @@
 			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}				    							    			
 				    		</div>
 
-				    		<div class="col-xs-12 panel-footer"  style="background-color:{{$tienda[0]->color_one}}; color: {{$tienda[0]->color_two}}; border-color:{{$tienda[0]->color_two}};padding: 2px;">				    			
+				    		<div class="col-xs-12 panel-footer"  style="background-color:transparen; color: {{$tienda[0]->color_two}}; border-color:{{$tienda[0]->color_two}};padding: 2px;">				    			
 				    			<div class="col-xs-12 col-mx-offset-0" style="font-size: 18px;">
 					    			{{$producto->name}}				    			
 				    			</div>
@@ -473,7 +492,7 @@
 			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}				    							    			
 				    		</div>
 
-				    		<div class="col-md-12 panel-footer"  style="background-color:{{$tienda[0]->color_one}}; color: {{$tienda[0]->color_two}}; border-color:{{$tienda[0]->color_two}};padding: 2px;">				    			
+				    		<div class="col-md-12 panel-footer"  style="background-color:transparent; color: {{$tienda[0]->color_two}}; border-color:transparent;padding: 2px;">				    			
 				    			<div class="col-md-12 col-mx-offset-0" style="font-size: 18px;">
 					    			{{$producto->name}}				    			
 				    			</div>
@@ -555,7 +574,7 @@
 		</div>
 		
 		<div class="col-md-4">
-			<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F{!!explode("/", $tienda[0]->fanpage)[count(explode("/", $tienda[0]->fanpage))-1]!!}%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+			<iframe class="ifrmae-facebook" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F{!!explode("/", $tienda[0]->fanpage)[count(explode("/", $tienda[0]->fanpage))-1]!!}%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 		</div>
 	</div>
 	@else
@@ -927,8 +946,9 @@
 
 	{!! Form::open(array('id'=>'form_add_product','url' => 'welcome/addproduct')) !!}		
     {!! Form::close() !!}
-    {!! Form::open(array('id'=>'form_from_products','url' => 'welcome/listarajaxproducts')) !!}		
+    {!! Form::open(array('id'=>'form_from_products','url' => 'welcome/listarajaxproducts')) !!}	
     {!! Form::close() !!}
+
 
 	<nav class="navbar  navbar-fixed-bottom navbar-light bg-faded hidden-lg hidden-md hidden-sm">		
 		<a href="#" id="cart_modal_b">
@@ -983,6 +1003,7 @@
 		var form0 = document.createElement("form");
 		form0.setAttribute("class", "navbar-form navbar-left visible-lg");
 		form0.setAttribute("method", "GET");
+		form0.setAttribute("id", "form_finder_store");
 		form0.setAttribute("action", ""+"{{url('/')}}");
 		form0.setAttribute("accept-charset", "UTF-8");
 		form0.setAttribute("onsubmit", "javascript:return seg_user.validateFinder()");
@@ -1018,6 +1039,7 @@
 		var form1 = document.createElement("form");
 		form1.setAttribute("class", "navbar-form navbar-left visible-md");
 		form1.setAttribute("method", "GET");
+		form1.setAttribute("id", "form_finder_store");
 		form1.setAttribute("action", ""+"{{url('/')}}");
 		form1.setAttribute("accept-charset", "UTF-8");
 		//form1.setAttribute("style", "width: 100%");
@@ -1054,6 +1076,7 @@
 		var form2 = document.createElement("form");
 		form2.setAttribute("class", "navbar-form navbar-left visible-sm");
 		form2.setAttribute("method", "GET");
+		form2.setAttribute("id", "form_finder_store");
 		form2.setAttribute("action", ""+"{{url('/')}}");
 		form2.setAttribute("accept-charset", "UTF-8");
 		form2.setAttribute("style", "width: 100%");
@@ -1446,16 +1469,13 @@
 		    });
 
 		    //redirección de subcategorias
-		    /*
+		    
 			$('.popover-content ul li').on('click', function(e) {		        
-		        window.location=$('#form_home').attr('action')+"/"+this.textContent;
-		    });
-
-			//redirección de categorias
-		    $('.popover-title').on('click', function(e) {		        
-		        window.location=$('#form_home').attr('action')+"/"+this.textContent;
-		    });
-		    */
+				$('[name=finder_store]').val(this.textContent);
+		        //window.location=$('#form_finder_store').attr('action');
+		        $('#form_finder_store').submit();
+		    });			
+		    
 	    });
 
 
@@ -1568,6 +1588,8 @@
 		    	return false;
 		    }
 	    });
+
+	   
 
 	    //cambio de url de tienda
 	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");

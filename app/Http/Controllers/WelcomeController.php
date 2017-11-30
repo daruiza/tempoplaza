@@ -286,7 +286,7 @@ class WelcomeController extends Controller {
 				->get();				
 			}
 
-			//buscador de la tienda
+			//BUSCADOR DE LA TIENDA
 			if(array_key_exists('finder_store',$request->input())){
 
 				//buscador de la tienda, intentan buscar productos o categorias
@@ -326,6 +326,7 @@ class WelcomeController extends Controller {
 				->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
 				->where('clu_store.id',$request->input('store'))							
 				->get();
+
 				$moduledata['tendero'] = \DB::table('seg_user_profile')
 				->select('seg_user_profile.*','seg_user.name as user_name')
 				->leftjoin('seg_user', 'seg_user_profile.user_id', '=', 'seg_user.id')					
@@ -583,7 +584,8 @@ class WelcomeController extends Controller {
 				}				
 			}
 
-			//categorias para el boton del menu			
+			//categorias para el boton del menu
+			/*	
 			$tienda_categorias = explode(',',$moduledata['tienda'][0]->metadata);			
 			$categorias = \DB::table('clu_category')
 			->select('clu_category.*')
@@ -591,8 +593,16 @@ class WelcomeController extends Controller {
 				foreach($tienda_categorias as $key => $value){
 					$q->orwhere('clu_category.category_id', '=', $value);
 				}
-			})		
-			->get();
+			})
+			*/
+
+			//consultamos las categorias solo de las tienda
+			$categorias = \DB::table('clu_products')
+			->select('clu_category.*')
+			->leftjoin('clu_category', 'clu_products.category', '=', 'clu_category.id')	
+			->where('clu_products.store_id',$moduledata['tienda'][0]->id)
+			->get();			
+
 			$moduledata['categorias'] = array();
 			foreach ($categorias as $key => $value) {
 				$moduledata['categorias'][] = $value->name;
