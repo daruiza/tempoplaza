@@ -378,7 +378,8 @@ class WelcomeController extends Controller {
 					}				
 				}
 
-				//categorias para el boton del menu			
+				//categorias para el boton del menu
+				/*		
 				$tienda_categorias = explode(',',$moduledata['tienda'][0]->metadata);			
 				$categorias = \DB::table('clu_category')
 				->select('clu_category.*')
@@ -386,8 +387,16 @@ class WelcomeController extends Controller {
 					foreach($tienda_categorias as $key => $value){
 						$q->orwhere('clu_category.category_id', '=', $value);
 					}
-				})		
+				})					
 				->get();
+				*/
+				//consultamos las categorias solo de las tienda
+				$categorias = \DB::table('clu_products')
+				->select('clu_category.*')
+				->leftjoin('clu_category', 'clu_products.category', '=', 'clu_category.id')	
+				->where('clu_products.store_id',$moduledata['tienda'][0]->id)
+				->distinct()
+				->get();	
 				$moduledata['categorias'] = array();
 				foreach ($categorias as $key => $value) {
 					$moduledata['categorias'][] = $value->name;
@@ -603,6 +612,7 @@ class WelcomeController extends Controller {
 			->select('clu_category.*')
 			->leftjoin('clu_category', 'clu_products.category', '=', 'clu_category.id')	
 			->where('clu_products.store_id',$moduledata['tienda'][0]->id)
+			->distinct()
 			->get();			
 
 			$moduledata['categorias'] = array();
