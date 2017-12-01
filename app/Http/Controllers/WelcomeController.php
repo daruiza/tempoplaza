@@ -337,17 +337,19 @@ class WelcomeController extends Controller {
 				->select('clu_products.*',\DB::raw('SUM(clu_order_detail.volume) as ventas'))			
 				->leftjoin('clu_order_detail', 'clu_products.id', '=', 'clu_order_detail.product_id')
 				//->leftjoin('clu_order', 'clu_order_detail.order_id', '=', 'clu_order.id')			
+				->leftjoin('clu_category', 'clu_products.category', '=', 'clu_category.id')			
 				->where('clu_products.store_id',$moduledata['tienda'][0]->id)
 				//->where('clu_order.stage_id',4)
 				->where(function($q) use ($criterio){
 					foreach($criterio as $key => $value){
 						$q->orwhere('clu_products.name', 'like', '%'.$value.'%')
-						->orwhere('clu_products.description', 'like', '%'.$value.'%');						
+						->orwhere('clu_products.description', 'like', '%'.$value.'%')						
+						->orwhere('clu_category.name','like','%'.$value.'%');
 					}
-				})
+				})				
 				->groupBy('clu_products.id')
 				->skip(0)->take(12)		
-				->get();
+				->get();				
 
 				$ventas = \DB::table('clu_products')
 				->select('clu_products.*',\DB::raw('SUM(clu_order_detail.volume) as ventas'))			
