@@ -480,8 +480,18 @@ class WelcomeController extends Controller {
 				}		
 				//asignamos el id para listar las ordenes, en listarajaxorders
 				Session::put('store.id', $moduledata['tienda'][0]->id);
-				Session::put('app', $moduledata['tienda'][0]->name);//para cambiar ombre de tienda		
-				return view('comprarjuntos/vertienda')->with($moduledata);
+				Session::put('app', $moduledata['tienda'][0]->name);//para cambiar ombre de tienda
+
+				//Mini controlador de vista, debe estar aqui para evitar la perdidad e url
+				if($moduledata['tienda'][0]->template == 'app_store' || $moduledata['tienda'][0]->template == 'web_store'){
+					return view('comprarjuntos/vertiendat1')->with($moduledata);
+				}
+
+				if($moduledata['tienda'][0]->template == 'menu_store'){
+					return view('comprarjuntos/vertiendat2')->with($moduledata);
+				}
+
+				
 			}
 
 		}else{
@@ -696,8 +706,17 @@ class WelcomeController extends Controller {
 			}		
 			//asignamos el id para listar las ordenes, en listarajaxorders
 			Session::put('store.id', $moduledata['tienda'][0]->id);
-			Session::put('app', $moduledata['tienda'][0]->name);//para cambiar el nombre de la teinda	
-			return view('comprarjuntos/vertienda')->with($moduledata);
+			Session::put('app', $moduledata['tienda'][0]->name);//para cambiar el nombre de la 
+
+			//Mini controlador de vista, debe estar aqui para evitar la perdidad e url			
+			if($moduledata['tienda'][0]->template == 'app_store' || $moduledata['tienda'][0]->template == 'web_store'){
+				return view('comprarjuntos/vertiendat1')->with($moduledata);
+			}
+
+			if($moduledata['tienda'][0]->template == 'menu_store'){
+				return view('comprarjuntos/vertiendat2')->with($moduledata);
+			}
+			
 		}
 
 		//SEGUNDO, miramos si coincide con el nombre de una categoria, y si alguna tienda la posee

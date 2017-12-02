@@ -1,6 +1,7 @@
 @extends('app')
 
-@section('content')		
+@section('content')
+	
 	<style>
 	.panel-body {		    
 	    padding-bottom: 0px;
@@ -402,6 +403,7 @@
 	    {!! Form::close() !!}
     </div>	
 
+    <!--Menu de categorias, ubicación y resumen-->
 	<div class="col-md-10 col-md-offset-1 " style="margin-bottom: 2%;">
 		<div class="title m-b-md center-block">
 			<div class="btn-group btn-menu" role="group">
@@ -489,7 +491,7 @@
 					<div class="panel-body">
 				    	<div class="row">
 				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
-			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}				    							    			
+			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}
 				    		</div>
 
 				    		<div class="col-md-12 panel-footer"  style="background-color:transparent; color: {{$tienda[0]->color_two}}; border-color:transparent;padding: 2px;">				    			
@@ -1542,7 +1544,7 @@
 	    seg_user.iniciarPie('#container_pie_ordenes','Distribución de pedidos por estado',seg_user.datos_pie_orders,seg_user.colores_pie_orders);
 	    seg_user.iniciarPie('#container_pie_calificaciones','Resumen de Calificaciones del servicio',seg_user.datos_pie_resenias,seg_user.colores_pie_resenias);
 
-	    //para hacer que el chart quepa ene l modal.
+	    //para hacer que el chart quepa en el modal.
 	    var chart = $('#container_pie_ordenes').highcharts();
 	    $('#resumen_modal').on('show.bs.modal', function() {
 		    $('#container_pie_ordenes').css('visibility', 'hidden');
