@@ -221,6 +221,18 @@
 
 	.categori_store ul li{
 		list-style: none;
+		cursor: pointer;
+		color: {!!$tienda[0]->color_two!!};
+		border-top-left-radius: 5px;
+    	border-bottom-right-radius: 5px;
+
+	}
+
+	.categori_store ul li:hover{
+		list-style: none;
+		background-color: {!!$tienda[0]->color_two!!};
+		color: {!!$tienda[0]->color_one!!};
+		
 	}
 
 	</style>
@@ -1387,7 +1399,7 @@
 
 		    //redirección de subcategorias
 		    
-			$('.popover-content ul li').on('click', function(e) {		        
+			$('.categori_store ul li').on('click', function(e) {		        
 				$('[name=finder_store]').val(this.textContent);
 		        //window.location=$('#form_finder_store').attr('action');
 		        $('#form_finder_store').submit();
