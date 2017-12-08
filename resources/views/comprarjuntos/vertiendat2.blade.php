@@ -215,7 +215,10 @@
 		margin-top: 10px;
 		text-align: left;
 		padding: 0px;
-		text-align: center;
+		text-align: center;		
+    	border-top-left-radius: 7px;
+    	border-bottom-right-radius: 7px;
+    	border: 1px solid {!!$tienda[0]->color_two!!};
 
 	}
 
@@ -227,7 +230,6 @@
     	border-bottom-right-radius: 5px;
 
 	}
-
 	.categori_store ul li:hover{
 		list-style: none;
 		background-color: {!!$tienda[0]->color_two!!};
@@ -1388,24 +1390,23 @@
 		 	$(this).popover('show');
 		 });
 
-		 $(document).on('click', function(e) {
+		 $(document).on('click', function(e) {		 	
 	        $('[data-toggle="popover"]').each(function () {
 		        //the 'is' for buttons that trigger popups
 		        //the 'has' for icons within a button that triggers a popup
 		        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
 		            $(this).popover('hide');
 		        }
-		    });
-
-		    //redirección de subcategorias
-		    
-			$('.categori_store ul li').on('click', function(e) {		        
-				$('[name=finder_store]').val(this.textContent);
-		        //window.location=$('#form_finder_store').attr('action');
-		        $('#form_finder_store').submit();
-		    });			
+		    });	   
 		    
 	    });
+
+		 //redirección de subcategorias		    
+		$('.categori_store ul li').on('click', function(e) {		        
+			$('[name=finder_store]').val(this.textContent);
+	        //window.location=$('#form_finder_store').attr('action');
+	        $('#form_finder_store').submit();
+	    });			
 
 
 		//al cerrar el modal de captacion de información se cierre el modal de carrito
