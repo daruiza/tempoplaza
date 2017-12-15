@@ -340,6 +340,7 @@ class WelcomeController extends Controller {
 				->leftjoin('clu_category', 'clu_products.category', '=', 'clu_category.id')			
 				->where('clu_products.store_id',$moduledata['tienda'][0]->id)
 				//->where('clu_order.stage_id',4)
+				->where('clu_products.active',1)
 				->where(function($q) use ($criterio){
 					foreach($criterio as $key => $value){
 						$q->orwhere('clu_products.name', 'like', '%'.$value.'%')
@@ -394,7 +395,7 @@ class WelcomeController extends Controller {
 				$categorias = \DB::table('clu_products')
 				->select('clu_category.*')
 				->leftjoin('clu_category', 'clu_products.category', '=', 'clu_category.id')	
-				->where('clu_products.store_id',$moduledata['tienda'][0]->id)
+				->where('clu_products.store_id',$moduledata['tienda'][0]->id)				
 				->distinct()
 				->get();	
 				$moduledata['categorias'] = array();
@@ -414,6 +415,7 @@ class WelcomeController extends Controller {
 				->select('clu_products.name as pname','clu_category.name as cname')
 				->leftjoin('clu_category', 'clu_products.category', '=', 'clu_category.id')	
 				->where('clu_products.store_id',$moduledata['tienda'][0]->id)
+				->where('clu_products.active',1)
 				->orderByRaw("RAND()")
 				->skip(0)->take(24)					
 				->get();
@@ -451,7 +453,10 @@ class WelcomeController extends Controller {
 				}
 
 				//paginador
-				$moduledata['paginador']['total'] =Producto::where('clu_products.store_id',$moduledata['tienda'][0]->id)->count();
+				$moduledata['paginador']['total'] =Producto::
+				where('clu_products.store_id',$moduledata['tienda'][0]->id)
+				->where('clu_products.active',1)
+				->count();
 				$moduledata['paginador']['ppp'] =16;//productospor pagina
 				$moduledata['paginador']['pagina'] =1;
 				$moduledata['paginador']['paginas'] = ceil($moduledata['paginador']['total'] / $moduledata['paginador']['ppp']);
@@ -579,6 +584,7 @@ class WelcomeController extends Controller {
 			//->leftjoin('clu_order', 'clu_order_detail.order_id', '=', 'clu_order.id')			
 			->where('clu_products.store_id',$moduledata['tienda'][0]->id)
 			//->where('clu_order.stage_id',4)
+			->where('clu_products.active',1)
 			->groupBy('clu_products.id')
 			->orderBy('clu_products.order')
 			->skip(0)->take(16)		
@@ -589,7 +595,7 @@ class WelcomeController extends Controller {
 			->leftjoin('clu_order_detail', 'clu_products.id', '=', 'clu_order_detail.product_id')
 			->leftjoin('clu_order', 'clu_order_detail.order_id', '=', 'clu_order.id')			
 			->where('clu_products.store_id',$moduledata['tienda'][0]->id)
-			->where('clu_order.stage_id',4)
+			->where('clu_order.stage_id',4)						
 			->groupBy('clu_products.id')
 			->orderBy('clu_products.order')
 			->skip(0)->take(16)		
@@ -643,6 +649,7 @@ class WelcomeController extends Controller {
 			->leftjoin('clu_category', 'clu_products.category', '=', 'clu_category.id')	
 			->where('clu_products.store_id',$moduledata['tienda'][0]->id)
 			->orderByRaw("RAND()")
+			->where('clu_products.active',1)
 			->skip(0)->take(128)					
 			->get();
 			$moduledata['products_name'] = array();
@@ -677,7 +684,10 @@ class WelcomeController extends Controller {
 			}
 												
 			//paginador
-			$moduledata['paginador']['total'] =Producto::where('clu_products.store_id',$moduledata['tienda'][0]->id)->count();
+			$moduledata['paginador']['total'] =Producto::
+			where('clu_products.store_id',$moduledata['tienda'][0]->id)
+			->where('clu_products.active',1)
+			->count();
 			$moduledata['paginador']['ppp'] =16;//productospor pagina
 			$moduledata['paginador']['pagina'] =1;
 			$moduledata['paginador']['paginas'] = ceil($moduledata['paginador']['total'] / $moduledata['paginador']['ppp']);
@@ -954,6 +964,7 @@ class WelcomeController extends Controller {
 			->select('clu_products.*',\DB::raw('COUNT(clu_products.id) as ventas'))
 			->leftjoin('clu_order_detail', 'clu_products.id', '=', 'clu_order_detail.product_id')								
 			->where('clu_products.store_id',Session::get('store.id'))
+			->where('clu_products.active',1)
 			->where(function($q) use ($criterio){
 				foreach($criterio as $key => $value){
 					$q->orwhere('clu_products.name', 'like', '%'.$value.'%')
@@ -985,6 +996,7 @@ class WelcomeController extends Controller {
 			->select('clu_products.*',\DB::raw('COUNT(clu_products.id) as ventas'))
 			->leftjoin('clu_order_detail', 'clu_products.id', '=', 'clu_order_detail.product_id')								
 			->where('clu_products.store_id',Session::get('store.id'))
+			->where('clu_products.active',1)
 			->groupBy('clu_products.id')
 			->skip($request->input('ppp')*($request->input('pagina_solicitada')-1))->take($request->input('ppp'))				
 			->get();

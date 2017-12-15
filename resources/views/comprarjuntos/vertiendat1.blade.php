@@ -1371,6 +1371,8 @@
 						}else{
 							$('#bange_cart_b').html(parseInt($('#bange_cart_b').html())+1);
 						}
+
+						//llamamos el metodo para gardar en session el array de los productos
 					}
 					//cerrar el modal
 					if(close_modal)$('#add_cart_modal').modal('toggle');	
