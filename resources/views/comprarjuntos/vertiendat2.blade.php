@@ -1302,6 +1302,12 @@
 						}
 
 						//llamamos el metodo para gardar en session el array de los productos
+						var datos = new Array();
+						for(i=0;i<seg_user.cart_products.length;i++){
+							datos[i] = seg_user.cart_products[i].toString();
+						}
+						datos['datos'] = seg_user.cart_products.length;					
+						seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");
 					}
 					//cerrar el modal
 					if(close_modal)$('#add_cart_modal').modal('toggle');	
@@ -1519,13 +1525,25 @@
 		    if(letras.indexOf(tecla) == -1 && !tecla_especial){			
 		    	return false;
 		    }
-	    });
-
-	   
+	    });	   
 
 	    //cambio de url de tienda
 	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");
 
 	</script>
+
+	<!--Actualización de carrito-->
+	@if(Session::has('cart'))
+		@foreach (Session::get('cart') as $cart)
+		<script type="text/javascript">
+			str = "{!!$cart!!}";
+			seg_user.cart_products.push(str.split(","));
+		</script>
+		@endforeach
+		<script type="text/javascript">
+			$('#bange_cart').html(parseInt("{!! count(Session::get('cart')) !!}"));
+            $('#bange_cart_b').html(parseInt("{!! count(Session::get('cart')) !!}"));
+		</script>				
+	@endif
 
 @endsection

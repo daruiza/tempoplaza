@@ -778,7 +778,10 @@ seg_user.prototype.openModalCart = function(result) {
 
         form.appendChild(row);
 
+       
         $('#cart_modal').modal();
+      
+        
         
 
         //eventos
@@ -807,16 +810,15 @@ seg_user.prototype.openModalCart = function(result) {
             $('#cantidad_cart').html(cantidad_total);
             $('#precio_total').html("$"+precio_total);
 
-        });
-
-        $(".solo_numeros" ).keypress(function(evt) {
-            evt = (evt) ? evt : window.event;
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                return false;
+            var datos = new Array();
+            for(i=0;i<seg_user.cart_products.length;i++){
+                datos[i] = seg_user.cart_products[i].toString();
             }
-            return true;
+            datos['datos'] = seg_user.cart_products.length;                 
+            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");
+
         });
+        
 
         $(".volumen_cart").keyup(function(e) {              
             if(this.value == ""){
@@ -846,6 +848,14 @@ seg_user.prototype.openModalCart = function(result) {
 
             //cambiamos el total de la fila
             $('#total_'+this.name.split('_')[2]+'_'+this.name.split('_')[3]).text((parseInt(seg_user.cart_products[j][1]) * parseInt(seg_user.cart_products[j][2]) ));
+
+            var datos = new Array();
+            for(i=0;i<seg_user.cart_products.length;i++){
+                datos[i] = seg_user.cart_products[i].toString();
+            }
+            datos['datos'] = seg_user.cart_products.length;                 
+            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");
+
             
         });
 
@@ -877,7 +887,24 @@ seg_user.prototype.openModalCart = function(result) {
 
             //cambiamos el total de la fila
             $('#total_'+this.name.split('_')[2]+'_'+this.name.split('_')[3]).text((parseInt(seg_user.cart_products[j][1]) * parseInt(seg_user.cart_products[j][2]) ));
+
+            var datos = new Array();
+            for(i=0;i<seg_user.cart_products.length;i++){
+                datos[i] = seg_user.cart_products[i].toString();
+            }
+            datos['datos'] = seg_user.cart_products.length;                 
+            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");
+
             
+        });
+
+        $(".solo_numeros" ).keypress(function(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
         });
         
     }
@@ -987,6 +1014,10 @@ seg_user.prototype.consultaRespuestaAddCart = function(result) {
     }
 
     $('#add_cart_modal').modal();
+};
+
+seg_user.prototype.consultaRespuestaAddCartSession = function(result) {
+
 };
 
 seg_user.prototype.consultaRespuestaListarProductos = function(result) {

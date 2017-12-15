@@ -1221,6 +1221,20 @@ class WelcomeController extends Controller {
 		return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>$producto]);	
 	}
 
+	//producto agregado al carro en cliente, agregamos a su session
+	public function postAddproductsession(Request $request){
+		//consultamos las caracteristicas del producto
+		//asignamos a array session	
+		$prods = array();
+		for($i=0;$i<intval($request->input('datos'));$i++){
+			$prods[] = $request->input($i);
+		}
+
+		Session::put('cart', $prods);
+		
+		return response()->json(['respuesta'=>true,'request'=>$request->input()]);	
+	}
+
 	//este motodo es para mandar la orden de pedido, guardarla
 	public function postAddorder(Request $request){
 				
