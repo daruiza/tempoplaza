@@ -1376,7 +1376,9 @@
 						//llamamos el metodo para gardar en session el array de los productos
 						var datos = new Array();
 						for(i=0;i<seg_user.cart_products.length;i++){
+							seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
 							datos[i] = seg_user.cart_products[i].toString();
+
 						}
 						datos['datos'] = seg_user.cart_products.length;					
 						seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");		

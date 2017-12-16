@@ -812,6 +812,7 @@ seg_user.prototype.openModalCart = function(result) {
 
             var datos = new Array();
             for(i=0;i<seg_user.cart_products.length;i++){
+                seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
                 datos[i] = seg_user.cart_products[i].toString();
             }
             datos['datos'] = seg_user.cart_products.length;                 
@@ -851,6 +852,7 @@ seg_user.prototype.openModalCart = function(result) {
 
             var datos = new Array();
             for(i=0;i<seg_user.cart_products.length;i++){
+                seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
                 datos[i] = seg_user.cart_products[i].toString();
             }
             datos['datos'] = seg_user.cart_products.length;                 
@@ -890,6 +892,7 @@ seg_user.prototype.openModalCart = function(result) {
 
             var datos = new Array();
             for(i=0;i<seg_user.cart_products.length;i++){
+                seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
                 datos[i] = seg_user.cart_products[i].toString();
             }
             datos['datos'] = seg_user.cart_products.length;                 
