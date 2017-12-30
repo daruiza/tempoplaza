@@ -12,7 +12,13 @@ class CreateCluTypePaymentMethodTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('clu_type_payment_method', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('type');   
+            $table->string('description');            
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +28,6 @@ class CreateCluTypePaymentMethodTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('clu_type_payment_method');
     }
 }
