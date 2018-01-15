@@ -286,7 +286,7 @@
 	<div class="col-md-10 col-md-offset-1" style="margin-bottom: 1%;">
 		<div class="row col-md-6">
 			<div class="col-md-5">
-			{{ Html::image('users/'.$tienda[0]->user_name.'/stores/'.$tienda[0]->image,'Imagen no disponible',array( 'style'=>'width: 100%;height: 200px;border-radius: 0%;' ))}}	
+			{{ Html::image('users/'.$tienda[0]->user_name.'/stores/'.$tienda[0]->image,'Imagen no disponible',array( 'style'=>'width: 100%;border-radius: 0%;' ))}}	
 			</div>
 			<div class="col-md-7 col-sd-offset-0" style="text-align: center;">
 				<div class ="hidden-lg" style="margin-bottom: 1%;margin-top: 1%;"><b>{{strtoupper($tienda[0]->name)}}</b></div>
