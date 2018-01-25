@@ -487,13 +487,17 @@ class WelcomeController extends Controller {
 				Session::put('store.id', $moduledata['tienda'][0]->id);
 				Session::put('app', $moduledata['tienda'][0]->name);//para cambiar ombre de tienda
 
-				//Mini controlador de vista, debe estar aqui para evitar la perdidad e url
+				//Mini controlador de vista, debe estar aqui para evitar la perdida de url
 				if($moduledata['tienda'][0]->template == 'app_store' || $moduledata['tienda'][0]->template == 'web_store'){
 					return view('comprarjuntos/vertiendat1')->with($moduledata);
 				}
 
 				if($moduledata['tienda'][0]->template == 'menu_store'){
 					return view('comprarjuntos/vertiendat2')->with($moduledata);
+				}
+
+				if($moduledata['tienda'][0]->template == 'simple_store'){
+					return view('comprarjuntos/simple')->with($moduledata);
 				}
 
 				
@@ -725,6 +729,10 @@ class WelcomeController extends Controller {
 
 			if($moduledata['tienda'][0]->template == 'menu_store'){
 				return view('comprarjuntos/vertiendat2')->with($moduledata);
+			}
+
+			if($moduledata['tienda'][0]->template == 'simple_store'){
+				return view('comprarjuntos/simple')->with($moduledata);
 			}
 			
 		}

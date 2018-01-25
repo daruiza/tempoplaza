@@ -450,7 +450,7 @@
 										<div class="form-group ">
 											{!! Form::label('template', 'Plantilla', array('class' => 'col-md-12 control-label')) !!}
 											<div class="col-md-12">
-												{!! Form::select('template',array('app_store'=>'Macalú','web_store'=>'Superior Web','menu_store'=>'Página Web'),old('tempalte'), array('id'=>'template','class' => 'form-control chosen-select','data-placeholder'=>'Selecciona la plantilla')) !!}	
+												{!! Form::select('template',array('app_store'=>'Macalú','web_store'=>'Superior Web','menu_store'=>'Página Web','simple_store'=>'Simple Web'),old('tempalte'), array('id'=>'template','class' => 'form-control chosen-select','data-placeholder'=>'Selecciona la plantilla')) !!}	
 											</div>
 									</div>
 								</div>
