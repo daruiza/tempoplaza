@@ -342,10 +342,13 @@ class WelcomeController extends Controller {
 				//->where('clu_order.stage_id',4)
 				->where('clu_products.active',1)
 				->where(function($q) use ($criterio){
-					foreach($criterio as $key => $value){
-						$q->orwhere('clu_products.name', 'like', '%'.$value.'%')
-						->orwhere('clu_products.description', 'like', '%'.$value.'%')						
-						->orwhere('clu_category.name','like','%'.$value.'%');
+					foreach($criterio as $key => $value){											
+						//para encontrar todas las categorias
+						if($value != "todascat"){														
+							$q->orwhere('clu_products.name', 'like', '%'.$value.'%')
+							->orwhere('clu_products.description', 'like', '%'.$value.'%')						
+							->orwhere('clu_category.name','like','%'.$value.'%');
+						}						
 					}
 				})				
 				->groupBy('clu_products.id')
@@ -399,6 +402,7 @@ class WelcomeController extends Controller {
 				->distinct()
 				->get();	
 				$moduledata['categorias'] = array();
+				$moduledata['categorias'][] = 'Todas';
 				foreach ($categorias as $key => $value) {
 					$moduledata['categorias'][] = $value->name;
 				}
@@ -636,6 +640,7 @@ class WelcomeController extends Controller {
 			->get();			
 
 			$moduledata['categorias'] = array();
+			$moduledata['categorias'][] = 'Todas';
 			foreach ($categorias as $key => $value) {
 				$moduledata['categorias'][] = $value->name;
 			}

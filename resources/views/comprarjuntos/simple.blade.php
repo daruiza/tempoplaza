@@ -1456,7 +1456,8 @@
 
 		    //redirección de subcategorias
 		    
-			$('.popover-content ul li').on('click', function(e) {		        
+			$('.popover-content ul li').on('click', function(e) {
+				if(this.textContent == "Todas") this.textContent="todascat"
 				$('[name=finder_store]').val(this.textContent);
 		        //window.location=$('#form_finder_store').attr('action');
 		        $('#form_finder_store').submit();
