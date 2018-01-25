@@ -204,11 +204,9 @@
 				    			<span class="glyphicon glyphicon-book option_store_icon"  aria-hidden="true"></span>
 				    			<div style="font-size: 10px;">Pedidos</div>
 				    		</div>
-				    		<div class="col-md-3 col-sm-4 col-xs-6 col-mx-offset-0 option_store option_ver" style="color:{{$tienda->color_two}};">
-				    			<a href="{{url('/'.$tienda->name)}}" style="text-decoration:none; color:{{$tienda->color_two}};">
-				    				<span class="glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 10px;">Reseñas</div>
-				    			</a>	
+				    		<div class="col-md-3 col-sm-4 col-xs-6 col-mx-offset-0 option_store option_ppago" style="color:{{$tienda->color_two}};">				    			
+			    				<span class="fa fa-credit-card option_store_icon" aria-hidden="true" data-toggle="tooltip" title="Proveedor de Métodos de Pago"></span>
+			    				<div style="font-size: 10px;">PPago</div>				    			
 				    		</div>				    		
 				    	</div>				    	
 				    </div>
@@ -251,14 +249,7 @@
 												<div class="col-md-12">
 													{!! Form::text('nombre',old('nombre'), array('class' => 'form-control','placeholder'=>'Nombre o La Razón Social')) !!}
 												</div>
-
-												{{--
-													{!! Form::label('nit', 'NIT', array('class' => 'col-md-12 control-label')) !!}
-													<div class="col-md-12">
-														{!! Form::text('nit',old('nit'), array('class' => 'form-control','placeholder'=>'Nùmero de identificación Tributaria')) !!}
-													</div>
-												--}}
-
+												
 												{!! Form::label('departamento', 'Departamento', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
 													{!! Form::select('departamento',Session::get('modulo.departamentos'),old('departamento'), array('class' => 'form-control chosen-select','placeholder'=>'Departamento de Tienda')) !!}
@@ -469,10 +460,10 @@
 		        </div>
 	      	</div>
 		</div>
-	</div>
+	</div><!--Esto es un machetazo-->@if(Session::has('_old_input.edit')) </div></div> @endif 
 
 	<div class="modal fade" id="guiaubicacion_modal" role="dialog" >
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog">
 		 <!-- Modal content-->
 	      <div class="modal-content">
 	      	<div class="modal-header">
@@ -731,6 +722,28 @@
 	  	</div>
 	</div>
 
+	<div class="modal fade" id="ppago_modal" role="dialog" >
+		<div class="modal-dialog">
+		 <!-- Modal content-->
+	      <div class="modal-content">
+	      	<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Proveedor de Métodos de Pago</h4>
+			</div>
+			<div class = "alerts-module"></div>
+			<div class="modal-body">
+				<div class="row ">
+					<div class="col-md-12 col-md-offset-0 row_init">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">		         
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>		                  
+		        </div>
+	      	</div>
+		</div>
+	</div>
+
 	<!-- Form en blanco para consultar Ciudades -->
 	{!! Form::open(array('id'=>'form_consult_city','url' => 'user/consultarcity')) !!}		
     {!! Form::close() !!}
@@ -977,6 +990,10 @@
 				
 			});
 		});
+
+		$('.option_ppago').on('click', function (e) {
+			$('#ppago_modal').modal()
+		});
 		
 		$( ".solo_numeros" ).keypress(function(evt) {
 			 evt = (evt) ? evt : window.event;
@@ -1049,13 +1066,13 @@
 		});
 
 		$('#productos_modal').on('hidden.bs.modal', function () {
-			 clu_tienda.table_products.destroy();
-			 $('#table_prods tbody').off('click');
+			 //clu_tienda.table_products.destroy();
+			 //$('#table_prods tbody').off('click');
 		});
 
 		$('#odenes_modal').on('hidden.bs.modal', function () {
-			 clu_tienda.table_orders.destroy();
-			 $('#table_orders tbody').off('click');
+			 //clu_tienda.table_orders.destroy();
+			 //$('#table_orders tbody').off('click');
 		});
 
 		$('#image_store').change(function(e) {
@@ -1093,12 +1110,12 @@
 
 	</script>
 	@if(old('edit'))		
-		<script> $("#nuevatienda_modal").modal(); </script>
+		<script type="text/javascript"> $("#nuevatienda_modal").modal(); </script>
 	@endif
 
 	@if(Session::has('error'))
 		@if(in_array('Productos0',Session::get('error')))
-			<script> 				
+			<script type="text/javascript"> 				
 				$("#nuevoproducto_modal").modal(); 
 				$('#nuevoproducto_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Problemas al crear el producto!</strong> No puedes crear màs de {{Session::get("comjunplus.usuario.products")}} productos por Tienda, Para màs información envìa tu sugerencia al administrador en tu perfil de usuario.</div>');
 			</script>
@@ -1195,7 +1212,7 @@
 			</script>
 		@endif
 		@if(in_array('nuevaTienda',Session::get('message')))
-			<script> 
+			<script type="text/javascript"> 
 				$("#nuevatienda_modal").modal();
 				/*
 				$('#nuevatienda_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!Formulario para creación de una Tienda!</strong> Consulte la guia de creación para una mayor comprensión.</div>');

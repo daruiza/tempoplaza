@@ -982,10 +982,10 @@
 		form0.setAttribute("action", ""+"{{url('/')}}");
 		form0.setAttribute("accept-charset", "UTF-8");
 		form0.setAttribute("onsubmit", "javascript:return seg_user.validateFinder()");
-		form0.setAttribute("style", "width: 100%;position: absolute;text-align: center;");
+		form0.setAttribute("style", "width: 50%;margin-left: 25%;position: absolute;text-align: center;");
 		var div_group0 = document.createElement("div");
 		div_group0.setAttribute("class", "input-group");
-		div_group0.setAttribute("style", "width: 40%;");
+		div_group0.setAttribute("style", "width: 65%;");
 		var input0 = document.createElement("input");
 		input0.setAttribute("class", "form-control");
 		input0.setAttribute("placeholder", "Busca productos de la Tienda "+"{!!ucwords($tienda[0]->name)!!}");

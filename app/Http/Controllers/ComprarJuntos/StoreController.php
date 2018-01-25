@@ -421,7 +421,7 @@ class StoreController extends Controller {
 		//dd($moduledata);
 		if(!empty($message)){
 			return Redirect::to('mistiendas/inicio')->with('modulo',$moduledata)->with('message', $message);
-		}else{
+		}else{			
 			return Redirect::to('mistiendas/inicio')->with('modulo',$moduledata);
 		}
 	}
