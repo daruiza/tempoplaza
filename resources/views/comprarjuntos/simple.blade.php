@@ -14,7 +14,8 @@
 
 	.nav-titulo{
 		font-family: 'Libre Baskerville', serif !important;
-		font-size: 32px !important;	
+		font-size: 32px !important;
+		text-transform: capitalize;
 	}
 
 	.nav-titulo b{
