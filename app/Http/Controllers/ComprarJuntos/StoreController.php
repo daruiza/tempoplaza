@@ -6,6 +6,7 @@ use App\Core\ComprarJuntos\Categoria;
 use App\Core\ComprarJuntos\Orden;
 use App\Core\ComprarJuntos\Anotacion;
 use App\Core\ComprarJuntos\Mensaje;
+use App\Core\ComprarJuntos\ProveedorPago;
 use Validator;
 use Mail;
 use DateTime;
@@ -43,8 +44,8 @@ class StoreController extends Controller {
 		//return redirect()->action('ComprarJuntos\StoreController@getListar');
 	}
 	
-	public function getListar($option=null){
-				
+	public function getListar($option=null){		
+
 		$moduledata['detalles']=\DB::table('clu_order_detail')
 		->select('clu_order_detail.*')
 		->leftjoin('clu_order', 'clu_order_detail.order_id', '=', 'clu_order.id')
@@ -650,6 +651,11 @@ class StoreController extends Controller {
 			
 	}
 
+	public function postNuevoproveedorpago(Request $request){	
+		dd($request->input());
+		return $request->input();
+	}
+
 	public function postConsultarorder(Request $request){
 		//consultamos, los detalles y las entradas del foro
 		$moduledata['detalles']=\DB::table('clu_order_detail')
@@ -680,6 +686,20 @@ class StoreController extends Controller {
 		//para la consulta de orden por email
 		//if(Session::has('orden_id'))Session::flash('orden_id', Session::get('orden_id'));
 		return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>null]);
+	}
+
+	public function postConsultarprovpago(Request $request){
+		//total de productos
+		$paymenproviders=ProveedorPago::where('store_id',$request->input('id'))->count();
+
+		//tipos de metodos de pago
+		$types=array('payu'=>'PayU');
+		//antes de enviar, asignamos el id de tienda par el listarajax
+		Session::put('store.id', $request->input('id'));
+		Session::put('store.name', $request->input('name'));
+		
+		//return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>null]);
+		return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>$paymenproviders,'types'=>$types]);
 	}
 
 	//LISTAR LAS ORDENES DE UNA TIENDA
@@ -729,6 +749,48 @@ class StoreController extends Controller {
 		
 		return response()->json(['draw'=>$request->input('draw')+1,'recordsTotal'=>$moduledata['total'],'recordsFiltered'=>$moduledata['filtro'],'data'=>$moduledata['ordenes']]);
 
+	}
+
+	public function getListarajaxproviders(Request $request){
+
+		//Tienda id
+		if(empty(Session::get('store.id'))){
+			//algo anda muy mal, no se udo asignar el id de tienda en la funcion Consultarproductos
+			return response()->json(['draw'=>$request->input('draw')+1,'recordsTotal'=>0,'recordsFiltered'=>0,'data'=>[]]);
+		}
+
+		$moduledata['total']=ProveedorPago::where('store_id',Session::get('store.id'))->count();
+
+		if(!empty($request->input('search')['value'])){
+			Session::flash('search', $request->input('search')['value']);			
+			
+			$moduledata['proveedores']=
+			ProveedorPago::
+			select('clu_payment_method.*','clu_store.name as store')			
+			->where('clu_payment_method.store_id',Session::get('store.id'))
+			->leftjoin('clu_store', 'clu_payment_method.store_id', '=', 'clu_store.id')		
+			->where(function ($query) {
+				$query->where('clu_payment_method.name', 'like', '%'.Session::get('search').'%')
+				->orWhere('clu_payment_method.description', 'like', '%'.Session::get('search').'%')
+				->orWhere('clu_payment_method.data', 'like', '%'.Session::get('search').'%');								
+			})
+			->skip($request->input('start'))->take($request->input('length'))
+			->orderBy('order', 'asc')
+			->get();		
+			$moduledata['filtro'] = count($moduledata['proveedores']);
+		}else{			
+			$moduledata['proveedores']=\DB::table('clu_payment_method')
+			->select('clu_payment_method.*','clu_store.name as store')
+			->leftjoin('clu_store', 'clu_payment_method.store_id', '=', 'clu_store.id')					
+			->where('clu_payment_method.store_id',Session::get('store.id'))
+			->skip($request->input('start'))->take($request->input('length'))
+			->orderBy('order', 'asc')
+			->get();			
+				
+			$moduledata['filtro'] = $moduledata['total'];
+		}
+		
+		return response()->json(['draw'=>$request->input('draw')+1,'recordsTotal'=>$moduledata['total'],'recordsFiltered'=>$moduledata['filtro'],'data'=>$moduledata['proveedores']]);
 	}
 
 	//funciòn para ante el cambio de estado de la orden

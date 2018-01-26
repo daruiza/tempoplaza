@@ -72,7 +72,20 @@
 			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 			font-size: 14px;
 			border-color: #449aa2;
-		}		
+		}
+
+		.metadatos_style{
+			/*width: 66.333333%;*/
+		}
+
+		.method_description{
+			font-size: 14px;		
+		}
+		xmp{
+			padding: 0px;
+    		margin: 0px;
+		}	
+		
 
 		/*selectores para sispositivos moviles*/
 		@media (max-width: 370px) {
@@ -204,7 +217,7 @@
 				    			<span class="glyphicon glyphicon-book option_store_icon"  aria-hidden="true"></span>
 				    			<div style="font-size: 10px;">Pedidos</div>
 				    		</div>
-				    		<div class="col-md-3 col-sm-4 col-xs-6 col-mx-offset-0 option_store option_ppago" style="color:{{$tienda->color_two}};">				    			
+				    		<div class="col-md-3 col-sm-4 col-xs-6 col-mx-offset-0 option_store option_ppago" style="color:{{$tienda->color_two}};" id ="ppago_{{$tienda->name}}_{{$tienda->id}}">				    			
 			    				<span class="fa fa-credit-card option_store_icon" aria-hidden="true" data-toggle="tooltip" title="Proveedor de Métodos de Pago"></span>
 			    				<div style="font-size: 10px;">PPago</div>				    			
 				    		</div>				    		
@@ -683,12 +696,7 @@
 						            	<th></th>					            	
 				            			<th>Número</th>
 				            			<th>Fecha</th>
-				            			<th>Cliente</th>
-				            			<!--
-				            			<th>Dirección</th>
-				            			<th>Correo</th>
-				            			<th>Contacto</th>
-				            			-->
+				            			<th>Cliente</th>				            			
 				            			<th>Estado</th>
 						            </tr>
 						        </thead>              
@@ -723,7 +731,7 @@
 	</div>
 
 	<div class="modal fade" id="ppago_modal" role="dialog" >
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 		 <!-- Modal content-->
 	      <div class="modal-content">
 	      	<div class="modal-header">
@@ -734,11 +742,110 @@
 			<div class="modal-body">
 				<div class="row ">
 					<div class="col-md-12 col-md-offset-0 row_init">
+						<table id="table_providers" class="display responsive no-wrap " cellspacing="0" width="100%">
+					        <thead>
+					            <tr>
+					            	<th></th>					            	
+			            			<th>Tipo</th>
+			            			<th>Nombre</th>
+			            			<th>Descripción</th>
+			            			<th>MetaDatos</th>
+			            			<th>Estado</th>			            			
+			            			<th>Tienda</th>
+					            </tr>
+					        </thead>              
+					    </table> 
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">		         
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>		                  
+		        </div>
+	      	</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="nuevoproveedor_modal" role="dialog" >
+		<div class="modal-dialog modal-lg">
+		 <!-- Modal content-->
+	      <div class="modal-content">
+	      	<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Nuevo Proveedor De Pago</h4>
+			</div>
+			<div class = "alerts-module"></div>
+			{!! Form::open(array('url' => Session::get('controlador').'nuevoproveedorpago', 'id'=>'form_nuevo_proveedorpago','onsubmit'=>'javascript:return clu_tienda.validateNuevoProveedorPago()')) !!}
+			<div class="modal-body">
+				<div class="row ">
+					<div class="col-md-12 col-md-offset-0 row_init">						
+						<div class="row col-md-5">
+							<div class="form-group">								
+								<div class="col-md-12">
+									{!! Form::label('type', 'Proveedor De Pago', array('class' => 'col-md-12 control-label')) !!}
+									{!! Form::select('type',array(),old('type'), array('id'=>'type_select', 'class' => 'form-control chosen-select', 'style'=>'width:350px;')) !!}	
+								</div>
+
+								<div class="col-md-12">
+									{!! Form::label('descripcion', 'Descripción', array('class' => 'col-md-12 control-label')) !!}
+									{!! Form::textarea('descripcion',old('descripcion'), array('class' => 'form-control','rows' => 3,'placeholder'=>'Descripción del Método de Pago','maxlength' => 256)) !!}
+								</div>
+
+								<div class="col-md-12">
+									{!! Form::label('estado', 'Estado', array('class' => 'col-md-12 control-label')) !!}										
+									@if(old('active') == 'true' )												
+										<div>{{Form::radio('active', 'Activa', true)}} Activa</div>
+										<div>{{Form::radio('active', 'Desactiva', false)}} Desactiva</div>		
+									@else
+										<div>{{Form::radio('active', 'Activa', false)}} Activa</div>
+										<div>{{Form::radio('active', 'Desactiva', true)}} Desactiva</div>
+									@endif											
+								</div>
+
+							</div>
+
+						</div>
+						<div class="row col-md-7 metadatos_style">
+							<div class="form-group">
+
+								<div class="col-md-12">
+									{!! Form::label('name', 'Nombre de Método', array('class' => 'col-md-12 control-label')) !!}
+									{!! Form::text('name',old('name'), array('class' => 'form-control','placeholder'=>'Nombre del método de pago')) !!}
+								</div>
+
+								<div class="col-md-12">
+									{!! Form::label('data', 'MetaDatos', array('class' => 'col-md-12 control-label')) !!}
+									{!! Form::textarea('data',old('data'), array('class' => 'form-control','rows' => 3,'placeholder'=>'JSON contenedor de llaves de acceso','maxlength' => 256)) !!}
+								</div>
+
+								<div class="col-md-12">
+									{!! Form::label('ambiente', 'Ambiente', array('class' => 'col-md-12 control-label')) !!}										
+									@if(old('test') == 'false' )
+
+										<div>{{Form::radio('test', 'Pruebas', false)}} Pruebas</div>
+										<div>{{Form::radio('test', 'Producción', true)}} Producción</div>		
+									@else
+										<div>{{Form::radio('test', 'Pruebas', true)}} Pruebas</div>
+										<div>{{Form::radio('test', 'Producción', false)}} Producción</div>
+
+									@endif											
+								</div>							
+							</div>
+						</div>
+						<div row col-md-12>
+							<div class="col-md-12">
+									<p class="method_description">
+										
+									</p>
+								</div>
+						</div>
+						{!! Form::hidden('store_id', old('store_id')) !!}
+					</div>
+				</div>
+			</div>
+			{!! Form::close() !!}
+			<div class="modal-footer">
+				<button type="submit" form = "form_nuevo_proveedorpago" id="modal-button-providerpay" class="btn btn-default " > Crear Producto</button>	         
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>		                  
 		        </div>
 	      	</div>
 		</div>
@@ -761,6 +868,9 @@
     {!! Form::close() !!}
 
     {!! Form::open(array('id'=>'form_stage_order','url' => 'mistiendas/cambioestadoorder')) !!}
+    {!! Form::close() !!}
+
+    {!! Form::open(array('id'=>'form_consult_provpago','url' => 'mistiendas/consultarprovpago')) !!}
     {!! Form::close() !!}
 
 @endsection
@@ -841,7 +951,7 @@
 		        		if (data == 1) {
 		                    return 'Activo';
 	                    }else{
-		                    return 'Desactivo';
+		                    return 'Inactivo';
 	                    }
 			        	}
 			    	}               
@@ -992,7 +1102,52 @@
 		});
 
 		$('.option_ppago').on('click', function (e) {
-			$('#ppago_modal').modal()
+			var datos = new Array();
+			datos['id'] = this.id.split('_')[2];
+			datos['name'] = this.id.split('_')[1];
+			seg_ajaxobject.peticionajax($('#form_consult_provpago').attr('action'),datos,"clu_tienda.consultaRespuestaProviders",false);
+
+			 //llamado sincrono, para cambiar el id de tienda
+		    //la otra opción es retardar el listado de las los proveedores
+		    javascript:clu_tienda.table_providers = $('#table_providers').DataTable( {		
+			    "responsive": true,
+			    "columnDefs": [
+			        { responsivePriority: 1, targets: 0 },
+			        { responsivePriority: 2, targets: 0 }
+	    		],
+			    "processing": true,
+			    "bLengthChange": false,
+			    "serverSide": true,
+			    "bDestroy": true,      
+			    "ajax": "{{url('mistiendas/listarajaxproviders')}}",
+			    "iDisplayLength": 15,     	       
+			    "columns": [
+			    	{
+		                "className":      'details-control',
+		                "orderable":      false,
+		                "data":           null,
+		                "defaultContent": ''
+		            },		   
+					{ "data": "type"},
+					{ "data": "name"},		        
+					{ "data": "description"},  	    
+			        { "data": "data"},
+			        { "data": "active",render: function ( data, type, row ) {
+		        		if (data == 1) {
+		                    return 'Activo';
+	                    }else{
+		                    return 'Inactivo';
+	                    }
+			        	}
+			    	},
+			    	{ "data": "store"}               
+			    ],       
+			    "language": {
+			        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+			    },
+			});
+
+			
 		});
 		
 		$( ".solo_numeros" ).keypress(function(evt) {
@@ -1027,6 +1182,40 @@
 		});
 		$("#materiales_select").chosen().change(function(event) {
 			$('#materiales').val($('#materiales_select').chosen().val());		    
+		});
+
+		$("#type_select").chosen().change(function(event) {
+
+			if($('#type_select').chosen().val() == 'payu'){
+				$('#nuevoproveedor_modal #data').text('{"merchantId":"","accountId":"","ApiKey":""}');
+				
+				var html = ''+
+				'<h4>PayU</h4>'+
+				'<div>URL: https://www.payulatam.com/co/ </div>'+
+				'<xmp><form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/"></xmp>'+
+				'<xmp><input name="merchantId" type="hidden" value="508029"></xmp>'+
+				'<xmp><input name="accountId" type="hidden" value="512321"></xmp>'+
+				'<xmp><input name="description" type="hidden" value="Test PAYU"></xmp>'+
+				'<xmp><input name="referenceCode" type="hidden" value="TestPayU"></xmp>'+
+				'<xmp><input name="amount" type="hidden" value="20000"></xmp>'+
+				'<xmp><input name="tax" type="hidden" value="3193"></xmp>'+
+				'<xmp><input name="taxReturnBase" type="hidden" value="16806"></xmp>'+
+				'<xmp><input name="currency" type="hidden" value="COP"></xmp>'+
+				'<xmp><input name="lng" type="hidden"  value="es"></xmp>'+
+				'<xmp><input name="signature" type="hidden" value="7ee7cf808ce6a39b17481c54f2c57acc"></xmp>'+
+				'<xmp><input name="test" type="hidden" value="1"></xmp>'+
+				'<xmp><input name="buyerEmail" type="hidden" value="test@test.com"></xmp>'+
+				'<xmp><input name="responseUrl" type="hidden" value="http://www.test.com/response"></xmp>'+
+				'<xmp><input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation"></xmp>'+
+				'<xmp><input name="Submit" type="submit" value="Enviar" ></xmp>'+				
+				'<xmp><form></xmp>'+
+				'<p>Pruebas: https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/</p>'+
+				'<p>Producción: https://checkout.payulatam.com/ppp-web-gateway-payu/</p>';
+				
+				$('#nuevoproveedor_modal .method_description').html(html)
+				
+				
+			}
 		});
 
 		$('#nuevoproducto_modal').on('hidden.bs.modal', function () {

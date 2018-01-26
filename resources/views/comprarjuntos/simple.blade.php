@@ -1232,8 +1232,6 @@
 					//todas las caracteristicas esta devidamente diligenciadas
 					var add_prod = true;
 					//verificamos el objeto carrito, id_tienda, aun no funcional
-
-					
 					//verificar que el objeto no este previament agregado
 					if(seg_user.cart_products.length){					
 						for(var i=0; i < seg_user.cart_products.length;i++){
@@ -1280,8 +1278,7 @@
 									$('#add_cart_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!El producto ya se encuentra agregado!</strong> Para editar sus datos da click en el Carrito de compras.</div>');
 									close_modal = false;
 									add_prod = false;
-									break;						
-
+									break;
 								}
 															
 							}
@@ -1304,6 +1301,7 @@
 							prod[7] = $("label[for='prod_cart_modal_for']").html();
 							prod[8] = $("#dercription_cart_modal").html();
 							prod[9] = $('#prod_img_cart_modal')[0].src;
+							prod[10] =$("input[name='store']").val();
 							
 							//agregamos el producto en la ultima posicion					
 							seg_user.cart_products[seg_user.cart_products.length] = prod;
@@ -1327,6 +1325,7 @@
 						prod[7] = $("label[for='prod_cart_modal_for']").html();
 						prod[8] = $("#dercription_cart_modal").html();
 						prod[9] = $('#prod_img_cart_modal')[0].src;
+						prod[10] =$("input[name='store']").val();
 						seg_user.cart_products[0] = prod;				
 					}
 					
@@ -1581,21 +1580,21 @@
 
 	</script>
 
-	<!--Actualización de carrito-->
+	<!--Actualización de carrito por session-->
 	@if(Session::has('cart'))
-		
-		@foreach (Session::get('cart') as $cart)
 		<script type="text/javascript">
+		@foreach (Session::get('cart') as $cart)		
 			str = "{!!$cart!!}";
-			seg_user.cart_products.push(str.split(","));
-		</script>
+			i = 0;			
+			if("{!!$tienda[0]->id!!}" == str.split(",")[10]){
+				seg_user.cart_products.push(str.split(","));
+				i++;
+			}						
 		@endforeach
-		<script type="text/javascript">
-			$('#bange_cart').html(parseInt("{!! count(Session::get('cart')) !!}"));
-            $('#bange_cart_b').html(parseInt("{!! count(Session::get('cart')) !!}"));
-		</script>			
+			$('#bange_cart').html(i);
+            $('#bange_cart_b').html(i);
+		</script>
+		
 	@endif
-
-
 
 @endsection

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCluTypePaymentMethodTable extends Migration
+class CreateCluPaymentMethodTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,16 @@ class CreateCluTypePaymentMethodTable extends Migration
      */
     public function up()
     {
-        Schema::create('clu_type_payment_method', function(Blueprint $table)
+        Schema::create('clu_payment_method', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('type');   
+            $table->string('name');   
             $table->string('description');           
-            $table->string('data');  
+            $table->string('data');
+            $table->string('form');
+            $table->boolean('active')->default(true); 
+            $table->boolean('test')->default(true); 
             $table->integer('store_id')->unsigned();            
             $table->foreign('store_id')->references('id')->on('clu_store')->onDelete('cascade');
             $table->timestamps();
@@ -31,6 +35,6 @@ class CreateCluTypePaymentMethodTable extends Migration
      */
     public function down()
     {
-        Schema::drop('clu_type_payment_method');
+        Schema::drop('clu_payment_method');
     }
 }

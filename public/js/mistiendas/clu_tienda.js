@@ -2,6 +2,7 @@ function clu_tienda() {
 	this.datos_pie = [];
 	this.table_products = '';
 	this.table_orders = '';
+	this.table_providers = '';
 	this.fillable = ['Nombre','Precio','Categorìa','Descripciòn'];
 	
 }
@@ -85,7 +86,28 @@ clu_tienda.prototype.validateNuevoProducto = function() {
 		return false;
 	}
 	return true;
-}
+};
+
+clu_tienda.prototype.validateNuevoProveedorPago = function() {
+	if($("#form_nuevo_proveedorpago :input")[1].value =="" || $("#form_nuevo_proveedorpago :input")[6].value =="" || $("#form_nuevo_proveedorpago :input")[7].value ==""){
+		$('#nuevoproveedor_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close close_alert_product" data-dismiss="alert">&times;</button><strong>!Envio Fallido!</strong></br> Faltan campos por diligenciar.</div>');
+		//pintar los inputs problematicos
+		for(var i=0; i < $("#form_nuevo_proveedorpago :input").length ; i++){
+	        if( i==6 || i==7 ) {
+	            if($("#form_nuevo_proveedorpago :input")[i].value ==""){
+	                $($("#form_nuevo_proveedorpago :input")[i]).addClass('input_danger');
+	            }	            
+	        }
+        }
+        $(".close_alert_product").on('click', function () { 
+        	$("#form_nuevo_proveedorpago :input").removeClass("input_danger");        	
+        });
+		return false;
+	}
+	return true;
+};
+
+
 
 clu_tienda.prototype.consultaRespuestaProducts = function(result) {
 
@@ -574,6 +596,32 @@ clu_tienda.prototype.cambiarRespuestaOrden = function(result) {
 		//ubo un error en el envio del mensage
 		$('#odenes_modal .alerts-module').html('<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!La Orden ha sido actualizada correctamente!</strong></br> Sin embargo el correo no llego al cliente </br> '+result.data+' </br>Intenta contactar el cliente si en caso dejo su nùmero de contacto para que sepa sobre el nuevo estado ('+result.request.stage+') de la orden de pedido: '+result.request.id_order+' </div>');
 	}	
+};
+
+clu_tienda.prototype.consultaRespuestaProviders = function(result) {
+	$('#ppago_modal .modal-title').html('Productos Tienda '+result.request.name);
+	
+	if(!result.data){
+		$('#ppago_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!La tienda aùn no tiene Métodos de pago Virtual!</strong></br> Para agregar un nuevo método de pago, no esperes màs y agrega un proveedor dando click en la opciòn <a href="#"><div class="" id="btn_nueva_tienda_a" data-toggle="modal" data-target="#nuevoproveedor_modal"><b> Crear un Proveedor de Pago</b></div></a></div>');
+	}
+
+	type_select=document.getElementById('type_select')
+	type_select.innerHTML = "";
+	var opt = document.createElement('option');
+	opt.value = '';
+	opt.innerHTML = 'Selecciona un tipo de Proveedor';
+	type_select.appendChild(opt);
+	for (var key in result.types) {
+		var opt = document.createElement('option');
+		opt.value = key;
+		opt.innerHTML = result.types[key];
+		type_select.appendChild(opt);
+	}
+	//actualiza el select dinamico
+	$('#type_select').trigger("chosen:updated");
+
+	$('#ppago_modal').modal()
+	
 };
 
 var clu_tienda = new clu_tienda();

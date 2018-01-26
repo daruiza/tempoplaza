@@ -1260,6 +1260,7 @@
 							prod[7] = $("label[for='prod_cart_modal_for']").html();
 							prod[8] = $("#dercription_cart_modal").html();
 							prod[9] = $('#prod_img_cart_modal')[0].src;
+							prod[10] =$("input[name='store']").val();
 							
 							//agregamos el producto en la ultima posicion					
 							seg_user.cart_products[seg_user.cart_products.length] = prod;
@@ -1283,6 +1284,7 @@
 						prod[7] = $("label[for='prod_cart_modal_for']").html();
 						prod[8] = $("#dercription_cart_modal").html();
 						prod[9] = $('#prod_img_cart_modal')[0].src;
+						prod[10] =$("input[name='store']").val();
 						seg_user.cart_products[0] = prod;				
 					}
 					
@@ -1534,16 +1536,19 @@
 
 	<!--Actualización de carrito-->
 	@if(Session::has('cart'))
-		@foreach (Session::get('cart') as $cart)
 		<script type="text/javascript">
+		@foreach (Session::get('cart') as $cart)		
 			str = "{!!$cart!!}";
-			seg_user.cart_products.push(str.split(","));
-		</script>
+			i = 0;			
+			if("{!!$tienda[0]->id!!}" == str.split(",")[10]){
+				seg_user.cart_products.push(str.split(","));
+				i++;
+			}						
 		@endforeach
-		<script type="text/javascript">
-			$('#bange_cart').html(parseInt("{!! count(Session::get('cart')) !!}"));
-            $('#bange_cart_b').html(parseInt("{!! count(Session::get('cart')) !!}"));
-		</script>				
+			$('#bange_cart').html(i);
+            $('#bange_cart_b').html(i);
+		</script>
+		
 	@endif
 
 @endsection
