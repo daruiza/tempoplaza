@@ -19,7 +19,7 @@ class CreateCluPaymentMethodTable extends Migration
             $table->string('name');   
             $table->string('description');           
             $table->string('data');
-            $table->string('form');
+            $table->string('form','2048');
             $table->boolean('active')->default(true); 
             $table->boolean('test')->default(true); 
             $table->integer('store_id')->unsigned();            

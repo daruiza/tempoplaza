@@ -237,6 +237,10 @@
 		
 	}
 
+	#form_payprov{
+		display: none !important;
+	}
+
 	</style>
 
 	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
@@ -530,6 +534,15 @@
 		</div>		
 	</div>
 	@endif
+
+	<!--Pago virtual-->
+	@if(!empty($payprov[0]))
+		<div id="form_payprov">			
+			{!! Form::hidden('type_payprov', $payprov[0]->type) !!}
+			{!! $payprov[0]->form !!}
+		</div>
+	@endif
+
 @endsection
 
 @section('modal')

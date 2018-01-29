@@ -84,7 +84,10 @@
 		xmp{
 			padding: 0px;
     		margin: 0px;
-		}	
+		}
+		.txt_16{
+			font-size: 16px;
+		}
 		
 
 		/*selectores para sispositivos moviles*/
@@ -731,12 +734,18 @@
 	</div>
 
 	<div class="modal fade" id="ppago_modal" role="dialog" >
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog  modal-lg">
 		 <!-- Modal content-->
 	      <div class="modal-content">
 	      	<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Proveedor de Métodos de Pago</h4>
+				<a href="#" style="text-decoration: none; color: #777">
+					<div class="" id="btn_nuevo_proveedor_pago" data-toggle="modal" data-target="#nuevoproveedor_modal">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true" style="font-size: 12px;"></span>
+						<span>Crear un Proveedor de Pago</span>
+					</div>
+				</a>
 			</div>
 			<div class = "alerts-module"></div>
 			<div class="modal-body">
@@ -748,9 +757,9 @@
 					            	<th></th>					            	
 			            			<th>Tipo</th>
 			            			<th>Nombre</th>
+			            			<th>Estado</th>		
+			            			<th>MetaDatos</th>			            				            			
 			            			<th>Descripción</th>
-			            			<th>MetaDatos</th>
-			            			<th>Estado</th>			            			
 			            			<th>Tienda</th>
 					            </tr>
 					        </thead>              
@@ -771,7 +780,7 @@
 	      <div class="modal-content">
 	      	<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Nuevo Proveedor De Pago</h4>
+				<h4 id="modal-title-provider" class="modal-title">Nuevo Proveedor De Pago</h4>
 			</div>
 			<div class = "alerts-module"></div>
 			{!! Form::open(array('url' => Session::get('controlador').'nuevoproveedorpago', 'id'=>'form_nuevo_proveedorpago','onsubmit'=>'javascript:return clu_tienda.validateNuevoProveedorPago()')) !!}
@@ -787,18 +796,14 @@
 
 								<div class="col-md-12">
 									{!! Form::label('descripcion', 'Descripción', array('class' => 'col-md-12 control-label')) !!}
-									{!! Form::textarea('descripcion',old('descripcion'), array('class' => 'form-control','rows' => 3,'placeholder'=>'Descripción del Método de Pago','maxlength' => 256)) !!}
+									{!! Form::textarea('description',old('description'), array('class' => 'form-control','rows' => 3,'placeholder'=>'Descripción del Método de Pago','maxlength' => 256)) !!}
 								</div>
 
 								<div class="col-md-12">
-									{!! Form::label('estado', 'Estado', array('class' => 'col-md-12 control-label')) !!}										
-									@if(old('active') == 'true' )												
-										<div>{{Form::radio('active', 'Activa', true)}} Activa</div>
-										<div>{{Form::radio('active', 'Desactiva', false)}} Desactiva</div>		
-									@else
-										<div>{{Form::radio('active', 'Activa', false)}} Activa</div>
-										<div>{{Form::radio('active', 'Desactiva', true)}} Desactiva</div>
-									@endif											
+									{!! Form::label('estado', 'Estado', array('class' => 'col-md-12 control-label')) !!}
+									<div>{{Form::radio('active', 'activa', false)}} Activa</div>
+									<div>{{Form::radio('active', 'inactiva', true)}} Inactiva</div>
+																			
 								</div>
 
 							</div>
@@ -814,20 +819,13 @@
 
 								<div class="col-md-12">
 									{!! Form::label('data', 'MetaDatos', array('class' => 'col-md-12 control-label')) !!}
-									{!! Form::textarea('data',old('data'), array('class' => 'form-control','rows' => 3,'placeholder'=>'JSON contenedor de llaves de acceso','maxlength' => 256)) !!}
+									{!! Form::textarea('data',old('data'), array('class' => 'form-control txt_16','rows' => 3,'placeholder'=>'JSON contenedor de llaves de acceso','maxlength' => 256)) !!}
 								</div>
 
 								<div class="col-md-12">
-									{!! Form::label('ambiente', 'Ambiente', array('class' => 'col-md-12 control-label')) !!}										
-									@if(old('test') == 'false' )
-
-										<div>{{Form::radio('test', 'Pruebas', false)}} Pruebas</div>
-										<div>{{Form::radio('test', 'Producción', true)}} Producción</div>		
-									@else
-										<div>{{Form::radio('test', 'Pruebas', true)}} Pruebas</div>
-										<div>{{Form::radio('test', 'Producción', false)}} Producción</div>
-
-									@endif											
+									{!! Form::label('ambiente', 'Ambiente', array('class' => 'col-md-12 control-label')) !!}
+									<div>{{Form::radio('test', 'pruebas', true)}} Pruebas</div>
+									<div>{{Form::radio('test', 'produccion', false)}} Producción</div>
 								</div>							
 							</div>
 						</div>
@@ -837,8 +835,8 @@
 										
 									</p>
 								</div>
-						</div>
-						{!! Form::hidden('store_id', old('store_id')) !!}
+						</div>						
+						{!! Form::hidden('payment_method_id', old('payment_method_id')) !!}
 					</div>
 				</div>
 			</div>
@@ -868,6 +866,9 @@
     {!! Form::close() !!}
 
     {!! Form::open(array('id'=>'form_stage_order','url' => 'mistiendas/cambioestadoorder')) !!}
+    {!! Form::close() !!}
+
+    {!! Form::open(array('id'=>'form_consult_provspago','url' => 'mistiendas/consultarprovspago')) !!}
     {!! Form::close() !!}
 
     {!! Form::open(array('id'=>'form_consult_provpago','url' => 'mistiendas/consultarprovpago')) !!}
@@ -916,6 +917,11 @@
 
 		//Consultar los productos de la tienda, listado
 		$('.option_products').on('click', function (e) {
+
+			//Limpiamos la variables
+			clu_tienda.trprod = undefined;
+		    clu_tienda.rowprod = undefined;
+
 			var datos = new Array();
 			datos['id'] = this.id.split('_')[2];
 			datos['name'] = this.id.split('_')[1];				
@@ -962,38 +968,43 @@
 			});
 
 			//metodo para la tabla
-			$('#table_prods tbody').on('click', 'td.details-control', function () {
+			$('#productos_modal #table_prods tbody').on('click', 'td.details-control', function () {
 				//cerramos el div anterior
-				if(clu_tienda.tr != undefined){
-					if(clu_tienda.row.data().id != clu_tienda.table_products.row($(this).closest('tr')).data().id){
-						clu_tienda.row.child.hide();
-		        		clu_tienda.tr.removeClass('shown');
+				if(clu_tienda.trprod != undefined){
+					if(clu_tienda.rowprod.data().id != clu_tienda.table_products.row($(this).closest('tr')).data().id){
+						clu_tienda.rowprod.child.hide();
+		        		clu_tienda.trprod.removeClass('shown');
 					}					
 				}				
 
-		        clu_tienda.tr = $(this).closest('tr');
-		        clu_tienda.row = clu_tienda.table_products.row( clu_tienda.tr );
+		        clu_tienda.trprod = $(this).closest('tr');
+		        clu_tienda.rowprod = clu_tienda.table_products.row( clu_tienda.trprod );
 		 		
-		        if ( clu_tienda.row.child.isShown() ) {
+		        if ( clu_tienda.rowprod.child.isShown() ) {
 		            // la fila esta abierta
-		            clu_tienda.row.child.hide();
-		            clu_tienda.tr.removeClass('shown');
+		            clu_tienda.rowprod.child.hide();
+		            clu_tienda.trprod.removeClass('shown');
 		        }
 		        else {
 		            //la fila esta cerrada
 		            //llamado asincrono datos de producto
 		            var datos = new Array();
-		            datos['id_producto'] = clu_tienda.row.data().id;
-		            datos['id_tienda'] = clu_tienda.row.data().store_id;
+		            datos['id_producto'] = clu_tienda.rowprod.data().id;
+		            datos['id_tienda'] = clu_tienda.rowprod.data().store_id;
 		            datos['url'] = "{{url('/')}}";
 					datos['usuario'] = "{{Session::get('comjunplus.usuario.name')}}";
 		            seg_ajaxobject.peticionajax($('#form_consult_product').attr('action'),datos,"clu_tienda.consultaRespuestaProduct");
-		            clu_tienda.tr.addClass('shown');
+		            clu_tienda.trprod.addClass('shown');
 		        }
 		    });		    
 		});
 
 		$('.option_order').on('click', function (e) {
+
+			//Limpiamos la variables
+			clu_tienda.trorder = undefined;
+		    clu_tienda.roworder = undefined;
+
 			var datos = new Array();
 			datos['id'] = this.id.split('_')[2];
 			datos['name'] = this.id.split('_')[1];			
@@ -1071,31 +1082,31 @@
 			$('#table_orders tbody').on('click', 'td.details-control', function () {
 
 				//cerramos el div anterior
-				if(clu_tienda.tr != undefined){
-					if(clu_tienda.row.data().id != clu_tienda.table_orders.row($(this).closest('tr')).data().id){
-						clu_tienda.row.child.hide();
-		        		clu_tienda.tr.removeClass('shown');
+				if(clu_tienda.trorder != undefined){
+					if(clu_tienda.roworder.data().id != clu_tienda.table_orders.row($(this).closest('tr')).data().id){
+						clu_tienda.roworder.child.hide();
+		        		clu_tienda.trorder.removeClass('shown');
 					}					
 				}				
 
-		        clu_tienda.tr = $(this).closest('tr');
-		        clu_tienda.row = clu_tienda.table_orders.row( clu_tienda.tr );
+		        clu_tienda.trorder = $(this).closest('tr');
+		        clu_tienda.roworder = clu_tienda.table_orders.row( clu_tienda.trorder );
 		 		
-		        if ( clu_tienda.row.child.isShown() ) {
+		        if ( clu_tienda.roworder.child.isShown() ) {
 		            // la fila esta abierta
-		            clu_tienda.row.child.hide();
-		            clu_tienda.tr.removeClass('shown');
+		            clu_tienda.roworder.child.hide();
+		            clu_tienda.trorder.removeClass('shown');
 		        }
 		        else {
 		            //la fila esta cerrada
 		            //llamado asincrono datos de producto
 		            var datos = new Array();
-		            datos['id_order'] = clu_tienda.row.data().id;
-		            datos['id_tienda'] = clu_tienda.row.data().store_id;
+		            datos['id_order'] = clu_tienda.roworder.data().id;
+		            datos['id_tienda'] = clu_tienda.roworder.data().store_id;
 		            datos['url'] = "{{url('/')}}";
 					datos['usuario'] = "{{Session::get('comjunplus.usuario.name')}}";
 		            seg_ajaxobject.peticionajax($('#form_consult_order').attr('action'),datos,"clu_tienda.consultaRespuestaOrder");
-		            clu_tienda.tr.addClass('shown');
+		            clu_tienda.trorder.addClass('shown');
 		        }
 				
 			});
@@ -1105,7 +1116,7 @@
 			var datos = new Array();
 			datos['id'] = this.id.split('_')[2];
 			datos['name'] = this.id.split('_')[1];
-			seg_ajaxobject.peticionajax($('#form_consult_provpago').attr('action'),datos,"clu_tienda.consultaRespuestaProviders",false);
+			seg_ajaxobject.peticionajax($('#form_consult_provspago').attr('action'),datos,"clu_tienda.consultaRespuestaProviders",false);
 
 			 //llamado sincrono, para cambiar el id de tienda
 		    //la otra opción es retardar el listado de las los proveedores
@@ -1129,22 +1140,57 @@
 		                "defaultContent": ''
 		            },		   
 					{ "data": "type"},
-					{ "data": "name"},		        
-					{ "data": "description"},  	    
-			        { "data": "data"},
-			        { "data": "active",render: function ( data, type, row ) {
-		        		if (data == 1) {
-		                    return 'Activo';
-	                    }else{
-		                    return 'Inactivo';
-	                    }
+					{ "data": "name"},
+					{ "data": "active", render: function ( data, type, row ) {
+			        		if (data == 1) {
+			                    return 'Activo';
+		                    }else{
+			                    return 'Inactivo';
+		                    }
 			        	}
-			    	},
-			    	{ "data": "store"}               
+			    	},	        
+					{ "data": "description","visible": false},  	    
+			        { "data": "data","visible": false},
+			        
+			    	{ "data": "store","visible": false}               
 			    ],       
 			    "language": {
 			        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
 			    },
+			});
+
+
+			//metodo para la tabla
+			$('#table_providers tbody').on('click', 'td.details-control', function () {
+
+				//cerramos el div anterior
+				if(clu_tienda.trppago != undefined){
+					if(clu_tienda.rowppago.data().id != clu_tienda.table_providers.row($(this).closest('tr')).data().id){
+						clu_tienda.rowppago.child.hide();
+		        		clu_tienda.trppago.removeClass('shown');
+					}					
+				}				
+
+		        clu_tienda.trppago = $(this).closest('tr');
+		        clu_tienda.rowppago = clu_tienda.table_providers.row( clu_tienda.trppago );
+		 		
+		        if ( clu_tienda.rowppago.child.isShown() ) {
+		            // la fila esta abierta
+		            clu_tienda.rowppago.child.hide();
+		            clu_tienda.trppago.removeClass('shown');
+		        }
+		        else {
+		            //la fila esta cerrada
+		            //llamado asincrono datos de producto
+		            var datos = new Array();
+		            datos['id_provider'] = clu_tienda.rowppago.data().id;
+		            datos['id_tienda'] = clu_tienda.rowppago.data().store_id;
+		            datos['url'] = "{{url('/')}}";
+					datos['usuario'] = "{{Session::get('comjunplus.usuario.name')}}";
+		            seg_ajaxobject.peticionajax($('#form_consult_provpago').attr('action'),datos,"clu_tienda.consultaRespuestaProvider");
+		            clu_tienda.trppago.addClass('shown');
+		        }
+				
 			});
 
 			
@@ -1187,7 +1233,7 @@
 		$("#type_select").chosen().change(function(event) {
 
 			if($('#type_select').chosen().val() == 'payu'){
-				$('#nuevoproveedor_modal #data').text('{"merchantId":"","accountId":"","ApiKey":""}');
+				$('#nuevoproveedor_modal #data').text('{"merchantId":"", "accountId":"", "ApiKey":"", "ApiLogin":"", "PlublicKey":""}');
 				
 				var html = ''+
 				'<h4>PayU</h4>'+
@@ -1212,8 +1258,7 @@
 				'<p>Pruebas: https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/</p>'+
 				'<p>Producción: https://checkout.payulatam.com/ppp-web-gateway-payu/</p>';
 				
-				$('#nuevoproveedor_modal .method_description').html(html)
-				
+				$('#nuevoproveedor_modal .method_description').html(html);
 				
 			}
 		});
@@ -1254,14 +1299,85 @@
 			$('#materiales_select').val([]).trigger("chosen:updated");
 		});
 
+		$('#nuevoproveedor_modal').on('hidden.bs.modal', function () {
+
+			$('#modal-title-provider').html('Crear Proveedor');
+			$("#nuevoproveedor_modal input[name='payment_method_id']").val('');
+			$('#nuevoproveedor_modal #type_select').val('');
+			$('#nuevoproveedor_modal #name').val('');
+			$('#nuevoproveedor_modal #description').val('');
+			$('#nuevoproveedor_modal #data').val('');
+			$('#nuevoproveedor_modal input[name=active][value=inactiva]').attr("checked", "checked");
+			$('#nuevoproveedor_modal input[name=test][value=inactiva]').attr("checked", "checked");
+			$('#modal-button-providerpay').html('Crear Proveedor')
+
+			$('#nuevoproveedor_modal #type_select').trigger("chosen:updated");
+		});
+
 		$('#productos_modal').on('hidden.bs.modal', function () {
 			 //clu_tienda.table_products.destroy();
 			 //$('#table_prods tbody').off('click');
+			 //clu_tienda.table_products.clear().draw();
+			 clu_tienda.table_products="";
+			 html=''+
+			 '<table id="table_prods" class="display responsive no-wrap " cellspacing="0" width="100%">'+
+			 '<thead>'+
+			 '<tr>'+
+			 '<th></th>'+
+			 '<th>Nombre</th>'+
+			 '<th>Precio</th>'+
+			 '<th>Categorìa</th>'+
+			 '<th>Unidades de Venta</th>'+
+			 '<th>Estado</th>'+
+			 '</tr>'+
+			 '</thead>'+
+			 '</table> ';
+			 $('#productos_modal .row_init').html(html);
+
 		});
 
 		$('#odenes_modal').on('hidden.bs.modal', function () {
 			 //clu_tienda.table_orders.destroy();
 			 //$('#table_orders tbody').off('click');
+			 //clu_tienda.table_orders.clear().draw();
+			 clu_tienda.table_orders="";
+			 html=''+
+			 '<table id="table_orders" class="display responsive no-wrap " cellspacing="0" width="100%">'+
+			 '<thead>'+
+			 '<tr>'+
+			 '<th></th>'+
+			 '<th>Número</th>'+
+			 '<th>Fecha</th>'+
+			 '<th>Cliente</th>'+
+			 '<th>Estado</th>'+			 
+			 '</tr>'+
+			 '</thead>'+
+			 '</table> ';
+
+			 $('#odenes_modal .row_init').html(html);
+		});
+
+		$('#ppago_modal').on('hidden.bs.modal', function () {
+			 //clu_tienda.table_orders.destroy();
+			 //$('#table_orders tbody').off('click');
+			 //clu_tienda.table_orders.clear().draw();
+			 clu_tienda.table_orders="";
+			 html=''+
+			 '<table id="table_providers" class="display responsive no-wrap " cellspacing="0" width="100%">'+
+			 '<thead>'+
+			 '<tr>'+
+			 '<th></th>'+
+			 '<th>Tipo</th>'+
+			 '<th>Nombre</th>'+
+			 '<th>Descripción</th>'+
+			 '<th>MetaDatos</th>'+
+			 '<th>Estado</th>'+
+			 '<th>Tienda</th>'+			 
+			 '</tr>'+
+			 '</thead>'+
+			 '</table> ';			 
+			            
+			 $('#ppago_modal .row_init').html(html);
 		});
 
 		$('#image_store').change(function(e) {
@@ -1357,7 +1473,7 @@
 			        		if (data == 1) {
 			                    return 'Activo';
 		                    }else{
-			                    return 'Desactivo';
+			                    return 'Inactivo';
 		                    }
 			        	}
 			    	}                     
@@ -1370,31 +1486,31 @@
 				//metodo para la tabla
 				$('#table_prods tbody').on('click', 'td.details-control', function () {
 					//cerramos el div anterior
-					if(clu_tienda.tr != undefined){
-						if(clu_tienda.row.data().id != clu_tienda.table_products.row($(this).closest('tr')).data().id){
-							clu_tienda.row.child.hide();
-			        		clu_tienda.tr.removeClass('shown');
+					if(clu_tienda.trprod != undefined){
+						if(clu_tienda.rowprod.data().id != clu_tienda.table_products.row($(this).closest('tr')).data().id){
+							clu_tienda.rowprod.child.hide();
+			        		clu_tienda.trprod.removeClass('shown');
 						}					
 					}
 
-			        clu_tienda.tr = $(this).closest('tr');
-			        clu_tienda.row = clu_tienda.table_products.row( clu_tienda.tr );
+			        clu_tienda.trprod = $(this).closest('tr');
+			        clu_tienda.rowprod = clu_tienda.table_products.row( clu_tienda.trprod );
 			 		
-			        if ( clu_tienda.row.child.isShown() ) {
+			        if ( clu_tienda.rowprod.child.isShown() ) {
 			            // la fila esta abierta
-			            clu_tienda.row.child.hide();
-			            clu_tienda.tr.removeClass('shown');
+			            clu_tienda.rowprod.child.hide();
+			            clu_tienda.trprod.removeClass('shown');
 			        }
 			        else {
 			            //la fila esta cerrada
 			            //llamado asincrono datos de producto
 			            var datos = new Array();
-			            datos['id_producto'] = clu_tienda.row.data().id;
-			            datos['id_tienda'] = clu_tienda.row.data().store_id;
+			            datos['id_producto'] = clu_tienda.rowprod.data().id;
+			            datos['id_tienda'] = clu_tienda.rowprod.data().store_id;
 			            datos['url'] = "{{url('/')}}";
 						datos['usuario'] = "{{Session::get('comjunplus.usuario.name')}}";
 			            seg_ajaxobject.peticionajax($('#form_consult_product').attr('action'),datos,"clu_tienda.consultaRespuestaProduct");
-			            clu_tienda.tr.addClass('shown');
+			            clu_tienda.trprod.addClass('shown');
 			        }
 			    });		
 				
@@ -1495,31 +1611,31 @@
 			$('#table_orders tbody').on('click', 'td.details-control', function () {
 
 				//cerramos el div anterior
-				if(clu_tienda.tr != undefined){
-					if(clu_tienda.row.data().id != clu_tienda.table_orders.row($(this).closest('tr')).data().id){
-						clu_tienda.row.child.hide();
-		        		clu_tienda.tr.removeClass('shown');
+				if(clu_tienda.trorder != undefined){
+					if(clu_tienda.roworder.data().id != clu_tienda.table_orders.row($(this).closest('tr')).data().id){
+						clu_tienda.roworder.child.hide();
+		        		clu_tienda.trorder.removeClass('shown');
 					}					
 				}				
 
-		        clu_tienda.tr = $(this).closest('tr');
-		        clu_tienda.row = clu_tienda.table_orders.row( clu_tienda.tr );
+		        clu_tienda.trorder = $(this).closest('tr');
+		        clu_tienda.roworder = clu_tienda.table_orders.row( clu_tienda.trorder );
 		 		
-		        if ( clu_tienda.row.child.isShown() ) {
+		        if ( clu_tienda.roworder.child.isShown() ) {
 		            // la fila esta abierta
-		            clu_tienda.row.child.hide();
-		            clu_tienda.tr.removeClass('shown');
+		            clu_tienda.roworder.child.hide();
+		            clu_tienda.trorder.removeClass('shown');
 		        }
 		        else {
 		            //la fila esta cerrada
 		            //llamado asincrono datos de producto
 		            var datos = new Array();
-		            datos['id_order'] = clu_tienda.row.data().id;
-		            datos['id_tienda'] = clu_tienda.row.data().store_id;
+		            datos['id_order'] = clu_tienda.roworder.data().id;
+		            datos['id_tienda'] = clu_tienda.roworder.data().store_id;
 		            datos['url'] = "{{url('/')}}";
 					datos['usuario'] = "{{Session::get('comjunplus.usuario.name')}}";
 		            seg_ajaxobject.peticionajax($('#form_consult_order').attr('action'),datos,"clu_tienda.consultaRespuestaOrder");
-		            clu_tienda.tr.addClass('shown');
+		            clu_tienda.trorder.addClass('shown');
 		        }
 			});
 		

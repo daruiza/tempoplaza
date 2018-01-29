@@ -443,6 +443,13 @@ class WelcomeController extends Controller {
 					if($value->stage == "FINALIZADO") $value->color = "#33cc33";
 				}
 
+				//método de pago
+				$moduledata['payprov'] = \DB::table('clu_payment_method')
+				->select('clu_payment_method.type','clu_payment_method.form')			
+				->where('clu_payment_method.store_id',$moduledata['tienda'][0]->id)
+				->where('clu_payment_method.active',1)			
+				->get();
+
 				$moduledata['calificaciones'] = \DB::table('clu_order')
 				->select('clu_order.resenia', \DB::raw('count(*) as total'))			
 				->where('clu_order.store_id',$moduledata['tienda'][0]->id)
@@ -490,6 +497,7 @@ class WelcomeController extends Controller {
 				//asignamos el id para listar las ordenes, en listarajaxorders
 				Session::put('store.id', $moduledata['tienda'][0]->id);
 				Session::put('app', $moduledata['tienda'][0]->name);//para cambiar ombre de tienda
+
 
 				//Mini controlador de vista, debe estar aqui para evitar la perdida de url
 				if($moduledata['tienda'][0]->template == 'app_store' || $moduledata['tienda'][0]->template == 'web_store'){
@@ -683,6 +691,15 @@ class WelcomeController extends Controller {
 				if($value->stage == "RECHAZADO") $value->color = "#ff5c33";
 				if($value->stage == "FINALIZADO") $value->color = "#33cc33";
 			}
+
+			//método de pago
+			$moduledata['payprov'] = \DB::table('clu_payment_method')
+			->select('clu_payment_method.type','clu_payment_method.form')		
+			->where('clu_payment_method.store_id',$moduledata['tienda'][0]->id)
+			->where('clu_payment_method.active',1)			
+			->get();
+
+
 			$moduledata['calificaciones'] = \DB::table('clu_order')
 			->select('clu_order.resenia', \DB::raw('count(*) as total'))			
 			->where('clu_order.store_id',$moduledata['tienda'][0]->id)
@@ -1431,7 +1448,10 @@ class WelcomeController extends Controller {
 				$mensaje->save();	
 			}catch (ModelNotFoundException $e) {				
 				//no hacer nada
-			}		
+			}
+
+			//eliminado de productos de la session cart
+			Session::pull('cart');
 
 			//retornar ala tienda con mensajes de ejecuciòn			
 			$mensage[]='El pedido fue enviado con EXITO!, Con Consecutivo: '.$orden->id;

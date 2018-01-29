@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+    	//confirmación de pedido de PayU       
+        'mistiendas/confirmationpayu',
     ];
 }

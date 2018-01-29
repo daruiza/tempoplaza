@@ -107,8 +107,6 @@ clu_tienda.prototype.validateNuevoProveedorPago = function() {
 	return true;
 };
 
-
-
 clu_tienda.prototype.consultaRespuestaProducts = function(result) {
 
 	$('#productos_modal .modal-title').html('Productos Tienda '+result.request.name);
@@ -132,10 +130,10 @@ clu_tienda.prototype.consultaRespuestaProducts = function(result) {
 };
 
 clu_tienda.prototype.consultaRespuestaProduct = function(result) {
-	clu_tienda.row.child( clu_tienda.format(clu_tienda.row.data(),result.request)).show();
+	clu_tienda.rowprod.child( clu_tienda.format(clu_tienda.rowprod.data(),result.request)).show();
 	$('.editproduct').on('click', function (e) {
 		//buscamos los datos seleccionados
-		for(var i=0; clu_tienda.table_products.data().length; i++){
+		for(var i=0; i < clu_tienda.table_products.data().length; i++){
 			if(this.className.split(' ')[0].split('_')[3]==clu_tienda.table_products.data()[i].id){
 				//encontramos los datos
 				$('#modal-title-product').html('Editar Producto');
@@ -264,7 +262,7 @@ clu_tienda.prototype.consultaRespuestaOrders = function(result) {
 };
 
 clu_tienda.prototype.consultaRespuestaOrder = function(result) {
-	clu_tienda.row.child( clu_tienda.formatorder(clu_tienda.row.data(),result.request ,result.data,result.annotations)).show();
+	clu_tienda.roworder.child( clu_tienda.formatorder(clu_tienda.roworder.data(),result.request ,result.data,result.annotations)).show();
 	//OPCIONES DE PEDIDO DE ORDEN
 	$('.stage_cambio').on('click', function (e) {
 
@@ -599,7 +597,7 @@ clu_tienda.prototype.cambiarRespuestaOrden = function(result) {
 };
 
 clu_tienda.prototype.consultaRespuestaProviders = function(result) {
-	$('#ppago_modal .modal-title').html('Productos Tienda '+result.request.name);
+	$('#ppago_modal .modal-title').html('Provedores de Pago Tienda '+result.request.name);
 	
 	if(!result.data){
 		$('#ppago_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!La tienda aùn no tiene Métodos de pago Virtual!</strong></br> Para agregar un nuevo método de pago, no esperes màs y agrega un proveedor dando click en la opciòn <a href="#"><div class="" id="btn_nueva_tienda_a" data-toggle="modal" data-target="#nuevoproveedor_modal"><b> Crear un Proveedor de Pago</b></div></a></div>');
@@ -620,8 +618,159 @@ clu_tienda.prototype.consultaRespuestaProviders = function(result) {
 	//actualiza el select dinamico
 	$('#type_select').trigger("chosen:updated");
 
+	//metodo type select
+	$("#type_select").chosen().change(function(event) {
+
+		if($('#type_select').chosen().val() == 'payu'){
+			$('#nuevoproveedor_modal #data').text('{"merchantId":"", "accountId":"", "ApiKey":"", "ApiLogin":"", "PlublicKey":""}');
+			
+			var html = ''+
+			'<h4>PayU</h4>'+
+			'<div>URL: https://www.payulatam.com/co/ </div>'+
+			'<xmp><form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/"></xmp>'+
+			'<xmp><input name="merchantId" type="hidden" value="508029"></xmp>'+
+			'<xmp><input name="accountId" type="hidden" value="512321"></xmp>'+
+			'<xmp><input name="description" type="hidden" value="Test PAYU"></xmp>'+
+			'<xmp><input name="referenceCode" type="hidden" value="TestPayU"></xmp>'+
+			'<xmp><input name="amount" type="hidden" value="20000"></xmp>'+
+			'<xmp><input name="tax" type="hidden" value="3193"></xmp>'+
+			'<xmp><input name="taxReturnBase" type="hidden" value="16806"></xmp>'+
+			'<xmp><input name="currency" type="hidden" value="COP"></xmp>'+
+			'<xmp><input name="lng" type="hidden"  value="es"></xmp>'+
+			'<xmp><input name="signature" type="hidden" value="7ee7cf808ce6a39b17481c54f2c57acc"></xmp>'+
+			'<xmp><input name="test" type="hidden" value="1"></xmp>'+
+			'<xmp><input name="buyerEmail" type="hidden" value="test@test.com"></xmp>'+
+			'<xmp><input name="responseUrl" type="hidden" value="http://www.test.com/response"></xmp>'+
+			'<xmp><input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation"></xmp>'+
+			'<xmp><input name="Submit" type="submit" value="Enviar" ></xmp>'+				
+			'<xmp><form></xmp>'+
+			'<p>Pruebas: https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/</p>'+
+			'<p>Producción: https://checkout.payulatam.com/ppp-web-gateway-payu/</p>';
+			
+			$('#nuevoproveedor_modal .method_description').html(html);
+			
+		}
+	});
+
 	$('#ppago_modal').modal()
 	
+};
+
+clu_tienda.prototype.consultaRespuestaProvider = function(result) {
+	clu_tienda.rowppago.child( clu_tienda.formatppago(clu_tienda.rowppago.data(),result.request)).show();
+	//bonton etitar 
+	$('.editppago').on('click', function (e) {
+		//buscamos los datos seleccionados
+		for(var i=0; i<clu_tienda.table_providers.data().length; i++){
+			if(this.className.split(' ')[0].split('_')[3]==clu_tienda.table_providers.data()[i].id){
+				//encontramos los datos
+				
+				$('#modal-title-provider').html('Editar Proveedor '+clu_tienda.table_providers.data()[i].name);
+				$("#nuevoproveedor_modal input[name='payment_method_id']").val(clu_tienda.table_providers.data()[i].id);
+				$('#nuevoproveedor_modal #type_select').val(clu_tienda.table_providers.data()[i].type);
+				$('#nuevoproveedor_modal #name').val(clu_tienda.table_providers.data()[i].name);
+				$('#nuevoproveedor_modal #description').val(clu_tienda.table_providers.data()[i].description);
+				$('#nuevoproveedor_modal #data').val(clu_tienda.table_providers.data()[i].data);
+				if(clu_tienda.table_providers.data()[i].active){
+					//si se esta activa
+					$('#nuevoproveedor_modal input[name=active][value=activa]').attr("checked", "checked");
+				}
+				if(clu_tienda.table_providers.data()[i].test){
+					//si se esta activa
+					$('#nuevoproveedor_modal input[name=test][value=activa]').attr("checked", "checked");
+				}
+
+				$('#modal-button-providerpay').html('Editar Proveedor')
+				
+				//Mostrar Modal
+				$('#nuevoproveedor_modal').modal();
+				
+				//para hacer efectivo el cambio del chossen
+				$('#nuevoproveedor_modal #type_select').trigger("chosen:updated");				
+				break;
+				
+			};
+		}	    
+	});
+};
+
+clu_tienda.prototype.formatppago= function(d,r) {
+	
+	var estado = 'Inactiva';
+	if(d.active){estado = 'Activa'}
+	var ambiente = 'Pruebas';
+	if(d.test){ambiente = 'Producción'}
+	
+
+
+	var html = ''+
+	
+    '<div class="panel panel-default">'+
+    	
+    	'<div class="panel-heading">'+
+
+    		'<a href="#" style="text-decoration: none; color: #777">'+
+				'<div class="btn_editar_ppago_'+d.id+' editppago" id="btn_editar_ppago" >'+
+					'<span class="glyphicon glyphicon-cog" aria-hidden="true" style=""></span>'+
+					'<span> Editar este Proveedor de Pago</span>'+
+				'</div>'+
+			'</a>'+
+
+    	'</div>'+
+    	
+    	'<div class="panel-body">'+
+			'<div class="row">'+
+				'<div class="col-md-12">'+
+					
+					'<div class="col-md-7" style="overflow-wrap: break-word;">'+
+						
+						'<div class="col-md-12">'+					
+							'<label for="name" class="col-md-12 control-label">Nombre de Método</label>'+
+							''+d.name+''+
+						'</div>'+
+
+						'<div class="col-md-12">'+					
+							'<label for="description" class="col-md-12 control-label">Descripciòn</label>'+
+							''+d.description+''+
+						'</div>'+
+
+						'<div class="col-md-12">'+					
+							'<label for="data" class="col-md-12 control-label">Metadatos</label>'+
+							''+d.data+''+
+						'</div>'+						
+						
+						'<div class="col-md-12">'+					
+							'<label for="data" class="col-md-12 control-label">Estado</label>'+
+							''+estado+''+
+						'</div>'+	
+						'<div class="col-md-12">'+					
+							'<label for="data" class="col-md-12 control-label">Ambiente</label>'+
+							''+ambiente+''+
+						'</div>'+
+						
+					'</div>'+
+					
+					'<div class="col-md-5" style="text-align: center;>'+
+						
+						'<label for="img_product_descrip" class="col-md-12 control-label">Imagen de Proveedor</label>'+
+						'<img src="'+r.url+'/images/payprovider/'+d.type+'.png" id="img_ppago" style="width: 100%; border-radius: 0%;" alt="Imagen no disponible">'+
+						'<a href="#" class="btn btn-default col-md-12" style="text-decoration: none; color: #777; margin-top: 10px; " >'+
+							'<div class="btn_editar_ppago_'+d.id+' editppago" id="btn_editar_ppago" >'+
+								'<span class="glyphicon glyphicon-cog" aria-hidden="true" style=""></span>'+
+								'<span> Editar este Proveedor</span>'+
+							'</div>'+
+						'</a>'+						
+
+					'</div>'+
+					
+				'</div>'+
+			'</div>'+
+		'</div>'+		
+    '</div>';
+
+    //return '<div class="panel panel-default"><div class="panel-heading">Panel Heading</div><div class="panel-body">Panel Content</div></div>';
+
+    return html;
 };
 
 var clu_tienda = new clu_tienda();

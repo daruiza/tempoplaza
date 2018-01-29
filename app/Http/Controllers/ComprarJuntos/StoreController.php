@@ -41,7 +41,7 @@ class StoreController extends Controller {
 	public function getIndex(){	
 		//no funcionara debido a la ruta de busqueda por url
 		//redirigimos a listar
-		//return redirect()->action('ComprarJuntos\StoreController@getListar');
+		//return redirect()->action('ComprarJuntos\StoreController@getListar');		
 	}
 	
 	public function getListar($option=null){		
@@ -158,8 +158,7 @@ class StoreController extends Controller {
 		return view('comprarjuntos/tienda');
 	}
 
-	public function postNuevatienda(Request $request){
-
+	public function postNuevatienda(Request $request){		
 		//verificamos si el tendero puede tener una tienda màs
 		if(!$request->input('edit')){			
 			$tiendas=\DB::table('clu_store')
@@ -642,7 +641,7 @@ class StoreController extends Controller {
 				$message[] = 'ProductosOK';	
 				return Redirect::to('mistiendas/listar')->withInput()->with('message', $message);
 			}catch (\Illuminate\Database\QueryException $e) {
-				$message[] = 'Problemas al crear la tienda';
+				$message[] = 'Problemas al crear el producto';
 				$message[] = $e->getMessage();
 				return Redirect::to('mistiendas/listar')->with('error', $message);
 			}
@@ -651,9 +650,116 @@ class StoreController extends Controller {
 			
 	}
 
-	public function postNuevoproveedorpago(Request $request){	
-		dd($request->input());
-		return $request->input();
+	public function postNuevoproveedorpago(Request $request){
+		//VERIFICACIONES
+		//verificamos que si existen otros metodos de pago
+		//dd($request->input());
+		if($request->input('active') == "activa"){
+
+			$paymenprovidersactive=
+			ProveedorPago::
+			where('store_id', Session::get('store.id'))
+			->where('active',1)
+			->count();
+
+			if($paymenprovidersactive){
+				$message[] = 'Problemas al crear/editar el proveedor de pago, no debe haber más de un proveedor activo';				
+				return Redirect::to('mistiendas/listar')->with('error', $message);
+			}
+		}
+
+		$messages = [
+			'required' => 'El campo :attribute es requerido.',
+			'size' => 'La :attribute deberia ser mayor a :size.',
+			'min' => 'La :attribute deberia tener almenos :min. caracteres',
+			'max' => 'La :attribute no debe tener maximo :max. caracteres',
+			'numeric' => 'El :attribute  debe ser un número',			
+			'date' => 'El :attribute  no es una fecha valida',
+			'mimes' => 'La :attribute debe ser de tipo jpeg, png o bmp',
+		];
+		
+		$rules = array(			
+			'type' => 'required',
+			'name'    => 'required', 
+			'data'    => 'required',
+		);
+
+		$validator = Validator::make($request->input(), $rules, $messages);		
+		if ($validator->fails()) {			
+			return Redirect::back()->withErrors($validator)->withInput();
+		}else{
+
+			$paymenprovider = new ProveedorPago();
+			if($request->input('payment_method_id')){					
+				//se actualizan los datos del producto
+				$paymenprovider = ProveedorPago::find($request->input('payment_method_id'));				
+			}
+
+			$paymenprovider->type =  $request->input()['type'];
+			$paymenprovider->name = $request->input()['name'];
+			$paymenprovider->description = $request->input()['description'];
+			$paymenprovider->data = $request->input()['data'];
+			$paymenprovider->active = 0;
+			if($request->input('active') == "activa")$paymenprovider->active = 1;
+			$paymenprovider->test = 0;
+			if($request->input('test') == "produccion")$paymenprovider->test = 1;			
+			$paymenprovider->store_id = Session::get('store.id');
+
+
+			//construimos el form para payu
+			if($request->input()['type'] == 'payu'){
+
+				$metadata = json_decode($request->input()['data']);
+				$form = '<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">';			
+				if($request->input('test') == "produccion") $form = 'https://checkout.payulatam.com/ppp-web-gateway-payu/';
+	 			
+				foreach ($metadata as $key => $value) {
+					if(empty($value)){
+						$message[] = 'Problemas al crear/editar el proveedor de pago, falta el metadato: '.$key;				
+						return Redirect::to('mistiendas/listar')->with('error', $message);
+					}
+					$form = $form.'<input name="'.$key.'" type="hidden" value="'.$value.'">';
+				}
+
+				$form = $form.'<input name="description" type="hidden" value="">';
+				$form = $form.'<input name="referenceCode" type="hidden" value="">';
+				$form = $form.'<input name="amount" type="hidden" value="">';
+				$form = $form.'<input name="tax" type="hidden" value="">';
+				$form = $form.'<input name="taxReturnBase" type="hidden" value="">';
+				$form = $form.'<input name="currency" type="hidden" value="COP">';
+				$form = $form.'<input name="lng" type="hidden" value="es">';
+				$form = $form.'<input name="signature" type="hidden" value="">';
+				$form = $form.'<input name="test" type="hidden" value="1">';
+				$form = $form.'<input name="buyerEmail" type="hidden" value="">';
+				$form = $form.'<input name="responseUrl" type="hidden" value="'.url('mistiendas/responsepayu').'">';
+				$form = $form.'<input name="confirmationUrl" type="hidden" value="'.url('mistiendas/confirmationpayu').'">';//
+				$form = $form.'<input name="Submit" type="hidden" value="Enviar">';
+				
+				$form = $form.'</form>';
+
+			}		
+
+			$paymenprovider->form = $form;
+
+			try {
+				$paymenprovider->save();
+
+				if($request->input('payment_method_id')){
+					$message[] = 'ProveedorPagoEDITOK';
+				}else{
+					$message[] = 'ProveedorPagoOK';	
+				}
+
+			}catch (\Illuminate\Database\QueryException $e) {
+				$message[] = 'Problemas al crear el proveedor de pago';
+				$message[] = $e->getMessage();
+				return Redirect::to('mistiendas/listar')->with('error', $message);
+			}
+			
+			return Redirect::to('mistiendas/listar')->withInput()->with('message', $message);
+
+		}
+
 	}
 
 	public function postConsultarorder(Request $request){
@@ -688,7 +794,7 @@ class StoreController extends Controller {
 		return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>null]);
 	}
 
-	public function postConsultarprovpago(Request $request){
+	public function postConsultarprovspago(Request $request){
 		//total de productos
 		$paymenproviders=ProveedorPago::where('store_id',$request->input('id'))->count();
 
@@ -700,6 +806,10 @@ class StoreController extends Controller {
 		
 		//return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>null]);
 		return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>$paymenproviders,'types'=>$types]);
+	}
+
+	public function postConsultarprovpago(Request $request){
+		return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>null]);		
 	}
 
 	//LISTAR LAS ORDENES DE UNA TIENDA
@@ -751,9 +861,10 @@ class StoreController extends Controller {
 
 	}
 
+	//LISTA LOS PROVEEDORES DE PAGO DE LA TIENDA
 	public function getListarajaxproviders(Request $request){
 
-		//Tienda id
+		//Tienda id, suministrado en Consultarprovpago
 		if(empty(Session::get('store.id'))){
 			//algo anda muy mal, no se udo asignar el id de tienda en la funcion Consultarproductos
 			return response()->json(['draw'=>$request->input('draw')+1,'recordsTotal'=>0,'recordsFiltered'=>0,'data'=>[]]);
@@ -952,5 +1063,15 @@ class StoreController extends Controller {
 		}		
 		return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>false]);
 	}
+
+	//pagina de confirmación de pagos de PayU
+	public function getResponsepayu(Request $request){	
+		dd($request->input());
+		return 'OK';
+	}
+	public function postConfirmationpayu(Request $request){	
+		dd($request->input());
+		return 'OK';
+	}	
 
 }

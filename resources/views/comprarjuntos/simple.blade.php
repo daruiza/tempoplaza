@@ -218,6 +218,10 @@
 	.ifrmae-facebook{
 		border: 1px solid {!!$tienda[0]->color_two!!} !important;	
 	}
+
+	#form_payprov{
+		display: none !important;
+	}
 	
 
 	</style>
@@ -570,6 +574,14 @@
 	<div class="row visible-md" style="margin-top: 6%;"></div>
 	<div class="row visible-sm" style="margin-top: 8%;"></div>
 	<div class="row visible-xs" style="margin-top: 10%;"></div>
+
+	@if(!empty($payprov[0]))
+		<div id="form_payprov">			
+			{!! Form::hidden('type_payprov', $payprov[0]->type) !!}
+			{!! $payprov[0]->form !!}
+		</div>
+	@endif
+
 
 	
 @endsection
@@ -933,7 +945,6 @@
 				<span id="bange_cart_b" class="badge"></span>
 			</div>
 		</a>
-
 	</nav>
 @endsection
 

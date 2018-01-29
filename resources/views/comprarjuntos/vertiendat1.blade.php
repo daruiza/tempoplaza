@@ -199,6 +199,9 @@
 		border: 1px solid {!!$tienda[0]->color_two!!} !important;	
 	}
 	
+	#form_payprov{
+		display: none !important;
+	}
 
 	</style>
 
@@ -600,6 +603,14 @@
 		</div>		
 	</div>
 	@endif
+
+	@if(!empty($payprov[0]))
+		<div id="form_payprov">			
+			{!! Form::hidden('type_payprov', $payprov[0]->type) !!}
+			{!! $payprov[0]->form !!}
+		</div>
+	@endif
+
 @endsection
 
 @section('modal')
