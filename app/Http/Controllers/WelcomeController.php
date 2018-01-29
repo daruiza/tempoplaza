@@ -441,14 +441,7 @@ class WelcomeController extends Controller {
 					if($value->stage == "ACEPTADO") $value->color = "#0099cc";
 					if($value->stage == "RECHAZADO") $value->color = "#ff5c33";
 					if($value->stage == "FINALIZADO") $value->color = "#33cc33";
-				}
-
-				//método de pago
-				$moduledata['payprov'] = \DB::table('clu_payment_method')
-				->select('clu_payment_method.type','clu_payment_method.form')			
-				->where('clu_payment_method.store_id',$moduledata['tienda'][0]->id)
-				->where('clu_payment_method.active',1)			
-				->get();
+				}				
 
 				$moduledata['calificaciones'] = \DB::table('clu_order')
 				->select('clu_order.resenia', \DB::raw('count(*) as total'))			
@@ -692,14 +685,6 @@ class WelcomeController extends Controller {
 				if($value->stage == "FINALIZADO") $value->color = "#33cc33";
 			}
 
-			//método de pago
-			$moduledata['payprov'] = \DB::table('clu_payment_method')
-			->select('clu_payment_method.type','clu_payment_method.form')		
-			->where('clu_payment_method.store_id',$moduledata['tienda'][0]->id)
-			->where('clu_payment_method.active',1)			
-			->get();
-
-
 			$moduledata['calificaciones'] = \DB::table('clu_order')
 			->select('clu_order.resenia', \DB::raw('count(*) as total'))			
 			->where('clu_order.store_id',$moduledata['tienda'][0]->id)
@@ -860,7 +845,7 @@ class WelcomeController extends Controller {
 		return Redirect::to('/')->with('message_ok', ['Lo sentimos, no encontramos información para la consulta '.$data.'.']);				
 	}
 
-	//Funcion para desplegar un modal den el index
+	//Funcion para desplegar un modal desde el index
 	public function getModal($data = null, $metadata = null){		
 		if($data == 'modalregistro' ){
 			Session::flash('modal', 'modalregistro');
@@ -1309,7 +1294,7 @@ class WelcomeController extends Controller {
 			}
 		}
 		$orden->active= true;
-		$orden->stage_id = 1;
+		$orden->stage_id = 1;//estado de la orden
 
 		$data = Array();
 		$productos = Array();
@@ -1356,7 +1341,10 @@ class WelcomeController extends Controller {
 				}catch (ModelNotFoundException $e) {				
 					return Redirect::back()->with('error',['No se pudo guardar la orden de pedido, Intentalo nuevamente. Error en guardar anotaciones ']);
 				}
-			}		
+			}
+
+			//total
+			$total = 0;
 			
 			//guardado de detalles
 			foreach ($productos as $id_prod => $prod) {
@@ -1374,6 +1362,8 @@ class WelcomeController extends Controller {
 					}catch (ModelNotFoundException $e) {				
 						return Redirect::back()->with('error',['No se pudo guardar la orden de pedido, Intentalo nuevamente. Error en guardar detalles']);
 					}
+
+					$total = $total + intval($values['precio']);
 				}				
 			}
 			
@@ -1453,12 +1443,27 @@ class WelcomeController extends Controller {
 			//eliminado de productos de la session cart
 			Session::pull('cart');
 
-			//retornar ala tienda con mensajes de ejecuciòn			
+			//proveedor de pago virtual
+			$moduledata['payprov'] = \DB::table('clu_payment_method')
+			->select('clu_payment_method.type','clu_payment_method.form')		
+			->where('clu_payment_method.store_id',$tienda[0]->id)
+			->where('clu_payment_method.active',1)			
+			->get();
+
+			//enviamos, la orden, la tienda y los detalles
+			$moduledata['order'] = $orden;
+			$moduledata['summary'] = $orden;
+
+			Session::flash('payment_method_array', $moduledata);
+
+			//retornar ala tienda con mensajes de ejecuciòn		
 			$mensage[]='El pedido fue enviado con EXITO!, Con Consecutivo: '.$orden->id;
 			return Redirect::back()->with('message',$mensage);
+				
 		}else{
 			//la tienda no tiene productos
-			return Redirect::back()->with('error',['Error Inesperado, no alcanzo a llegar ningun producto.']);
+			return Redirect::back()
+				->with('error',['Error Inesperado, no alcanzo a llegar ningun producto.']);
 		}
 		
 	}

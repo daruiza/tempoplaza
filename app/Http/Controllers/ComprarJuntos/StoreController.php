@@ -720,7 +720,7 @@ class StoreController extends Controller {
 					}
 					$form = $form.'<input name="'.$key.'" type="hidden" value="'.$value.'">';
 				}
-
+				
 				$form = $form.'<input name="description" type="hidden" value="">';
 				$form = $form.'<input name="referenceCode" type="hidden" value="">';
 				$form = $form.'<input name="amount" type="hidden" value="">';
@@ -732,7 +732,7 @@ class StoreController extends Controller {
 				$form = $form.'<input name="test" type="hidden" value="1">';
 				$form = $form.'<input name="buyerEmail" type="hidden" value="">';
 				$form = $form.'<input name="responseUrl" type="hidden" value="'.url('mistiendas/responsepayu').'">';
-				$form = $form.'<input name="confirmationUrl" type="hidden" value="'.url('mistiendas/confirmationpayu').'">';//
+				$form = $form.'<input name="confirmationUrl" type="hidden" value="'.url('mistiendas/confirmationpayu').'">';
 				$form = $form.'<input name="Submit" type="hidden" value="Enviar">';
 				
 				$form = $form.'</form>';

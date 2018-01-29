@@ -3,225 +3,232 @@
 @section('content')
 	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
 	<style>
-	html, body{
-		font-family: 'Libre Baskerville', serif !important;
-		font-size: 17px !important;
-	}
-	.btn {
-		font-family: 'Libre Baskerville', serif !important;
-		font-size: 14px !important;	
-	}
+		html, body{
+			font-family: 'Libre Baskerville', serif !important;
+			font-size: 17px !important;
+		}
+		.btn {
+			font-family: 'Libre Baskerville', serif !important;
+			font-size: 14px !important;	
+		}
 
-	.nav-titulo{
-		font-family: 'Libre Baskerville', serif !important;
-		font-size: 32px !important;
-		text-transform: capitalize;
-	}
+		.nav-titulo{
+			font-family: 'Libre Baskerville', serif !important;
+			font-size: 32px !important;
+			text-transform: capitalize;
+		}
 
-	.nav-titulo b{
-		font-weight: 500;
-	}
+		.nav-titulo b{
+			font-weight: 500;
+		}
 
-	.panel-body {		    
-	    padding-bottom: 0px;
-	}	
-	.navbar-default {
-	    background-color: {{$tienda[0]->color_one}} !important;
-	    border-color: #e7e7e7;
-	}
-	.navbar-default .navbar-brand{
-		color: {{$tienda[0]->color_two}} !important;
-	}
-	.navbar-default .navbar-nav > li > a{
-		color: {{$tienda[0]->color_two}} !important;	
-	}
-	.tienda_banner{
-		background-image: url("{{url('users/'.$tienda[0]->user_name.'/banners/'.$tienda[0]->banner)}}");
-		background-size: auto 100%;
-		background-repeat: no-repeat;
-    	background-position: center;
-	}
-	.center-block {
-	  display: block;
-	  margin-left: auto;
-	  margin-right: auto;
-	  text-align: center;
-	}
-	.option_store{
-		text-align: center;
-		cursor:pointer;			
-	}
-	.chosen-container .chosen-container-multi{
-		border: 1px solid #ccc !important;
-		border-radius: 4px !important;
-	}
-	.categorias{
-		width: 100% !important;
-		border-radius: 4px !important;
-		position: relative !important;
-		min-height: 1px !important;
-		padding-right: 15px !important;
-		padding-left: 15px !important;			
-	}
-	.fa-star, .fa-star-half-o{
-		color:#ffcc00;
-	}	
-	
-	table.dataTable.no-footer {
-	    border-bottom: 1px solid #111 !important;
-	    border: 1px solid transparent;
-	}
+		.panel-body {		    
+		    padding-bottom: 0px;
+		}	
+		.navbar-default {
+		    background-color: {{$tienda[0]->color_one}} !important;
+		    border-color: #e7e7e7;
+		}
+		.navbar-default .navbar-brand{
+			color: {{$tienda[0]->color_two}} !important;
+		}
+		.navbar-default .navbar-nav > li > a{
+			color: {{$tienda[0]->color_two}} !important;	
+		}
+		.tienda_banner{
+			background-image: url("{{url('users/'.$tienda[0]->user_name.'/banners/'.$tienda[0]->banner)}}");
+			background-size: auto 100%;
+			background-repeat: no-repeat;
+	    	background-position: center;
+		}
+		.center-block {
+		  display: block;
+		  margin-left: auto;
+		  margin-right: auto;
+		  text-align: center;
+		}
+		.option_store{
+			text-align: center;
+			cursor:pointer;			
+		}
+		.chosen-container .chosen-container-multi{
+			border: 1px solid #ccc !important;
+			border-radius: 4px !important;
+		}
+		.categorias{
+			width: 100% !important;
+			border-radius: 4px !important;
+			position: relative !important;
+			min-height: 1px !important;
+			padding-right: 15px !important;
+			padding-left: 15px !important;			
+		}
+		.fa-star, .fa-star-half-o{
+			color:#ffcc00;
+		}	
+		
+		table.dataTable.no-footer {
+		    border-bottom: 1px solid #111 !important;
+		    border: 1px solid transparent;
+		}
 
-	.popover-content ul{
-		margin-left: -25px;
-	}
+		.popover-content ul{
+			margin-left: -25px;
+		}
 
-	.popover-content ul li{
-		cursor:pointer;
-	}
-	.popover-content ul li:hover{
-		background-color: #dddddd;
-	}
+		.popover-content ul li{
+			cursor:pointer;
+		}
+		.popover-content ul li:hover{
+			background-color: #dddddd;
+		}
 
-	.glyphicon-star{
-		color: #ffcc00;
-	}
+		.glyphicon-star{
+			color: #ffcc00;
+		}
 
-	/*Debe funcionar solo para el boton del menu*/
-	.popover-content ul{
-		margin-left: -25px;
-	}
-	.popover-content ul li{
-		cursor:pointer;
-	}
-	.popover-content ul li:hover{
-		background-color: #dddddd;
-	}
+		/*Debe funcionar solo para el boton del menu*/
+		.popover-content ul{
+			margin-left: -25px;
+		}
+		.popover-content ul li{
+			cursor:pointer;
+		}
+		.popover-content ul li:hover{
+			background-color: #dddddd;
+		}
 
-	.btn-paginator{		
-		color: {!!$tienda[0]->color_two!!};
-		box-sizing: border-box;
-		display: inline-block;
-		min-width: 1.5em;
-	    padding: 0.5em 1em;
-	    margin-left: 2px;
-	    text-align: center;
-	    text-decoration: none !important;
-	    cursor: pointer;
+		.btn-paginator{		
+			color: {!!$tienda[0]->color_two!!};
+			box-sizing: border-box;
+			display: inline-block;
+			min-width: 1.5em;
+		    padding: 0.5em 1em;
+		    margin-left: 2px;
+		    text-align: center;
+		    text-decoration: none !important;
+		    cursor: pointer;
 
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #dcdcdc));
-	    background: -webkit-linear-gradient(top, #fff 0%, #fff 100%);
-	    background: -moz-linear-gradient(top, #fff 0%, #fff 100%);
-	    background: -ms-linear-gradient(top, #fff 0%, #fff 100%);
-	    background: -o-linear-gradient(top, #fff 0%, #fff 100%);
-	    background: linear-gradient(to bottom, #fff 0%, #fff 100%);	 
-	    border: 1px solid transparent;
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #dcdcdc));
+		    background: -webkit-linear-gradient(top, #fff 0%, #fff 100%);
+		    background: -moz-linear-gradient(top, #fff 0%, #fff 100%);
+		    background: -ms-linear-gradient(top, #fff 0%, #fff 100%);
+		    background: -o-linear-gradient(top, #fff 0%, #fff 100%);
+		    background: linear-gradient(to bottom, #fff 0%, #fff 100%);	 
+		    border: 1px solid transparent;
 
-	    user-select: none;
-	    -webkit-user-select: none;
-	    -moz-user-select: -moz-none;
-	}
-	.btn-paginator:hover{		
-		color: {!!$tienda[0]->color_one!!} !important;;
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000), color-stop(100%, {!!$tienda[0]->color_two!!}));
-	    background: -webkit-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
-	    background: -moz-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
-	    background: -ms-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
-	    background: -o-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
-	    background: linear-gradient(to bottom, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);	    
-	    border-radius: 2px;
-	    
-	}
-	.btn-paginatorslc{
-		box-sizing: border-box;
-	    display: inline-block;
-	    min-width: 1.5em;
-	    padding: 0.5em 1em;
-	    margin-left: 2px;
-	    text-align: center;
-	    text-decoration: none !important;
-	    cursor: pointer;	    
-	    border: 1px solid transparent;
-	    border-radius: 2px;
-	    user-select: none;
-	    -webkit-user-select: none;
-	    -moz-user-select: -moz-none;   
-	}
+		    user-select: none;
+		    -webkit-user-select: none;
+		    -moz-user-select: -moz-none;
+		}
+		.btn-paginator:hover{		
+			color: {!!$tienda[0]->color_one!!} !important;;
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000), color-stop(100%, {!!$tienda[0]->color_two!!}));
+		    background: -webkit-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+		    background: -moz-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+		    background: -ms-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+		    background: -o-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+		    background: linear-gradient(to bottom, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);	    
+		    border-radius: 2px;
+		    
+		}
+		.btn-paginatorslc{
+			box-sizing: border-box;
+		    display: inline-block;
+		    min-width: 1.5em;
+		    padding: 0.5em 1em;
+		    margin-left: 2px;
+		    text-align: center;
+		    text-decoration: none !important;
+		    cursor: pointer;	    
+		    border: 1px solid transparent;
+		    border-radius: 2px;
+		    user-select: none;
+		    -webkit-user-select: none;
+		    -moz-user-select: -moz-none;   
+		}
 
-	.btn-paginatorslc{
-		color: {!!$tienda[0]->color_two!!} !important;
-		border: 1px solid {!!$tienda[0]->color_two!!} !important;
-	}
-	.btn-paginatorslc{
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, {!!$tienda[0]->color_one!!} ));
-	    background: -webkit-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
-	    background: -moz-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
-	    background: -ms-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
-	    background: -o-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
-	    background: linear-gradient(to bottom, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+		.btn-paginatorslc{
+			color: {!!$tienda[0]->color_two!!} !important;
+			border: 1px solid {!!$tienda[0]->color_two!!} !important;
+		}
+		.btn-paginatorslc{
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, {!!$tienda[0]->color_one!!} ));
+		    background: -webkit-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+		    background: -moz-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+		    background: -ms-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+		    background: -o-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
+		    background: linear-gradient(to bottom, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
 
-	}
-	.bnt-catacteristicas{
-		text-decoration: none;
-    	color: #333;
-	}
-	.bnt-catacteristicas:hover{
-		text-decoration: none;    	
-	}
-	.btn{
-		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-		font-size: 14px;
-		/*border-color: {!!$tienda[0]->color_two!!} !important;*/
-	}
+		}
+		.bnt-catacteristicas{
+			text-decoration: none;
+	    	color: #333;
+		}
+		.bnt-catacteristicas:hover{
+			text-decoration: none;    	
+		}
+		.btn{
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-size: 14px;
+			/*border-color: {!!$tienda[0]->color_two!!} !important;*/
+		}
 
-	.ui-autocomplete{
-	    color: #555555;
-    	background-color: #ffffff;
-    	background-image: none;
-    	font-size: 14px;
-    	line-height: 1.42857143;
-    	font-family: inherit;
-    	position: absolute; cursor: default;z-index:1060 !important;
-	}
-	.marco{
-		border: 1px solid #ddd;
-		border-radius: 5px;
-		margin-bottom: 2%;
-		box-shadow: 4px 4px 2px #ddd;
-	}
-	.panel-default{
-		border-color: {!!$tienda[0]->color_two!!} !important;		
-	}
-	.panel-heading{
-		background-color: {!!$tienda[0]->color_one!!} !important;
-	}
-	.buscador_t{
-		border-color: {!!$tienda[0]->color_two!!} !important;		
-	}
-	.cart_b{
-		color: {!!$tienda[0]->color_one!!} !important;		
-	}
-	.boton_cart2{
-	    text-align: center;
-	    background-color: {!!$tienda[0]->color_two!!} !important;	
-	}
-	.bange_cart_b{
-		color: {!!$tienda[0]->color_one!!} !important;		
-	}
-	.cart_text_b{
-		color: {!!$tienda[0]->color_one!!} !important;		
-	}
-	.badge{
-		background-color: {!!$tienda[0]->color_one!!} !important;
-		color: {!!$tienda[0]->color_two!!} !important;			
-	}
-	.ifrmae-facebook{
-		border: 1px solid {!!$tienda[0]->color_two!!} !important;	
-	}
+		.ui-autocomplete{
+		    color: #555555;
+	    	background-color: #ffffff;
+	    	background-image: none;
+	    	font-size: 14px;
+	    	line-height: 1.42857143;
+	    	font-family: inherit;
+	    	position: absolute; cursor: default;z-index:1060 !important;
+		}
+		.marco{
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			margin-bottom: 2%;
+			box-shadow: 4px 4px 2px #ddd;
+		}
+		.panel-default{
+			border-color: {!!$tienda[0]->color_two!!} !important;		
+		}
+		.panel-heading{
+			background-color: {!!$tienda[0]->color_one!!} !important;
+		}
+		.buscador_t{
+			border-color: {!!$tienda[0]->color_two!!} !important;		
+		}
+		.cart_b{
+			color: {!!$tienda[0]->color_one!!} !important;		
+		}
+		.boton_cart2{
+		    text-align: center;
+		    background-color: {!!$tienda[0]->color_two!!} !important;	
+		}
+		.bange_cart_b{
+			color: {!!$tienda[0]->color_one!!} !important;		
+		}
+		.cart_text_b{
+			color: {!!$tienda[0]->color_one!!} !important;		
+		}
+		.badge{
+			background-color: {!!$tienda[0]->color_one!!} !important;
+			color: {!!$tienda[0]->color_two!!} !important;			
+		}
+		.ifrmae-facebook{
+			border: 1px solid {!!$tienda[0]->color_two!!} !important;	
+		}
 
-	#form_payprov{
-		display: none !important;
-	}
+		#form_payprov{
+			display: none !important;
+		}
+
+		@media (min-width: 768px){		
+			.navbar-nav>li>a {
+			    padding-top: 20px !important;
+			    padding-bottom: 5px !important;
+			}
+		}
 	
 
 	</style>
@@ -575,15 +582,17 @@
 	<div class="row visible-sm" style="margin-top: 8%;"></div>
 	<div class="row visible-xs" style="margin-top: 10%;"></div>
 
-	@if(!empty($payprov[0]))
+	@if(Session::has('payment_method_array') )
 		<div id="form_payprov">			
-			{!! Form::hidden('type_payprov', $payprov[0]->type) !!}
-			{!! $payprov[0]->form !!}
+			{!! Form::hidden('type_payprov', Session::get('payment_method_array')['payprov'][0]->type  ) !!}
+			{!! Session::get('payment_method_array')['payprov'][0]->form !!}
 		</div>
 	@endif
 
+	@if(Session::has('payment_method_array'))
+		
+	@endif
 
-	
 @endsection
 
 @section('modal')

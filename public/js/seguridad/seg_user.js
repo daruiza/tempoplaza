@@ -34,8 +34,6 @@ seg_user.prototype.validateLogin = function() {
 		return false;
 	}
 	return true;
-
-
 };
 
 seg_user.prototype.validateRegistry = function() {
@@ -271,8 +269,11 @@ seg_user.prototype.validateCart = function(){
         , position: 'absolute' // Element positioning
     }       
     seg_user.spinner = new Spinner(opts).spin(document.getElementsByTagName("body")[0]);  
+
+    //bloqueamos el boton, se pone a puntar a otro lado   
+    $('#submit_cart_modal').attr("form", "button_block");
+
     return true;
-    
 };
 
 seg_user.prototype.validateFinder = function(){
@@ -297,7 +298,6 @@ seg_user.prototype.lugarRespuesta = function(result) {
 	}else{
 		alert('Problemas con el cambio de lugar');		
 	}
-	
 };
 	
 seg_user.prototype.edit = function(this_val) {
@@ -1280,7 +1280,6 @@ seg_user.prototype.consultaRespuestaItem = function(result) {
     //$( ".carrusel_index_back" ).show( 'drop',{ direction: "right" },500);
     $( ".carrusel_index_back" ).show( 'clip',800);
     $(div2_2_img).show( 'drop',{ direction: "right" },1600);
-
 };
 
 
