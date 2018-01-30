@@ -1425,7 +1425,8 @@
 	    });
 
 		 //redirección de subcategorias		    
-		$('.categori_store ul li').on('click', function(e) {		        
+		$('.categori_store ul li').on('click', function(e) {
+			if(this.textContent == "Todas") this.textContent="todascat"		        
 			$('[name=finder_store]').val(this.textContent);
 	        //window.location=$('#form_finder_store').attr('action');
 	        $('#form_finder_store').submit();
@@ -1550,9 +1551,9 @@
 	<!--Actualización de carrito-->
 	@if(Session::has('cart'))
 		<script type="text/javascript">
+		var i = 0;
 		@foreach (Session::get('cart') as $cart)		
-			str = "{!!$cart!!}";
-			i = 0;			
+			str = "{!!$cart!!}";						
 			if("{!!$tienda[0]->id!!}" == str.split(",")[10]){
 				seg_user.cart_products.push(str.split(","));
 				i++;

@@ -1603,9 +1603,10 @@
 	<!--Actualización de carrito por session-->
 	@if(Session::has('cart'))
 		<script type="text/javascript">
-		@foreach (Session::get('cart') as $cart)		
-			str = "{!!$cart!!}";
-			i = 0;			
+		var i = 0;
+		
+		@foreach (Session::get('cart') as $cart)
+			str = "{!!$cart!!}";				
 			if("{!!$tienda[0]->id!!}" == str.split(",")[10]){
 				seg_user.cart_products.push(str.split(","));
 				i++;

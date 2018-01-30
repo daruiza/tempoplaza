@@ -1252,8 +1252,9 @@ class WelcomeController extends Controller {
 		for($i=0;$i<intval($request->input('datos'));$i++){
 			$prods[] = $request->input($i);
 		}
-
-		Session::put('cart', $prods);
+		$session_prods = $prods;
+		if(Session::has('cart'))$session_prods = array_merge(Session::get('cart'),$prods);		
+		Session::put('cart', array_unique($session_prods));
 		
 		return response()->json(['respuesta'=>true,'request'=>$request->input()]);	
 	}
