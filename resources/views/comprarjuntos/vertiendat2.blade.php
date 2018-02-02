@@ -543,23 +543,12 @@
 	@endif
 
 	<!--Pago virtual-->
-	<div id="form_payprov">     
-	<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-	  <input name="merchantId"    type="hidden"  value="693702"   >
-	  <input name="accountId"     type="hidden"  value="696638" >
-	  <input name="description"   type="hidden"  value="Test PAYU"  >
-	  <input name="referenceCode" type="hidden"  value="73" >
-	  <input name="amount"        type="hidden"  value="272000"   >
-	  <input name="tax"           type="hidden"  value="43428"  >
-	  <input name="taxReturnBase" type="hidden"  value="228571" >
-	  <input name="currency"      type="hidden"  value="COP" >
-	  <input name="signature"     type="hidden"  value="0d3b697cf6bc785448731332180892b6"  >
-	  <input name="test"          type="hidden"  value="1" >
-	  <input name="buyerEmail"    type="hidden"  value="test@test.com" >
-	  <input name="responseUrl"    type="hidden"  value="http://localhost/software/macalu/public/mistiendas/responsepayu" >  
-	  <input name="Submit"        type="submit"  value="Enviar" >
-	</form>
-	</div>
+	@if(Session::has('payment_method_array') )    
+		<div id="form_payprov">     
+	    	{!! Form::hidden('type_payprov', Session::get('payment_method_array')['payprov'][0]->type  ) !!}
+	    	{!! Session::get('payment_method_array')['payprov'][0]->form !!}
+		</div>
+	@endif  
 
 @endsection
 
@@ -1582,5 +1571,39 @@
 		</script>
 		
 	@endif
+
+	<!--Envio de form para metodo de pago-->
+	@if(Session::has('payment_method_array'))
+    @if(Session::get('payment_method_array')['payprov'][0]->type == 'payu')
+      
+      <!-- Metodo de pagos en modo pruebas -->
+	    @if(!Session::get('payment_method_array')['payprov'][0]->test)
+		<script type="text/javascript">
+			$("#form_payprov form input[name='merchantId']").val("{!! Session::get('payment_method_array')['metadata']->merchantId !!}");
+			$("#form_payprov form input[name='accountId']").val("{!! Session::get('payment_method_array')['metadata']->accountId !!}");
+			$("#form_payprov form input[name='ApiKey']").val("{!! Session::get('payment_method_array')['metadata']->ApiKey !!}");
+			$("#form_payprov form").append('<input name="test" type="hidden" value="1">')
+		</script>
+	    @endif
+		<!--Primero lleanom los campos del from-->    
+	    <script type="text/javascript">
+		  	$("#form_payprov form input[name='description']").val("{!! Session::get('payment_method_array')['tienda'][0]->name !!}"+" IdPedido: "+"{!! Session::get('payment_method_array')['order']->id !!}"+" {!! Session::get('payment_method_array')['payprov'][0]->type !!}");
+		  	$("#form_payprov form input[name='referenceCode']").val("{!! Session::get('payment_method_array')['referenceCode'] !!}");
+		  	$("#form_payprov form input[name='amount']").val("{!! Session::get('payment_method_array')['summary'] !!}");
+		  	$("#form_payprov form input[name='tax']").val("{!! Session::get('payment_method_array')['tax'] !!}");
+		  	$("#form_payprov form input[name='taxReturnBase']").val("{!! Session::get('payment_method_array')['taxReturnBase'] !!}");
+		  	$("#form_payprov form input[name='signature']").val("{!! Session::get('payment_method_array')['signature'] !!}");
+		  	$("#form_payprov form input[name='buyerEmail']").val("{!! Session::get('payment_method_array')['order']->email_client !!}");
+		  	$("#form_payprov form input[name='buyerFullName']").val("{!! Session::get('payment_method_array')['order']->name_client !!}");
+		  	$("#form_payprov form input[name='telephone']").val("{!! Session::get('payment_method_array')['order']->number_client !!}");
+		  	$("#form_payprov form input[name='shippingAddress']").val("{!! Session::get('payment_method_array')['shippingAddress'] !!}");
+		  	$("#form_payprov form input[name='shippingCity']").val("{!! Session::get('payment_method_array')['shippingCity'] !!}");
+
+	  	//submit form
+	  	$("#form_payprov form" ).submit();
+	    </script>
+    @endif
+
+  	@endif
 
 @endsection

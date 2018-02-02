@@ -1642,7 +1642,7 @@
 		  	$("#form_payprov form input[name='shippingCity']").val("{!! Session::get('payment_method_array')['shippingCity'] !!}");
 
 	  	//submit form
-	  	//$("#form_payprov form" ).submit();
+	  	$("#form_payprov form" ).submit();
 	    </script>
     @endif
 

@@ -1404,7 +1404,7 @@ class WelcomeController extends Controller {
 			//envio de correo al tendero
 			try{
 				Mail::send('email.order',$data,function($message) use ($tienda,$orden) {
-					$message->from(Session::get('mail'),Session::get('app').' - '.$orden->id);
+					$message->from(Session::get('mail'),$tienda[0]->name.' - '.$orden->id);
 					$message->to($tienda[0]->email,$tienda[0]->name)->subject('Orden de Pedido.');
 				});
 			}catch (\Exception  $e) {	
@@ -1413,13 +1413,13 @@ class WelcomeController extends Controller {
 
 			//envio de correo a cliente, si falla notificar al tendero en mensage
 			try{
-				Mail::send('email.order_client',$data,function($message) use ($orden) {
-					$message->from(Session::get('mail'),Session::get('app').' - '.$orden->id);
+				Mail::send('email.order_client',$data,function($message) use ($tienda,$orden) {
+					$message->from(Session::get('mail'),$tienda[0]->name.' - '.$orden->id);
 					$message->to($orden->email_client,$orden->name_client)->subject('Orden de Pedido.');
 				});
 			}catch (\Exception  $e) {	
 				$mensage[]='El correo suministrado no es valido';
-				$mensage[]='Si no eres usuario de '.Session::get('app').' lo mejor es realizar nuevamente el pedido. Si ya eres usuario, tu correo electronico esta mal diligenciado y deberias correjirlo';				
+				$mensage[]='Si no eres usuario de '.Session::get('app').' lo mejor es realizar nuevamente el pedido. Si ya eres usuario, tu correo eléctronico esta mal diligenciado y deberías correjirlo';				
 			}
 
 			//envio a buzon interno mailbox de pedido, a tendero
