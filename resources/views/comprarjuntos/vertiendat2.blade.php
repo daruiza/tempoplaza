@@ -241,6 +241,13 @@
 		display: none !important;
 	}
 
+	@media (min-width: 768px){		
+		.navbar-nav>li>a {
+		    padding-top: 20px !important;
+		    padding-bottom: 5px !important;
+		}
+	}
+
 	</style>
 
 	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
@@ -536,12 +543,23 @@
 	@endif
 
 	<!--Pago virtual-->
-	@if(!empty($payprov[0]))
-		<div id="form_payprov">			
-			{!! Form::hidden('type_payprov', $payprov[0]->type) !!}
-			{!! $payprov[0]->form !!}
-		</div>
-	@endif
+	<div id="form_payprov">     
+	<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+	  <input name="merchantId"    type="hidden"  value="693702"   >
+	  <input name="accountId"     type="hidden"  value="696638" >
+	  <input name="description"   type="hidden"  value="Test PAYU"  >
+	  <input name="referenceCode" type="hidden"  value="73" >
+	  <input name="amount"        type="hidden"  value="272000"   >
+	  <input name="tax"           type="hidden"  value="43428"  >
+	  <input name="taxReturnBase" type="hidden"  value="228571" >
+	  <input name="currency"      type="hidden"  value="COP" >
+	  <input name="signature"     type="hidden"  value="0d3b697cf6bc785448731332180892b6"  >
+	  <input name="test"          type="hidden"  value="1" >
+	  <input name="buyerEmail"    type="hidden"  value="test@test.com" >
+	  <input name="responseUrl"    type="hidden"  value="http://localhost/software/macalu/public/mistiendas/responsepayu" >  
+	  <input name="Submit"        type="submit"  value="Enviar" >
+	</form>
+	</div>
 
 @endsection
 

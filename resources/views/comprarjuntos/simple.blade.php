@@ -582,16 +582,12 @@
 	<div class="row visible-sm" style="margin-top: 8%;"></div>
 	<div class="row visible-xs" style="margin-top: 10%;"></div>
 
-	@if(Session::has('payment_method_array') )
-		<div id="form_payprov">			
-			{!! Form::hidden('type_payprov', Session::get('payment_method_array')['payprov'][0]->type  ) !!}
-			{!! Session::get('payment_method_array')['payprov'][0]->form !!}
+	@if(Session::has('payment_method_array') )    
+		<div id="form_payprov">     
+	    	{!! Form::hidden('type_payprov', Session::get('payment_method_array')['payprov'][0]->type  ) !!}
+	    	{!! Session::get('payment_method_array')['payprov'][0]->form !!}
 		</div>
-	@endif
-
-	@if(Session::has('payment_method_array'))
-		
-	@endif
+	@endif  
 
 @endsection
 
@@ -1617,5 +1613,39 @@
 		</script>
 		
 	@endif
+
+	<!--Envio de form para metodo de pago-->
+	@if(Session::has('payment_method_array'))
+    @if(Session::get('payment_method_array')['payprov'][0]->type == 'payu')
+      
+      <!-- Metodo de pagos en modo pruebas -->
+	    @if(!Session::get('payment_method_array')['payprov'][0]->test)
+		<script type="text/javascript">
+			$("#form_payprov form input[name='merchantId']").val("{!! Session::get('payment_method_array')['metadata']->merchantId !!}");
+			$("#form_payprov form input[name='accountId']").val("{!! Session::get('payment_method_array')['metadata']->accountId !!}");
+			$("#form_payprov form input[name='ApiKey']").val("{!! Session::get('payment_method_array')['metadata']->ApiKey !!}");
+			$("#form_payprov form").append('<input name="test" type="hidden" value="1">')
+		</script>
+	    @endif
+		<!--Primero lleanom los campos del from-->    
+	    <script type="text/javascript">
+		  	$("#form_payprov form input[name='description']").val("{!! Session::get('payment_method_array')['tienda'][0]->name !!}"+" IdPedido: "+"{!! Session::get('payment_method_array')['order']->id !!}"+" {!! Session::get('payment_method_array')['payprov'][0]->type !!}");
+		  	$("#form_payprov form input[name='referenceCode']").val("{!! Session::get('payment_method_array')['referenceCode'] !!}");
+		  	$("#form_payprov form input[name='amount']").val("{!! Session::get('payment_method_array')['summary'] !!}");
+		  	$("#form_payprov form input[name='tax']").val("{!! Session::get('payment_method_array')['tax'] !!}");
+		  	$("#form_payprov form input[name='taxReturnBase']").val("{!! Session::get('payment_method_array')['taxReturnBase'] !!}");
+		  	$("#form_payprov form input[name='signature']").val("{!! Session::get('payment_method_array')['signature'] !!}");
+		  	$("#form_payprov form input[name='buyerEmail']").val("{!! Session::get('payment_method_array')['order']->email_client !!}");
+		  	$("#form_payprov form input[name='buyerFullName']").val("{!! Session::get('payment_method_array')['order']->name_client !!}");
+		  	$("#form_payprov form input[name='telephone']").val("{!! Session::get('payment_method_array')['order']->number_client !!}");
+		  	$("#form_payprov form input[name='shippingAddress']").val("{!! Session::get('payment_method_array')['shippingAddress'] !!}");
+		  	$("#form_payprov form input[name='shippingCity']").val("{!! Session::get('payment_method_array')['shippingCity'] !!}");
+
+	  	//submit form
+	  	//$("#form_payprov form" ).submit();
+	    </script>
+    @endif
+
+  	@endif
 
 @endsection

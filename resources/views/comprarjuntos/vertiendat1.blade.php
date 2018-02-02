@@ -203,6 +203,13 @@
 		display: none !important;
 	}
 
+	@media (min-width: 768px){		
+		.navbar-nav>li>a {
+		    padding-top: 20px !important;
+		    padding-bottom: 5px !important;
+		}
+	}
+
 	</style>
 
 	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
@@ -604,12 +611,24 @@
 	</div>
 	@endif
 
-	@if(!empty($payprov[0]))
-		<div id="form_payprov">			
-			{!! Form::hidden('type_payprov', $payprov[0]->type) !!}
-			{!! $payprov[0]->form !!}
-		</div>
-	@endif
+	<!--Pago virtual-->
+	<div id="form_payprov">     
+	<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+	  <input name="merchantId"    type="hidden"  value="508029"   >
+	  <input name="ApiKey"    type="hidden"  value="4Vj8eK4rloUd272L48hsrarnUA"   >	  	  	  
+	  <input name="referenceCode" type="hidden"  value="TestPayUMacalu" >
+	  <input name="accountId"     type="hidden"  value="512321" >
+	  <input name="description"   type="hidden"  value="Test PAYU"  >
+	  <input name="amount"        type="hidden"  value="3"   >
+	  <input name="tax"           type="hidden"  value="0"  >
+	  <input name="taxReturnBase" type="hidden"  value="0" >
+	  <input name="currency"      type="hidden"  value="USD" >
+	  <input name="signature"     type="hidden"  value="37be299fc90c3b2503cfbe50e9ed6e96"  >
+	  <input name="test"          type="hidden"  value="1" >
+	  <input name="buyerEmail"    type="hidden"  value="test@test.com" >
+	  
+	</form>	
+	</div>
 
 @endsection
 

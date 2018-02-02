@@ -33,9 +33,10 @@ class StoreController extends Controller {
 	 * @return void
 	 */
 	public function __construct(Guard $auth)
-	{
-		$this->auth = $auth;
-		$this->middleware('guest');
+	{	
+		//se remueve por que el proveedor de pagos necesita dos metodos para retornar
+		//$this->auth = $auth;
+		//$this->middleware('guest');
 	}
 
 	public function getIndex(){	
@@ -326,10 +327,8 @@ class StoreController extends Controller {
 				$message[] = 'Problemas al crear la tienda';
 				$message[] = $e->getMessage();
 				return Redirect::to('mistiendas/listar')->with('error', $message);
-			}	
-
+			}
 		}
-
 	}
 
 	public function getActualizar($id_store=null,$id_user){		
@@ -659,8 +658,20 @@ class StoreController extends Controller {
 			$paymenprovidersactive=
 			ProveedorPago::
 			where('store_id', Session::get('store.id'))
-			->where('active',1)
+			->where('active',1)			
 			->count();
+
+			if($request->input('payment_method_id')){
+
+				//si hay otros activos
+				$paymenprovidersactive=
+				ProveedorPago::
+				where('store_id', Session::get('store.id'))
+				->where('active',1)			
+				->where('id',"!=",$request->input('payment_method_id'))			
+				->count();
+
+			}
 
 			if($paymenprovidersactive){
 				$message[] = 'Problemas al crear/editar el proveedor de pago, no debe haber más de un proveedor activo';				
@@ -718,22 +729,30 @@ class StoreController extends Controller {
 						$message[] = 'Problemas al crear/editar el proveedor de pago, falta el metadato: '.$key;				
 						return Redirect::to('mistiendas/listar')->with('error', $message);
 					}
-					$form = $form.'<input name="'.$key.'" type="hidden" value="'.$value.'">';
-				}
+					if($key != 'ApiLogin'){
+						if($key != 'PlublicKey'){
+							$form = $form.'<input name="'.$key.'" type="hidden" value="'.$value.'">';		
+						}
+						
+					}
+				}				
 				
 				$form = $form.'<input name="description" type="hidden" value="">';
 				$form = $form.'<input name="referenceCode" type="hidden" value="">';
 				$form = $form.'<input name="amount" type="hidden" value="">';
 				$form = $form.'<input name="tax" type="hidden" value="">';
-				$form = $form.'<input name="taxReturnBase" type="hidden" value="">';
-				$form = $form.'<input name="currency" type="hidden" value="COP">';
+				$form = $form.'<input name="taxReturnBase" type="hidden" value="">';				
 				$form = $form.'<input name="lng" type="hidden" value="es">';
 				$form = $form.'<input name="signature" type="hidden" value="">';
-				$form = $form.'<input name="test" type="hidden" value="1">';
+				//$form = $form.'<input name="test" type="hidden" value="1">';
 				$form = $form.'<input name="buyerEmail" type="hidden" value="">';
+				$form = $form.'<input name="buyerFullName" type="hidden" value="">';
+				$form = $form.'<input name="telephone" type="hidden" value="">';				
+				$form = $form.'<input name="shippingAddress" type="hidden" value="">';				
+				$form = $form.'<input name="shippingCity" type="hidden" value="">';								
 				$form = $form.'<input name="responseUrl" type="hidden" value="'.url('mistiendas/responsepayu').'">';
 				$form = $form.'<input name="confirmationUrl" type="hidden" value="'.url('mistiendas/confirmationpayu').'">';
-				$form = $form.'<input name="Submit" type="hidden" value="Enviar">';
+				//$form = $form.'<input name="Submit" type="hidden" value="Enviar">';
 				
 				$form = $form.'</form>';
 
@@ -1065,11 +1084,42 @@ class StoreController extends Controller {
 	}
 
 	//pagina de confirmación de pagos de PayU
-	public function getResponsepayu(Request $request){	
+	public function getResponsepayu(Request $request){
+
+		//se tatran los datos		
+		$type = explode(" ",$request->input('description'))[3];
+
+		if($type == "payu"){
+			$tienda = explode("_",$request->input('referenceCode'))[0];
+			$order_id = explode("_",$request->input('referenceCode'))[1];
+			$transactionState = $request->input('transactionState');//4,6,104,5,7
+			$polTransactionState = $request->input('polTransactionState');//codigo más especifico de transactionState, hijo
+			$polResponseCode = $request->input('polResponseCode');//codigo más especifico de transactionState, hijo		
+			$lapResponseCode = $request->input('lapResponseCode');//string base de polResponseCode	
+			
+			$reference_pol = $request->input('reference_pol');//referencia en payu
+			$transactionId = $request->input('transactionId');//identificador de transaccion
+
+			$polPaymentMethod = $request->input('polPaymentMethod');//cod metodo de pago "10"
+			$lapPaymentMethod = $request->input('lapPaymentMethod');//string metodo de pago "VISA"
+			$polPaymentMethodType = $request->input('polPaymentMethodType');//cod tipo de pago "2"
+			$lapPaymentMethodType = $request->input('lapPaymentMethodType');//string tupo de pago "CREDIT_CARD"	
+
+			$processingDate = $request->input('processingDate');//"2018-02-01"			
+			
+		}
+
+		
+
+		//se emite una anotación sobre el pedido
+
+
+		//retornamos a la tienda con el mensaje para usuario
 		dd($request->input());
 		return 'OK';
 	}
-	public function postConfirmationpayu(Request $request){	
+	public function postConfirmationpayu(Request $request){
+
 		dd($request->input());
 		return 'OK';
 	}	

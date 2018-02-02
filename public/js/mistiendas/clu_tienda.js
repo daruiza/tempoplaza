@@ -622,7 +622,7 @@ clu_tienda.prototype.consultaRespuestaProviders = function(result) {
 	$("#type_select").chosen().change(function(event) {
 
 		if($('#type_select').chosen().val() == 'payu'){
-			$('#nuevoproveedor_modal #data').text('{"merchantId":"", "accountId":"", "ApiKey":"", "ApiLogin":"", "PlublicKey":""}');
+			$('#nuevoproveedor_modal #data').text('{"merchantId":"", "accountId":"", "ApiKey":"", "ApiLogin":"", "PlublicKey":"", "currency":"", "shippingCountry":""}');
 			
 			var html = ''+
 			'<h4>PayU</h4>'+

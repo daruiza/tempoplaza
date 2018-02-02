@@ -47,10 +47,6 @@ Route::get('/{data}',[
 	'as' => 'search'
 ]);
 
-Route::post('/pagina', function () {
-    return 'Hello World';
-});
-
 Route::group(['middleware' => 'guest'], function () {
 	
 	Route::get('salida/{id}',[

@@ -1265,6 +1265,8 @@ class WelcomeController extends Controller {
 		$orden = new Orden();	
 		$hoy = new DateTime();
 		$orden->date = $hoy->format('Y-m-d H:i:s');
+		$city_client = '';
+		$adress_client = '';
 		//miramos si es usuario o invitado
 		if(!empty($request->input('name_invitado')) && !empty($request->input('dir_invitado')) ){
 			//es invitado, captamos los datos de contacto
@@ -1273,6 +1275,9 @@ class WelcomeController extends Controller {
 			$orden->email_client = strtolower($request->input('email_invitado'));
 			$orden->number_client = $request->input('tel_invitado');
 			$orden->client_id = 0;
+
+			$city_client = $request->input('municipio_invitado');
+			$adress_client = $request->input('dir_invitado');
 			
 		}else{
 			//es usuario del sistema y esta logueado
@@ -1287,6 +1292,9 @@ class WelcomeController extends Controller {
 			$orden->email_client = $cliente[0]->email;
 			$orden->number_client = $cliente[0]->movil_number.', ' .$cliente[0]->fix_number;
 			$orden->client_id = $cliente[0]->user_id;
+
+			$city_client = $cliente[0]->city;
+			$adress_client = $cliente[0]->adress;
 			//verificamos si ya terminado sus datos de perfil
 			if(empty($cliente[0]->names) || empty($cliente[0]->adress) || empty($cliente[0]->email) ){
 				//el cleinte no ha terminado su registro
@@ -1346,7 +1354,9 @@ class WelcomeController extends Controller {
 
 			//total
 			$total = 0;
-			
+			$base = 0;
+			$iva = 0;
+
 			//guardado de detalles
 			foreach ($productos as $id_prod => $prod) {
 				//de un producto pude haber diferentes configuraciones			
@@ -1363,8 +1373,9 @@ class WelcomeController extends Controller {
 					}catch (ModelNotFoundException $e) {				
 						return Redirect::back()->with('error',['No se pudo guardar la orden de pedido, Intentalo nuevamente. Error en guardar detalles']);
 					}
-
-					$total = $total + intval($values['precio']);
+					$iva = $iva + ((intval($values['precio'])*intval($values['volume']))/1.19)*0.19;
+					$base = $base + intval($values['precio'])*intval($values['volume'])/1.19;
+					$total = $total + (intval($values['precio'])*intval($values['volume']));
 				}				
 			}
 			
@@ -1446,16 +1457,44 @@ class WelcomeController extends Controller {
 
 			//proveedor de pago virtual
 			$moduledata['payprov'] = \DB::table('clu_payment_method')
-			->select('clu_payment_method.type','clu_payment_method.form')		
+			->select('clu_payment_method.type','clu_payment_method.form','clu_payment_method.data','clu_payment_method.test')		
 			->where('clu_payment_method.store_id',$tienda[0]->id)
 			->where('clu_payment_method.active',1)			
 			->get();
 
-			//enviamos, la orden, la tienda y los detalles
-			$moduledata['order'] = $orden;
-			$moduledata['summary'] = $orden;
+			if(count($moduledata['payprov'])){
 
-			Session::flash('payment_method_array', $moduledata);
+				if( $moduledata['payprov'][0]->type == "payu" ){
+					//preparamos los metadatos
+					$metadata = json_decode($moduledata['payprov'][0]->data);
+					//enviamos, la orden, la tienda y los detalles
+					$moduledata['metadata'] = $metadata;
+					$moduledata['tienda'] = $tienda;
+					$moduledata['order'] = $orden;
+					$moduledata['summary'] = round($total,2);
+					$moduledata['taxReturnBase'] = round($base,2);
+					$moduledata['tax'] = round($iva,2);				 
+					$moduledata['shippingAddress'] =$adress_client;
+					$moduledata['shippingCity'] = $city_client;
+					$moduledata['referenceCode'] = $tienda[0]->name.'_'.$orden->id;
+					//“ApiKey~merchantId~referenceCode~amount~currency”.				
+					$moduledata['signature'] = md5($metadata->ApiKey.'~'.$metadata->merchantId.'~'.$moduledata['referenceCode'].'~'.$total.'~'.$metadata->currency);
+					
+					//si el pago esta sobre el ambiente de pruebas
+					if(!$moduledata['payprov'][0]->test){
+						//el estado es: test					
+						$metadata->merchantId = '508029';
+						$metadata->accountId = '512321';
+						$metadata->ApiKey = '4Vj8eK4rloUd272L48hsrarnUA';					
+						$metadata->PlublicKey = '512321';
+						$metadata->currency = 'COP';
+						$metadata->shippingCountry = 'CO';
+						$moduledata['signature'] = md5($metadata->ApiKey.'~'.$metadata->merchantId.'~'.$moduledata['referenceCode'].'~'.$total.'~'.$metadata->currency);
+					}
+				}
+				
+				Session::flash('payment_method_array', $moduledata);
+			}			
 
 			//retornar ala tienda con mensajes de ejecuciòn		
 			$mensage[]='El pedido fue enviado con EXITO!, Con Consecutivo: '.$orden->id;
