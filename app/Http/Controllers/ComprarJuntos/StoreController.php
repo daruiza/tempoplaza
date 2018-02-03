@@ -1086,60 +1086,92 @@ class StoreController extends Controller {
 	//pagina de confirmación de pagos de PayU
 	public function getResponsepayu(Request $request){
 
-		//se tatran los datos		
-		$type = explode(" ",$request->input('description'))[3];
+		//se tatran los datos
+		if(array_key_exists('description',$request->input())){
 
-		if($type == "payu"){
-			$tienda = explode("_",$request->input('referenceCode'))[0];
-			$order_id = explode("_",$request->input('referenceCode'))[1];
-			$transactionState = $request->input('transactionState');//4,6,104,5,7
-			$lapTransactionState = $request->input('lapTransactionState');//String transactionState			
+			$type = explode(" ",$request->input('description'))[3];
+
+			if($type == "payu"){
+
+				$tienda = explode("_",$request->input('referenceCode'))[0];
+				$order_id = explode("_",$request->input('referenceCode'))[1];
+				$transactionState = $request->input('transactionState');//4,6,104,5,7
+				$lapTransactionState = $request->input('lapTransactionState');//String transactionState			
+				
+				$polResponseCode = $request->input('polResponseCode');//codigo más especifico de transactionState, hijo		
+				$polTransactionState = $request->input('polTransactionState');//codigo más especifico de transactionState, hijo
+				
+				$lapResponseCode = $request->input('lapResponseCode');//string base de polResponseCode
+				$messagepayu = $request->input('message');//string base de polResponseCode
+				
+				$reference_pol = $request->input('reference_pol');//referencia en payu
+				$transactionId = $request->input('transactionId');//identificador de transaccion
+
+				$polPaymentMethod = $request->input('polPaymentMethod');//cod metodo de pago "10"
+				$lapPaymentMethod = $request->input('lapPaymentMethod');//string metodo de pago "VISA"
+				$polPaymentMethodType = $request->input('polPaymentMethodType');//cod tipo de pago "2"
+				$lapPaymentMethodType = $request->input('lapPaymentMethodType');//string tupo de pago "CREDIT_CARD"	
+
+				$processingDate = $request->input('processingDate');//"2018-02-01"
+
+				//cración de anotación
+				$anotacion = new Anotacion();
+				$hoy = new DateTime();
+				$anotacion->user_name = 'PayU';
+				$anotacion->date = $hoy->format('Y-m-d H:i:s');
+				//$anotacion->description = 'Informe Pago Virtual: Estado - '.$lapTransactionState.'['.$transactionState.'], EstadoEspecifico - '.$lapResponseCode.'['.$polTransactionState.'], Mensaje: '.$messagepayu.', Referencia de Orden en PayU: '.$reference_pol.',  Identificador de transaccion: '.$transactionId.', Metodo de Pago: '.$lapPaymentMethod.'['.$polPaymentMethod.'],  Tipo de Pago: '.$lapPaymentMethodType.'['.$polPaymentMethodType.']';
+				$anotacion->description = str_replace(',',', ',json_encode($request->input()));
+				$anotacion->active = true;
+				$anotacion->order_id = $order_id;			
+				try {
+					//guardado de anotacion de pedido
+					$anotacion->save();
+				}catch (ModelNotFoundException $e) {
+					$mensage[]='No se pudo guardar la orden de pedido, Intentalo nuevamente. Error en guardar anotaciones';
+					return Redirect::to('/'.$tienda)->with('error', $mensage);
+				}
+
+				$mensage[]='El pedido fue enviado con EXITO!, Con Consecutivo: '.$order_id;
+				$mensage[]='Resultado del Pago Virtual: '.$lapTransactionState;
+				return Redirect::to('/'.$tienda)->with('message', $mensage);		
 			
-			$polResponseCode = $request->input('polResponseCode');//codigo más especifico de transactionState, hijo		
-			$polTransactionState = $request->input('polTransactionState');//codigo más especifico de transactionState, hijo
-			
-			$lapResponseCode = $request->input('lapResponseCode');//string base de polResponseCode
-			$messagepayu = $request->input('message');//string base de polResponseCode
-			
-			$reference_pol = $request->input('reference_pol');//referencia en payu
-			$transactionId = $request->input('transactionId');//identificador de transaccion
-
-			$polPaymentMethod = $request->input('polPaymentMethod');//cod metodo de pago "10"
-			$lapPaymentMethod = $request->input('lapPaymentMethod');//string metodo de pago "VISA"
-			$polPaymentMethodType = $request->input('polPaymentMethodType');//cod tipo de pago "2"
-			$lapPaymentMethodType = $request->input('lapPaymentMethodType');//string tupo de pago "CREDIT_CARD"	
-
-			$processingDate = $request->input('processingDate');//"2018-02-01"
-
-			//cración de anotación
-			$anotacion = new Anotacion();
-			$hoy = new DateTime();
-			$anotacion->user_name = 'PayU';
-			$anotacion->date = $hoy->format('Y-m-d H:i:s');
-			$anotacion->description = 'Informe Pago Virtual: Estado - '.$lapTransactionState.'['.$transactionState.'], EstadoEspecifico - '.$lapResponseCode.'['.$polTransactionState.'], Mensaje: '.$messagepayu.', Referencia de Orden en PayU: '.$reference_pol.',  Identificador de transaccion: '.$transactionId.', Metodo de Pago: '.$lapPaymentMethod.'['.$polPaymentMethod.'],  Tipo de Pago: '.$lapPaymentMethodType.'['.$polPaymentMethodType.']';
-			$anotacion->active = true;
-			$anotacion->order_id = $order_id;			
-			try {
-				//guardado de anotacion de pedido
-				$anotacion->save();
-			}catch (ModelNotFoundException $e) {
-				$mensage[]='No se pudo guardar la orden de pedido, Intentalo nuevamente. Error en guardar anotaciones';
-				return Redirect::to('/'.$tienda)->with('error', $mensage);
 			}
 
-			$mensage[]='El pedido fue enviado con EXITO!, Con Consecutivo: '.$order_id;
-			$mensage[]='Resultado del Pago Virtual: '.$lapTransactionState;
-			return Redirect::to('/'.$tienda)->with('message', $mensage);			
-			
-		}
-				
+		}		
+
+		
 		$mensage[]='El pedido fue enviado con EXITO!, Muchas gracias por tu compra.';
 		return Redirect::to('/'.$tienda);
 	}
+
 	public function postConfirmationpayu(Request $request){
 
-		dd($request->input());
-		return 'OK';
+		//se tatran los datos
+		if(array_key_exists('description',$request->input())){
+
+			$type = explode(" ",$request->input('description'))[3];
+		
+			if($type == "payu"){
+				$tienda = explode("_",$request->input('reference_sale'))[0];
+				$order_id = explode("_",$request->input('reference_sale'))[1];
+				$state_pol = $request->input('state_pol');//4,6,5
+
+
+				$response_message_pol = $request->input('response_message_pol');//String state_pol
+
+				//cración de anotación
+				$anotacion = new Anotacion();
+				$hoy = new DateTime();
+				$anotacion->user_name = 'PayU';
+				$anotacion->date = $hoy->format('Y-m-d H:i:s');				
+				$anotacion->description = str_replace(',',', ',json_encode($request->input()));
+				$anotacion->active = true;
+				$anotacion->order_id = $order_id;			
+				$anotacion->save();
+			}
+		}			
+
+		
 	}	
 
 }

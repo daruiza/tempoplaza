@@ -663,6 +663,20 @@
 			<div> Facebook</div>	
 	</div>
 	-->
+
+	<!--
+	<div class="col-md-12 col-md-offset-0 visible-lg">
+		<form action="mistiendas/confirmationpayu" method="post">
+			First name:<br>
+		 	<input type="text" name="firstname" value="Mickey">
+			<br>
+			Last name:<br>
+			<input type="text" name="lastname" value="Mouse">
+			<br><br>
+			<input type="submit" value="Submit">
+		</form> 
+	</div>
+	-->	
 	
 
 @endsection
