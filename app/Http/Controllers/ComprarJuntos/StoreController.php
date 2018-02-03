@@ -652,7 +652,7 @@ class StoreController extends Controller {
 	public function postNuevoproveedorpago(Request $request){
 		//VERIFICACIONES
 		//verificamos que si existen otros metodos de pago
-		//dd($request->input());
+
 		if($request->input('active') == "activa"){
 
 			$paymenprovidersactive=
@@ -716,13 +716,15 @@ class StoreController extends Controller {
 			if($request->input('test') == "produccion")$paymenprovider->test = 1;			
 			$paymenprovider->store_id = Session::get('store.id');
 
-
+			
 			//construimos el form para payu
 			if($request->input()['type'] == 'payu'){
 
 				$metadata = json_decode($request->input()['data']);
 				$form = '<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">';			
-				if($request->input('test') == "produccion") $form = 'https://checkout.payulatam.com/ppp-web-gateway-payu/';
+				if($request->input('test') == "produccion") {
+					$form = '<form method="post" action="https://checkout.payulatam.com/ppp-web-gateway-payu/">';
+				}
 	 			
 				foreach ($metadata as $key => $value) {
 					if(empty($value)){

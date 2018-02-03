@@ -11,6 +11,6 @@ class ProveedorPago extends Model
      */
 	protected $table = 'clu_payment_method';
 	
-	protected $fillable = ['id','type','name','description','data','active','store_id'];
+	protected $fillable = ['id','type','name','description','data','active','test','store_id'];
 			
 }

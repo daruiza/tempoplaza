@@ -211,11 +211,15 @@ class RegisterController extends Controller
 							//envio de mensage al administrador							
 							$data['user'] = $user->name;
 							$data['email'] = $user->email;
-							
-							Mail::send('email.registry',$data,function($message) {
-								$message->from(Session::get('mail'),Session::get('copy'));
-								$message->to(Session::get('mail'),Session::get('name'))->subject('Registro de Tendero.');
-							});						
+
+							try{
+								Mail::send('email.registry',$data,function($message) {
+									$message->from(Session::get('mail'),Session::get('copy'));
+									$message->to(Session::get('mail'),Session::get('name'))->subject('Registro de Tendero.');
+								});
+							}catch (\Exception  $e) {	
+								//enviar un log para su tratamiento
+							}					
 							
 							return redirect()->action('Auth\LoginController@getLogin', ['user_id' => $user->id, 'usuario'=>$user->name, 'contraseña'=>  $request->input()['contraseña_uno']]);
 
