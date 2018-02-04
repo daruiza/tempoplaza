@@ -188,7 +188,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="background-color:{{$tienda->color_one}}; color: {{$tienda->color_two}}; border-color:{{$tienda->color_two}};">{{$tienda->name}}
 						@if($tienda->status == 'Activa')
-							<span class="glyphicon glyphicon-ok" aria-hidden="true" style="float: right;font-size: 20px;" data-toggle="tooltip" title="{{$tienda->status}}"></span>
+							<span class="glyphicon glyphicon-ok" aria-hidden="true" style="position: absolute;top: 15px;font-size: 20px;" data-toggle="tooltip" title="{{$tienda->status}}"></span>
 						@else
 							<span class="glyphicon glyphicon-remove" aria-hidden="true" style="float: right;font-size: 20px;" data-toggle="tooltip" title="{{$tienda->status}}"></span>
 						@endif
