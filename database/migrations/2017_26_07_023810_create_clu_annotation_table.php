@@ -16,7 +16,7 @@ class CreateCluAnnotationTable extends Migration
             $table->increments('id');
             $table->string('user_name');//entrada de texto
             $table->dateTime('date');
-            $table->string('description');//entrada de texto
+            $table->string('description','2048');//entrada de texto
             $table->boolean('active')->default(true);
             $table->integer('order_id')->unsigned();            
             $table->foreign('order_id')->references('id')->on('clu_order')->onDelete('cascade');            

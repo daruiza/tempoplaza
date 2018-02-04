@@ -677,7 +677,7 @@ clu_tienda.prototype.consultaRespuestaProvider = function(result) {
 				}
 				if(clu_tienda.table_providers.data()[i].test){
 					//si se esta activa
-					$('#nuevoproveedor_modal input[name=test][value=activa]').attr("checked", "checked");
+					$('#nuevoproveedor_modal input[name=test][value=produccion]').attr("checked", "checked");
 				}
 
 				$('#modal-button-providerpay').html('Editar Proveedor')

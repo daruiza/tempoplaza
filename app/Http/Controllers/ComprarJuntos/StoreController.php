@@ -155,6 +155,7 @@ class StoreController extends Controller {
 	}
 
 	public function getInicio(){
+
 		if(!Session::has('modulo'))return redirect()->action('ComprarJuntos\StoreController@getListar');
 		return view('comprarjuntos/tienda');
 	}
@@ -799,6 +800,20 @@ class StoreController extends Controller {
 		->orderBy('id', 'desc')
 		->get();
 
+		foreach ($moduledata['entradas'] as $key => $value) {
+			if(!empty(json_decode($value->description))){
+				//es un json
+				$description = json_decode($value->description);
+
+				if($description->merchantId == '508029'){
+					//es una transaccion tipo test
+					$value->description = "Transaccion en ambiente PRUEBAS, Estado: ".$description->lapTransactionState." [".$description->lapResponseCode."], Referencia de orden en PayU: ".$description->reference_pol." Identificador de transaccion: ".$description->transactionId.", Metodo de Pago:".$description->lapPaymentMethod.", Tipo de Pago: ".$description->lapPaymentMethodType;
+				}
+
+				
+			} 
+		}
+
 		if(count($moduledata['detalles'])){
 			return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>$moduledata['detalles'],'annotations'=>$moduledata['entradas']]);	
 		}
@@ -1120,8 +1135,7 @@ class StoreController extends Controller {
 				$anotacion = new Anotacion();
 				$hoy = new DateTime();
 				$anotacion->user_name = 'PayU';
-				$anotacion->date = $hoy->format('Y-m-d H:i:s');
-				//$anotacion->description = 'Informe Pago Virtual: Estado - '.$lapTransactionState.'['.$transactionState.'], EstadoEspecifico - '.$lapResponseCode.'['.$polTransactionState.'], Mensaje: '.$messagepayu.', Referencia de Orden en PayU: '.$reference_pol.',  Identificador de transaccion: '.$transactionId.', Metodo de Pago: '.$lapPaymentMethod.'['.$polPaymentMethod.'],  Tipo de Pago: '.$lapPaymentMethodType.'['.$polPaymentMethodType.']';
+				$anotacion->date = $hoy->format('Y-m-d H:i:s');				
 				$anotacion->description = str_replace(',',', ',json_encode($request->input()));
 				$anotacion->active = true;
 				$anotacion->order_id = $order_id;			
