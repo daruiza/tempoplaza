@@ -47,7 +47,7 @@
 	</style>	
 	<body>
 		<div class="container-fluid">			
-			<div class="panel panel-default" style="width: 65%;margin: auto;border-radius: 6px;font-family: 'Dosis', sans-serif;font-size: 18px;line-height: 1.42857143;color: #333;box-shadow: 0 5px 15px rgba(0,0,0,.5);border: 1px solid rgba(0,0,0,.2);">
+			<div class="panel panel-default" style="width: 95%;margin: auto;border-radius: 6px;font-family: 'Dosis', sans-serif;font-size: 18px;line-height: 1.42857143;color: #333;box-shadow: 0 5px 15px rgba(0,0,0,.5);border: 1px solid rgba(0,0,0,.2);">
 				<div class="panel-heading" style="padding: 15px;border-bottom: 1px solid #e5e5e5;background: #dddddd;">{{ ucwords($tienda) }} te Informa</div>
 				<div class="panel-body" style="padding: 15px;font-size: 16px;">
 					<div style="float: right;margin-right: 5%;">
@@ -69,30 +69,30 @@
 						<div style="margin-bottom: 15px;margin-top: 15px;"><b>DETALLES DE ORDEN</b></div>
 						<table style="text-align: center;width: 90%;margin: auto;  border-collapse: collapse;" >
 							<tr >
-								<th style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Producto</th>
-								<th style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Precio</th> 
-								<th style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Cantidad</th>
-								<th style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Total</th>
+								<th style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;">Producto</th>
+								<th style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;">Precio</th> 
+								<th style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;">Cantidad</th>
+								<th style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;">Total</th>
 							</tr>
 							@php ($c=0)
 							@php ($p=0)	
 							@foreach( $detalles as $key => $value )
 								<tr>
-									<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{{$value->product}} - {{$value->description}}</td>
-									<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{{$value->price}}</td>
-									<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{{$value->volume}}</td>
-									<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{{($value->price*$value->volume)}}</td>
+									<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;">{{$value->product}} - {{$value->description}}</td>
+									<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;">{{$value->price}}</td>
+									<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;">{{$value->volume}}</td>
+									<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;">{{($value->price*$value->volume)}}</td>
 								</tr>
 								@php ($c = $c + $value->volume)
 								@php ($p = $p + $value->price*$value->volume)
 							@endforeach
 							<tr>
-								<td colspan="4" style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;background: #dddddd;"></td>
+								<td colspan="4" style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;background: #dddddd;max-width: 75px;"></td>
 							</tr>							
 							<tr>
-								<td colspan="2" style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"></td>								
-								<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"><b>Total a Pagar</b></td>
-								<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"><b>{{$p}}</b></td>
+								<td colspan="2" style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;"></td>								
+								<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;"><b>Total a Pagar</b></td>
+								<td style = "padding: 8px; text-align: left; border-bottom: 1px solid #ddd;max-width: 75px;"><b>{{$p}}</b></td>
 							</tr>
 						</table>
 					</div>

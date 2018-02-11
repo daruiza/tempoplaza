@@ -1264,7 +1264,10 @@
 		});
 
 		$('#nuevoproducto_modal').on('hidden.bs.modal', function () {
-		   //limpiamos todos los datos, puudo haver sido un edit quien abrio el modal
+			//limpiar el imput file
+			$('#imge_product').val('');
+			$($('#imge_product').parent().children()[1]).children()[0].value="";
+		    //limpiamos todos los datos, puudo haver sido un edit quien abrio el modal
 			$('#modal-title-product').html('Crear Producto');
 			$( "input[name='edit_product']").val(false);
 			$( "input[name='product_id']").val('');
@@ -1274,7 +1277,12 @@
 			$('#descripcion_producto').val('');
 			$('#prioridad_producto').val('');			
 			//imagen, se reemplaza el src del elemento
-			$('#img_product').attr('src',$('#img_product').attr('src').replace($('#img_product').attr('src').split('/')[$('#img_product').attr('src').split('/').length-1],'default.png'));
+			if($('#img_product').attr('src').includes('users')){
+				$('#img_product').attr('src',$('#img_product').attr('src').replace($('#img_product').attr('src').split('/')[$('#img_product').attr('src').split('/').length-1],'default.png'));	
+			}else{
+				$('#img_product').attr('src',clu_tienda.url_img_product);			
+			}
+			
 			$('#unidades_select').val('');
 			$('#unidades_medida').val('');
 			$('#colores_select').val('');
@@ -1409,6 +1417,21 @@
 		    }
 		    reader.readAsDataURL(file);
 	    });		
+
+	   $('#imge_product').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_product').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });			   
 
 		//limpiamos el spinner
 		//clu_tienda.spinner.el.remove();

@@ -32,8 +32,7 @@ class StoreController extends Controller {
 	 * @param  Guard  $auth
 	 * @return void
 	 */
-	public function __construct(Guard $auth)
-	{	
+	public function __construct(Guard $auth)	{	
 		//se remueve por que el proveedor de pagos necesita dos metodos para retornar
 		//$this->auth = $auth;
 		//$this->middleware('guest');
@@ -804,11 +803,19 @@ class StoreController extends Controller {
 			if(!empty(json_decode($value->description))){
 				//es un json
 				$description = json_decode($value->description);
-
-				if($description->merchantId == '508029'){
-					//es una transaccion tipo test
-					$value->description = "Transaccion en ambiente PRUEBAS, Estado: ".$description->lapTransactionState." [".$description->lapResponseCode."], Referencia de orden en PayU: ".$description->reference_pol." Identificador de transaccion: ".$description->transactionId.", Metodo de Pago:".$description->lapPaymentMethod.", Tipo de Pago: ".$description->lapPaymentMethodType;
+				if(array_key_exists('merchantId',$description)){
+					if($description->merchantId == '508029'){
+						//es una transaccion tipo test
+						$value->description = "Transaccion en ambiente PRUEBAS, Estado: ".$description->lapTransactionState." [".$description->lapResponseCode."], Referencia de orden en PayU: ".$description->reference_pol." Identificador de transacción: ".$description->transactionId.", Método de Pago:".$description->lapPaymentMethod.", Tipo de Pago: ".$description->lapPaymentMethodType;
+					}else{
+						//es una transaccion tipo producción
+						$value->description = "Transaccion en ambiente PRODUCCIÓN, Estado: ".$description->lapTransactionState." [".$description->polResponseCode."], Referencia de orden en PayU: ".$description->reference_pol." Identificador de transacción: ".$description->transactionId.", Método de Pago:".$description->lapPaymentMethod.", Tipo de Pago: ".$description->polPaymentMethod;
+					}
+				}else{
+					//es un tipo d erespuesta diferente
+					$value->description = "Transaccion en ambiente PRODUCCIÓN Mensaje, Estado: ".$description->response_message_pol." [".$description->response_code_pol."], mensaje de Error: ".$description->error_message_bank." Identificador de transacción: ".$description->transaction_id.", Método de Pago:".$description->payment_method_name.", Tipo de Pago: ".$description->payment_method_type;
 				}
+				
 
 				
 			} 

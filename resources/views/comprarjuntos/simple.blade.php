@@ -587,7 +587,9 @@
 	    	{!! Form::hidden('type_payprov', Session::get('payment_method_array')['payprov'][0]->type  ) !!}
 	    	{!! Session::get('payment_method_array')['payprov'][0]->form !!}
 		</div>
-	@endif  
+	@endif
+
+	
 
 @endsection
 
@@ -939,6 +941,8 @@
     {!! Form::open(array('id'=>'form_from_products','url' => 'welcome/listarajaxproducts')) !!}	
     {!! Form::close() !!}
     {!! Form::open(array('id'=>'form_add_product_session','url' => 'welcome/addproductsession')) !!}		
+    {!! Form::close() !!}
+    {!! Form::open(array('id'=>'form_remove_product_session','url' => 'welcome/removeproductsession')) !!}		
     {!! Form::close() !!}
 
 
@@ -1362,9 +1366,14 @@
 
 						//llamamos el metodo para gardar en session el array de los productos
 						var datos = new Array();
+						var contador;
 						for(i=0;i<seg_user.cart_products.length;i++){
 							seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
+							//borramos el index 11 en caso de existir
+							contador = seg_user.cart_products[i][11];
+							seg_user.cart_products[i][11] = "";
 							datos[i] = seg_user.cart_products[i].toString();
+							seg_user.cart_products[i][11] = contador;
 
 						}
 						datos['datos'] = seg_user.cart_products.length;					

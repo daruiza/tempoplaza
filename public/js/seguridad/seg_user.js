@@ -335,6 +335,7 @@ seg_user.prototype.iniciarDatepiker = function(obj) {
         dateFormat: 'yy-mm-dd'
     });
 };
+
 seg_user.prototype.changeImg = function(input){
 	if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -699,7 +700,7 @@ seg_user.prototype.openModalCart = function(result) {
             formgpoup.appendChild(div);
 
             fondo_bandera = fondo_bandera*-1;
-            seg_user.cart_products[i][10] = seg_user.cart_contador;
+            seg_user.cart_products[i][11] = seg_user.cart_contador;
             cantidad_total = parseInt(cantidad_total) + parseInt(seg_user.cart_products[i][2]);
             precio_total = parseInt(precio_total) + (parseInt(seg_user.cart_products[i][1])*parseInt(seg_user.cart_products[i][2]));
 
@@ -780,15 +781,12 @@ seg_user.prototype.openModalCart = function(result) {
 
        
         $('#cart_modal').modal();
-      
-        
-        
 
         //eventos
         $(".remove").on('click', function (e) {
             //remover de objeto, corremos el objeto
             for(var i=0;i<seg_user.cart_products.length;i++){
-                if(seg_user.cart_products[i][10] == this.id.split('_')[1])
+                if(seg_user.cart_products[i][11] == this.id.split('_')[1])
                 {                
                     seg_user.cart_products.splice( i, 1 );
                 }
@@ -813,10 +811,14 @@ seg_user.prototype.openModalCart = function(result) {
             var datos = new Array();
             for(i=0;i<seg_user.cart_products.length;i++){
                 seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
+                contador = seg_user.cart_products[i][11];
+                seg_user.cart_products[i][11] = "";
                 datos[i] = seg_user.cart_products[i].toString();
+                seg_user.cart_products[i][11] = contador;
             }
             datos['datos'] = seg_user.cart_products.length;                 
-            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");
+            //seg_ajaxobject.peticionajax($('#form_remove_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");
+            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");    
 
         });
         
@@ -829,7 +831,7 @@ seg_user.prototype.openModalCart = function(result) {
             }
              var j = -1;//para halalr los datos del producto
            for(var i=0;i<seg_user.cart_products.length;i++){
-                if(seg_user.cart_products[i][10] == this.name.split('_')[3])
+                if(seg_user.cart_products[i][11] == this.name.split('_')[3])
                 {                
                    seg_user.cart_products[i][2] = cantidad;
                    j=i;
@@ -853,10 +855,13 @@ seg_user.prototype.openModalCart = function(result) {
             var datos = new Array();
             for(i=0;i<seg_user.cart_products.length;i++){
                 seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
+                contador = seg_user.cart_products[i][11];
+                seg_user.cart_products[i][11] = "";
                 datos[i] = seg_user.cart_products[i].toString();
+                seg_user.cart_products[i][11] = contador;
             }
             datos['datos'] = seg_user.cart_products.length;                 
-            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");
+            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");    
 
             
         });
@@ -869,7 +874,7 @@ seg_user.prototype.openModalCart = function(result) {
             }
             var j = -1;//para halalr los datos del producto
            for(var i=0;i<seg_user.cart_products.length;i++){
-                if(seg_user.cart_products[i][10] == this.name.split('_')[3])
+                if(seg_user.cart_products[i][11] == this.name.split('_')[3])
                 {                
                    seg_user.cart_products[i][2] = cantidad;
                     j=i;
@@ -893,10 +898,13 @@ seg_user.prototype.openModalCart = function(result) {
             var datos = new Array();
             for(i=0;i<seg_user.cart_products.length;i++){
                 seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
+                contador = seg_user.cart_products[i][11];
+                seg_user.cart_products[i][11] = "";
                 datos[i] = seg_user.cart_products[i].toString();
+                seg_user.cart_products[i][11] = contador;
             }
             datos['datos'] = seg_user.cart_products.length;                 
-            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");
+            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");    
 
             
         });

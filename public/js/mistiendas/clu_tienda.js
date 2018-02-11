@@ -3,6 +3,7 @@ function clu_tienda() {
 	this.table_products = '';
 	this.table_orders = '';
 	this.table_providers = '';
+	this.url_img_product = '';
 	this.fillable = ['Nombre','Precio','Categorìa','Descripciòn'];
 	
 }
@@ -131,6 +132,14 @@ clu_tienda.prototype.consultaRespuestaProducts = function(result) {
 
 clu_tienda.prototype.consultaRespuestaProduct = function(result) {
 	clu_tienda.rowprod.child( clu_tienda.format(clu_tienda.rowprod.data(),result.request)).show();
+
+	//limpiar el imput file
+	$('#imge_product').val('');
+	$($('#imge_product').parent().children()[1]).children()[0].value="";
+	//reasignamos la imagen por defecto		
+	$('#img_product').attr('src',result.request.url+'/users/'+result.request.usuario+'/products/'+clu_tienda.rowprod.data().image1);
+	clu_tienda.url_img_product = result.request.url+'/users/'+result.request.usuario+'/products/'+clu_tienda.rowprod.data().image1;
+
 	$('.editproduct').on('click', function (e) {
 		//buscamos los datos seleccionados
 		for(var i=0; i < clu_tienda.table_products.data().length; i++){
@@ -171,9 +180,26 @@ clu_tienda.prototype.consultaRespuestaProduct = function(result) {
 				$('#sabores_select').val(clu_tienda.table_products.data()[i].flavors.split(',')).trigger("chosen:updated");
 				$('#materiales_select').val(clu_tienda.table_products.data()[i].materials.split(',')).trigger("chosen:updated");
 				break;
-			};
-		}	    
-	});
+			}
+		}	
+
+		$('#imge_product').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_product').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });			   
+			    
+	});	
+
 };
 
 clu_tienda.prototype.format= function(d,r) {    			

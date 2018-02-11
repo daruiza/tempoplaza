@@ -970,6 +970,8 @@
     {!! Form::close() !!}
     {!! Form::open(array('id'=>'form_add_product_session','url' => 'welcome/addproductsession')) !!}		
     {!! Form::close() !!}
+    {!! Form::open(array('id'=>'form_remove_product_session','url' => 'welcome/removeproductsession')) !!}		
+    {!! Form::close() !!}
 
 
 	<nav class="navbar  navbar-fixed-bottom navbar-light bg-faded hidden-lg hidden-md hidden-sm">		
@@ -1395,14 +1397,20 @@
 						}
 
 						//llamamos el metodo para gardar en session el array de los productos
+						//llamamos el metodo para gardar en session el array de los productos
 						var datos = new Array();
+						var contador;
 						for(i=0;i<seg_user.cart_products.length;i++){
 							seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
+							//borramos el index 11 en caso de existir
+							contador = seg_user.cart_products[i][11];
+							seg_user.cart_products[i][11] = "";
 							datos[i] = seg_user.cart_products[i].toString();
+							seg_user.cart_products[i][11] = contador;
 
 						}
 						datos['datos'] = seg_user.cart_products.length;					
-						seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");		
+						seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");			
 						
 					}
 					//cerrar el modal

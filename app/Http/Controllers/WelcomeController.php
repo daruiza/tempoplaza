@@ -1249,13 +1249,47 @@ class WelcomeController extends Controller {
 		//consultamos las caracteristicas del producto
 		//asignamos a array session	
 		$prods = array();
+		$array = array();
+		$productos = array();
+		for($i=0;$i<intval($request->input('datos'));$i++){
+			$array = explode(",",$request->input($i));
+			if(array_key_exists($array[0], $productos)){
+				//solo dejamos el de más volumen
+				foreach ($productos as $key => $value) {
+					if($key == $array[0]){
+						if($array[2] > $productos[$key][2]){
+							$productos[$key] = $array;
+						}
+					}
+				}
+			}else{
+				$productos[$array[0]] = $array;	
+			}			
+		}
+		foreach ($productos as $key => $value) {
+			$prods[] = implode(',',$value);
+		}
+		/*
+		for($i=0;$i<intval($request->input('datos'));$i++){			
+			$prods[] = $request->input($i);
+		}
+		*/
+		$session_prods = $prods;
+		if(Session::has('cart'))$session_prods = array_merge(Session::get('cart'),$prods);
+		Session::put('cart', array_unique($session_prods));
+		
+		return response()->json(['respuesta'=>true,'request'=>$request->input()]);	
+	}
+
+	public function postRemoveproductsession(Request $request){
+		//consultamos las caracteristicas del producto
+		//asignamos a array session	
+		$prods = array();
 		for($i=0;$i<intval($request->input('datos'));$i++){
 			$prods[] = $request->input($i);
 		}
-		$session_prods = $prods;
-		if(Session::has('cart'))$session_prods = array_merge(Session::get('cart'),$prods);		
-		Session::put('cart', array_unique($session_prods));
-		
+		Session::put('cart', $prods);
+				
 		return response()->json(['respuesta'=>true,'request'=>$request->input()]);	
 	}
 
