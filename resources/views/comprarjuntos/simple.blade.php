@@ -589,8 +589,6 @@
 		</div>
 	@endif
 
-	
-
 @endsection
 
 @section('modal')

@@ -785,10 +785,23 @@ seg_user.prototype.openModalCart = function(result) {
         //eventos
         $(".remove").on('click', function (e) {
             //remover de objeto, corremos el objeto
+            //datos de envio
+            var datos = new Array();
+
             for(var i=0;i<seg_user.cart_products.length;i++){
                 if(seg_user.cart_products[i][11] == this.id.split('_')[1])
-                {                
+                {   
+
+                    seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
+                    contador = seg_user.cart_products[i][11];
+                    seg_user.cart_products[i][11] = "";
+                    datos[0] = seg_user.cart_products[i].toString();
+                    seg_user.cart_products[i][11] = contador;                    
+                    datos['datos'] = 1;    
+
                     seg_user.cart_products.splice( i, 1 );
+
+                   
                 }
             }
             //remover de modal
@@ -806,19 +819,9 @@ seg_user.prototype.openModalCart = function(result) {
                 precio_total = precio_total + (parseInt(seg_user.cart_products[i][1]) * parseInt(seg_user.cart_products[i][2]) );
             }
             $('#cantidad_cart').html(cantidad_total);
-            $('#precio_total').html("$"+precio_total);
-
-            var datos = new Array();
-            for(i=0;i<seg_user.cart_products.length;i++){
-                seg_user.cart_products[i][8]=seg_user.cart_products[i][8].replace(",", ";");
-                contador = seg_user.cart_products[i][11];
-                seg_user.cart_products[i][11] = "";
-                datos[i] = seg_user.cart_products[i].toString();
-                seg_user.cart_products[i][11] = contador;
-            }
-            datos['datos'] = seg_user.cart_products.length;                 
-            //seg_ajaxobject.peticionajax($('#form_remove_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");
-            seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");    
+            $('#precio_total').html("$"+precio_total);            
+                          
+            seg_ajaxobject.peticionajax($('#form_remove_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");            
 
         });
         
@@ -872,7 +875,7 @@ seg_user.prototype.openModalCart = function(result) {
             }else{
                 cantidad = this.value;
             }
-            var j = -1;//para halalr los datos del producto
+            var j = -1;//para hallar los datos del producto
            for(var i=0;i<seg_user.cart_products.length;i++){
                 if(seg_user.cart_products[i][11] == this.name.split('_')[3])
                 {                
@@ -1028,7 +1031,8 @@ seg_user.prototype.consultaRespuestaAddCart = function(result) {
 };
 
 seg_user.prototype.consultaRespuestaAddCartSession = function(result) {
-
+    //Add product
+    var r = result;
 };
 
 seg_user.prototype.consultaRespuestaListarProductos = function(result) {

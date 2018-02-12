@@ -43,7 +43,7 @@ class WelcomeController extends Controller {
 	 * @return Response
 	 */
 	public function index(Request $request){
-		
+
 		if(!empty($request->input())){
 			//si es el finder es el buscador inicial			
 			if(array_key_exists('finder',$request->input())){				
@@ -1246,6 +1246,13 @@ class WelcomeController extends Controller {
 
 	//producto agregado al carro en cliente, agregamos a su session
 	public function postAddproductsession(Request $request){
+
+		/*El ejemplo simple
+		for($i=0;$i<intval($request->input('datos'));$i++){			
+			$prods[] = $request->input($i);
+		}
+		*/
+
 		//consultamos las caracteristicas del producto
 		//asignamos a array session	
 		$prods = array();
@@ -1266,31 +1273,58 @@ class WelcomeController extends Controller {
 				$productos[$array[0]] = $array;	
 			}			
 		}
+		//miramos los productos del session
+		for($i=0; $i < count(Session::get('cart')) ;$i++){
+			$array = explode(",",Session::get('cart')[$i]);
+			if(array_key_exists($array[0], $productos)){
+				//solo dejamos el de más volumen
+				foreach ($productos as $key => $value) {
+					if($key == $array[0]){
+						if($array[2] > $productos[$key][2]){
+							$productos[$key] = $array;
+						}
+					}
+				}
+			}else{
+				$productos[$array[0]] = $array;	
+			}			
+		}
+
 		foreach ($productos as $key => $value) {
 			$prods[] = implode(',',$value);
 		}
-		/*
-		for($i=0;$i<intval($request->input('datos'));$i++){			
-			$prods[] = $request->input($i);
-		}
-		*/
+		
 		$session_prods = $prods;
-		if(Session::has('cart'))$session_prods = array_merge(Session::get('cart'),$prods);
+		//if(Session::has('cart'))$session_prods = array_merge(Session::get('cart'),$prods);
 		Session::put('cart', array_unique($session_prods));
 		
-		return response()->json(['respuesta'=>true,'request'=>$request->input()]);	
+		return response()->json(['respuesta'=>true,'request'=>$request->input(),'cart'=>Session::get('cart')]);	
 	}
 
 	public function postRemoveproductsession(Request $request){
 		//consultamos las caracteristicas del producto
-		//asignamos a array session	
-		$prods = array();
-		for($i=0;$i<intval($request->input('datos'));$i++){
-			$prods[] = $request->input($i);
+		
+		$productos = array();
+		$session_prods = array();
+		for($i=0; $i<intval($request->input('datos')); $i++){
+			$session_prods[] = explode(",",$request->input($i));
 		}
-		Session::put('cart', $prods);
+		
+		foreach (Session::get('cart') as $key => $value) {
+			$array = explode(",",$value);
+			//se reasignan todos menos el removido
+			if(intval($session_prods[0][0]) != intval($array[0])){
+				$productos[$array[0]] = $array;		
+			}
+		}		
+
+		foreach ($productos as $key => $value) {
+			$prods[] = implode(',',$value);
+		}
+
+		Session::put('cart', array_unique($prods));
 				
-		return response()->json(['respuesta'=>true,'request'=>$request->input()]);	
+		return response()->json(['respuesta'=>true,'request'=>$request->input(),'cart'=>Session::get('cart')]);	
 	}
 
 	//este motodo es para mandar la orden de pedido, guardarla
