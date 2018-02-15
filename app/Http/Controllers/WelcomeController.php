@@ -324,6 +324,7 @@ class WelcomeController extends Controller {
 				$moduledata['tienda'] = \DB::table('clu_store')
 				->select('clu_store.*','seg_user.name as user_name')
 				->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
+				->leftjoin('clu_payment_method', 'clu_store.id', '=', 'clu_payment_method.store_id')
 				->where('clu_store.id',$request->input('store'))							
 				->get();
 
