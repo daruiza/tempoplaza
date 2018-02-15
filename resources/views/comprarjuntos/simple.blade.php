@@ -439,10 +439,7 @@
 			<div class="btn-group btn-menu" role="group">
 				<!--<button type="button" class="btn btn-default">Articulos</button>-->
 				<button type="button" class="btn btn-default" data-toggle="popover" title="Categorias" data-placement="bottom" data-content="{{ Html::ul($categorias)}}" data-html="true">Categorias</button>				
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ubication_modal">Ubicación</button>
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#resumen_modal">Resumen</button>				
-				<!--<button type="button" class="btn btn-default">Grupos de Consumo</button>-->
-				<button type="button" class="btn btn-default visible-lg" ><a href="#calificaciones" id="link1" class="bnt-catacteristicas">Calificaciones</a></button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ubication_modal">Ubicación</button>				
 			</div>
 		</div>
 	</div>
