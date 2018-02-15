@@ -550,6 +550,13 @@
 		</div>
 	@endif  
 
+	@if(!empty($tienda[0]->payment_method))		
+		<div class="col-md-10 col-md-offset-1 img_pay_method" style="margin-bottom: 2%;margin-top: 2%; text-align: center;">
+			<span style="font-size: 14px;">Métodos de pago: </span>
+			{{ Html::image('images/payprovider/metodosdepago.png','Imagen no disponible',array( 'style'=>'border-radius: 0%;' ))}}			
+		</div>
+	@endif
+
 @endsection
 
 @section('modal')

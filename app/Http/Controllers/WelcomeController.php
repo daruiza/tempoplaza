@@ -577,8 +577,9 @@ class WelcomeController extends Controller {
 		
 		//PRIMERO miramos si coincide con el nombre de una tienda
 		$moduledata['tienda'] = \DB::table('clu_store')
-		->select('clu_store.*','seg_user.name as user_name')
+		->select('clu_store.*','seg_user.name as user_name','clu_payment_method.type as payment_method')
 		->leftjoin('seg_user', 'clu_store.user_id', '=', 'seg_user.id')
+		->leftjoin('clu_payment_method', 'clu_store.id', '=', 'clu_payment_method.store_id')
 		->where('clu_store.name',strtolower($data))							
 		->get();
 
@@ -835,7 +836,7 @@ class WelcomeController extends Controller {
 			->orderByRaw("RAND()")
 			->skip(0)->take(1)
 			->get();
-			//no s vamos para el index para luego si buscar todo el criterio
+			//nos vamos para el index para luego si buscar todo el criterio
 			if(count($productos)){
 				return redirect()->action('WelcomeController@index', ['criterio' => strtolower($data)]);	
 			}

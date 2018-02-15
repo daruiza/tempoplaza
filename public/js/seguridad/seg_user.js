@@ -737,6 +737,27 @@ seg_user.prototype.openModalCart = function(result) {
         row.appendChild(hr);
         row.appendChild(div_c2);
 
+
+        if($('.img_pay_method > img').length){
+
+            div_c2_2 = document.createElement("div");
+            div_c2_2.className = "col-md-6 col-md-offset-0";
+
+            div_c2_t_2 = document.createElement("div");
+            div_c2_t_2.innerHTML = "Métodos de pago";
+            //div_c2_t_2.style.textAlign = "";
+
+            img = document.createElement("img");
+            //img.className = "form-control";
+            img.setAttribute("src", $('.img_pay_method > img').attr('src'));
+
+            div_c2_2.appendChild(div_c2_t_2);
+            div_c2_2.appendChild(img);
+
+             row.appendChild(div_c2_2);
+
+        }
+
         //construimos el input para descripcion
 
         //construimos los inputs para los invitados
