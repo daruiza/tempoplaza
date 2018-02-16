@@ -241,11 +241,17 @@
 		display: none !important;
 	}
 
-	@media (min-width: 768px){		
+	@media (min-width: 768px)  and (max-width: 990px){		
+		
 		.navbar-nav>li>a {
 		    padding-top: 20px !important;
 		    padding-bottom: 5px !important;
 		}
+
+		#calificaciones{
+			display: none;
+		}
+
 	}
 
 	</style>
@@ -333,7 +339,7 @@
 
 	<!--Buscador de tiendas solo para moviles-->
 	<div class="col-sm-10 col-md-offset-1 hidden-lg hidden-md hidden-sm">
-		{!! Form::open(array('id'=>'form_finder_store','url' => '/','method'=>'get','class'=>'navbar-form navbar-left','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
+		{!! Form::open(array('class'=>'form_finder_store','url' => '/','method'=>'get','class'=>'navbar-form navbar-left','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
 		   <div class="input-group">
 				{!! Form::text('finder_store','', array('class' => 'form-control buscador_t','placeholder'=>'Buscador de Productos','style'=>'text-align: center;','maxlength' => 48)) !!}
 				{!! Form::hidden('store', $tienda[0]->id) !!}
@@ -656,7 +662,7 @@
 						<span>Cantidad de productos a llevar: <label id="cantidad_cart" ></label>. Total a pagar: <label id="precio_total" ></label></span>
 					</div>
 					<div class="col-md-4">
-						<button type="submit"  form = "cart_form" id="submit_cart_modal" class="btn btn-default" >Enviar Pedido</button>
+						<button type="submit"  form = "cart_form" class="btn btn-default submit_cart_modal" >Enviar Pedido</button>
 				    	<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar Carro</button>
 					</div>
 				    
@@ -705,7 +711,7 @@
 
 				<div class="modal-footer">
 					<div class="col-md-12">
-						<button type="submit"  form = "cart_form" id="submit_cart_modal" class="btn btn-default btn_invitado_submit" >Enviar Pedido</button>
+						<button type="submit"  form = "cart_form" class="btn btn-default btn_invitado_submit submit_cart_modal" >Enviar Pedido</button>
 				    	<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar Carro</button>
 					</div>
 				</div>
@@ -955,6 +961,7 @@
 		//$('.div-finder').hide();
 		//agregamos el carrito
 		$('#cart_modal_b').on('click', function (e) { seg_user.openModalCart();});
+		
 		$('.chosen-select').chosen();
 		$('.chosen-container').width('100%');
 				
@@ -964,9 +971,9 @@
 		var div_finder0 = document.createElement("div");
 		div_finder0.setAttribute("class", "div-finder-store");
 		var form0 = document.createElement("form");
-		form0.setAttribute("class", "navbar-form navbar-left visible-lg");
+		form0.setAttribute("class", "navbar-form navbar-left visible-lg form_finder_store");
 		form0.setAttribute("method", "GET");
-		form0.setAttribute("id", "form_finder_store");
+		//form0.setAttribute("id", "form_finder_store");
 		form0.setAttribute("action", ""+"{{url('/')}}");
 		form0.setAttribute("accept-charset", "UTF-8");
 		form0.setAttribute("onsubmit", "javascript:return seg_user.validateFinder()");
@@ -977,7 +984,7 @@
 		var input0 = document.createElement("input");
 		input0.setAttribute("class", "form-control");
 		input0.setAttribute("placeholder", "Busca productos de la Tienda "+"{!!ucwords($tienda[0]->name)!!}");
-		input0.setAttribute("style", "text-align: center;width: 115%;");
+		input0.setAttribute("style", "text-align: center;width: 111%;");
 		input0.setAttribute("maxlength", 48);
 		input0.setAttribute("name", "finder_store");
 		inputhidden0 = document.createElement("input");
@@ -1000,9 +1007,9 @@
 		var div_finder1 = document.createElement("div");
 		div_finder1.setAttribute("class", "div-finder-store");		
 		var form1 = document.createElement("form");
-		form1.setAttribute("class", "navbar-form navbar-left visible-md");
+		form1.setAttribute("class", "navbar-form navbar-left visible-md form_finder_store");
 		form1.setAttribute("method", "GET");
-		form1.setAttribute("id", "form_finder_store");
+		//form1.setAttribute("id", "form_finder_store");
 		form1.setAttribute("action", ""+"{{url('/')}}");
 		form1.setAttribute("accept-charset", "UTF-8");
 		//form1.setAttribute("style", "width: 100%");
@@ -1037,9 +1044,9 @@
 		var div_finder2 = document.createElement("div");
 		div_finder2.setAttribute("class", "div-finder-store");		
 		var form2 = document.createElement("form");
-		form2.setAttribute("class", "navbar-form navbar-left visible-sm");
+		form2.setAttribute("class", "navbar-form navbar-left visible-sm form_finder_store");
 		form2.setAttribute("method", "GET");
-		form2.setAttribute("id", "form_finder_store");
+		//form2.setAttribute("id", "form_finder_store");
 		form2.setAttribute("action", ""+"{{url('/')}}");
 		form2.setAttribute("accept-charset", "UTF-8");
 		form2.setAttribute("style", "width: 100%");
@@ -1158,9 +1165,7 @@
 		    ],	       
 		    "language": {
 		        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-		    },		   
-		    "fnRowCallback": function( nRow, aData ) {
-            }
+		    }
 		});
 
 		$('.option_add_product').on('click', function (e) {
@@ -1456,7 +1461,7 @@
 			if(this.textContent == "Todas") this.textContent="todascat"		        
 			$('[name=finder_store]').val(this.textContent);
 	        //window.location=$('#form_finder_store').attr('action');
-	        $('#form_finder_store').submit();
+	        $('.form_finder_store').submit();
 	    });			
 
 
@@ -1573,19 +1578,21 @@
 	    //cambio de url de tienda
 	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");
 
-	    //menu desplazamiento
-	    $(window).scroll(function(){	    	
-	    	if($(window).scrollTop()>190){
-	    		$(".categori_store").animate({				    
-				    //top: "+=20"				    
-				    top: $(window).scrollTop() - 190
-				  }, 0, function() {
-				    // Animation complete.
-				    
-			  	});
-	    	}   	
-
-	    });
+	    //menu desplazamiento, solo para resoluciones mayores
+	    if(window.innerWidth > 991){
+	    	$(window).scroll(function(){	    	
+		    	if($(window).scrollTop()>190){
+		    		$(".categori_store").animate({				    
+					    //top: "+=20"				    
+					    top: $(window).scrollTop() - 190
+					  }, 0, function() {
+					    // Animation complete.
+					    
+				  	});
+		    	}
+		    });
+	    }
+	    
 
 	</script>
 

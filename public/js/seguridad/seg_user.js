@@ -271,7 +271,7 @@ seg_user.prototype.validateCart = function(){
     seg_user.spinner = new Spinner(opts).spin(document.getElementsByTagName("body")[0]);  
 
     //bloqueamos el boton, se pone a puntar a otro lado   
-    $('#submit_cart_modal').attr("form", "button_block");
+    $('.submit_cart_modal').attr("form", "button_block");
 
     return true;
 };
