@@ -63,7 +63,7 @@ class LoginController extends Controller
 			];
 	
 			$rules = array(
-				'usuario'    => 'required|min:4|max:12', // make sure the username field is not empty
+				'user'    => 'required|min:4|max:12', // make sure the username field is not empty
 				'contraseña' => 'required|min:6|max:12' // password can only be alphanumeric and has to be greater than 3 characters
 			);
 			$validator = Validator::make($request->input(), $rules, $messages);
@@ -82,13 +82,13 @@ class LoginController extends Controller
 					//no esta autenticado
 					$user = new User();
 					$userdata = array(
-						'name'  => $request->input('usuario'),
+						'name'  => $request->input('user'),
 						'password'  => $request->input('contraseña'),
 						'active'  => 1
 					);
 					if (!$this->auth->attempt($userdata)){
 						//preguntamos si el name es un email
-						$usuario = $user->where('email',$request->input('usuario'))->get()->toArray();
+						$usuario = $user->where('email',$request->input('user'))->get()->toArray();
 						if(count($usuario)){
 							//es un email
 							$userdata = array(
@@ -318,13 +318,12 @@ class LoginController extends Controller
     }
     
     //envio de email
-    public function getRecoverPassword(Request $request)
-    {
+    public function getRecoverPassword(Request $request){
     	//verificamos si el email corresponde a un usuario de la aplicacion
 		$data = array(
 			'name' => Session::get('copy'),
 			'mail' => Session::get('mail'),
-			'email' => $request->input()['email'],				
+			'email' => $request->input()['email_recover'],				
 		);
 		try {
 			$model = User::where('email', '=', $data['email'])->firstOrFail();

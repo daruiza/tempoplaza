@@ -784,9 +784,9 @@
 								<div class="panel-body">
 												
 									<div class="form-group">
-										{!! Form::label('usuario', 'Usuario', array('class' => 'col-md-12 control-label')) !!}						
+										{!! Form::label('user', 'Usuario', array('class' => 'col-md-12 control-label')) !!}						
 										<div class="col-md-12">
-											{!! Form::text('usuario', old('usuario'), array('class' => 'form-control','placeholder'=>'Ingresa tu nombre usuario', 'autofocus'=>'autofocus'))!!}
+											{!! Form::text('user', old('user'), array('class' => 'form-control','placeholder'=>'Ingresa tu nombre usuario', 'autofocus'=>'autofocus'))!!}
 										</div>
 									</div>
 			
@@ -829,9 +829,9 @@
 						<div class="col-md-12 col-md-offset-0 row_init">
 							{!! Form::open(array('id'=>'rpsw','url' => '/recuperarcontraseña','method'=>'get')) !!}
 				        		<div class="form-group">
-									{!! Form::label('email', 'Correo Electronico', array('class' => 'col-md-12 control-label')) !!}
+									{!! Form::label('email_recover', 'Correo Electronico', array('class' => 'col-md-12 control-label')) !!}
 									<div class="col-md-12">
-										{!! Form::email('email','', array('class' => 'form-control','placeholder'=>'Ingresa tu email', 'autofocus'=>'autofocus')) !!}
+										{!! Form::email('email_recover','', array('class' => 'form-control','placeholder'=>'Ingresa tu email', 'autofocus'=>'autofocus')) !!}
 									</div>
 								</div>
 								      
@@ -878,9 +878,9 @@
 										{!! Form::password('contraseña_uno', array('class' => 'form-control','placeholder'=>'Ingresa tu contraseña')) !!}
 									</div>
 									
-									{!! Form::label('contraseña_dos', 'Contraseña Nuevamente', array('class' => 'col-md-12 control-label')) !!}
+									{!! Form::label('contrasenia_dos', 'Contraseña Nuevamente', array('class' => 'col-md-12 control-label')) !!}
 									<div class="col-md-12">
-										{!! Form::password('contraseña_dos', array('class' => 'form-control','placeholder'=>'Ingresa nuevamente tu contraseña')) !!}
+										{!! Form::password('contrasenia_dos', array('class' => 'form-control','placeholder'=>'Ingresa nuevamente tu contraseña')) !!}
 									</div>
 									
 								</div>
@@ -1572,6 +1572,20 @@
 
 	    //cambio de url de tienda
 	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");
+
+	    //menu desplazamiento
+	    $(window).scroll(function(){	    	
+	    	if($(window).scrollTop()>190){
+	    		$(".categori_store").animate({				    
+				    //top: "+=20"				    
+				    top: $(window).scrollTop() - 190
+				  }, 0, function() {
+				    // Animation complete.
+				    
+			  	});
+	    	}   	
+
+	    });
 
 	</script>
 

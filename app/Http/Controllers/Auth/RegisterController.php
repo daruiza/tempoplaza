@@ -96,7 +96,7 @@ class RegisterController extends Controller
 				'usuario'    => 'required|min:4|max:12', // make sure the username field is not empty
 				//'email'    => 'required|min:6|max:18', // make sure the username field is not empty
 				'contraseña_uno' => 'required|min:6|max:12', // password can only be alphanumeric and has to be greater than 3 characters
-				'contraseña_dos' => 'required|min:6|max:12', // password can only be alphanumeric and has to be greater than 3 characters
+				'contrasenia_dos' => 'required|min:6|max:12', // password can only be alphanumeric and has to be greater than 3 characters
 			);
 			$validator = Validator::make($request->input(), $rules, $messages);
 				
@@ -111,7 +111,7 @@ class RegisterController extends Controller
 					$user = User::where('email', '=', $request->input('email'))->first();
 					if(empty($user)){
 						//verificamos que las contraseñas sean iguales
-						if($request->input()['contraseña_uno'] == $request->input()['contraseña_dos']){
+						if($request->input()['contraseña_uno'] == $request->input()['contrasenia_dos']){
 							//se realiza la inscripción
 							$user = new User();
 							$userprofile = new UserProfile();

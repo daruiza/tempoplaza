@@ -266,7 +266,7 @@
 						<div class="form-group ">													
 							{!! Form::label('usuario', 'Usuario', array('class' => 'col-md-12 control-label')) !!}
 							<div class="col-md-12">
-								{!! Form::text('usuario',value(Session::get('comjunplus.usuario.name')), array('class' => 'form-control','placeholder'=>'Ingresa tu nombre de usuario','disabled'=>'disabled')) !!}
+								{!! Form::text('usuario',value(Session::get('comjunplus.usuario.name')), array('class' => 'form-control','placeholder'=>'Ingresa tu usuario','disabled'=>'disabled')) !!}
 							</div>
 							
 							{!! Form::label('nombres', 'Nombres', array('class' => 'col-md-12 control-label')) !!}
