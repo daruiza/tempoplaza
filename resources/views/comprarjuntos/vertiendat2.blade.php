@@ -1596,7 +1596,7 @@
 	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");
 
 	     //smoove
-	    $('.smoove').smoove({offset:'25%'});
+	    $('.smoove').smoove({offset:'36%'});
 
 	    //menu desplazamiento, solo para resoluciones mayores
 	    if(window.innerWidth > 991){
