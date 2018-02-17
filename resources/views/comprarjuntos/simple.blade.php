@@ -1624,7 +1624,7 @@
 	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");
 
 	    //smoove
-	    $('.smoove').smoove({offset:'36%'});
+	    $('.smoove').smoove({offset:'30%'});
 
 	</script>
 
