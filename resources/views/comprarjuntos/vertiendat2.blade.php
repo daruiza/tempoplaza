@@ -417,11 +417,26 @@
 		<div class="col-md-10 col-md-offset-0 listado_productos visible-lg">
 			@php ($p=0)
 			@php ($j=1)
+			@php ($k=0)
 			@foreach($productos as $producto)
 				@if($p%4==0)
+					@php ($k=0)
 					<div class="col-md-12 col-md-offset-0">
 				@endif
-				<div class="col-md-3 col-lg-3 col-mx-offset-1" style="text-align: center;">
+				
+				@if($k==0)
+				<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove" data-move-y="200px" data-move-x="-200px" style="text-align: center;">
+				@endif
+				@if($k==1)
+				<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove" data-move-y="200px" data-move-x="-100px" style="text-align: center;">
+				@endif
+				@if($k==2)
+				<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove" data-move-y="200px" data-move-x="100px" style="text-align: center;">
+				@endif
+				@if($k==3)
+				<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove"  data-move-y="200px" data-move-x="200px" style="text-align: center;">
+				@endif
+
 					<div class="panel panel-default">					
 						<div class="panel-body">
 					    	<div class="row">
@@ -457,6 +472,7 @@
 				@endif
 				@php ($p++)
 				@php ($j++)
+				@php ($k++)
 			@endforeach
 
 			<!--Paginador-->
@@ -1577,6 +1593,9 @@
 
 	    //cambio de url de tienda
 	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");
+
+	     //smoove
+	    $('.smoove').smoove({offset:'25%'});
 
 	    //menu desplazamiento, solo para resoluciones mayores
 	    if(window.innerWidth > 991){
