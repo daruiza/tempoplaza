@@ -983,6 +983,7 @@
 	<script type="text/javascript" src="{{ url('js/exporting.js') }}"></script>		
 	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>	
 	<script type="text/javascript" src="{{ url('js/spin.min.js') }}"></script>	
+	<script type="text/javascript" src="{{ url('js/jquery.smoove.min.js') }}"></script>
 
 	<!--Autocomplete para buscador-->
 	@foreach($products_name as $producto)
