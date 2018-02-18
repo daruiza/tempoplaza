@@ -18,23 +18,9 @@
 		}
 		.introduccion{
 			margin-top: 2%;padding: 1%;
-			/*
-			background:  #B0E1EA ; 
-		    background: -webkit-linear-gradient(left, #B0E1EA  , white );
-		    background: -o-linear-gradient(right,   #B0E1EA  , white ); 
-		    background: -moz-linear-gradient(right,   #B0E1EA  , white ); 
-		    background: linear-gradient(to right,   #B0E1EA  , white ); 
-		    */
+			
 		}
-		/*
-		.carrusel_index_back{			
-			background:  #B0E1EA ; 
-		    background: -webkit-linear-gradient(left top, #faf9f5, #faf9f5, #B0E1EA );
-		    background: -o-linear-gradient(left top,  #faf9f5, #faf9f5, #B0E1EA ); 
-		    background: -moz-linear-gradient(left top,   #faf9f5, #faf9f5, #B0E1EA ); 
-		    background: linear-gradient(to left top,   #faf9f5, #faf9f5, #B0E1EA ); 		    
-		}
-		*/				
+				
 
 		.pie_wellcome{						
 			background:  #009999 ;
@@ -134,13 +120,6 @@
 		}
 
 	</style>
-
-	<!--Importacion de iconos especiales para la labor (star)-->
-	<!--
-	<link  rel="stylesheet" href="{{ url('fonts/font-awesome/css/font-awesome.min.css') }}">
-	-->
-	<link  rel="stylesheet" href="{{ url('css/bootstrap-datepicker.min.css') }}" type="text/css" />	
-	<link  rel="stylesheet" href="{{ url('css/chosen.css') }}" type="text/css" />
 
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
 	<div class="row visible-md" style="margin-top: 7%;"></div>
@@ -1078,6 +1057,10 @@
 @endsection
 
 @section('script')
+	<!--Importacion de links-->	
+	<link  rel="stylesheet" href="{{ url('css/bootstrap-datepicker.min.css') }}" type="text/css" />	
+	<link  rel="stylesheet" href="{{ url('css/chosen.min.css') }}" type="text/css" />
+
 	<script type="text/javascript" src="{{ url('js/spin.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url('js/bootstrap-datepicker.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url('js/locales/bootstrap-datepicker.es.min.js') }}"></script>

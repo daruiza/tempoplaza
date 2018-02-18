@@ -11,32 +11,14 @@
 		<meta name="description" content="Plaza de Mercado Virtual, donde crear una tienda virtual, ofrecer vender y comprar productos en Colombia" />
 		<meta name="keywords" content="plaza virtual de mercado, Colombia, economía solidaria, crear una tienda virtual,vender online, comprar online, plaza Macalú para la economía el bien común" />
 
-		<link rel="shortcut icon" href="{{ url('images/icons/icon.png') }}">		
-		<link  rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css" />		
+		<link rel="shortcut icon" href="{{ url('images/icons/icon.png') }}">
 
-		<!--
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		-->
 		
 		@php ($style = "default")
 		@if (Session::has('style'))
 			@php ($style=Session::get('style'))
-		@endif		
-			
-		<link  rel="stylesheet" href="{{ url('css/'.$style.'/app.css') }}" type="text/css" />		
-		<link  rel="stylesheet" href="{{ url('css/jquery-ui.css') }}" type="text/css" />
-		<link  rel="stylesheet" href="{{ url('css/bootstrap-submenu.min.css') }}" type="text/css" />		
+		@endif	
 		
-		<!--Google analitycs-->
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-		  ga('create', 'UA-102562779-1', 'auto');
-		  ga('send', 'pageview');
-		</script>
 		
 	</head>
 	
@@ -256,11 +238,31 @@
 		</nav>		
 		<div class="container-fluid">
 			@yield('content')
-		</div>		
+		</div>	
+
+		<!-- Links -->
+
+		<link  rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css" />		
+		<link  rel="stylesheet" href="{{ url('css/'.$style.'/app.css') }}" type="text/css" />		
+		<link  rel="stylesheet" href="{{ url('css/jquery-ui.min.css') }}" type="text/css" />
+		<link  rel="stylesheet" href="{{ url('css/bootstrap-submenu.min.css') }}" type="text/css" />
+
+
+		
+		<!--Google analitycs-->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-102562779-1', 'auto');
+		  ga('send', 'pageview');
+		</script>			
 
 		<!-- Scripts -->		
 		<script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
-		<script type="text/javascript" src="{{ url('js/jquery-ui.js') }}"></script>
+		<script type="text/javascript" src="{{ url('js/jquery-ui.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url('js/bootstrap.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url('js/bootstrap.submenu.min.js') }}"></script>		
 		
