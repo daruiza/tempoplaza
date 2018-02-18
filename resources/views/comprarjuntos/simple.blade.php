@@ -233,12 +233,7 @@
 
 	</style>
 
-	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
-	<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />
-	<link  rel="stylesheet" href="{{ url('css/chosen.css') }}" type="text/css" />
-
-	<link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}">
-
+	
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
 	<div class="row visible-md" style="margin-top: 7%;"></div>
 	<div class="row visible-sm" style="margin-top: 10%;"></div>
@@ -976,6 +971,12 @@
 @endsection
 
 @section('script')
+
+	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
+	<link  rel="stylesheet" href="{{ url('css/datatables-responsive.min.css') }}" type="text/css" />
+	<link  rel="stylesheet" href="{{ url('css/chosen.min.css') }}" type="text/css" />
+
+	<link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}">
 	
 	<script type="text/javascript" src="{{ url('js/datatables_row.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url('js/datatables-responsive.min.js') }}"></script>
