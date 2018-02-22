@@ -88,14 +88,14 @@
 		.txt_16{
 			font-size: 16px;
 		}
-		
 
 		/*selectores para sispositivos moviles*/
 		@media (max-width: 370px) {
 		  #categoria_select, #unidades_select, #colores_select, #tallas_select, #sabores_select,#materiales_select {
 		        width: 245px !important;
 		    }  
-		  }
+	  	}
+
 	</style>
 	
 	<link  rel="stylesheet" href="{{ url('css/datatables.min.css') }}" type="text/css" />	
@@ -457,7 +457,7 @@
 										<div class="form-group ">
 											{!! Form::label('template', 'Plantilla', array('class' => 'col-md-12 control-label')) !!}
 											<div class="col-md-12">
-												{!! Form::select('template',array('app_store'=>'Macalú','web_store'=>'Superior Web','menu_store'=>'Página Web','simple_store'=>'Simple Web'),old('tempalte'), array('id'=>'template','class' => 'form-control chosen-select','data-placeholder'=>'Selecciona la plantilla')) !!}	
+												{!! Form::select('template',array('app_store'=>'Macalú','web_store'=>'Superior Web','menu_store'=>'Página Web','simple_store'=>'Simple Web','basic_store'=>'Basic Web'),old('tempalte'), array('id'=>'template','class' => 'form-control chosen-select','data-placeholder'=>'Selecciona la plantilla')) !!}	
 											</div>
 									</div>
 								</div>

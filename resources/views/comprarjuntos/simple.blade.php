@@ -223,10 +223,18 @@
 			display: none !important;
 		}
 
+		
+
 		@media (min-width: 768px){		
 			.navbar-nav>li>a {
 			    padding-top: 20px !important;
 			    padding-bottom: 5px !important;
+			}
+		}
+
+		@media (max-width: 1024px){
+			.navbar-form .input-group>.form-control {
+		    	width: 102% !important;
 			}
 		}
 	

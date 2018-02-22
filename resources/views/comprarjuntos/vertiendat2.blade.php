@@ -254,6 +254,12 @@
 
 	}
 
+	@media (max-width: 1024px){
+		.navbar-form .input-group>.form-control {
+	    	width: 102% !important;
+		}
+	}
+
 	</style>
 
 

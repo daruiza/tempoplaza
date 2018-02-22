@@ -506,6 +506,10 @@ class WelcomeController extends Controller {
 					return view('comprarjuntos/simple')->with($moduledata);
 				}
 
+				if($moduledata['tienda'][0]->template == 'basic_store'){
+					return view('comprarjuntos/basic')->with($moduledata);
+				}
+
 				if($moduledata['tienda'][0]->template == NULL){
 					return view('comprarjuntos/vertiendat1')->with($moduledata);
 				}
@@ -746,6 +750,10 @@ class WelcomeController extends Controller {
 
 			if($moduledata['tienda'][0]->template == 'simple_store'){
 				return view('comprarjuntos/simple')->with($moduledata);
+			}
+
+			if($moduledata['tienda'][0]->template == 'basic_store'){
+				return view('comprarjuntos/basic')->with($moduledata);
 			}
 
 			if($moduledata['tienda'][0]->template == NULL){

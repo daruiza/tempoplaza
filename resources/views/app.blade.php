@@ -12,13 +12,19 @@
 		<meta name="keywords" content="plaza virtual de mercado, Colombia, economía solidaria, crear una tienda virtual,vender online, comprar online, plaza Macalú para la economía el bien común" />
 
 		<link rel="shortcut icon" href="{{ url('images/icons/icon.png') }}">
-
 		
+
 		@php ($style = "default")
 		@if (Session::has('style'))
 			@php ($style=Session::get('style'))
 		@endif	
 		
+		<!-- Links -->
+		<link  rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css" />		
+		<link  rel="stylesheet" href="{{ url('css/'.$style.'/app.css') }}" type="text/css" />		
+		<link  rel="stylesheet" href="{{ url('css/jquery-ui.min.css') }}" type="text/css" />
+		<link  rel="stylesheet" href="{{ url('css/bootstrap-submenu.min.css') }}" type="text/css" />
+
 		
 	</head>
 	
@@ -239,15 +245,7 @@
 		<div class="container-fluid">
 			@yield('content')
 		</div>	
-
-		<!-- Links -->
-
-		<link  rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css" />		
-		<link  rel="stylesheet" href="{{ url('css/'.$style.'/app.css') }}" type="text/css" />		
-		<link  rel="stylesheet" href="{{ url('css/jquery-ui.min.css') }}" type="text/css" />
-		<link  rel="stylesheet" href="{{ url('css/bootstrap-submenu.min.css') }}" type="text/css" />
-
-
+		
 		
 		<!--Google analitycs-->
 		<script>
