@@ -11,6 +11,6 @@ class Producto extends Model
      */
 	protected $table = 'clu_products';
 	
-	protected $fillable = ['id','name','price','category','unity_measure','colors','sizes','flavors','materials','models','description','image1','image2','image3','order','avtive','store_id'];
+	protected $fillable = ['id','name','price','category','unity_measure','colors','sizes','flavors','materials','models','description','image1','image2','image3','basic_class','order','avtive','store_id'];
 			
 }

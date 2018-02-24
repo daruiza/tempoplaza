@@ -432,10 +432,11 @@ class StoreController extends Controller {
 
 		//consultamos las categorias de la tienda seleccionada.
 		$categorias=array();
-		try {$categorias=\DB::table('clu_store')
-		->select('metadata')
-		->where('clu_store.id',$request->input('id'))		
-		->get()[0]->metadata;
+		try {
+			$categorias=\DB::table('clu_store')
+			->select('metadata')
+			->where('clu_store.id',$request->input('id'))		
+			->get()[0]->metadata;
 		}catch (ModelNotFoundException $e) {
 			$message = ['Problemas al hallar categorias de la Tienda'];			
 		}
@@ -543,6 +544,7 @@ class StoreController extends Controller {
 		$array_input['sabores'] = $request->input('sabores');
 		$array_input['materiales'] = $request->input('materiales');
 		$array_input['modelos'] = $request->input('modelos');
+		$array_input['basic_class'] = $request->input('basic_class');
 		$array_input['prioridad_producto'] = 0;
 		if(is_numeric($request->input('prioridad_producto')))$array_input['prioridad_producto'] = $request->input('prioridad_producto');
 
@@ -557,7 +559,8 @@ class StoreController extends Controller {
 				$key != "sabores" &&
 				$key != "materiales" &&	
 				$key != "modelos" &&	
-				$key != "prioridad")
+				$key != "prioridad" &&
+				$key != "basic_class")
 			{				
 				$array_input[$key] = ucwords(mb_strtolower($value));
 			}
@@ -624,6 +627,7 @@ class StoreController extends Controller {
 			$product->flavors = $request->input()['sabores'];
 			$product->materials = $request->input()['materiales'];
 			$product->models = $request->input()['modelos'];
+			$product->basic_class = $request->input()['basic_class'];
 			$product->description = $request->input()['descripcion_producto'];
 			$product->order = 1;
 			if(!empty($request->input()['prioridad_producto']))$product->order =  $request->input()['prioridad_producto'];	
@@ -1167,6 +1171,7 @@ class StoreController extends Controller {
 		return Redirect::to('/'.$tienda);
 	}
 
+	//confirmación back de PayU
 	public function postConfirmationpayu(Request $request){
 
 		//se tatran los datos

@@ -5,22 +5,24 @@
 		.panel-body {		    
 		    padding-bottom: 0px;
 		}
+
 		.input_danger{
 			color: #a94442;
     		background-color: #f2dede;
     		border-color: #ebccd1;
 		}
+
 		.center-block {
 		  display: block;
 		  margin-left: auto;
 		  margin-right: auto;
 		  text-align: center;
 		}
+
 		.introduccion{
 			margin-top: 2%;padding: 1%;
 			
-		}
-				
+		}			
 
 		.pie_wellcome{						
 			background:  #009999 ;
@@ -41,8 +43,7 @@
 		}
 		@if(count($ultima_tienda))
 		.macalu_nueva{
-			margin-top: 3%;
-			
+			margin-top: 3%;			
 			/*background-size: 100% 175px;*/			
 	    	margin-bottom: 3%;
 	    	border: 1px solid {{$ultima_tienda[0]->color_one}};
@@ -116,7 +117,7 @@
 		}
 		.chosen-container .chosen-container-multi{
 			border: 1px solid #ccc !important;
-			border-radius: 4px !important;
+			border-radius: 4px !important;			
 		}
 
 	</style>

@@ -655,6 +655,12 @@
 														<span class="input-group-addon" data-toggle="tooltip" title="Para diligenciar adecuadamente este campo, ponemos una coma entre modelo y modelo; ejemplo; Modelo 2016, Modelo 2015, Modelo 2000.">?</span>
 													</div>
 												</div>
+
+												{!! Form::label('basic_class', 'Etiqueta', array('class' => 'col-md-12 control-label')) !!}
+												<div class="col-md-12">
+													{!! Form::text('basic_class',old('basic_class'), array('class' => 'form-control','placeholder'=>'Ingresa una nota')) !!}
+												</div>
+
 												<div class="col-md-12 estado-roduct" style="display:none">
 													{!! Form::label('estado', 'Estado', array('class' => 'col-md-12 control-label')) !!}
 													<div>{{Form::radio('estado_producto', '1', true)}} Activo</div>

@@ -166,6 +166,7 @@ clu_tienda.prototype.consultaRespuestaProduct = function(result) {
 				$('#materiales_select').val(clu_tienda.table_products.data()[i].flavors);
 				$('#materiales').val(clu_tienda.table_products.data()[i].materials);
 				$('#modelos').val(clu_tienda.table_products.data()[i].models);
+				$('#basic_class').val(clu_tienda.table_products.data()[i].basic_class);
 				$('.estado-roduct').show();
 				$('input[name=estado_producto][value='+clu_tienda.table_products.data()[i].active+']').attr("checked", "checked");
 				$('#modal-button-product').html('Editar Producto')
@@ -246,6 +247,11 @@ clu_tienda.prototype.format= function(d,r) {
 						if(d.models != ''){
 							html = html +'<div><label for="modelos" class="col-md-12 control-label">Modelos Disponibles</label>'+
 							''+d.models+'</div>';					
+						}
+
+						if(d.basic_class != ''){
+							html = html +'<div><label for="basic_class" class="col-md-12 control-label">Etiqueta</label>'+
+							''+d.basic_class+'</div>';					
 						}
 
 						html = html +'<div><label for="prioridad" class="col-md-12 control-label">Nivel de Prioridad</label>';

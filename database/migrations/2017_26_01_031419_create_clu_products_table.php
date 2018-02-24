@@ -29,6 +29,7 @@ class CreateCluProductsTable extends Migration
             $table->string('image1')->nullable();
             $table->string('image2')->nullable();
             $table->string('image3')->nullable();
+            $table->string('basic_class')->nullable();            
             $table->string('order')->nullable();
             $table->boolean('active')->default(true);
             $table->integer('store_id')->unsigned();

@@ -222,44 +222,70 @@
 		#form_payprov{
 			display: none !important;
 		}
-
+		
 		.productos_computador{
 			padding-right: 0px;
     		padding-left: 0px;
+    		/*max-width: 1200px;*/
+    		width: 100%;
+  			margin: 0 auto;
+		}
+
+		.productos_computador:after {
+	  		content: '';
+	  		display: block;
+	  		clear: both;
+		}
+
+		.prod-item{			
+			/*border: 1px solid black;*/
+			/*float: left;*/
+			width: 25%;
+		}
+
+		.prod-item img{
+			width: 100%;
+		}
+
+		.masonry-diez{			
+			width: 10%;
+		}
+
+		.masonry-veinte{			
+			width: 20%;
 		}		
 
-		.productos_computador > div{
-			/*
-			padding-right: 5px;
-    		padding-left: 5px;
-    		display: flex;
-		  	flex-direction: column;
-		  	flex-wrap: wrap;
-		  	padding: 10px;
-		  	height: 100vw;
-		  	*/
+		.masonry-treinta{			
+			width: 30%;
+		}		
+			
+		.masonry-cuarenta{
+			width: 40%;
 		}
 
-		.product_content{
-			column-count: 3;
-    		column-gap: 0;
-			
-			/*
-			display: flex;
-		  	flex: 1 1 auto;		  	
-		  	margin-bottom: 10px;
-		  	border-radius: 10px;
-		  	*/
-		  	
-		  	
-			
+		.masonry-cincuenta{
+			width: 50%;
 		}
 
-		.prod-item{
-			display: block;
-			border: 1px solid black;
+		.masonry-sesenta{
+			width: 60%;
 		}
-					
+
+		.masonry-setenta{
+			width: 70%;
+		}
+
+		.masonry-ochenta{
+			width: 80%;
+		}
+
+		.masonry-noventa{
+			width: 80%;
+		}
+
+		.masonry-cien{
+			width: 100%;
+		}					
 
 		@media (min-width: 768px){		
 			.navbar-nav>li>a {
@@ -546,49 +572,49 @@
 
 	<!-- Para resoluciones de computador-->
 	<div class="col-md-12 listado_productos productos_computador visible-lg visible-md">
-		<div class="col-md-12 product_content" >
+		<div class="col-md-11 col-md-offset-1 product_content " >
+
 		@php ($p=0)
 		@php ($j=1)
 		@php ($k=0)
+
 		@foreach($productos as $producto)
 			@if($p%3==0)
 				@php ($k=0)				
 			@endif
 			
 			@if($k==0)
-			<div class="prod-{!! $j !!} prod-item " data-move-y="200px" data-move-x="-200px" style="text-align: center;">
+			<div class="prod-{!! $k !!} prod-item {!! $producto->basic_class !!} option_add_product" id ="{{$producto->name}}_{{$producto->id}}" data-move-y="200px" data-move-x="-200px" style="text-align: center;">
 			@endif
 			@if($k==1)
-			<div class="prod-{!! $j !!} prod-item" data-move-y="200px" data-move-x="-100px" style="text-align: center;">
+			<div class="prod-{!! $k !!} prod-item {!! $producto->basic_class !!} option_add_product" id ="{{$producto->name}}_{{$producto->id}}" data-move-y="200px" data-move-x="-100px" style="text-align: center;">
 			@endif
 			@if($k==2)
-			<div class="prod-{!! $j !!} prod-item" data-move-y="200px" data-move-x="100px" style="text-align: center;">
+			<div class="prod-{!! $k !!} prod-item {!! $producto->basic_class !!} option_add_product" id ="{{$producto->name}}_{{$producto->id}}" data-move-y="200px" data-move-x="100px" style="text-align: center;">
 			@endif
-			
 				
-				
-				    		<div class="option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
-			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'border-radius: 0%;' ))}}
-				    		</div>
+	    					    			
+				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'border-radius: 0%;' ))}}
+	    	
 
-				    		<div class=""  style="background-color:transparent; color: {{$tienda[0]->color_two}}; border-color:transparent;padding: 2px;display:none">				    			
-				    			<div class="" style="font-size: 14px;">
-					    			{{$producto->name}}				    			
-				    			</div>
-				    			<div class="">
-				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
-				    				<div  style="font-size: 14px;">${{$producto->price}}</div>					    			
-				    			</div>	
-				    			<div class="option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
-				    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 12px;">Descripción</div>
-				    			</div>
-				    			<div class="option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
-				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 12px;">Al Carrito</div>
-				    			</div>	
-				    		</div>
-				    	</div>
+	    		<div class=""  style="background-color:transparent; color: {{$tienda[0]->color_two}}; border-color:transparent;padding: 2px;display:none">				    			
+	    			<div class="" style="font-size: 14px;">
+		    			{{$producto->name}}				    			
+	    			</div>
+	    			<div class="">
+	    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
+	    				<div  style="font-size: 14px;">${{$producto->price}}</div>					    			
+	    			</div>	
+	    			<div class="option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
+	    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
+	    				<div style="font-size: 12px;">Descripción</div>
+	    			</div>
+	    			<div class="option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
+	    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
+	    				<div style="font-size: 12px;">Al Carrito</div>
+	    			</div>	
+	    		</div>
+	    	</div>
 				   
 			
 			@php ($p++)
@@ -599,7 +625,7 @@
 	</div>
 
 	<!--Paginador-->
-	<div  class="col-md-10 col-md-offset-1">
+	<div  class="col-md-10 col-md-offset-1" style="margin-top: 2%;">
 		<div style="float:left;padding: 0.5em 1em;">Total de productos: {{$paginador['total']}}</div>
 		<div class="" style="display: flex;float: right;">			
 			<div class="btn-paginator paginador-btn">Anterior</div>
@@ -1020,6 +1046,7 @@
 	<script type="text/javascript" src="{{ url('js/chosen.jquery.min.js') }}"></script>	
 	<script type="text/javascript" src="{{ url('js/spin.min.js') }}"></script>	
 	<script type="text/javascript" src="{{ url('js/jquery.smoove.min.js') }}"></script>	
+	<script type="text/javascript" src="{{ url('js/jquery.masonry.min.js') }}"></script>	
 	
 
 	<!--Autocomplete para buscador-->
@@ -1662,6 +1689,15 @@
 
 	    //smoove
 	    $('.smoove').smoove({offset:'30%'});
+
+	    //asignacion height a div de img
+	    for(var i=0 ; i<$('.prod-item img').length; i++ ){
+	    	$($('.prod-item img')[i].parentElement).css('height',$($('.prod-item img')[i]).height())
+	    }
+
+	    //$('.product_content').css('margin-bottom',$('.product_content').height()); 
+
+	    $('.product_content').masonry();
 
 	</script>
 

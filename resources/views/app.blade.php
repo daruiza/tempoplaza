@@ -24,7 +24,7 @@
 		<link  rel="stylesheet" href="{{ url('css/'.$style.'/app.css') }}" type="text/css" />		
 		<link  rel="stylesheet" href="{{ url('css/jquery-ui.min.css') }}" type="text/css" />
 		<link  rel="stylesheet" href="{{ url('css/bootstrap-submenu.min.css') }}" type="text/css" />
-
+		
 		
 	</head>
 	
