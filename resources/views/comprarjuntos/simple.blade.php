@@ -223,6 +223,15 @@
 			display: none !important;
 		}
 
+		.option_add_product{
+			padding-right: 0px;
+    		padding-left: 0px;
+		}
+
+		.panel-prod > .panel-body{
+			padding-top: 0px;
+		}
+
 		
 
 		@media (min-width: 768px){		
@@ -532,11 +541,11 @@
 			<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove"  data-move-y="200px" data-move-x="200px" style="text-align: center;">
 			@endif
 			
-				<div class="panel panel-default">					
+				<div class="panel panel-default panel-prod">					
 					<div class="panel-body">
 				    	<div class="row">
 				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
-			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}
+			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 200px;border-radius: 0%;' ))}}
 				    		</div>
 
 				    		<div class="col-md-12 panel-footer"  style="background-color:transparent; color: {{$tienda[0]->color_two}}; border-color:transparent;padding: 2px;">				    			

@@ -6,11 +6,12 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-		
-
+			
+		<!-- Para evitar que los iframe no guarden cahce
 		<meta http-equiv="Cache-Control" content="no-cache" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="0" />
+		-->
 
 		<title>{!! Session::get('app') !!}</title>
 		<meta name="description" content="Plaza de Mercado Virtual, donde crear una tienda virtual, ofrecer vender y comprar productos en Colombia" />
