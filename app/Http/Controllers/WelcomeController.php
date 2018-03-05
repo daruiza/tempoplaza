@@ -734,10 +734,11 @@ class WelcomeController extends Controller {
 				$moduledata['tienda'][0]->reputacion = ($reputacion_score / (count($ordenes)*5))*5;
 				$moduledata['tienda'][0]->reputacionpercent = ($reputacion_score / (count($ordenes)*5));	
 				$moduledata['tienda'][0]->ordenes = count($ordenes);	
-			}		
+			}
+
 			//asignamos el id para listar las ordenes, en listarajaxorders
 			Session::put('store.id', $moduledata['tienda'][0]->id);
-			Session::put('app', $moduledata['tienda'][0]->name);//para cambiar el nombre de la 
+			Session::put('app', ucfirst(str_replace('_',' ',$moduledata['tienda'][0]->name)));//para cambiar el nombre de la 
 
 			//Mini controlador de vista, debe estar aqui para evitar la perdidad e url			
 			if($moduledata['tienda'][0]->template == 'app_store' || $moduledata['tienda'][0]->template == 'web_store'){

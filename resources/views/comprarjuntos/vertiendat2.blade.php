@@ -334,7 +334,7 @@
 	
 	<div class="row tienda_banner col-md-12 col-md-offset-0 visible-lg" style="height: 200px;font-size: 40px; color: {{$tienda[0]->color_two}} !important; padding: 1%;margin-bottom: 1%; ">
 		@if($tienda[0]->banner == 'default.png')
-			{{$tienda[0]->name}}
+			{{strtoupper(str_replace('_',' ',$tienda[0]->name))}}
 		@endif
 	</div>
 

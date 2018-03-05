@@ -44,7 +44,13 @@ class StoreController extends Controller {
 		//return redirect()->action('ComprarJuntos\StoreController@getListar');		
 	}
 	
-	public function getListar($option=null){		
+	public function getListar($option=null){
+
+		//reajuste de datos de session
+		Session::put('app', env('APP_NAME','Macalù'));
+		Session::put('copy', env('APP_RIGTH','Temposolutions'));
+		Session::put('mail', env('MAIL_USERNAME','soportemacalu@gmail.com'));
+		Session::put('support', env('APP_SUPPORT','daruiza@gmail.com'));			
 
 		$moduledata['detalles']=\DB::table('clu_order_detail')
 		->select('clu_order_detail.*')

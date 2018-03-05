@@ -332,7 +332,7 @@
 			{{ Html::image('users/'.$tienda[0]->user_name.'/stores/'.$tienda[0]->image,'Imagen no disponible',array( 'style'=>'width: 100%;border-radius: 0%;' ))}}	
 			</div>
 			<div class="col-md-7 col-sd-offset-0" style="text-align: center;">
-				<div class ="hidden-lg" style="margin-bottom: 1%;margin-top: 1%;"><b>{{strtoupper($tienda[0]->name)}}</b></div>
+				<div class ="hidden-lg" style="margin-bottom: 1%;margin-top: 1%;"><b>{{strtoupper(str_replace('_',' ',$tienda[0]->name))}}</b></div>
 				<div>{{$tienda[0]->description}}</div>
 				<div><span class="glyphicon glyphicon-map-marker" aria-hidden="true">{{$tienda[0]->department}}, {{$tienda[0]->city}}</span></div>
 				<div>{{$tienda[0]->adress}}</div>
