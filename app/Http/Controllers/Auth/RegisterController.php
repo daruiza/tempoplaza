@@ -221,7 +221,7 @@ class RegisterController extends Controller
 								//enviar un log para su tratamiento
 							}					
 							
-							return redirect()->action('Auth\LoginController@getLogin', ['user_id' => $user->id, 'usuario'=>$user->name, 'contraseña'=>  $request->input()['contraseña_uno']]);
+							return redirect()->action('Auth\LoginController@getLogin', ['user_id' => $user->id, 'user'=>$user->name, 'contraseña'=>  $request->input()['contraseña_uno']]);
 
 						}else{
 							return Redirect::to('/')->withErrors(['Datos invalidos, La contraseña no coincide']);

@@ -448,7 +448,7 @@ class StoreController extends Controller {
 		}
 
 		$subcategorias = array();
-		if(count($categorias)){
+		if(!empty($categorias)){
 			//si hay categorias
 			$categorias_id = explode(",", $categorias);
 			$categorias_db=\DB::table('clu_category')

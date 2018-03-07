@@ -931,7 +931,8 @@
 			var datos = new Array();
 			datos['id'] = this.id.split('_')[2];
 			datos['name'] = this.id.split('_')[1];				
-		    seg_ajaxobject.peticionajax($('#form_consult_products').attr('action'),datos,"clu_tienda.consultaRespuestaProducts",false);
+		    //seg_ajaxobject.peticionajax($('#form_consult_products').attr('action'),datos,"clu_tienda.consultaRespuestaProducts",false);
+		    seg_ajaxobject.peticionajax($('#form_consult_products').attr('action'),datos,"clu_tienda.consultaRespuestaProducts");
 
 		    //llamado sincrono, para cambiar el id de tienda
 		    //la otra opción es retardar el listado de las los productos
@@ -1014,7 +1015,8 @@
 			var datos = new Array();
 			datos['id'] = this.id.split('_')[2];
 			datos['name'] = this.id.split('_')[1];			
-			seg_ajaxobject.peticionajax($('#form_consult_orders').attr('action'),datos,"clu_tienda.consultaRespuestaOrders",false);
+			//seg_ajaxobject.peticionajax($('#form_consult_orders').attr('action'),datos,"clu_tienda.consultaRespuestaOrders",false);
+			seg_ajaxobject.peticionajax($('#form_consult_orders').attr('action'),datos,"clu_tienda.consultaRespuestaOrders");
 
 			//llamado sincrono, para cambiar el id de tienda
 		    //la otra opción es retardar el listado de las los pedidos
@@ -1122,7 +1124,8 @@
 			var datos = new Array();
 			datos['id'] = this.id.split('_')[2];
 			datos['name'] = this.id.split('_')[1];
-			seg_ajaxobject.peticionajax($('#form_consult_provspago').attr('action'),datos,"clu_tienda.consultaRespuestaProviders",false);
+			//seg_ajaxobject.peticionajax($('#form_consult_provspago').attr('action'),datos,"clu_tienda.consultaRespuestaProviders",false);
+			seg_ajaxobject.peticionajax($('#form_consult_provspago').attr('action'),datos,"clu_tienda.consultaRespuestaProviders");
 
 			 //llamado sincrono, para cambiar el id de tienda
 		    //la otra opción es retardar el listado de las los proveedores
@@ -1472,7 +1475,8 @@
 				var datos = new Array();
 				datos['id'] = "{!!Session::get('store.id')!!}";
 				datos['name'] = "{!!Session::get('store.name')!!}";						
-			    seg_ajaxobject.peticionajax($('#form_consult_products').attr('action'),datos,"clu_tienda.consultaRespuestaProducts",false);
+			    //seg_ajaxobject.peticionajax($('#form_consult_products').attr('action'),datos,"clu_tienda.consultaRespuestaProducts",false);
+			    seg_ajaxobject.peticionajax($('#form_consult_products').attr('action'),datos,"clu_tienda.consultaRespuestaProducts");
 
 				//recarga la tabla de productos
 				javascript:clu_tienda.table_products = $('#table_prods').DataTable( {		
@@ -1562,7 +1566,8 @@
 			var datos = new Array();
 			datos['id'] = "{!!Session::get('modulo.tienda_orden.0')->id!!}";
 			datos['name'] = "{!!Session::get('modulo.tienda_orden.0')->name!!}";			
-			seg_ajaxobject.peticionajax($('#form_consult_orders').attr('action'),datos,"clu_tienda.consultaRespuestaOrders",false);
+			//seg_ajaxobject.peticionajax($('#form_consult_orders').attr('action'),datos,"clu_tienda.consultaRespuestaOrders",false);
+			seg_ajaxobject.peticionajax($('#form_consult_orders').attr('action'),datos,"clu_tienda.consultaRespuestaOrders");
 
 			//llamado sincrono, para cambiar el id de tienda
 		    //la otra opción es retardar el listado de las los pedidos
