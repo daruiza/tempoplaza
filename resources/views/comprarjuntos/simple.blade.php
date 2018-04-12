@@ -24,7 +24,21 @@
 
 		.panel-body {		    
 		    padding-bottom: 0px;
-		}	
+		}
+		.panel{
+			border-top-right-radius: 0px;
+			border-top-left-radius: 0px;
+			border-bottom-right-radius: 10px;
+    		border-bottom-left-radius: 10px;
+    		box-shadow: 0 5px 5px rgba(0,0,0,.05);
+		}
+		.panel-footer{
+			background-color:transparent;
+			color: {{$tienda[0]->color_two}};
+			/*border-color:transparent;*/
+			padding: 2px;
+			border-top: 0px solid transparent;
+		}
 		.navbar-default {
 		    background-color: {{$tienda[0]->color_one}} !important;
 		    border-color: #e7e7e7;
@@ -190,10 +204,16 @@
 			box-shadow: 4px 4px 2px #ddd;
 		}
 		.panel-default{
-			border-color: {!!$tienda[0]->color_two!!} !important;		
+			/*border-color: {!!$tienda[0]->color_two!!} !important;*/
+			border-color:transparent;
 		}
 		.panel-heading{
 			background-color: {!!$tienda[0]->color_one!!} !important;
+			
+		}
+
+		.img_prod{
+			width: 100%;height: 200px;border-radius: 0%;
 		}
 		.buscador_t{
 			border-color: {!!$tienda[0]->color_two!!} !important;		
@@ -230,9 +250,7 @@
 
 		.panel-prod > .panel-body{
 			padding-top: 0px;
-		}
-
-		
+		}		
 
 		@media (min-width: 768px){		
 			.navbar-nav>li>a {
@@ -246,10 +264,15 @@
 		    	width: 102% !important;
 			}
 		}
-	
+
+		@media (max-width: 768px){
+			.tienda_de_matriculas{
+				font-size: 20px !important;
+			}
+
+		}
 
 	</style>
-
 	
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
 	<div class="row visible-md" style="margin-top: 7%;"></div>
@@ -332,7 +355,7 @@
 			{{ Html::image('users/'.$tienda[0]->user_name.'/stores/'.$tienda[0]->image,'Imagen no disponible',array( 'style'=>'width: 100%;border-radius: 0%;' ))}}	
 			</div>
 			<div class="col-md-7 col-sd-offset-0" style="text-align: center;">
-				<div class ="hidden-lg" style="margin-bottom: 1%;margin-top: 1%;"><b>{{strtoupper(str_replace('_',' ',$tienda[0]->name))}}</b></div>
+				<div class ="hidden-lg" style="margin-bottom: 1%;margin-top: 1%;"><b>{{strtoupper(str_replace('-',' ',$tienda[0]->name))}}</b></div>
 				<div>{{$tienda[0]->description}}</div>
 				<div><span class="glyphicon glyphicon-map-marker" aria-hidden="true">{{$tienda[0]->department}}, {{$tienda[0]->city}}</span></div>
 				<div>{{$tienda[0]->adress}}</div>
@@ -479,26 +502,28 @@
 				<div class="col-md-12 col-md-offset-0">
 			@endif
 			<div class="col-sm-4 col-md-4 col-mx-offset-1" style="text-align: center;">
-				<div class="panel panel-default">					
+				<div class="panel panel-default panel-prod">					
 					<div class="panel-body">
 				    	<div class="row">
 				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
-			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}				    							    			
+			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'class'=>'img_prod' ))}}				    							    			
 				    		</div>
 
-				    		<div class="col-xs-12 panel-footer"  style="background-color:transparen; color: {{$tienda[0]->color_two}}; border-color:{{$tienda[0]->color_two}};padding: 2px;">				    			
+				    		<div class="col-xs-12 panel-footer" >				    			
 				    			<div class="col-xs-12 col-mx-offset-0" style="font-size: 14px;">
 					    			{{$producto->name}}				    			
 				    			</div>
-				    			<div class="col-xs-4 col-mx-offset-0">
-				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
+				    			<div class="col-xs-6 col-mx-offset-0">				    
+				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>				
 				    				<div  style="font-size: 14px;">${{$producto->price}}</div>					    			
 				    			</div>	
-				    			<div class="col-xs-4 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
-				    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 12px;">Descripción</div>
+				    			<!--
+				    			<div class="col-xs-12 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">
+				    				<div style="font-size: 12px;">Descripción<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true" style="margin-left: 10px;"></span></div>
 				    			</div>
-				    			<div class="col-xs-4 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
+				    			-->
+
+				    			<div class="col-xs-66 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
 				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
 				    				<div style="font-size: 12px;">Al Carrito</div>
 				    			</div>	
@@ -545,10 +570,10 @@
 					<div class="panel-body">
 				    	<div class="row">
 				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
-			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 100%;height: 200px;border-radius: 0%;' ))}}
+			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'class'=>'img_prod' ))}}
 				    		</div>
 
-				    		<div class="col-md-12 panel-footer"  style="background-color:transparent; color: {{$tienda[0]->color_two}}; border-color:transparent;padding: 2px;">				    			
+				    		<div class="col-md-12 panel-footer">				    			
 				    			<div class="col-md-12 col-mx-offset-0" style="font-size: 14px;">
 					    			{{$producto->name}}				    			
 				    			</div>
@@ -556,11 +581,11 @@
 				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
 				    				<div  style="font-size: 14px;">${{$producto->price}}</div>					    			
 				    			</div>	
-				    			<div class="col-md-4 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
+				    			<div class="col-md-5 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
 				    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
 				    				<div style="font-size: 12px;">Descripción</div>
 				    			</div>
-				    			<div class="col-md-4 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
+				    			<div class="col-md-3 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
 				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
 				    				<div style="font-size: 12px;">Al Carrito</div>
 				    			</div>	
@@ -1046,7 +1071,7 @@
 		div_group0.setAttribute("style", "width: 65%;");
 		var input0 = document.createElement("input");
 		input0.setAttribute("class", "form-control");
-		input0.setAttribute("placeholder", "Busca productos de la Tienda "+"{!!ucwords($tienda[0]->name)!!}");
+		input0.setAttribute("placeholder", "Busca productos de la Tienda "+"{!!ucwords(str_replace('-',' ',$tienda[0]->name))!!}");
 		input0.setAttribute("style", "text-align: center;width: 111%;");
 		input0.setAttribute("maxlength", 48);
 		input0.setAttribute("name", "finder_store");
@@ -1083,7 +1108,7 @@
 		//div_group1.setAttribute("style", "width: 100%;");
 		var input1 = document.createElement("input");
 		input1.setAttribute("class", "form-control");
-		input1.setAttribute("placeholder", "Buscador de "+"{!!ucwords($tienda[0]->name)!!}");
+		input1.setAttribute("placeholder", "Buscador de "+"{!!ucwords(str_replace('-',' ',$tienda[0]->name))!!}");
 		input1.setAttribute("style", "text-align: center;");
 		input1.setAttribute("maxlength", 48);
 		input1.setAttribute("name", "finder_store");
@@ -1120,7 +1145,7 @@
 		//div_group2.setAttribute("style", "width: 100%;");
 		var input2 = document.createElement("input");
 		input2.setAttribute("class", "form-control");
-		input2.setAttribute("placeholder", "Buscador de "+"{!!ucwords($tienda[0]->name)!!}");
+		input2.setAttribute("placeholder", "Buscador de "+"{!!ucwords(str_replace('-',' ',$tienda[0]->name))!!}");
 		input2.setAttribute("style", "text-align: center;");
 		input2.setAttribute("maxlength", 48);
 		input2.setAttribute("name", "finder_store");
@@ -1640,6 +1665,7 @@
 
 	    //cambio de url de tienda
 	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");
+	    $(".nav-titulo").addClass("{!! $tienda[0]->name !!}");
 
 	    //smoove
 	    $('.smoove').smoove({offset:'30%'});

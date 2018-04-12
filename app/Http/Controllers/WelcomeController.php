@@ -738,7 +738,7 @@ class WelcomeController extends Controller {
 
 			//asignamos el id para listar las ordenes, en listarajaxorders
 			Session::put('store.id', $moduledata['tienda'][0]->id);
-			Session::put('app', ucfirst(str_replace('_',' ',$moduledata['tienda'][0]->name)));//para cambiar el nombre de la 
+			Session::put('app', ucfirst(str_replace('-',' ',$moduledata['tienda'][0]->name)));//para cambiar el nombre de la 
 
 			//Mini controlador de vista, debe estar aqui para evitar la perdidad e url			
 			if($moduledata['tienda'][0]->template == 'app_store' || $moduledata['tienda'][0]->template == 'web_store'){
