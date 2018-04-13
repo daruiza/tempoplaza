@@ -56,7 +56,11 @@
 			background-image: url("{{url('users/'.$ultima_tienda[0]->user_name.'/banners/'.$ultima_tienda[0]->banner)}}");
 			background-repeat: no-repeat;
 	    	background-position: center;
-	    	height: 200px;
+	    	height: 225px;
+	    	-webkit-background-size: cover;
+		  	-moz-background-size: cover;
+		  	-o-background-size: cover;
+		  	background-size: cover;
 		}
 
 		.img_nueva{

@@ -479,7 +479,7 @@ class WelcomeController extends Controller {
 				}
 
 				//$moduledata['ordenes'] = $ordenes;
-
+				$moduledata['tienda'][0]->name = ucfirst(str_replace('-',' ',$moduledata['tienda'][0]->name));
 				$moduledata['tienda'][0]->reputacion = 0;
 				$moduledata['tienda'][0]->reputacionpercent = 0;
 				$moduledata['tienda'][0]->ordenes = 0;	
@@ -508,6 +508,10 @@ class WelcomeController extends Controller {
 
 				if($moduledata['tienda'][0]->template == 'basic_store'){
 					return view('comprarjuntos/basic')->with($moduledata);
+				}
+
+				if($moduledata['tienda'][0]->template == 'flame_store'){
+					return view('comprarjuntos/flame')->with($moduledata);
 				}
 
 				if($moduledata['tienda'][0]->template == NULL){
@@ -755,6 +759,10 @@ class WelcomeController extends Controller {
 
 			if($moduledata['tienda'][0]->template == 'basic_store'){
 				return view('comprarjuntos/basic')->with($moduledata);
+			}
+
+			if($moduledata['tienda'][0]->template == 'flame_store'){
+				return view('comprarjuntos/flame')->with($moduledata);
 			}
 
 			if($moduledata['tienda'][0]->template == NULL){

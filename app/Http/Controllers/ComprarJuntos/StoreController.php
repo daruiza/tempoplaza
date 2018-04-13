@@ -190,7 +190,8 @@ class StoreController extends Controller {
 		$array_input['categorias'] = $request->input('categorias');	
 		$array_input['color_uno'] = $request->input('color_uno');
 		$array_input['color_dos'] = $request->input('color_dos');		
-		$array_input['descripcion'] = ucfirst(mb_strtolower($request->input('descripcion')));		
+		//$array_input['descripcion'] = ucfirst(mb_strtolower($request->input('descripcion')));		
+		$array_input['descripcion'] = $request->input('descripcion');		
 		$array_input['image_store'] = $request->input('image_store');
 		$array_input['image_banner'] = $request->input('image_banner');
 		$array_input['sitio_web'] = $request->input('sitio_web');

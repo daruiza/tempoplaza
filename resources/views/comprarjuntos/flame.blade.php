@@ -1,269 +1,272 @@
 @extends('app')
 
 @section('content')
-	
-	<style>
-	.panel-body {		    
-	    padding-bottom: 0px;
-	}	
-	.navbar-default {
-	    background-color: {{$tienda[0]->color_one}} !important;
-	    border-color: #e7e7e7;
-	}
-	.navbar-default .navbar-brand{
-		color: {{$tienda[0]->color_two}} !important;
-	}
-	.navbar-default .navbar-nav > li > a{
-		color: {{$tienda[0]->color_two}} !important;	
-	}
-	.tienda_banner{
-		background-image: url("{{url('users/'.$tienda[0]->user_name.'/banners/'.$tienda[0]->banner)}}");
-		background-size: auto auto;
-		background-repeat: no-repeat;
-    	background-position: center;
-	}
-	.center-block {
-	  display: block;
-	  margin-left: auto;
-	  margin-right: auto;
-	  text-align: center;
-	}
-	.option_store{
-		text-align: center;
-		cursor:pointer;			
-	}
-	.chosen-container .chosen-container-multi{
-		border: 1px solid #ccc !important;
-		border-radius: 4px !important;
-	}
-	.categorias{
-		width: 100% !important;
-		border-radius: 4px !important;
-		position: relative !important;
-		min-height: 1px !important;
-		padding-right: 15px !important;
-		padding-left: 15px !important;			
-	}
-	.fa-star, .fa-star-half-o{
-		color:#ffcc00;
-	}	
-	
-	table.dataTable.no-footer {
-	    border-bottom: 1px solid #111 !important;
-	    border: 1px solid transparent;
-	}
-
-	.popover-content ul{
-		margin-left: -25px;
-	}
-
-	.popover-content ul li{
-		cursor:pointer;
-	}
-	.popover-content ul li:hover{
-		background-color: #dddddd;
-	}
-
-	.glyphicon-star{
-		color: #ffcc00;
-	}
-
-	/*Debe funcionar solo para el boton del menu*/
-	.popover-content ul{
-		margin-left: -25px;
-	}
-	.popover-content ul li{
-		cursor:pointer;
-	}
-	.popover-content ul li:hover{
-		background-color: #dddddd;
-	}
-
-	.btn-paginator{		
-		color: {!!$tienda[0]->color_two!!};
-		box-sizing: border-box;
-		display: inline-block;
-		min-width: 1.5em;
-	    padding: 0.5em 1em;
-	    margin-left: 2px;
-	    text-align: center;
-	    text-decoration: none !important;
-	    cursor: pointer;
-
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #dcdcdc));
-	    background: -webkit-linear-gradient(top, #fff 0%, #fff 100%);
-	    background: -moz-linear-gradient(top, #fff 0%, #fff 100%);
-	    background: -ms-linear-gradient(top, #fff 0%, #fff 100%);
-	    background: -o-linear-gradient(top, #fff 0%, #fff 100%);
-	    background: linear-gradient(to bottom, #fff 0%, #fff 100%);	 
-	    border: 1px solid transparent;
-
-	    user-select: none;
-	    -webkit-user-select: none;
-	    -moz-user-select: -moz-none;
-	}
-	.btn-paginator:hover{		
-		color: {!!$tienda[0]->color_one!!} !important;;
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000), color-stop(100%, {!!$tienda[0]->color_two!!}));
-	    background: -webkit-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
-	    background: -moz-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
-	    background: -ms-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
-	    background: -o-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
-	    background: linear-gradient(to bottom, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);	    
-	    border-radius: 2px;
-	    
-	}
-	.btn-paginatorslc{
-		box-sizing: border-box;
-	    display: inline-block;
-	    min-width: 1.5em;
-	    padding: 0.5em 1em;
-	    margin-left: 2px;
-	    text-align: center;
-	    text-decoration: none !important;
-	    cursor: pointer;	    
-	    border: 1px solid transparent;
-	    border-radius: 2px;
-	    user-select: none;
-	    -webkit-user-select: none;
-	    -moz-user-select: -moz-none;   
-	}
-
-	.btn-paginatorslc{
-		color: {!!$tienda[0]->color_two!!} !important;
-		border: 1px solid {!!$tienda[0]->color_two!!} !important;
-	}
-	.btn-paginatorslc{
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, {!!$tienda[0]->color_one!!} ));
-	    background: -webkit-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
-	    background: -moz-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
-	    background: -ms-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
-	    background: -o-linear-gradient(top, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
-	    background: linear-gradient(to bottom, #fff 0%, {!!$tienda[0]->color_one!!} 100%);
-
-	}
-	.bnt-catacteristicas{
-		text-decoration: none;
-    	color: #333;
-	}
-	.bnt-catacteristicas:hover{
-		text-decoration: none;    	
-	}
-	.btn{
-		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-		font-size: 14px;
-		/*border-color: {!!$tienda[0]->color_two!!} !important;*/
-	}
-
-	.ui-autocomplete{
-	    color: #555555;
-    	background-color: #ffffff;
-    	background-image: none;
-    	font-size: 14px;
-    	line-height: 1.42857143;
-    	font-family: inherit;
-    	position: absolute; cursor: default;z-index:1060 !important;
-	}
-	.marco{
-		border: 1px solid #ddd;
-		border-radius: 5px;
-		margin-bottom: 2%;
-		box-shadow: 4px 4px 2px #ddd;
-	}
-	.panel-default{
-		border-color: {!!$tienda[0]->color_two!!} !important;		
-	}
-	.panel-heading{
-		background-color: {!!$tienda[0]->color_one!!} !important;
-	}
-	.buscador_t{
-		border-color: {!!$tienda[0]->color_two!!} !important;		
-	}
-	.cart_b{
-		color: {!!$tienda[0]->color_one!!} !important;		
-	}
-	.boton_cart2{
-	    text-align: center;
-	    background-color: {!!$tienda[0]->color_two!!} !important;	
-	}
-	.bange_cart_b{
-		color: {!!$tienda[0]->color_one!!} !important;		
-	}
-	.cart_text_b{
-		color: {!!$tienda[0]->color_one!!} !important;		
-	}
-	.badge{
-		background-color: {!!$tienda[0]->color_one!!} !important;
-		color: {!!$tienda[0]->color_two!!} !important;			
-	}
-	.ifrmae-facebook{
-		border: 1px solid {!!$tienda[0]->color_two!!} !important;	
-	}
-
-	.categori_store{
-		text-align: center;
-		padding: 0px;
-	}
-	
-	.categori_title{
-		font-size: 115%;
-		color: {!!$tienda[0]->color_two!!};
-
-	}
-
-	.categori_store ul{
-		margin-top: 10px;
-		text-align: left;
-		padding: 0px;
-		text-align: center;		
-    	border-top-left-radius: 7px;
-    	border-bottom-right-radius: 7px;
-    	border: 1px solid {!!$tienda[0]->color_two!!};
-
-	}
-
-	.categori_store ul li{
-		list-style: none;
-		cursor: pointer;
-		color: {!!$tienda[0]->color_two!!};
-		border-top-left-radius: 5px;
-    	border-bottom-right-radius: 5px;
-
-	}
-	.categori_store ul li:hover{
-		list-style: none;
-		background-color: {!!$tienda[0]->color_two!!};
-		color: {!!$tienda[0]->color_one!!};
+	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+	<style>		
+		.panel-body {		    
+		    padding-bottom: 0px;
+		}
+		.panel{
+			border-top-right-radius: 0px;
+			border-top-left-radius: 0px;
+			border-bottom-right-radius: 10px;
+    		border-bottom-left-radius: 10px;
+    		box-shadow: 0 5px 5px rgba(0,0,0,.05);
+		}
+		.panel-footer{
+			background-color:transparent;
+			color: {{$tienda[0]->color_one}};
+			/*border-color:transparent;*/
+			padding: 2px;
+			border-top: 0px solid transparent;
+		}
+		.navbar-default {
+		    background-color: {{$tienda[0]->color_one}} !important;
+		    border-color: #e7e7e7;
+		}
+		.navbar-default .navbar-brand{
+			color: {{$tienda[0]->color_two}} !important;
+		}
+		.navbar-default .navbar-nav > li > a{
+			color: {{$tienda[0]->color_two}} !important;	
+		}
+		.tienda_banner{
+			background-image: url("{{url('users/'.$tienda[0]->user_name.'/banners/'.$tienda[0]->banner)}}");
+			background-size: auto 100%;
+			background-repeat: no-repeat;
+	    	background-position: center;
+		}
+		.center-block {
+		  display: block;
+		  margin-left: auto;
+		  margin-right: auto;
+		  text-align: center;
+		}
+		.option_store{
+			text-align: center;
+			cursor:pointer;			
+		}
+		.chosen-container .chosen-container-multi{
+			border: 1px solid #ccc !important;
+			border-radius: 4px !important;
+		}
+		.categorias{
+			width: 100% !important;
+			border-radius: 4px !important;
+			position: relative !important;
+			min-height: 1px !important;
+			padding-right: 15px !important;
+			padding-left: 15px !important;			
+		}
+		.fa-star, .fa-star-half-o{
+			color:#ffcc00;
+		}	
 		
-	}
-
-	#form_payprov{
-		display: none !important;
-	}
-
-	@media (min-width: 768px)  and (max-width: 990px){		
-		
-		.navbar-nav>li>a {
-		    padding-top: 20px !important;
-		    padding-bottom: 5px !important;
+		table.dataTable.no-footer {
+		    border-bottom: 1px solid #111 !important;
+		    border: 1px solid transparent;
 		}
 
-		#calificaciones{
-			display: none;
+		.popover-content ul{
+			margin-left: -25px;
 		}
 
-	}
-
-	@media (max-width: 1024px){
-		.navbar-form .input-group>.form-control {
-	    	width: 102% !important;
+		.popover-content ul li{
+			cursor:pointer;
 		}
-	}
+		.popover-content ul li:hover{
+			background-color: #dddddd;
+		}
+
+		.glyphicon-star{
+			color: #ffcc00;
+		}
+
+		/*Debe funcionar solo para el boton del menu*/
+		.popover-content ul{
+			margin-left: -25px;
+		}
+		.popover-content ul li{
+			cursor:pointer;
+		}
+		.popover-content ul li:hover{
+			background-color: #dddddd;
+		}
+
+		.btn-paginator{		
+			color: {!!$tienda[0]->color_one!!};
+			box-sizing: border-box;
+			display: inline-block;
+			min-width: 1.5em;
+		    padding: 0.5em 1em;
+		    margin-left: 2px;
+		    text-align: center;
+		    text-decoration: none !important;
+		    cursor: pointer;
+
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #dcdcdc));
+		    background: -webkit-linear-gradient(top, #fff 0%, #fff 100%);
+		    background: -moz-linear-gradient(top, #fff 0%, #fff 100%);
+		    background: -ms-linear-gradient(top, #fff 0%, #fff 100%);
+		    background: -o-linear-gradient(top, #fff 0%, #fff 100%);
+		    background: linear-gradient(to bottom, #fff 0%, #fff 100%);	 
+		    border: 1px solid transparent;
+
+		    user-select: none;
+		    -webkit-user-select: none;
+		    -moz-user-select: -moz-none;
+		}
+		.btn-paginator:hover{		
+			color: {!!$tienda[0]->color_one!!} !important;;
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000), color-stop(100%, {!!$tienda[0]->color_two!!}));
+		    background: -webkit-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+		    background: -moz-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+		    background: -ms-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+		    background: -o-linear-gradient(top, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);
+		    background: linear-gradient(to bottom, {!!$tienda[0]->color_two!!}  0%, {!!$tienda[0]->color_two!!} 100%);	    
+		    border-radius: 2px;
+		    
+		}
+		.btn-paginatorslc{
+			box-sizing: border-box;
+		    display: inline-block;
+		    min-width: 1.5em;
+		    padding: 0.5em 1em;
+		    margin-left: 2px;
+		    text-align: center;
+		    text-decoration: none !important;
+		    cursor: pointer;	    
+		    border: 1px solid transparent;
+		    border-radius: 2px;
+		    user-select: none;
+		    -webkit-user-select: none;
+		    -moz-user-select: -moz-none;   
+		}
+
+		.btn-paginatorslc{
+			color: {!!$tienda[0]->color_two!!} !important;
+			border: 1px solid {!!$tienda[0]->color_two!!} !important;
+		}
+		.btn-paginatorslc{
+			background: {!!$tienda[0]->color_one!!};
+
+		}
+		.bnt-catacteristicas{
+			text-decoration: none;
+	    	color: #333;
+		}
+		.bnt-catacteristicas:hover{
+			text-decoration: none;    	
+		}
+		.btn{
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-size: 14px;
+			/*border-color: {!!$tienda[0]->color_two!!} !important;*/
+		}
+
+		.ui-autocomplete{
+		    color: #555555;
+	    	background-color: #ffffff;
+	    	background-image: none;
+	    	font-size: 14px;
+	    	line-height: 1.42857143;
+	    	font-family: inherit;
+	    	position: absolute; cursor: default;z-index:1060 !important;
+		}
+		.marco{
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			margin-bottom: 2%;
+			box-shadow: 4px 4px 2px #ddd;
+		}
+		.panel-default{
+			/*border-color: {!!$tienda[0]->color_two!!} !important;*/
+			border-color:transparent;
+		}
+		.panel-heading{
+			background-color: {!!$tienda[0]->color_one!!} !important;
+			
+		}
+
+		.img_prod{
+			width: 100%;height: 200px;border-radius: 0%;
+		}
+		.buscador_t{
+			border-color: {!!$tienda[0]->color_two!!} !important;		
+		}
+		.cart_b{
+			color: {!!$tienda[0]->color_one!!} !important;		
+		}
+		.boton_cart2{
+		    text-align: center;
+		    background-color: {!!$tienda[0]->color_two!!} !important;	
+		}
+		.bange_cart_b{
+			color: {!!$tienda[0]->color_one!!} !important;		
+		}
+		.cart_text_b{
+			color: {!!$tienda[0]->color_one!!} !important;		
+		}
+		.badge{
+			background-color: {!!$tienda[0]->color_one!!} !important;
+			color: {!!$tienda[0]->color_two!!} !important;			
+		}
+		.ifrmae-facebook{
+			border: 1px solid {!!$tienda[0]->color_two!!} !important;	
+		}
+
+		#form_payprov{
+			display: none !important;
+		}
+
+		.option_add_product{
+			
+			padding-right: 0px;
+    		padding-left: 0px;  		
+    		
+		}
+
+		.cart-bottom{
+			background: {!!$tienda[0]->color_one!!};
+			color:{!!$tienda[0]->color_two!!};
+			padding: 5px;
+			border-radius: 4px;
+		}
+
+		.cart-bottom:hover{
+			color:{!!$tienda[0]->color_one!!};
+			background: {!!$tienda[0]->color_two!!};
+		}
+
+
+
+		.panel-prod > .panel-body{
+			padding-top: 0px;
+		}		
+
+		@media (min-width: 768px){		
+			.navbar-nav>li>a {
+			    padding-top: 20px !important;
+			    padding-bottom: 5px !important;
+			}
+		}
+
+		@media (max-width: 1024px){
+			.navbar-form .input-group>.form-control {
+		    	width: 102% !important;
+			}
+		}
+
+		@media (max-width: 768px){
+			.tienda_de_matriculas{
+				font-size: 20px !important;
+			}
+
+		}
 
 	</style>
-
-
-	<div class="row visible-lg" style="margin-top: 2%;"></div>
+	
+	<div class="row visible-lg" style="margin-top: 5%;"></div>
 	<div class="row visible-md" style="margin-top: 7%;"></div>
 	<div class="row visible-sm" style="margin-top: 10%;"></div>
 	<div class="row visible-xs" style="margin-top: 16%;"></div>
@@ -329,16 +332,9 @@
 				</div>                
 			@endif
 		</div>
-	</div>
-	
-	
-	<div class="row tienda_banner col-md-12 col-md-offset-0 visible-lg" style="height: 200px;font-size: 40px; color: {{$tienda[0]->color_two}} !important; padding: 1%;margin-bottom: 1%; ">
-		@if($tienda[0]->banner == 'default.png')
-			{{strtoupper(str_replace('-',' ',$tienda[0]->name))}}
-		@endif
-	</div>
+	</div>	
 
-	<!--Buscador de tiendas solo para moviles-->
+	<!--Buscador de tiendas solo para moviles-->	
 	<div class="col-sm-10 col-md-offset-1 hidden-lg hidden-md hidden-sm">
 		{!! Form::open(array('class'=>'form_finder_store','url' => '/','method'=>'get','class'=>'navbar-form navbar-left','onsubmit'=>'javascript:return seg_user.validateFinder()')) !!}
 		   <div class="input-group">
@@ -351,232 +347,261 @@
 	    {!! Form::close() !!}
     </div>	
 
-    <div id="url_app" style="display:none;">{{url('/')}}</div>
+    <!--Descipcion solo para moviles -->
+    <div class="col-md-12 col-md-offset-0 hidden-sm hidden-md hidden-lg" style="text-align: center;margin-bottom: 15px;">
+    				
+		<div>{{$tienda[0]->description}}</div>				
+		<div style="display: flex;margin-top: 10px;">
+			<span class="glyphicon glyphicon-map-marker" aria-hidden="true">				
+			</span>
+			<div style="font-size: 17px;">{{$tienda[0]->department}}, {{$tienda[0]->city}} - {{$tienda[0]->adress}}</div>
+		</div>
+
+		@if($tienda[0]->web)
+			<div><i class="fa fa-cloud" aria-hidden="true"></i> <a href="{{$tienda[0]->web}}" target="_blank">Sitio Web</a></div>
+		@endif
+		@if($tienda[0]->fanpage)
+			<div><i class="fa fa-facebook" aria-hidden="true"></i> <a href="{{$tienda[0]->fanpage}}" target="_blank">Página de Facebook</a></div>
+		@endif
+
+		@if($tienda[0]->movil)
+			<div><i class="fa fa-whatsapp" aria-hidden="true"></i>
+				<a href="https://api.whatsapp.com/send?phone=57{!!$tienda[0]->movil!!}" target="_blank" rel="noopener noreferrer">{!!$tienda[0]->movil!!}</a>			 
+			</div>
+		@endif			
+		
+    </div>
+
+    <!--Descipcion solo para tablets y pc -->
+ 	<div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1 hidden-xs" style="text-align: center;margin-bottom: 15px;">
+    	
+    	<div class="row col-md-4 col-sm-4 col-md-offset-0">		
+			<div>{{$tienda[0]->description}}</div>				
+			<div style="margin-top: 10px;">
+				
+				<div style="font-size: 17px;"><span class="glyphicon glyphicon-map-marker" aria-hidden="true">				
+				</span>{{$tienda[0]->department}}, {{$tienda[0]->city}}</div>
+				<div style="font-size: 17px;">{{$tienda[0]->adress}}</div>
+			</div>
+
+			@if($tienda[0]->web)
+				<div><i class="fa fa-cloud" aria-hidden="true"></i> <a href="{{$tienda[0]->web}}" target="_blank">Sitio Web</a></div>
+			@endif
+			@if($tienda[0]->fanpage)
+				<div><i class="fa fa-facebook" aria-hidden="true"></i> <a href="{{$tienda[0]->fanpage}}" target="_blank">Página de Facebook</a></div>
+			@endif
+
+			@if($tienda[0]->movil)
+				<div><i class="fa fa-whatsapp" aria-hidden="true"></i>
+					<a href="https://api.whatsapp.com/send?phone=57{!!$tienda[0]->movil!!}" target="_blank" rel="noopener noreferrer">{!!$tienda[0]->movil!!}</a>			 
+				</div>
+			@endif
+		</div>	
+		
+
+		<div class="row col-md-8 col-sm-8 col-md-offset-0">
+			<div class="row col-md-10 col-sm-10 col-md-offset-0 col-sm-offset-0">
+				<div class="row tienda_banner col-md-12 col-md-offset-0 visible-lg" style="height: 180px;font-size: 40px; color: {{$tienda[0]->color_two}} !important; padding: 1%;margin-bottom: 1%; ">
+					@if($tienda[0]->banner == 'default.png')
+						{{strtoupper(str_replace('-',' ',$tienda[0]->name))}}
+					@endif
+				</div>
+			</div>
+		</div>
+		
+    </div>
+
+    <!--Menu de categorias, ubicación y resumen-->
+	<div class="col-md-10 col-md-offset-1 " style="margin-bottom: 15px;">
+		<div class="title m-b-md center-block">
+			<div class="btn-group btn-menu" role="group">
+				<!--<button type="button" class="btn btn-default">Articulos</button>-->
+				<button type="button" class="btn btn-default" data-toggle="popover" title="Categorias" data-placement="bottom" data-content="{{ Html::ul($categorias)}}" data-html="true">Categorias</button>				
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ubication_modal">Ubicación</button>				
+			</div>
+		</div>
+	</div>
+
+	<div id="url_app" style="display:none;">{{url('/')}}</div>
 	<div id="user_name" style="display:none;">{{$tienda[0]->user_name}}</div>
 	<div id="color_one" style="display:none;">{{$tienda[0]->color_one}}</div>
 	<div id="color_two" style="display:none;">{{$tienda[0]->color_two}}</div>
 
-    <div class="col-md-12 col-md-offset-0">
-    	<!--Menu de categorias, ubicación y resumen-->
-    	<div class="col-md-2 col-md-offset-0 categori_store">
-    		<div class="col-md-12 col-md-offset-0 ">
-    			<span class="categori_title">Menú de Categorías</span>
-				{{ Html::ul($categorias)}}
-    		</div>
-    		
-		</div>	
+	<!--Listado de productos-->
+	<!-- Para resoluciones de celulares-->
+	<div class="col-md-10 col-md-offset-1 listado_productos hidden-lg">
+		@php ($p=0)
+		@php ($j=1)
+		@foreach($productos as $producto)
+			@if($p%3==0)
+				<div class="col-md-12 col-md-offset-0">
+			@endif
+			<div class="col-sm-4 col-md-4 col-mx-offset-1" style="text-align: center;">
+				<div class="panel panel-default panel-prod">					
+					<div class="panel-body">
+				    	<div class="row">
+				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
+			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'class'=>'img_prod' ))}}				    							    			
+				    		</div>
 
-		<!--Listado de productos-->
-		<!-- Para resoluciones de celulares-->
-		<div class="col-md-10 col-md-offset-0 listado_productos hidden-lg ">
-			@php ($p=0)
-			@php ($j=1)
-			@foreach($productos as $producto)
-				@if($p%3==0)
-					<div class="col-md-12 col-md-offset-0">
-				@endif
-				<div class="col-sm-4 col-md-4 col-mx-offset-1" style="text-align: center;">
-					<div class="panel panel-default">					
-						<div class="panel-body">
-					    	<div class="row">
-					    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
-				    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}				    							    			
-					    		</div>
+				    		<div class="col-xs-12 panel-footer" >				    			
+				    			<div class="col-xs-12 col-mx-offset-0" style="font-size: 14px;">
+					    			{{$producto->name}}				    			
+				    			</div>
+				    			<div class="col-xs-6 col-mx-offset-0">				    
+				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true">
+				    				</span>				    						
+				    				<div  style="font-size: 14px;">
+				    					${{number_format($producto->price)}}
+				    				</div>					    			
+				    			</div>				    			
 
-					    		<div class="col-xs-12 panel-footer"  style="background-color:transparen; color: {{$tienda[0]->color_two}}; border-color:{{$tienda[0]->color_two}};padding: 2px;">				    			
-					    			<div class="col-xs-12 col-mx-offset-0" style="font-size: 18px;">
-						    			{{$producto->name}}				    			
-					    			</div>
-					    			<div class="col-xs-4 col-mx-offset-0">
-					    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
-					    				<div  style="font-size: 16px;">${{$producto->price}}</div>					    			
-					    			</div>	
-					    			<div class="col-xs-4 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
-					    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
-					    				<div style="font-size: 14px;">Descripción</div>
-					    			</div>
-					    			<div class="col-xs-4 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
-					    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
-					    				<div style="font-size: 14px;">Al Carrito</div>
-					    			</div>	
-					    		</div>
-					    	</div>
-					    </div>				    
-					</div>
-				</div>
-				@if($j%3==0)
-					</div>							
-				@elseif($p == count($productos)-1)
-					</div>
-				@endif
-				@php ($p++)
-				@php ($j++)
-			@endforeach
-		</div>
-
-		<!-- Para resoluciones de computador-->
-		<div class="col-md-10 col-md-offset-0 listado_productos visible-lg">
-			@php ($p=0)
-			@php ($j=1)
-			@php ($k=0)
-			@foreach($productos as $producto)
-				@if($p%4==0)
-					@php ($k=0)
-					<div class="col-md-12 col-md-offset-0">
-				@endif
-				
-				@if($k==0)
-				<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove" data-move-y="200px" data-move-x="-200px" style="text-align: center;">
-				@endif
-				@if($k==1)
-				<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove" data-move-y="200px" data-move-x="-100px" style="text-align: center;">
-				@endif
-				@if($k==2)
-				<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove" data-move-y="200px" data-move-x="100px" style="text-align: center;">
-				@endif
-				@if($k==3)
-				<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove"  data-move-y="200px" data-move-x="200px" style="text-align: center;">
-				@endif
-
-					<div class="panel panel-default">					
-						<div class="panel-body">
-					    	<div class="row">
-					    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
-				    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}
-					    		</div>
-
-					    		<div class="col-md-12 panel-footer"  style="background-color:transparent; color: {{$tienda[0]->color_two}}; border-color:transparent;padding: 2px;">				    			
-					    			<div class="col-md-12 col-mx-offset-0" style="font-size: 18px;">
-						    			{{$producto->name}}				    			
-					    			</div>
-					    			<div class="col-md-4 col-mx-offset-0">
-					    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
-					    				<div  style="font-size: 16px;">${{$producto->price}}</div>					    			
-					    			</div>	
-					    			<div class="col-md-4 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
-					    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
-					    				<div style="font-size: 14px;">Descripción</div>
-					    			</div>
-					    			<div class="col-md-4 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
-					    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
-					    				<div style="font-size: 14px;">Al Carrito</div>
-					    			</div>	
-					    		</div>
-					    	</div>
-					    </div>				    
-					</div>
-				</div>
-				@if($j%4==0)
-					</div>							
-				@elseif($p == count($productos)-1)
-					</div>
-				@endif
-				@php ($p++)
-				@php ($j++)
-				@php ($k++)
-			@endforeach
-
-			<!--Paginador-->
-			<div  class="col-md-12 col-md-offset-0">
-				<div style="float:left;padding: 0.5em 1em;">Total de productos: {{$paginador['total']}}</div>
-				<div class="" style="display: flex;float: right;">			
-					<div class="btn-paginator paginador-btn">Anterior</div>
-					@for($i=0;$i<$paginador['paginas'];$i++)
-						@if($i+1 == $paginador['pagina'])
-							<div class="btn-paginatorslc paginador-btn">{{$i+1}}</div>
-							<!--Div oculto con pagina actual-->
-							<div id="pagina_actual" style="display: none;">{{$i+1}}</div>
-						@else
-							<div class="btn-paginator paginador-btn">{{$i+1}}</div>
-						@endif				
-					@endfor						
-					<div class="btn-paginator paginador-btn">Siguiente</div>
-					<div id="paginas" style="display:none;">{{$paginador['paginas']}}</div>
-					<div id="total_productos" style="display:none;">{{$paginador['total']}}</div>
-					<div id="productos_pagina" style="display:none;">{{$paginador['ppp']}}</div>
+				    			<div class="col-xs-66 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
+				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
+				    				<div style="font-size: 12px;">Al Carrito</div>
+				    			</div>	
+				    		</div>
+				    	</div>
+				    </div>				    
 				</div>
 			</div>
-
-			<!--Margin para el div paginador que es flotante, para que se vea en los diferentes dispositivos.-->
-			<div class="row visible-lg" style="margin-top: 0%;"></div>
-			<div class="row visible-md" style="margin-top: 6%;"></div>
-			<div class="row visible-sm" style="margin-top: 8%;"></div>
-			<div class="row visible-xs" style="margin-top: 10%;"></div>
-
-		</div>
-
-		
-
-    </div>
-    
-	
-
-	
-
-	
-
-	<!--Listado de reseñas-->
-	<a name="calificaciones"></a>
-	@if($tienda[0]->fanpage != "")
-	<div class="col-md-10 col-md-offset-1" style="margin-top: 2%;"></div>
-		<div id="calificaciones" class="col-md-8 ">
-			<div class="panel panel-default">
-				<div class="panel-heading" style="text-align: center;"><b>CALIFICACIONES DEL SERVICIO</b></div>
-				<div class="panel-body">
-					<table id="table_orders" class="display responsive no-wrap " cellspacing="0" width="96%" style="margin: auto;">
-						<thead >
-				            <tr>
-				            	<td></td>			            			            	
-			        			<td>CLIENTE</td>
-			        			<td>CALIFICACIÓN</td>
-			        			<td>RESEÑA</td>
-			        			<td>FECHA</td>		        			
-				            </tr>
-				        </thead>              
-					</table>
+			@if($j%3==0)
+				</div>							
+			@elseif($p == count($productos)-1)
 				</div>
-			</div>		
-		</div>
-		
-		<div class="col-md-4">
-			<iframe class="ifrmae-facebook" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F{!!explode("/", $tienda[0]->fanpage)[count(explode("/", $tienda[0]->fanpage))-1]!!}%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+			@endif
+			@php ($p++)
+			@php ($j++)
+		@endforeach
+	</div>
+
+	<!-- Para resoluciones de computador-->
+	<div class="col-md-10 col-md-offset-1 listado_productos visible-lg">
+		@php ($p=0)
+		@php ($j=1)
+		@php ($k=0)
+		@foreach($productos as $producto)
+			@if($p%4==0)
+				@php ($k=0)
+				<div class="col-md-12 col-md-offset-0">
+			@endif
+			
+			@if($k==0)
+			<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove" data-move-y="200px" data-move-x="-200px" style="text-align: center;">
+			@endif
+			@if($k==1)
+			<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove" data-move-y="200px" data-move-x="-100px" style="text-align: center;">
+			@endif
+			@if($k==2)
+			<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove" data-move-y="200px" data-move-x="100px" style="text-align: center;">
+			@endif
+			@if($k==3)
+			<div class="col-md-3 col-lg-3 col-mx-offset-1 smoove"  data-move-y="200px" data-move-x="200px" style="text-align: center;">
+			@endif
+			
+				<div class="panel panel-default panel-prod">					
+					<div class="panel-body">
+				    	<div class="row">
+				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
+			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'class'=>'img_prod' ))}}
+				    		</div>
+
+				    		<div class="col-md-12 panel-footer">				    			
+				    			<div class="col-md-12 col-mx-offset-0" >
+					    			<span style="font-size: 16px;margin-top: 5px;margin-bottom: 5px;text-decoration: underline;cursor: pointer;"> {{$producto->name}} </span>				    			
+				    			</div>
+
+				    			<div class="col-md-12" style="font-size: 14px;padding-right: 0px;padding-left: 0px;">
+				    				@if(!empty($producto->basic_class))
+						    			<div class="col-md-4 col-mx-offset-0" style="padding-right: 5px;padding-left: 5px;">
+						    				
+						    				<div style="font-size: 14px; text-decoration: line-through;" >
+						    					${!! number_format($producto->basic_class) !!}
+						    				</div>
+						    				
+						    				<div  style="font-size: 16px; ">
+						    					${{number_format($producto->price)}}
+						    				</div>					    			
+						    			</div>
+					    			@else
+						    			<div class="col-md-4 col-mx-offset-0" style="padding-right: 5px;padding-left: 5px;margin-top: 5px;">					    				
+						    				<div  style="font-size: 16px; ">
+						    					${{number_format($producto->price)}}
+						    				</div>					    			
+						    			</div>
+					    			@endif	
+					    			@if(!empty($producto->basic_class))
+						    			<div class="col-md-8 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}" style="padding-right: 10px;padding-left: 10px;">
+						    				
+						    				<div class="cart-bottom" style="font-size: 16px;margin-top: 5px;">
+						    					<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
+						    					Agregar Pedido
+						    				</div>
+						    			</div>					    			
+					    			@else
+						    			<div class="col-md-8 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}" style="padding-right: 10px;padding-left: 10px;margin-bottom: 5px;">
+						    				
+						    				<div class="cart-bottom" style="font-size: 16px;margin-top: 0px;">
+						    					<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
+						    					Agregar Pedido
+						    				</div>
+						    			</div>
+					    			@endif
+				    			</div>
+				    		</div>
+				    	</div>
+				    </div>				    
+				</div>
+			</div>
+			@if($j%4==0)
+				</div>							
+			@elseif($p == count($productos)-1)
+				</div>
+			@endif
+			@php ($p++)
+			@php ($j++)
+			@php ($k++)
+		@endforeach
+	</div>
+
+	<!--Paginador-->
+	<div  class="col-md-10 col-md-offset-1">
+		<div style="float:left;padding: 0.5em 1em;">Total de productos: {{$paginador['total']}}</div>
+		<div class="" style="display: flex;float: right;">			
+			<div class="btn-paginator paginador-btn">Anterior</div>
+			@for($i=0;$i<$paginador['paginas'];$i++)
+				@if($i+1 == $paginador['pagina'])
+					<div class="btn-paginatorslc paginador-btn">{{$i+1}}</div>
+					<!--Div oculto con pagina actual-->
+					<div id="pagina_actual" style="display: none;">{{$i+1}}</div>
+				@else
+					<div class="btn-paginator paginador-btn">{{$i+1}}</div>
+				@endif				
+			@endfor						
+			<div class="btn-paginator paginador-btn">Siguiente</div>
+			<div id="paginas" style="display:none;">{{$paginador['paginas']}}</div>
+			<div id="total_productos" style="display:none;">{{$paginador['total']}}</div>
+			<div id="productos_pagina" style="display:none;">{{$paginador['ppp']}}</div>
 		</div>
 	</div>
-	@else
-	<div class="col-md-10 col-md-offset-1" style="margin-top: 2%;"></div>
-		<div id="calificaciones" class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading" style="text-align: center;"><b>CALIFICACIONES DEL SERVICIO</b></div>
-				<div class="panel-body">
-					<table id="table_orders" class="display responsive no-wrap " cellspacing="0" width="96%" style="margin: auto;">
-						<thead >
-				            <tr>
-				            	<td></td>			            			            	
-			        			<td>CLIENTE</td>
-			        			<td>CALIFICACIÓN</td>
-			        			<td>RESEÑA</td>
-			        			<td>FECHA</td>		        			
-				            </tr>
-				        </thead>              
-					</table>
-				</div>
-			</div>		
-		</div>		
-	</div>
-	@endif
 
-	<!--Pago virtual-->
+	<!--Margin para el div paginador que es flotante, para que se vea en los diferentes dispositivos.-->
+	<div class="row visible-lg" style="margin-top: 0%;"></div>
+	<div class="row visible-md" style="margin-top: 6%;"></div>
+	<div class="row visible-sm" style="margin-top: 8%;"></div>
+	<div class="row visible-xs" style="margin-top: 10%;"></div>
+	
 	@if(Session::has('payment_method_array') )    
 		<div id="form_payprov">     
 	    	{!! Form::hidden('type_payprov', Session::get('payment_method_array')['payprov'][0]->type  ) !!}
 	    	{!! Session::get('payment_method_array')['payprov'][0]->form !!}
-		</div>
-	@endif  
+		</div>		
+	@endif
 
 	@if(!empty($tienda[0]->payment_method))		
 		<div class="col-md-10 col-md-offset-1 img_pay_method" style="margin-bottom: 2%;margin-top: 2%; text-align: center;">
 			<span style="font-size: 14px;">Métodos de pago: </span>
-			{{ Html::image('images/payprovider/metodosdepago.png','Imagen no disponible',array( 'style'=>'border-radius: 0%;' ))}}			
+			{{ Html::image('images/payprovider/metodosdepago.png','Imagen no disponible',array( 'style'=>'border-radius: 0%;' ))}}
 		</div>
 	@endif
 
@@ -594,6 +619,12 @@
 				<div class = "alerts-module"></div>				
 				<div class="modal-body">
 					<div class="row">
+						<div class="col-md-5">
+							<div class="col-md-12" style="text-align: center;font-size: 14px;">
+								<label for="prod_cart_modal_for" class="col-md-12 control-label"></label>
+								{{ Html::image('users/'.$tendero[0]->user_name.'/products/default.png','Imagen no disponible',array('id'=>'prod_img_cart_modal','style'=>'width: 100%;'))}}
+							</div>													
+						</div>
 						<div class="col-md-7">
 							{!! Form::hidden('id_store_cart_modal',null,array('id'=>'id_store_cart_modal')) !!}
 							{!! Form::hidden('id_product_cart_modal',null,array('id'=>'id_product_cart_modal')) !!}
@@ -637,18 +668,14 @@
 								<label for="model_cart_modal_for" class="col-md-3 control-label">Modelo:</label>
 								<div id="model_cart_modal" class="col-md-9" ></div>
 							</div>
-							
-						</div>
-						<div class="col-md-5">
-							<div class="col-md-12" style="text-align: center;font-size: 14px;">
-								<label for="prod_cart_modal_for" class="col-md-12 control-label"></label>
-								{{ Html::image('users/'.$tendero[0]->user_name.'/products/default.png','Imagen no disponible',array('id'=>'prod_img_cart_modal','style'=>'width: 100%;'))}}
-							</div>
+
 							<div id="div_cart_description" class="col-md-12">
 								<label for="description_cart_modal_for" class="col-md-12 control-label">Descripción</label>
 								<div id="dercription_cart_modal" class="col-md-12" ></div>
-							</div>							
+							</div>	
+							
 						</div>
+						
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -820,7 +847,7 @@
 										</div>
 									</div>
 
-									<div class="col-md-12" data-toggle="modal" data-target="#rpsw_modal" style="margin-top: 10px; font-size: 16px;">
+									<div class="col-md-12" data-toggle="modal" data-target="#rpsw_modal" style="margin-top: 10px; font-size: 14px;">
 										<a href="#">Recuperar Contraseña</a>
 									</div>
 								</div>							
@@ -913,7 +940,7 @@
 					</div>
 					<div class="row" style="text-align: center;">
 						{{ Form::checkbox('tyc') }}
-						<a href="{{ url('/welcome/terminosycondiciones')}}"  target="_blank" style="font-size: 16px;margin:auto;">Terminos y Condiciones</a>		
+						<a href="{{ url('/welcome/terminosycondiciones')}}"  target="_blank" style="font-size: 14px;margin:auto;">Terminos y Condiciones</a>		
 					</div>
 		        </div>
 		        <div class="modal-footer">
@@ -935,16 +962,14 @@
     {!! Form::close() !!}
 
 
-
 	<nav class="navbar  navbar-fixed-bottom navbar-light bg-faded hidden-lg hidden-md hidden-sm">		
 		<a href="#" id="cart_modal_b">
 			<div class="col-xs-4 col-xs-offset-4 boton_cart2" style="border-radius: 5%">			
 				<span class="glyphicon glyphicon-shopping-cart cart_b" aria-hidden="true" style = "font-size: 30px;"></span>
-				<span class ="cart_text_b" style = "font-size: 16px;" >Carro</span>	
+				<span class ="cart_text_b" style = "font-size: 14px;" >Carro</span>	
 				<span id="bange_cart_b" class="badge"></span>
 			</div>
 		</a>
-
 	</nav>
 @endsection
 
@@ -1007,7 +1032,7 @@
 		div_group0.setAttribute("style", "width: 65%;");
 		var input0 = document.createElement("input");
 		input0.setAttribute("class", "form-control");
-		input0.setAttribute("placeholder", "Busca productos de la Tienda "+"{!!ucwords($tienda[0]->name)!!}");
+		input0.setAttribute("placeholder", "Busca productos de la Tienda "+"{!!ucwords(str_replace('-',' ',$tienda[0]->name))!!}");
 		input0.setAttribute("style", "text-align: center;width: 111%;");
 		input0.setAttribute("maxlength", 48);
 		input0.setAttribute("name", "finder_store");
@@ -1044,7 +1069,7 @@
 		//div_group1.setAttribute("style", "width: 100%;");
 		var input1 = document.createElement("input");
 		input1.setAttribute("class", "form-control");
-		input1.setAttribute("placeholder", "Buscador de "+"{!!ucwords($tienda[0]->name)!!}");
+		input1.setAttribute("placeholder", "Buscador de "+"{!!ucwords(str_replace('-',' ',$tienda[0]->name))!!}");
 		input1.setAttribute("style", "text-align: center;");
 		input1.setAttribute("maxlength", 48);
 		input1.setAttribute("name", "finder_store");
@@ -1081,7 +1106,7 @@
 		//div_group2.setAttribute("style", "width: 100%;");
 		var input2 = document.createElement("input");
 		input2.setAttribute("class", "form-control");
-		input2.setAttribute("placeholder", "Buscador de "+"{!!ucwords($tienda[0]->name)!!}");
+		input2.setAttribute("placeholder", "Buscador de "+"{!!ucwords(str_replace('-',' ',$tienda[0]->name))!!}");
 		input2.setAttribute("style", "text-align: center;");
 		input2.setAttribute("maxlength", 48);
 		input2.setAttribute("name", "finder_store");
@@ -1189,7 +1214,9 @@
 		    ],	       
 		    "language": {
 		        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-		    }
+		    },		   
+		    "fnRowCallback": function( nRow, aData ) {
+            }
 		});
 
 		$('.option_add_product').on('click', function (e) {
@@ -1249,8 +1276,6 @@
 					//todas las caracteristicas esta devidamente diligenciadas
 					var add_prod = true;
 					//verificamos el objeto carrito, id_tienda, aun no funcional
-
-					
 					//verificar que el objeto no este previament agregado
 					if(seg_user.cart_products.length){					
 						for(var i=0; i < seg_user.cart_products.length;i++){
@@ -1297,8 +1322,7 @@
 									$('#add_cart_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!El producto ya se encuentra agregado!</strong> Para editar sus datos da click en el Carrito de compras.</div>');
 									close_modal = false;
 									add_prod = false;
-									break;						
-
+									break;
 								}
 															
 							}
@@ -1365,7 +1389,6 @@
 						}
 
 						//llamamos el metodo para gardar en session el array de los productos
-						//llamamos el metodo para gardar en session el array de los productos
 						var datos = new Array();
 						var contador;
 						for(i=0;i<seg_user.cart_products.length;i++){
@@ -1378,7 +1401,8 @@
 
 						}
 						datos['datos'] = seg_user.cart_products.length;					
-						seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");	
+						seg_ajaxobject.peticionajax($('#form_add_product_session').attr('action'),datos,"seg_user.consultaRespuestaAddCartSession");		
+						
 					}
 					//cerrar el modal
 					if(close_modal)$('#add_cart_modal').modal('toggle');	
@@ -1469,24 +1493,25 @@
 		 	$(this).popover('show');
 		 });
 
-		 $(document).on('click', function(e) {		 	
+		 $(document).on('click', function(e) {
 	        $('[data-toggle="popover"]').each(function () {
 		        //the 'is' for buttons that trigger popups
 		        //the 'has' for icons within a button that triggers a popup
 		        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
 		            $(this).popover('hide');
 		        }
-		    });	   
+		    });
+
+		    //redirección de subcategorias
+		    
+			$('.popover-content ul li').on('click', function(e) {
+				if(this.textContent == "Todas") this.textContent="todascat"
+				$('[name=finder_store]').val(this.textContent);
+		        //window.location=$('#form_finder_store').attr('action');
+		        $('.form_finder_store').submit();
+		    });			
 		    
 	    });
-
-		 //redirección de subcategorias		    
-		$('.categori_store ul li').on('click', function(e) {
-			if(this.textContent == "Todas") this.textContent="todascat"		        
-			$('[name=finder_store]').val(this.textContent);
-	        //window.location=$('#form_finder_store').attr('action');
-	        $('.form_finder_store').submit();
-	    });			
 
 
 		//al cerrar el modal de captacion de información se cierre el modal de carrito
@@ -1552,7 +1577,7 @@
 	    seg_user.iniciarPie('#container_pie_ordenes','Distribución de pedidos por estado',seg_user.datos_pie_orders,seg_user.colores_pie_orders);
 	    seg_user.iniciarPie('#container_pie_calificaciones','Resumen de Calificaciones del servicio',seg_user.datos_pie_resenias,seg_user.colores_pie_resenias);
 
-	    //para hacer que el chart quepa ene l modal.
+	    //para hacer que el chart quepa en el modal.
 	    var chart = $('#container_pie_ordenes').highcharts();
 	    $('#resumen_modal').on('show.bs.modal', function() {
 		    $('#container_pie_ordenes').css('visibility', 'hidden');
@@ -1601,34 +1626,20 @@
 
 	    //cambio de url de tienda
 	    $(".nav-titulo").attr("href", "{!! url('/') !!}/{!!$tienda[0]->name!!}");
+	    $(".nav-titulo").addClass("{!! $tienda[0]->name !!}");
 
-	     //smoove
+	    //smoove
 	    $('.smoove').smoove({offset:'30%'});
-
-	    //menu desplazamiento, solo para resoluciones mayores
-	    if(window.innerWidth > 991){
-	    	$(window).scroll(function(){	    	
-		    	if($(window).scrollTop()>190){
-		    		$(".categori_store").animate({				    
-					    //top: "+=20"				    
-					    top: $(window).scrollTop() - 190
-					  }, 0, function() {
-					    // Animation complete.
-					    
-				  	});
-		    	}
-		    });
-	    }
-	    
 
 	</script>
 
-	<!--Actualización de carrito-->
+	<!--Actualización de carrito por session-->
 	@if(Session::has('cart'))
 		<script type="text/javascript">
 		var i = 0;
-		@foreach (Session::get('cart') as $cart)		
-			str = "{!!$cart!!}";						
+		
+		@foreach (Session::get('cart') as $cart)
+			str = "{!!$cart!!}";				
 			if("{!!$tienda[0]->id!!}" == str.split(",")[10]){
 				seg_user.cart_products.push(str.split(","));
 				i++;

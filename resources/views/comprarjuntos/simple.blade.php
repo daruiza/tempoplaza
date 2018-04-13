@@ -515,7 +515,7 @@
 				    			</div>
 				    			<div class="col-xs-6 col-mx-offset-0">				    
 				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>				
-				    				<div  style="font-size: 14px;">${{$producto->price}}</div>					    			
+				    				<div  style="font-size: 14px;">${{number_format($producto->price)}}</div>					    			
 				    			</div>	
 				    			<!--
 				    			<div class="col-xs-12 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">
@@ -579,7 +579,7 @@
 				    			</div>
 				    			<div class="col-md-4 col-mx-offset-0">
 				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true"></span>
-				    				<div  style="font-size: 14px;">${{$producto->price}}</div>					    			
+				    				<div  style="font-size: 14px;">${{number_format($producto->price)}}</div>					    			
 				    			</div>	
 				    			<div class="col-md-5 col-mx-offset-0 option_store" data-toggle="popover" title="{{$producto->name}}" data-placement="bottom" data-content="<div>{{$producto->description}}</div><div>Nº de veces comprado: {{$producto->ventas}}</div>" data-html="true">			    			
 				    				<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>
