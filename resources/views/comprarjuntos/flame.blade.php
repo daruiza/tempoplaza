@@ -264,6 +264,15 @@
 
 		}
 
+		@media (max-width: 360px){
+			.paginator-group{
+				display: flex;
+			}
+
+		}
+
+		
+
 	</style>
 	
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
@@ -373,6 +382,7 @@
     </div>
 
     <!--Descipcion solo para tablets y pc -->
+    <!--
  	<div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1 hidden-xs" style="text-align: center;margin-bottom: 15px;">
     	
     	<div class="row col-md-4 col-sm-4 col-md-offset-0">		
@@ -410,13 +420,17 @@
 		</div>
 		
     </div>
+	-->
 
     <!--Menu de categorias, ubicación y resumen-->
 	<div class="col-md-10 col-md-offset-1 " style="margin-bottom: 15px;">
 		<div class="title m-b-md center-block">
 			<div class="btn-group btn-menu" role="group">
 				<!--<button type="button" class="btn btn-default">Articulos</button>-->
-				<button type="button" class="btn btn-default" data-toggle="popover" title="Categorias" data-placement="bottom" data-content="{{ Html::ul($categorias)}}" data-html="true">Categorias</button>				
+				<button type="button" class="btn btn-default visible-lg" data-toggle="popover-cnt" title="Envios" data-placement="bottom" data-content="<div style='text-align:center;'>Envíos GRATIS para toda el área metropolitana del Valle De Aburrá por compras superiores a $50.000<div><i class='fa fa-whatsapp' aria-hidden='true'></i>
+					<a href='https://api.whatsapp.com/send?phone=57{!!$tienda[0]->movil!!}'' target='_blank' rel='noopener noreferrer'>{!!$tienda[0]->movil!!}</a>			 
+				</div></div>" data-html="true">Envíos Gratis</button>				
+				<button type="button" class="btn btn-default" data-toggle="popover-cat" title="Categorias" data-placement="bottom" data-content="{{ Html::ul($categorias)}}" data-html="true">Categorías</button>				
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ubication_modal">Ubicación</button>				
 			</div>
 		</div>
@@ -445,21 +459,47 @@
 				    		</div>
 
 				    		<div class="col-xs-12 panel-footer" >				    			
-				    			<div class="col-xs-12 col-mx-offset-0" style="font-size: 14px;">
+				    			<div class="col-xs-12 col-mx-offset-0" style="font-size: 16px;margin-top: 5px;margin-bottom: 5px;text-decoration: underline;">
 					    			{{$producto->name}}				    			
 				    			</div>
-				    			<div class="col-xs-6 col-mx-offset-0">				    
-				    				<span class="glyphicon glyphicon glyphicon-tags option_store_icon" aria-hidden="true">
-				    				</span>				    						
-				    				<div  style="font-size: 14px;">
-				    					${{number_format($producto->price)}}
-				    				</div>					    			
-				    			</div>				    			
 
-				    			<div class="col-xs-66 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
-				    				<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
-				    				<div style="font-size: 12px;">Al Carrito</div>
-				    			</div>	
+				    			<div class="col-xs-12 col-mx-offset-0" style="padding-right: 0px;padding-left: 0px;">
+					    			@if(!empty($producto->basic_class))
+						    			<div class="col-xs-4 col-mx-offset-0" style="padding-right: 5px;padding-left: 5px;">
+						    				
+						    				<div style="font-size: 14px; text-decoration: line-through;" >
+						    					${!! number_format($producto->basic_class) !!}
+						    				</div>
+						    				
+						    				<div  style="font-size: 16px; ">
+						    					${{number_format($producto->price)}}
+						    				</div>					    			
+						    			</div>
+					    			@else
+						    			<div class="col-xs-4 col-mx-offset-0" style="padding-right: 5px;padding-left: 5px;margin-top: 5px;">					    				
+						    				<div  style="font-size: 16px; ">
+						    					${{number_format($producto->price)}}
+						    				</div>					    			
+						    			</div>
+					    			@endif	
+					    			@if(!empty($producto->basic_class))
+						    			<div class="col-xs-8 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}" style="padding-right: 10px;padding-left: 10px;">
+						    				
+						    				<div class="cart-bottom" style="font-size: 16px;margin-top: 5px;">
+						    					<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
+						    					Agregar Pedido
+						    				</div>
+						    			</div>					    			
+					    			@else
+						    			<div class="col-xs-8 col-mx-offset-0 option_store option_add_product" id ="{{$producto->name}}_{{$producto->id}}" style="padding-right: 10px;padding-left: 10px;margin-bottom: 5px;">
+						    				
+						    				<div class="cart-bottom" style="font-size: 16px;margin-top: 0px;">
+						    					<span class="glyphicon glyphicon-shopping-cart option_store_icon" aria-hidden="true"></span>
+						    					Agregar Pedido
+						    				</div>
+						    			</div>
+					    			@endif
+				    			</div>
 				    		</div>
 				    	</div>
 				    </div>				    
@@ -502,12 +542,12 @@
 				<div class="panel panel-default panel-prod">					
 					<div class="panel-body">
 				    	<div class="row">
-				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
+				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">		    			
 			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'class'=>'img_prod' ))}}
 				    		</div>
 
 				    		<div class="col-md-12 panel-footer">				    			
-				    			<div class="col-md-12 col-mx-offset-0" >
+				    			<div class="col-md-12 col-mx-offset-0 option_add_product" id ="{{$producto->name}}_{{$producto->id}}"  >
 					    			<span style="font-size: 16px;margin-top: 5px;margin-bottom: 5px;text-decoration: underline;cursor: pointer;"> {{$producto->name}} </span>				    			
 				    			</div>
 
@@ -564,8 +604,30 @@
 		@endforeach
 	</div>
 
-	<!--Paginador-->
-	<div  class="col-md-10 col-md-offset-1">
+	<!--Paginador para movil-->
+	<div  class="col-md-10 col-md-offset-1 hidden-lg">
+		<div class="col-mx-12" style="text-align: center;padding: 0.5em 1em;">Total de productos: {{$paginador['total']}}</div>
+		<div class="col-mx-12 paginator-group" style="text-align: center">			
+			<div class="col-mx-5 btn-paginator paginador-btn">Anterior</div>
+			@for($i=0;$i<$paginador['paginas'];$i++)
+				@if($i+1 == $paginador['pagina'])
+					<div class="col-mx-2 btn-paginatorslc paginador-btn">{{$i+1}}</div>
+					<!--Div oculto con pagina actual-->
+					<div id="pagina_actual" style="display: none;">{{$i+1}}</div>
+				@else
+					<div class="btn-paginator paginador-btn">{{$i+1}}</div>
+				@endif				
+			@endfor						
+			<div class="col-mx-5 btn-paginator paginador-btn">Siguiente</div>
+			<div id="paginas" style="display:none;">{{$paginador['paginas']}}</div>
+			<div id="total_productos" style="display:none;">{{$paginador['total']}}</div>
+			<div id="productos_pagina" style="display:none;">{{$paginador['ppp']}}</div>
+		</div>
+	</div>
+
+
+	<!--Paginador para pc-->
+	<div  class="col-md-10 col-md-offset-1 visible-lg">
 		<div style="float:left;padding: 0.5em 1em;">Total de productos: {{$paginador['total']}}</div>
 		<div class="" style="display: flex;float: right;">			
 			<div class="btn-paginator paginador-btn">Anterior</div>
@@ -1478,15 +1540,16 @@
 		    return true;
 		});
 
-		$('[data-toggle="popover"]').popover({
+		
+		$('[data-toggle="popover-cat"]').popover({
 			html: true,
 	        trigger: 'manual',			
 			container: 'body'
 		 }).on('click', function(e) {
-		 	$('[data-toggle="popover"]').each(function () {
+		 	$('[data-toggle="popover-cat"]').each(function () {
 		        //the 'is' for buttons that trigger popups
 		        //the 'has' for icons within a button that triggers a popup		        
-		        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+		        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-cat').has(e.target).length === 0) {
 		            $(this).popover('hide');
 		        }
 		    });	        
@@ -1494,10 +1557,10 @@
 		 });
 
 		 $(document).on('click', function(e) {
-	        $('[data-toggle="popover"]').each(function () {
+	        $('[data-toggle="popover-cat"]').each(function () {
 		        //the 'is' for buttons that trigger popups
 		        //the 'has' for icons within a button that triggers a popup
-		        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+		        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover-cat').has(e.target).length === 0) {
 		            $(this).popover('hide');
 		        }
 		    });
@@ -1511,8 +1574,11 @@
 		        $('.form_finder_store').submit();
 		    });			
 		    
-	    });
+	    });		
 
+		$('[data-toggle="popover-cnt"]').popover({
+		  trigger: 'focus'
+		});
 
 		//al cerrar el modal de captacion de información se cierre el modal de carrito
 		$('#invitado_cart_modal').on('hidden.bs.modal', function () {			
