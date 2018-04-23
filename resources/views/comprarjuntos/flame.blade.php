@@ -459,7 +459,7 @@
 				    		</div>
 
 				    		<div class="col-xs-12 panel-footer" >				    			
-				    			<div class="col-xs-12 col-mx-offset-0" style="font-size: 16px;margin-top: 5px;margin-bottom: 5px;text-decoration: underline;">
+				    			<div class="col-xs-12 col-mx-offset-0 option_add_product" id ="{{$producto->name}}_{{$producto->id}}" style="font-size: 16px;margin-top: 5px;margin-bottom: 5px;text-decoration: underline;">
 					    			{{$producto->name}}				    			
 				    			</div>
 
@@ -681,22 +681,22 @@
 				<div class = "alerts-module"></div>				
 				<div class="modal-body">
 					<div class="row">
-						<div class="col-md-5">
-							<div class="col-md-12" style="text-align: center;font-size: 14px;">
+						<div class="col-md-12" style="padding-right: 0px;padding-left: 5px;">
+							<div class="col-md-12" style="text-align: center;font-size: 14px;padding-right: 0px;padding-left: 0px;">
 								<label for="prod_cart_modal_for" class="col-md-12 control-label"></label>
 								{{ Html::image('users/'.$tendero[0]->user_name.'/products/default.png','Imagen no disponible',array('id'=>'prod_img_cart_modal','style'=>'width: 100%;'))}}
 							</div>													
 						</div>
-						<div class="col-md-7">
+						<div class="col-md-12">
 							{!! Form::hidden('id_store_cart_modal',null,array('id'=>'id_store_cart_modal')) !!}
 							{!! Form::hidden('id_product_cart_modal',null,array('id'=>'id_product_cart_modal')) !!}
-							<div class="col-md-12">
+							<div class="col-md-12" style="padding-right: 0px;padding-left: 0px;">
 								<label for="price_cart_modal_for" class="col-md-3 control-label">Precio:</label>
 								<label for="price_cart_modal" class="col-md-9 control-label">
 									$<span id="price_cart_modal_span"></span>
 								</label>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-12" style="padding-right: 0px;padding-left: 0px;">
 								<div id="unity_cart_modal" class="col-md-12"></div>
 							</div>
 							<div class="col-md-12" style="margin-bottom: 5%;">

@@ -1057,9 +1057,11 @@ seg_user.prototype.consultaRespuestaAddCartSession = function(result) {
 };
 
 seg_user.prototype.consultaRespuestaListarProductos = function(result) {
-    //borramos el contnido del div
+    //borramos el contenido del div
     list = document.getElementsByClassName("listado_productos")[0];
+    listp = document.getElementsByClassName("listado_productos")[1];
     list.textContent="";
+    listp.textContent="";
     //agregamos los nuevos productos
     var html = "";
     var p=0;
@@ -1075,7 +1077,7 @@ seg_user.prototype.consultaRespuestaListarProductos = function(result) {
         html +=             '<div class="row">';
         
         html +=                 '<div class="col-md-12 option_add_product" id ="'+result.data[i].name+'_'+result.data[i].id+'">';
-        html +=                     '<img src="'+$('#url_app').text()+'/users/'+$('#user_name').text()+'/products/'+result.data[0].image1+'" style="width: 90%;height: 200px;border-radius: 0%;" alt="Imagen no disponible">';
+        html +=                     '<img src="'+$('#url_app').text()+'/users/'+$('#user_name').text()+'/products/'+result.data[i].image1+'" style="width: 90%;height: 200px;border-radius: 0%;" alt="Imagen no disponible">';
         html +=                 '</div>';
         html +=                 '<div class="col-md-12 panel-footer"  style="background-color:'+$('#color_one').text()+'; color: '+$('#color_two').text()+'; border-color:'+$('#color_two').text()+';padding: 2px;">';
         html +=                     '<div class="col-md-4 col-mx-offset-0" style="font-size: 14px;">';
@@ -1108,6 +1110,7 @@ seg_user.prototype.consultaRespuestaListarProductos = function(result) {
     }
 
     list.innerHTML=html;
+    listp.innerHTML=html;
 
     $('.option_add_product').on('click', function (e) {
         var datos = new Array();
