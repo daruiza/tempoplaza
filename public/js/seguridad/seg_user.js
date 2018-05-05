@@ -1079,10 +1079,14 @@ seg_user.prototype.consultaRespuestaListarProductos = function(result) {
         html +=                 '<div class="col-md-12 option_add_product" id ="'+result.data[i].name+'_'+result.data[i].id+'">';
         html +=                     '<img src="'+$('#url_app').text()+'/users/'+$('#user_name').text()+'/products/'+result.data[i].image1+'" style="width: 90%;height: 200px;border-radius: 0%;" alt="Imagen no disponible">';
         html +=                 '</div>';
-        html +=                 '<div class="col-md-12 panel-footer"  style="background-color:'+$('#color_one').text()+'; color: '+$('#color_two').text()+'; border-color:'+$('#color_two').text()+';padding: 2px;">';
-        html +=                     '<div class="col-md-4 col-mx-offset-0" style="font-size: 14px;">';
+        html +=                 '<div class="col-md-12 panel-footer" id ="'+result.data[i].name+'_'+result.data[i].id+'" style="background-color:'+$('#color_one').text()+'; color: '+$('#color_two').text()+'; border-color:'+$('#color_two').text()+';padding: 2px;">';
+        html +=                     '<div class="col-md-12 col-mx-offset-0 option_add_product" style="font-size: 14px;">';
         html +=                         ''+result.data[i].name;
         html +=                     '</div>';
+        html +=                     '<div class="col-md-4 col-mx-offset-0" style="font-size: 16px;">';
+        html +=                         '<div style="font-size: 14px; text-decoration: line-through;">$'+result.data[i].basic_class+'</div>';
+        html +=                         '<div>$'+result.data[i].price+'</div>';
+        html +=                     '</div>';       
         html +=                     '<div class="col-md-4 col-mx-offset-0 option_store" data-toggle="popover" title="'+result.data[i].name+'" data-placement="bottom" data-content="<div>'+result.data[i].description+'</div><div>Nº de veces comprado: '+result.data[i].ventas+'</div>" data-html="true">';
         html +=                         '<span class="glyphicon glyphicon-signal option_store_icon" aria-hidden="true"></span>';
         html +=                         '<div style="font-size: 10px;">Descripciòn</div>';

@@ -238,7 +238,9 @@
 			background: {!!$tienda[0]->color_two!!};
 		}
 
-
+		.boton_cart2{
+			border: 1px solid {!!$tienda[0]->color_one!!};
+		}
 
 		.panel-prod > .panel-body{
 			padding-top: 0px;
