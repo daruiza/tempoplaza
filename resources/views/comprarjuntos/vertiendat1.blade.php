@@ -420,7 +420,7 @@
 				<!--<button type="button" class="btn btn-default">Articulos</button>-->
 				<button type="button" class="btn btn-default" data-toggle="popover" title="Categorias" data-placement="bottom" data-content="{{ Html::ul($categorias)}}" data-html="true">Categorias</button>				
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ubication_modal">Ubicación</button>
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#resumen_modal">Resumen</button>				
+				<button type="button" class="btn btn-default visible-lg" data-toggle="modal" data-target="#resumen_modal">Resumen</button>				
 				<!--<button type="button" class="btn btn-default">Grupos de Consumo</button>-->
 				<button type="button" class="btn btn-default visible-lg" ><a href="#calificaciones" id="link1" class="bnt-catacteristicas">Calificaciones</a></button>
 			</div>
@@ -453,7 +453,7 @@
 				<div class="panel panel-default">					
 					<div class="panel-body">
 				    	<div class="row">
-				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
+				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}" style="padding: 0px !important;">				    			
 			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'style'=>'width: 90%;height: 200px;border-radius: 0%;' ))}}				    							    			
 				    		</div>
 

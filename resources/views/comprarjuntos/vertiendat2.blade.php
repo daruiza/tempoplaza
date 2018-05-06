@@ -502,17 +502,8 @@
 			<div class="row visible-md" style="margin-top: 6%;"></div>
 			<div class="row visible-sm" style="margin-top: 8%;"></div>
 			<div class="row visible-xs" style="margin-top: 10%;"></div>
-
 		</div>
-
-		
-
     </div>
-    
-	
-
-	
-
 	
 
 	<!--Listado de reseñas-->
