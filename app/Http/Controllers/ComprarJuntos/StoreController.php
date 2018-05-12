@@ -855,7 +855,7 @@ class StoreController extends Controller {
 		//tipos de metodos de pago
 		$types=array('payu'=>'PayU');
 		//antes de enviar, asignamos el id de tienda par el listarajax
-		Session::put('store.id', $request->input('id'));
+		Session::put('store.id', $request->input('id'));		
 		Session::put('store.name', $request->input('name'));
 		
 		//return response()->json(['respuesta'=>true,'request'=>$request->input(),'data'=>null]);
