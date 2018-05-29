@@ -352,6 +352,7 @@
 			</div>
 
 			<!--Div Presentación de una tienda-->
+			<!--
 			@if(count($ultima_tienda))
 				<div class="col-md-12 col-md-offset-0 macalu_nueva_movil" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
 							
@@ -400,7 +401,8 @@
 					</div>				
 		
 				</div>
-			@endif		
+			@endif
+			-->	
 
 			<!-- Div de tiendas-->
 			<div class="col-md-12 col-md-offset-0 " style="margin-top: 1%;">
@@ -522,6 +524,7 @@
 		</div>		
 
 		<!--Div Presentación de una tienda-->
+		<!--
 		@if(count($ultima_tienda))
 			<div class="col-md-10 col-md-offset-1 macalu_nueva" onclick="location.href='{{url('/'.$ultima_tienda[0]->name)}}'">
 							
@@ -538,6 +541,7 @@
 	
 			</div>
 		@endif
+		-->
 
 		<!-- Div de tiendas-->
 		<div class="tiendas">
