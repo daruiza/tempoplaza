@@ -312,7 +312,7 @@
 
 												{!! Form::label('descripcion', 'Descripción', array('class' => 'col-md-12 control-label')) !!}
 												<div class="col-md-12">
-													{!! Form::textarea('descripcion',old('descripcion'), array('class' => 'form-control','rows' => 3,'placeholder'=>'Descripción de tu Tienda','maxlength' => 256)) !!}
+													{!! Form::textarea('descripcion',old('descripcion'), array('class' => 'form-control','rows' => 3,'placeholder'=>'Descripción de tu Tienda','maxlength' => 512)) !!}
 												</div>
 
 											</div>
@@ -802,7 +802,7 @@
 
 								<div class="col-md-12">
 									{!! Form::label('descripcion', 'Descripción', array('class' => 'col-md-12 control-label')) !!}
-									{!! Form::textarea('description',old('description'), array('class' => 'form-control','rows' => 3,'placeholder'=>'Descripción del Método de Pago','maxlength' => 256)) !!}
+									{!! Form::textarea('description',old('description'), array('class' => 'form-control','rows' => 3,'placeholder'=>'Descripción del Método de Pago','maxlength' => 255)) !!}
 								</div>
 
 								<div class="col-md-12">

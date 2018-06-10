@@ -429,9 +429,11 @@
 		<div class="title m-b-md center-block">
 			<div class="btn-group btn-menu" role="group">
 				<!--<button type="button" class="btn btn-default">Articulos</button>-->
+				<!--
 				<button type="button" class="btn btn-default visible-lg" data-toggle="popover-cnt" title="Envios" data-placement="bottom" data-content="<div style='text-align:center;'>Envíos GRATIS para toda el área metropolitana del Valle De Aburrá por compras superiores a $50.000<div><i class='fa fa-whatsapp' aria-hidden='true'></i>
 					<a href='https://api.whatsapp.com/send?phone=57{!!$tienda[0]->movil!!}'' target='_blank' rel='noopener noreferrer'>{!!$tienda[0]->movil!!}</a>			 
-				</div></div>" data-html="true">Envíos Gratis</button>				
+				</div></div>" data-html="true">Envíos Gratis</button>
+				-->
 				<button type="button" class="btn btn-default" data-toggle="popover-cat" title="Categorias" data-placement="bottom" data-content="{{ Html::ul($categorias)}}" data-html="true">Categorías</button>				
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ubication_modal">Ubicación</button>				
 			</div>
