@@ -32,7 +32,7 @@ class RedirectIfAuthenticated
              * Asignamos nombre de aplicación
              */         
             //dd($request);
-            return redirect()->to('/')->with('alerta', ['La ruta suministrada solo puede accederce por los Usuarios de ComprarJuntos.', 'Haste usuario de ComprarJuntos en la Opción Registrate.'] );;//esto es una direccion,return redirect()->to('ingreso');
+            return redirect()->to('/')->with('alerta', ['La ruta suministrada solo puede accederce por los Usuarios de '.env('APP_NAME','Macalù').'.', 'Haste usuario de '.env('APP_NAME','Macalù').' en la Opción Registrate.'] );//esto es una direccion,return redirect()->to('ingreso');
             //return Redirect::route('home')->with('message', ['La ruta suministrada solo puede accederce por Usuarios', 'Haste usuario de ComprarJuntos en la Oción de Registro'] );
         }
 

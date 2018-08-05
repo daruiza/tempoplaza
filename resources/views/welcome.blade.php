@@ -163,7 +163,7 @@
 							</li>													
 						@elseif ($message  == 'Tiendauno')						
 							<li>								
-								Ya puedes crear tu primer tienda en Macalú. ¡Animate a crear tu tieanda! dando <a  href="{{url('/mistiendas/listar/nueva')}}"><span class ="tienda_uno">CLICK AQUI</span></a>. Ó dando click sobre la opción Mis Tiendas.
+								Ya puedes crear tu primer tienda en {{env('APP_NAME','Macalù')}}. ¡Animate a crear tu tieanda! dando <a  href="{{url('/mistiendas/listar/nueva')}}"><span class ="tienda_uno">CLICK AQUI</span></a>. Ó dando click sobre la opción Mis Tiendas.
 							</li>							
 						@elseif ($message  == 'Perfil2' || $message  == 'Perfil3')						
 						@else

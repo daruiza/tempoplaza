@@ -14,7 +14,7 @@ class CreateCluOrderTable extends Migration
     {
         Schema::create('clu_order', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('number_order')->default(1);->unsigned();
+            $table->integer('number_order')->default(1)->unsigned();
             $table->dateTime('date');
             $table->string('name_client');
             $table->string('adress_client');

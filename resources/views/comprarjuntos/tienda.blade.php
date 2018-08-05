@@ -405,8 +405,8 @@
 											{!! Form::label('prioridad', 'Prioridad' , array('class' => 'col-md-12 control-label')) !!} 
 											<div class="col-md-12">
 												<div class="input-group ">									
-													{!! Form::number('prioridad',old('prioridad'), array('class' => 'form-control solo_numeros','placeholder'=>'Prioridad de la Tienda para Macalú')) !!}
-													<span class="input-group-addon" data-toggle="tooltip" title="La prioridad es un nùmero que indica el orden en el cual se listaran las tiendas dentro de Macalú.">?</span>
+													{!! Form::number('prioridad',old('prioridad'), array('class' => 'form-control solo_numeros','placeholder'=>'Prioridad de la Tienda')) !!}
+													<span class="input-group-addon" data-toggle="tooltip" title="La prioridad es un nùmero que indica el orden en el cual se listaran las tiendas dentro de {{env('APP_NAME','Macalù')}}.">?</span>
 												</div>
 											</div>
 										</div>
@@ -848,7 +848,7 @@
 			</div>
 			{!! Form::close() !!}
 			<div class="modal-footer">
-				<button type="submit" form = "form_nuevo_proveedorpago" id="modal-button-providerpay" class="btn btn-default " > Crear Producto</button>	         
+				<button type="submit" form = "form_nuevo_proveedorpago" id="modal-button-providerpay" class="btn btn-default" > Crear Producto</button>	         
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>		                  
 		        </div>
 	      	</div>

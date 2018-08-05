@@ -16,7 +16,7 @@
 
 		<title>{!! Session::get('app') !!}</title>
 		<meta name="description" content="Plaza de Mercado Virtual, donde crear una tienda virtual, ofrecer vender y comprar productos en Colombia" />
-		<meta name="keywords" content="plaza virtual de mercado, Colombia, economía solidaria, crear una tienda virtual,vender online, comprar online, plaza Macalú para la economía el bien común" />
+		<meta name="keywords" content="plaza virtual de mercado, Colombia, economía solidaria, crear una tienda virtual,vender online, comprar online, plaza {{env('APP_NAME','Macalù')}} para la economía el bien común" />
 
 		<link rel="shortcut icon" href="{{ url('images/icons/icon.png') }}">
 		
