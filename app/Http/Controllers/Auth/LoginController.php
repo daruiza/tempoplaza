@@ -263,7 +263,7 @@ class LoginController extends Controller
 					$message[] = 'Bienvenid@: '.Session::get('comjunplus.usuario.names').' '.Session::get('comjunplus.usuario.surnames');
 
 					if(!empty($request->input('user_id'))){
-						$message[] = 'Ya puedes crear tu propia tienda y vender tus productos en nuestra gran comunidad';			
+						$message[] = 'Ya puedes crear tu propia tienda y vender tus productos en nuestra gran comunidad pasate por http://www.temposolutions.co/capacitacion y aprende como administrar tu nueva tienda virtual';			
 						$message[] = 'Perfil1';
 						
 					}else{						
