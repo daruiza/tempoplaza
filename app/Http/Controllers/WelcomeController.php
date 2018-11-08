@@ -145,6 +145,7 @@ class WelcomeController extends Controller {
 			if(array_key_exists('categoria',$request->input())){
 				//hay filtro de categoria
 				//consultamos id de categoria
+
 				$categoria = \DB::table('clu_category')
 				->select('clu_category.*')
 				->where('clu_category.name',$request->input('categoria'))							
@@ -575,8 +576,7 @@ class WelcomeController extends Controller {
 
 	//Este es el metodo que controla el buscador principal
 	public function getFind($data = null){
-		//BUSQUEDA DE TIENDA PRODUCTO O CATEGORIA
-		
+		//BUSQUEDA DE TIENDA PRODUCTO O CATEGORIA		
 		if( empty(Session::get('copy'))){
 			Session::put('app', env('APP_NAME','Macalù'));
 			Session::put('copy', env('APP_RIGTH','Temposolutions'));
@@ -778,6 +778,7 @@ class WelcomeController extends Controller {
 		->get();
 		$tiendas = array();
 		if(count($categoria)){
+			
 			//hallamos la categoria padre
 			if($categoria[0]->category_id){
 				//es subcategoria
