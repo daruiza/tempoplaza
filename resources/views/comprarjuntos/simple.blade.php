@@ -772,12 +772,12 @@
 
 						<div class="col-md-12">
 							{!! Form::label('municipio', 'Municipio', array('class' => 'col-md-12 control-label')) !!}
-							{!! Form::select('municipio_invitado_modal',$ciudades,null, array('id'=>'municipio_invitado_modal','class' => 'form-control chosen-select municipio_invitado_modal','placeholder'=>'Municipio de recidencia')) !!}				
+							{!! Form::select('municipio_invitado_modal',$ciudades,null, array('id'=>'municipio_invitado_modal','class' => 'form-control chosen-select municipio_invitado_modal','placeholder'=>'Municipio de residencia')) !!}				
 						</div>
 
 						<div class="col-md-12">
 							{!! Form::label('direccion', 'Dirección', array('class' => 'col-md-12 control-label')) !!}
-							{!! Form::text('dir_invitado_modal',null, array('id'=>'dir_invitado_modal', 'class' => 'form-control','placeholder'=>'Dirección de recidencia')) !!}
+							{!! Form::text('dir_invitado_modal',null, array('id'=>'dir_invitado_modal', 'class' => 'form-control','placeholder'=>'Dirección de residencia')) !!}
 						</div>
 
 						<div class="col-md-12">
