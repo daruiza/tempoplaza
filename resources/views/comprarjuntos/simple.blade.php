@@ -257,6 +257,9 @@
 			    padding-top: 20px !important;
 			    padding-bottom: 5px !important;
 			}
+			.invitado_cart_modal label{
+				padding-left: 0px;
+			}
 		}
 
 		@media (max-width: 1024px){
