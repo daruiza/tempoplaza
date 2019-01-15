@@ -275,6 +275,20 @@
 
 		}
 
+		@media (max-width: 767px) and (min-width:415px){
+			.row-simple{
+				display: flex;
+			}
+
+			.row-simple > div:nth-of-type(1),
+			.row-simple > div:nth-of-type(2),
+			.row-simple > div:nth-of-type(3){
+				width: 33.3%;
+			}
+		}
+
+
+
 	</style>
 	
 	<div class="row visible-lg" style="margin-top: 5%;"></div>
@@ -502,7 +516,7 @@
 		@php ($j=1)
 		@foreach($productos as $producto)
 			@if($p%3==0)
-				<div class="col-md-12 col-md-offset-0">
+				<div class="row-simple col-md-12 col-md-offset-0">
 			@endif
 			<div class="col-sm-4 col-md-4 col-mx-offset-1" style="text-align: center;">
 				<div class="panel panel-default panel-prod">					
