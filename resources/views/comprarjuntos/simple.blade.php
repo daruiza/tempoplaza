@@ -275,7 +275,7 @@
 
 		}
 
-		@media (max-width: 767px) and (min-width:415px){
+		@media (max-width: 767px) and (min-width:580px){
 			.row-simple{
 				display: flex;
 			}
@@ -284,6 +284,19 @@
 			.row-simple > div:nth-of-type(2),
 			.row-simple > div:nth-of-type(3){
 				width: 33.3%;
+			}
+		}
+
+		@media (max-width: 579px) and (min-width:414px){
+			.row-simple{
+				display: flex;
+				flex-wrap: wrap;
+			}
+
+			.row-simple > div:nth-of-type(1),
+			.row-simple > div:nth-of-type(2),
+			.row-simple > div:nth-of-type(3){
+				width: 50%;
 			}
 		}
 
