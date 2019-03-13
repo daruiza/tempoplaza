@@ -257,6 +257,9 @@
 			    padding-top: 20px !important;
 			    padding-bottom: 5px !important;
 			}
+			#invitado_cart_modal label{
+				padding-left: 0px;
+			}
 		}
 
 		@media (max-width: 1024px){
@@ -271,6 +274,33 @@
 			}
 
 		}
+
+		@media (max-width: 767px) and (min-width:580px){
+			.row-simple{
+				display: flex;
+			}
+
+			.row-simple > div:nth-of-type(1),
+			.row-simple > div:nth-of-type(2),
+			.row-simple > div:nth-of-type(3){
+				width: 33.3%;
+			}
+		}
+
+		@media (max-width: 579px) and (min-width:414px){
+			.row-simple{
+				display: flex;
+				flex-wrap: wrap;
+			}
+
+			.row-simple > div:nth-of-type(1),
+			.row-simple > div:nth-of-type(2),
+			.row-simple > div:nth-of-type(3){
+				width: 50%;
+			}
+		}
+
+
 
 	</style>
 	
@@ -499,7 +529,7 @@
 		@php ($j=1)
 		@foreach($productos as $producto)
 			@if($p%3==0)
-				<div class="col-md-12 col-md-offset-0">
+				<div class="row-simple col-md-12 col-md-offset-0">
 			@endif
 			<div class="col-sm-4 col-md-4 col-mx-offset-1" style="text-align: center;">
 				<div class="panel panel-default panel-prod">					
@@ -772,12 +802,12 @@
 
 						<div class="col-md-12">
 							{!! Form::label('municipio', 'Municipio', array('class' => 'col-md-12 control-label')) !!}
-							{!! Form::select('municipio_invitado_modal',$ciudades,null, array('id'=>'municipio_invitado_modal','class' => 'form-control chosen-select municipio_invitado_modal','placeholder'=>'Municipio de recidencia')) !!}				
+							{!! Form::select('municipio_invitado_modal',$ciudades,null, array('id'=>'municipio_invitado_modal','class' => 'form-control chosen-select municipio_invitado_modal','placeholder'=>'Municipio de residencia')) !!}				
 						</div>
 
 						<div class="col-md-12">
 							{!! Form::label('direccion', 'Dirección', array('class' => 'col-md-12 control-label')) !!}
-							{!! Form::text('dir_invitado_modal',null, array('id'=>'dir_invitado_modal', 'class' => 'form-control','placeholder'=>'Dirección de recidencia')) !!}
+							{!! Form::text('dir_invitado_modal',null, array('id'=>'dir_invitado_modal', 'class' => 'form-control','placeholder'=>'Dirección de residencia')) !!}
 						</div>
 
 						<div class="col-md-12">

@@ -189,7 +189,10 @@
 		}
 
 		.img_prod{
-			width: 100%;height: 200px;border-radius: 0%;
+			width: 100%;
+			/*height: 200px;*/
+			max-height: 320px;
+			border-radius: 0%;
 		}
 		.buscador_t{
 			border-color: {!!$tienda[0]->color_two!!} !important;		
