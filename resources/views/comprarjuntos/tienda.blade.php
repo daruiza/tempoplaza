@@ -599,6 +599,31 @@
 												<div class="col-md-12 filestyle" style="text-align: center; margin-top: 10px">
 													{!! Form::file('imge_product',array('id'=>'imge_product','style'=>'font-size: 13px;')) !!}
 												</div>
+
+												<div class="col-md-12" style="text-align: center;">
+													{!! Form::label('img_product2', 'Imagen de Producto', array('class' => 'col-md-12 control-label')) !!}
+													@if( old('img_product2'))
+														{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/products/'.old('img_product2'),'Imagen no disponible',array('id'=>'img_product2', 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
+													@else
+														{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/products/default.png','Imagen no disponible',array('id'=>'img_product2','style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
+													@endif
+												</div>
+												<div class="col-md-12 filestyle" style="text-align: center; margin-top: 10px">
+													{!! Form::file('imge_product2',array('id'=>'imge_product2','style'=>'font-size: 13px;')) !!}
+												</div>
+
+												<div class="col-md-12" style="text-align: center;">
+													{!! Form::label('img_product3', 'Imagen de Producto', array('class' => 'col-md-12 control-label')) !!}
+													@if( old('img_product3'))
+														{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/products/'.old('img_product3'),'Imagen no disponible',array('id'=>'img_product3', 'style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
+													@else
+														{{ Html::image('users/'.Session::get('comjunplus.usuario.name').'/products/default.png','Imagen no disponible',array('id'=>'img_product3','style'=>'width: 90%; border:2px solid #ddd;border-radius: 0%;'))}}
+													@endif
+												</div>
+												<div class="col-md-12 filestyle" style="text-align: center; margin-top: 10px">
+													{!! Form::file('imge_product3',array('id'=>'imge_product3','style'=>'font-size: 13px;')) !!}
+												</div>
+
 												<div class="col-md-12" style="margin-top: 28px;">		
 													<button id="to_prod2" type="button" class="btn btn-default" style="width: 100%;">Siguiente >></button>
 												</div>
@@ -1441,6 +1466,36 @@
 		    }
 		    reader.readAsDataURL(file);
 	    });			   
+
+	   $('#imge_product2').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_product2').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });	
+
+	    $('#imge_product3').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_product3').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });			   		   
 
 		//limpiamos el spinner
 		//clu_tienda.spinner.el.remove();

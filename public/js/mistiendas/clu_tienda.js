@@ -155,6 +155,8 @@ clu_tienda.prototype.consultaRespuestaProduct = function(result) {
 				$('#prioridad_producto').val(clu_tienda.table_products.data()[i].order);				
 				//imagen, se reemplaza el src del elemento
 				$('#img_product').attr('src',$('#img_product').attr('src').replace($('#img_product').attr('src').split('/')[$('#img_product').attr('src').split('/').length-1],clu_tienda.table_products.data()[i].image1));
+				$('#img_product2').attr('src',$('#img_product2').attr('src').replace($('#img_product2').attr('src').split('/')[$('#img_product2').attr('src').split('/').length-1],clu_tienda.table_products.data()[i].image2));
+				$('#img_product3').attr('src',$('#img_product3').attr('src').replace($('#img_product3').attr('src').split('/')[$('#img_product3').attr('src').split('/').length-1],clu_tienda.table_products.data()[i].image3));
 				$('#unidades_select').val(clu_tienda.table_products.data()[i].unity_measure);
 				$('#unidades_medida').val(clu_tienda.table_products.data()[i].unity_measure);
 				$('#colores_select').val(clu_tienda.table_products.data()[i].colors);
@@ -197,7 +199,37 @@ clu_tienda.prototype.consultaRespuestaProduct = function(result) {
 		    	$('#img_product').attr("src",result);
 		    }
 		    reader.readAsDataURL(file);
-	    });			   
+	    });
+
+	    $('#imge_product2').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_product2').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });	
+
+	    $('#imge_product3').change(function(e) {
+	    	var file = e.target.files[0],
+		    imageType = /image.*/;
+		    
+		    if (!file.type.match(imageType))
+		    return;
+		  
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		    	var result=e.target.result;
+		    	$('#img_product3').attr("src",result);
+		    }
+		    reader.readAsDataURL(file);
+	    });		   
 			    
 	});	
 

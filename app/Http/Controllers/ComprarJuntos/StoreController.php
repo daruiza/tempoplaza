@@ -521,7 +521,7 @@ class StoreController extends Controller {
 	}
 
 	public function postNuevoproducto(Request $request){		
-		
+
 		//VERIFICACIONES
 		//verificamos si tienda puede tener màs productos
 		if(!$request->input('edit')){			
@@ -601,7 +601,7 @@ class StoreController extends Controller {
 					'imge_product'=>'required|mimes:jpeg,bmp,png',
 				);
 				$validator = Validator::make($file, $rules, $messages);
-				if ($validator->fails()) {			
+				if ($validator->fails()) {						
 					return Redirect::back()->withErrors($validator)->withInput();;
 				}else{
 					if(Input::file('imge_product')->isValid()){						
@@ -609,6 +609,44 @@ class StoreController extends Controller {
 						$extension = Input::file('imge_product')->getClientOriginalExtension(); // getting image extension
 						$fileName_image1 = rand(1,9999999).'.'.$extension; // renameing image
 						Input::file('imge_product')->move($destinationPath, $fileName_image1); 						
+					}
+				}	
+			}
+
+			//preparación y validacion de imagen de producto
+			if(!empty(Input::file('imge_product2'))){
+				$file = array('imge_product2' => Input::file('imge_product2'));
+				$rules = array(
+					'imge_product2'=>'required|mimes:jpeg,bmp,png',
+				);
+				$validator = Validator::make($file, $rules, $messages);
+				if ($validator->fails()) {								
+					return Redirect::back()->withErrors($validator)->withInput();;
+				}else{
+					if(Input::file('imge_product2')->isValid()){						
+						$destinationPath = 'users/'.Session::get('comjunplus.usuario.name').'/products';
+						$extension = Input::file('imge_product2')->getClientOriginalExtension(); // getting image extension
+						$fileName_image2 = rand(1,9999999).'.'.$extension; // renameing image
+						Input::file('imge_product2')->move($destinationPath, $fileName_image2); 						
+					}
+				}	
+			}
+
+			//preparación y validacion de imagen de producto
+			if(!empty(Input::file('imge_product3'))){
+				$file = array('imge_product3' => Input::file('imge_product3'));
+				$rules = array(
+					'imge_product3'=>'required|mimes:jpeg,bmp,png',
+				);
+				$validator = Validator::make($file, $rules, $messages);
+				if ($validator->fails()) {								
+					return Redirect::back()->withErrors($validator)->withInput();;
+				}else{
+					if(Input::file('imge_product3')->isValid()){						
+						$destinationPath = 'users/'.Session::get('comjunplus.usuario.name').'/products';
+						$extension = Input::file('imge_product3')->getClientOriginalExtension(); // getting image extension
+						$fileName_image3 = rand(1,9999999).'.'.$extension; // renameing image
+						Input::file('imge_product3')->move($destinationPath, $fileName_image3); 						
 					}
 				}	
 			}
@@ -640,6 +678,13 @@ class StoreController extends Controller {
 			if(!empty($request->input()['prioridad_producto']))$product->order =  $request->input()['prioridad_producto'];	
 			if(empty($product->image1))$product->image1 =  'default.png';
 			if(!empty($fileName_image1))$product->image1 =  $fileName_image1;
+
+			if(empty($product->image2))$product->image2 =  'default.png';
+			if(!empty($fileName_image2))$product->image2 =  $fileName_image2;
+
+			if(empty($product->image3))$product->image3 =  'default.png';
+			if(!empty($fileName_image3))$product->image3 =  $fileName_image3;
+			
 			$product->store_id = Session::get('store.id');
 		
 			try {			
