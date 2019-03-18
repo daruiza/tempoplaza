@@ -742,9 +742,7 @@
 								<label for="model_cart_modal_for" class="col-md-3 control-label">Modelo:</label>
 								<div id="model_cart_modal" class="col-md-9" ></div>
 							</div>
-							
-						</div>
-						<div class="col-md-5">
+
 							<div class="col-md-12" style="text-align: center;font-size: 14px;">
 								<label for="prod_cart_modal_for" class="col-md-12 control-label"></label>
 								{{ Html::image('users/'.$tendero[0]->user_name.'/products/default.png','Imagen no disponible',array('id'=>'prod_img_cart_modal','class'=>'modal-img-primary','style'=>'width: 100%;'))}}
@@ -761,6 +759,10 @@
 
 								</div>
 							</div>
+							
+						</div>
+						<div class="col-md-5">
+							
 							<div id="div_cart_description" class="col-md-12">
 								<label for="description_cart_modal_for" class="col-md-12 control-label">Descripción</label>
 								<div id="dercription_cart_modal" class="col-md-12" ></div>
