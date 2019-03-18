@@ -250,7 +250,16 @@
 
 		.panel-prod > .panel-body{
 			padding-top: 0px;
-		}		
+		}
+
+		.modal-img-secundary{
+			cursor: pointer;
+			opacity: 0.8;
+		}
+
+		.modal-img-secundary:hover{			
+			opacity: 1;
+		}	
 
 		@media (min-width: 768px){		
 			.navbar-nav>li>a {
@@ -535,8 +544,8 @@
 				<div class="panel panel-default panel-prod">					
 					<div class="panel-body">
 				    	<div class="row">
-				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
-			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'class'=>'img_prod' ))}}				    							    			
+				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
+			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'class'=>'img_prod' ))}}
 				    		</div>
 
 				    		<div class="col-xs-12 panel-footer" >				    			
@@ -599,7 +608,7 @@
 				<div class="panel panel-default panel-prod">					
 					<div class="panel-body">
 				    	<div class="row">
-				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">				    			
+				    		<div class="col-md-12 option_add_product" id ="{{$producto->name}}_{{$producto->id}}">
 			    				{{ Html::image('users/'.$tendero[0]->user_name.'/products/'.$producto->image1,'Imagen no disponible',array( 'class'=>'img_prod' ))}}
 				    		</div>
 
@@ -738,7 +747,19 @@
 						<div class="col-md-5">
 							<div class="col-md-12" style="text-align: center;font-size: 14px;">
 								<label for="prod_cart_modal_for" class="col-md-12 control-label"></label>
-								{{ Html::image('users/'.$tendero[0]->user_name.'/products/default.png','Imagen no disponible',array('id'=>'prod_img_cart_modal','style'=>'width: 100%;'))}}
+								{{ Html::image('users/'.$tendero[0]->user_name.'/products/default.png','Imagen no disponible',array('id'=>'prod_img_cart_modal','class'=>'modal-img-primary','style'=>'width: 100%;'))}}
+								<div class="col-md-12" style="padding: 1px;text-align: center;font-size: 14px;">
+									<div class="col-md-4" style="padding: 1px;">
+										{{ Html::image('users/'.$tendero[0]->user_name.'/products/default.png','Imagen no disponible',array('id'=>'prod_img_cart_modal1','class'=>'modal-img-secundary','style'=>'width: 100%;'))}}
+									</div>
+									<div class="col-md-4" style="padding: 1px;">
+										{{ Html::image('users/'.$tendero[0]->user_name.'/products/default.png','Imagen no disponible',array('id'=>'prod_img_cart_modal2','class'=>'modal-img-secundary','style'=>'width: 100%;'))}}
+									</div>
+									<div class="col-md-4" style="padding: 1px;">
+										{{ Html::image('users/'.$tendero[0]->user_name.'/products/default.png','Imagen no disponible',array('id'=>'prod_img_cart_modal3','class'=>'modal-img-secundary','style'=>'width: 100%;'))}}
+									</div>
+
+								</div>
 							</div>
 							<div id="div_cart_description" class="col-md-12">
 								<label for="description_cart_modal_for" class="col-md-12 control-label">Descripción</label>
@@ -1308,8 +1329,7 @@
 					if($('#colores_cart_select').val() == "0"){
 						//no se selecciono ninguna opción
 						add = false;
-						$('#add_cart_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!El producto esta disponible en uno o varios colores!</strong> Debes elejir un color para continuar.</div>');	
-						
+						$('#add_cart_modal .alerts-module').html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>!El producto esta disponible en uno o varios colores!</strong> Debes elejir un color para continuar.</div>');
 					}
 				}
 				if($('#sizes_cart_select option').length > 1){
@@ -1346,7 +1366,7 @@
 					var add_prod = true;
 					//verificamos el objeto carrito, id_tienda, aun no funcional
 					//verificar que el objeto no este previament agregado
-					if(seg_user.cart_products.length){					
+					if(seg_user.cart_products.length){				
 						for(var i=0; i < seg_user.cart_products.length;i++){
 							if(seg_user.cart_products[i][0] == $('#id_product_cart_modal').val()){
 								//ya exixte el producto id
@@ -1357,7 +1377,7 @@
 										//el color es el mismo
 										color = true;
 									}
-								}else{color =true;}
+								}else{color = true;}
 
 								var size = false;								
 								if(seg_user.cart_products[i][4] != ''){
@@ -1366,7 +1386,7 @@
 										//el color es el mismo
 										size = true;
 									}
-								}else{size =true;}
+								}else{size = true;}
 
 								var sabor = false;								
 								if(seg_user.cart_products[i][5] != ''){
@@ -1375,7 +1395,7 @@
 										//el color es el mismo
 										sabor = true;
 									}
-								}else{sabor =true;}
+								}else{sabor = true;}
 
 								var material = false;								
 								if(seg_user.cart_products[i][6] != ''){
@@ -1384,7 +1404,7 @@
 										//el color es el mismo
 										material = true;
 									}
-								}else{material =true;}
+								}else{material = true;}
 								
 								if(color && size && sabor && material){
 									//todas las caracteristicas son las mismas
@@ -1392,8 +1412,7 @@
 									close_modal = false;
 									add_prod = false;
 									break;
-								}
-															
+								}							
 							}
 						}
 
