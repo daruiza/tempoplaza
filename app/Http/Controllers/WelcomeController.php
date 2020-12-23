@@ -288,7 +288,7 @@ class WelcomeController extends Controller {
 			}
 
 			//BUSCADOR DE LA TIENDA
-			if(array_key_exists('finder_store',$request->input())){
+			if(array_key_exists('finder_store',$request->input())){				
 
 				//buscador de la tienda, intentan buscar productos o categorias
 				$criterio = explode(' ',strtolower($request->input('finder_store')));		
@@ -344,19 +344,23 @@ class WelcomeController extends Controller {
 				//->where('clu_order.stage_id',4)
 				->where('clu_products.active',1)
 				->where(function($q) use ($criterio){
-					foreach($criterio as $key => $value){											
+					foreach($criterio as $key => $value){	
 						//para encontrar todas las categorias
 						if($value != "todascat"){														
 							$q->orwhere('clu_products.name', 'like', '%'.$value.'%')
 							->orwhere('clu_products.description', 'like', '%'.$value.'%')						
 							->orwhere('clu_category.name','like','%'.$value.'%');
-						}						
+						} else {
+							$q->orwhere('clu_category.name','like','%%');
+						}					
 					}
-				})				
+				})	
 				->groupBy('clu_products.id')
 				->skip(0)->take(12)		
 				->get();				
 
+				
+				
 				$ventas = \DB::table('clu_products')
 				->select('clu_products.*',\DB::raw('SUM(clu_order_detail.volume) as ventas'))			
 				->leftjoin('clu_order_detail', 'clu_products.id', '=', 'clu_order_detail.product_id')
