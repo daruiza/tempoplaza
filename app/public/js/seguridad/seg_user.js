@@ -951,7 +951,7 @@ seg_user.prototype.consultaRespuestaAddCart = function(result) {
     $('#add_cart_modal .modal-title').html('Agregar '+result.request.name+' al Carrito de Compras');
     $("label[for='prod_cart_modal_for']").html(result.request.name);
     $('#prod_img_cart_modal').attr('src',$('#prod_img_cart_modal').attr('src').replace($('#prod_img_cart_modal').attr('src').split('/')[$('#prod_img_cart_modal').attr('src').split('/').length-1],result.data[0].image1));
-    if(result.data[0].image1){
+    if(result.data[0].image1 && $('#prod_img_cart_modal1')[0]){        
         $('#prod_img_cart_modal1').attr('src',$('#prod_img_cart_modal1').attr('src').replace($('#prod_img_cart_modal1').attr('src').split('/')[$('#prod_img_cart_modal1').attr('src').split('/').length-1],result.data[0].image1));    
     }else{
         $('#prod_img_cart_modal').attr('src',$('#prod_img_cart_modal').attr('src').replace($('#prod_img_cart_modal').attr('src').split('/')[$('#prod_img_cart_modal').attr('src').split('/').length-1],result.data[0].image1));
